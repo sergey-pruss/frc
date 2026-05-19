@@ -4,6 +4,6 @@
   "private": true,
   "description": "SEO project documentation for the FRC / National Center Russia merch website.",
   "scripts": {
-    "test": "node tests/verify-html.mjs"
+    "test": "node tests/verify-html.mjs && node tests/verify-prototype.mjs"
   }
 }

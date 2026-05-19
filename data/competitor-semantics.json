@@ -1,0 +1,694 @@
+{
+  "generated_at": "2026-05-19",
+  "region": "Россия (225)",
+  "source": "Yandex Suggest",
+  "thresholds": {
+    "vh_min": 3000,
+    "sch_min": 150
+  },
+  "note": "Тип ВЧ/СЧ по показам Wordstat (РФ). Если показов нет — тип с * по длине фразы (нужен YANDEX_WORDSTAT_TOKEN).",
+  "putin_team": [
+    {
+      "phrase": "putin team",
+      "shows": null,
+      "type": "ВЧ*"
+    },
+    {
+      "phrase": "putin team russia",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team russia воронеж",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team russia одежда",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team russia одежда купить",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "putin team russia одежда официальный сайт",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "putin team russia официальный сайт",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "putin team russia пермь",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team russia что за бренд",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "putin team азбука",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team доставка",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team капсульная коллекция",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team кепка",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team красная машина",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team купить",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team магазин",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team одежда",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team одежда купить",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team одежда купить в спб",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "putin team одежда купить екатеринбург",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "putin team одежда купить официальный сайт",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "putin team одежда официальный сайт",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "putin team одежда официальный сайт интернет магазин",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "putin team подарочный сертификат",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team распродажа",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team свитшот",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team футболка",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "putin team худи",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "russian putin team одежда",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "team putin одежда",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "кепка putin team",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "кепка путин тим",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "костюм путин тим спортивный купить",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "купить футболку путин тим",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "одежда putin team",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "одежда putin team russia",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тим",
+      "shows": null,
+      "type": "ВЧ*"
+    },
+    {
+      "phrase": "путин тим авиапарк",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тим бренд",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тим геленджик магазин",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тим кепка",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тим красная машина",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тим краснодар",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тим магазин",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тим одежда",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тим одежда купить",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тим одежда купить официальный",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "путин тим одежда купить официальный сайт",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "путин тим официальный",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тим официальный сайт одежда",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "путин тим раша официальный сайт",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "путин тим россия",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тим сайт",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тим самара",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тим спортивные костюмы",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тим футболка",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "путин тимошенко",
+      "shows": null,
+      "type": "ВЧ*"
+    },
+    {
+      "phrase": "футболка putin team",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "футболка putin team russia",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "футболка putin team купить",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "футболка путин тим купить",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "худи putin team",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "худи путин тим",
+      "shows": null,
+      "type": "СЧ*"
+    }
+  ],
+  "gloryseason": [
+    {
+      "phrase": "glory season",
+      "shows": null,
+      "type": "ВЧ*"
+    },
+    {
+      "phrase": "glory season дубленка",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "glory season куртка",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "glory season одежда",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "glory season промокод",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "glory season пуховик",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "glory season сезон славы",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "glory season.ru",
+      "shows": null,
+      "type": "ВЧ*"
+    },
+    {
+      "phrase": "glory seasons",
+      "shows": null,
+      "type": "ВЧ*"
+    },
+    {
+      "phrase": "mystery box",
+      "shows": null,
+      "type": "ВЧ*"
+    },
+    {
+      "phrase": "mystery box el",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "mystery box online",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "mystery box online официальный сайт на русском",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "mystery box купить",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "mystery box от золотого яблока",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "mystery box что это",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "mystery box что это такое",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "mystery boxes",
+      "shows": null,
+      "type": "ВЧ*"
+    },
+    {
+      "phrase": "russia capsule",
+      "shows": null,
+      "type": "ВЧ*"
+    },
+    {
+      "phrase": "бомбер glory season",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "бренд россия сезон славы",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "дубленка glory season",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "дубленка россия сезон славы",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "кожаная куртка сезон славы",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "кожанка россия сезон славы",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "кофта россия сезон славы худи",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "куртка glory season",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "курченко глеб сергеевич glory season",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "одежда россия сезон славы",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "промокод glory season",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "пуховик glory season",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "пуховик россия сезон славы",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "россия сезон славы кожаная куртка",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "россия сезон славы куртка",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "россия сезон славы одежда",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "россия сезон славы худи",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "россия сезон славы худи купить",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "россия сезон славы худи чей мерч",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "сезон славы",
+      "shows": null,
+      "type": "ВЧ*"
+    },
+    {
+      "phrase": "сезон славы авиапарк",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы беларусь худи",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы бомбер",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы бренд",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы интернет магазин",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы куртка",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы куртка зимняя",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы куртка россия",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы куртки",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы магазин",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы одежда",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы одежда магазин",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы одежда сайт",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы официальный сайт",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы пуховик",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы россии худи",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы россия",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы россия бренд",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы россия куртка",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы россия одежда",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы россия футболка",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы россия худи",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы россия худи купить",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "сезон славы сайт",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы сумка",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы тдд",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы худи",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы худи леопард",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "сезон славы худи россия",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "слава россии худи сезон славы",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "толстовка россия сезон славы",
+      "shows": null,
+      "type": "СЧ*"
+    },
+    {
+      "phrase": "худи glory season сезон славы",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "худи россия сезон славы чей мерч",
+      "shows": null,
+      "type": "НЧ*"
+    },
+    {
+      "phrase": "худи слава россии сезон славы",
+      "shows": null,
+      "type": "НЧ*"
+    }
+  ]
+}

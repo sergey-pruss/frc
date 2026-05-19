@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
-const html = readFileSync(join(root, 'index.html'), 'utf8');
+const html = readFileSync(join(root, 'seo/index.html'), 'utf8');
 const css = readFileSync(join(root, 'assets/styles.css'), 'utf8');
 const robots = readFileSync(join(root, 'robots.txt'), 'utf8');
 

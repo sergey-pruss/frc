@@ -3,43 +3,30 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Главная — Универмаг «Россия»</title>
+    <title>Каталог — Универмаг «Россия»</title>
     <meta name="description" content="Прототип интернет-магазина мерча Национального центра «Россия».">
     <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="assets/shop.css">
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../assets/shop.css">
   </head>
   <body>
     <div data-site-header></div>
     <main>
 
-      <section class="hero-shop">
-        <div class="wrap hero-grid">
-          <div class="hero-copy">
-            <div class="hero-badges">
-              <span class="pill">Официальный мерч</span>
-              <span class="pill">Доставка по России</span>
-              <span class="pill">Коллекция Russia Capsule</span>
-            </div>
-            <h1>Одежда и мерч Национального центра «Россия»</h1>
-            <p>Демо-витрина для согласования структуры каталога, карточек и сервисных страниц. Все тексты и цены — рыбные заглушки.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:12px;">
-              <a class="btn btn-primary" href="catalog/">Смотреть каталог</a>
-              <a class="btn btn-secondary" href="collections/russia-capsule/">Russia Capsule</a>
-            </div>
-          </div>
-          <div class="hero-visual" aria-hidden="true"></div>
+      <div class="wrap">
+        <nav class="breadcrumbs"><a href="../">Главная</a> / <span>Каталог</span></nav>
+        <h1>Каталог</h1>
+        <p class="page-intro">Разводящая страница ассортимента: категории, новинки и фильтры. В прототипе — 6 демо-товаров.</p>
+        <div class="category-chips">
+          <a class="is-active" href="./">Все</a>
+          <a href="futbolki/">Футболки</a>
+          <a href="svitshoty/">Свитшоты</a>
+          <a href="kepki/">Кепки</a>
+          <a href="kurtki/">Куртки</a>
         </div>
-      </section>
-      <section class="section">
-        <div class="wrap">
-          <div class="section-head">
-            <h2>Новинки сезона</h2>
-            <p>Подборка для прототипа: сетка карточек, цены, бейджи и переход в товар.</p>
-          </div>
-          <div class="product-grid">
+        <div class="product-grid">
         <article class="product-card">
-          <a href="product/futbolka-oranzhevaya/">
+          <a href="../product/futbolka-oranzhevaya/">
             <div class="product-thumb">
               <span class="product-tag">Новинка</span>
               <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80" alt="Футболка «Оранжевая линия»" loading="lazy" width="400" height="500">
@@ -56,7 +43,7 @@
         </article>
 
         <article class="product-card">
-          <a href="product/futbolka-belaya/">
+          <a href="../product/futbolka-belaya/">
             <div class="product-thumb">
               <span class="product-tag">Хит</span>
               <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80" alt="Футболка «Белый фасад»" loading="lazy" width="400" height="500">
@@ -73,7 +60,7 @@
         </article>
 
         <article class="product-card">
-          <a href="product/svitshot-klassika/">
+          <a href="../product/svitshot-klassika/">
             <div class="product-thumb">
               <span class="product-tag">Коллекция</span>
               <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80" alt="Свитшот «Классика»" loading="lazy" width="400" height="500">
@@ -90,7 +77,7 @@
         </article>
 
         <article class="product-card">
-          <a href="product/svitshot-premium/">
+          <a href="../product/svitshot-premium/">
             <div class="product-thumb">
               <span class="product-tag">−10%</span>
               <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=800&q=80" alt="Свитшот «Премиум капсула»" loading="lazy" width="400" height="500">
@@ -107,7 +94,7 @@
         </article>
 
         <article class="product-card">
-          <a href="product/kepka-simvol/">
+          <a href="../product/kepka-simvol/">
             <div class="product-thumb">
               <span class="product-tag">Аксессуар</span>
               <img src="https://images.unsplash.com/photo-1588856142877-1aae7062c88f?auto=format&fit=crop&w=800&q=80" alt="Кепка «Символ»" loading="lazy" width="400" height="500">
@@ -124,7 +111,7 @@
         </article>
 
         <article class="product-card">
-          <a href="product/kurtka-veter/">
+          <a href="../product/kurtka-veter/">
             <div class="product-thumb">
               <span class="product-tag">Премиум</span>
               <img src="https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=800&q=80" alt="Куртка «Ветер с севера»" loading="lazy" width="400" height="500">
@@ -138,30 +125,10 @@
               </div>
             </div>
           </a>
-        </article>
-          </div>
-        </div>
-      </section>
-      <section class="section">
-        <div class="wrap collection-banner">
-          <div class="visual" aria-hidden="true"></div>
-          <div class="copy">
-            <h3>Russia Capsule</h3>
-            <p>Капсульная линейка с акцентом на символику и архитектурные мотивы. Здесь будет отдельная посадочная коллекции с историей и lookbook.</p>
-            <a class="btn btn-primary" href="collections/russia-capsule/">Открыть коллекцию</a>
-          </div>
-        </div>
-      </section>
-      <section class="section">
-        <div class="wrap trust-row">
-          <div class="trust-card"><strong>Доставка по РФ</strong>Курьер, ПВЗ и почта — условия на демо-странице.</div>
-          <div class="trust-card"><strong>Официальный магазин</strong>Брендовая связка с Национальным центром «Россия».</div>
-          <div class="trust-card"><strong>Примерка и возврат</strong>Блок FAQ и возвратов для SEO и доверия.</div>
-          <div class="trust-card"><strong>Подарочные карты</strong>Отдельный сценарий в структуре каталога.</div>
-        </div>
-      </section>
+        </article></div>
+      </div>
     </main>
     <div data-site-footer></div>
-    <script src="assets/site.js" data-depth="0"></script>
+    <script src="../assets/site.js" data-depth="1"></script>
   </body>
 </html>

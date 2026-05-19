@@ -1,0 +1,576 @@
+{
+  "generated_at": "2026-05-19",
+  "region": "Россия, все регионы",
+  "source": "Яндекс Wordstat → вкладка «Популярные» (запросы со словами)",
+  "thresholds": {
+    "vh_min": 1000,
+    "sch_min": 100,
+    "legend": "ВЧ — от 1000 показов/мес, СЧ — 100–999, НЧ — до 99"
+  },
+  "notes": [
+    "Частотность — суммарные показов по кластеру запроса в Wordstat.",
+    "Запрос «сезон славы» без уточнений в топе смешан с дорамами и музыкой — в таблице gloryseason.ru не используется как коммерческий ВЧ."
+  ],
+  "putin_team": [
+    {
+      "phrase": "putin team",
+      "shows": 3383,
+      "type": "ВЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia",
+      "shows": 1479,
+      "type": "ВЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team одежда",
+      "shows": 981,
+      "type": "СЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "одежда putin team russia",
+      "shows": 532,
+      "type": "СЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team официальный",
+      "shows": 257,
+      "type": "СЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team сайт",
+      "shows": 251,
+      "type": "СЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team официальный сайт",
+      "shows": 247,
+      "type": "СЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "одежда putin team официальный",
+      "shows": 205,
+      "type": "СЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team одежда официальный сайт",
+      "shows": 197,
+      "type": "СЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia сайт",
+      "shows": 183,
+      "type": "СЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia официальный сайт",
+      "shows": 180,
+      "type": "СЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia одежда официальный",
+      "shows": 161,
+      "type": "СЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia одежда официальный сайт",
+      "shows": 155,
+      "type": "СЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team магазин",
+      "shows": 142,
+      "type": "СЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team купить",
+      "shows": 96,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "бренд putin team",
+      "shows": 94,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "магазин putin team russia",
+      "shows": 67,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "костюм putin team",
+      "shows": 61,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team одежда купить",
+      "shows": 47,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "спортивный костюм putin team",
+      "shows": 44,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team перевод",
+      "shows": 42,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team отзывы",
+      "shows": 40,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia отзывы",
+      "shows": 39,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team перевод на русский",
+      "shows": 31,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team кепка",
+      "shows": 28,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team футболки",
+      "shows": 27,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team владелец",
+      "shows": 26,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "smp racing putin team",
+      "shows": 25,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "азбука putin team",
+      "shows": 25,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia перевод",
+      "shows": 22,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "жилетка черная putin team купить",
+      "shows": 22,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "president putin team",
+      "shows": 21,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "рюкзак putin team",
+      "shows": 21,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team екатеринбург",
+      "shows": 20,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team ru",
+      "shows": 19,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team поло",
+      "shows": 19,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team шереметьевское ш вл37 химки",
+      "shows": 18,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "толстовка putin team",
+      "shows": 18,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin russian team",
+      "shows": 16,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia перевод на русский",
+      "shows": 16,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team одежда магазины",
+      "shows": 16,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "mr president putin team",
+      "shows": 15,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia купить",
+      "shows": 15,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team москва",
+      "shows": 15,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia что за бренд",
+      "shows": 14,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team геленджик",
+      "shows": 14,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team кому принадлежит",
+      "shows": 14,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "спортивный костюм putin team russia",
+      "shows": 14,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team красноярск",
+      "shows": 13,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia перевод на русский язык",
+      "shows": 12,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia воронеж",
+      "shows": 11,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia кто владелец",
+      "shows": 11,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team чей бренд",
+      "shows": 11,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia одежда купить",
+      "shows": 10,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team x smp racing",
+      "shows": 10,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team сочи",
+      "shows": 10,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "шишкин putin team",
+      "shows": 10,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "бейсболка putin team",
+      "shows": 9,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "куртка putin team",
+      "shows": 9,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "худи putin team",
+      "shows": 9,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team красная машина",
+      "shows": 8,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team одежда кто владелец",
+      "shows": 8,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "магазин putin team russia официальный",
+      "shows": 8,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia инн",
+      "shows": 7,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia отзывы сотрудников",
+      "shows": 7,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team брюки",
+      "shows": 7,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team казань",
+      "shows": 7,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "ветровка putin team",
+      "shows": 7,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team краснодар",
+      "shows": 6,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team одежда официальный сайт интернет магазин",
+      "shows": 6,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "галстук putin team",
+      "shows": 6,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "красная машина russia putin team",
+      "shows": 5,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "магазин putin team russia официальный сайт",
+      "shows": 5,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "putin team russia одежда отзывы",
+      "shows": 2,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    },
+    {
+      "phrase": "купить мужскую одежду putin team",
+      "shows": 1,
+      "type": "НЧ",
+      "competitor": "putin-team.ru"
+    }
+  ],
+  "gloryseason": [
+    {
+      "phrase": "россия сезон славы",
+      "shows": 982,
+      "type": "СЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "сезон славы одежда",
+      "shows": 514,
+      "type": "СЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "куртка сезон славы",
+      "shows": 345,
+      "type": "СЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "сезон славы худи",
+      "shows": 294,
+      "type": "СЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "сезон славы бренд",
+      "shows": 269,
+      "type": "СЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "куртка россия сезон славы",
+      "shows": 216,
+      "type": "СЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "россия сезон славы худи",
+      "shows": 175,
+      "type": "СЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "сезон славы магазин",
+      "shows": 156,
+      "type": "СЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "сумка сезон славы",
+      "shows": 147,
+      "type": "СЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "кожаная куртка сезон славы",
+      "shows": 146,
+      "type": "СЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "сезон славы кожанка",
+      "shows": 94,
+      "type": "НЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "кожаная куртка россия сезон славы",
+      "shows": 93,
+      "type": "НЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "сезон славы купить",
+      "shows": 93,
+      "type": "НЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "мерч сезон славы",
+      "shows": 76,
+      "type": "НЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "glory season одежда",
+      "shows": 64,
+      "type": "НЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "кофта сезон славы",
+      "shows": 54,
+      "type": "НЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "россия сезон славы одежда",
+      "shows": 26,
+      "type": "НЧ",
+      "competitor": "gloryseason.ru"
+    },
+    {
+      "phrase": "бренд одежды сезон славы",
+      "shows": 18,
+      "type": "НЧ",
+      "competitor": "gloryseason.ru"
+    }
+  ]
+}
