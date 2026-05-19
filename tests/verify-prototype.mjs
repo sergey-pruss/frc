@@ -21,8 +21,8 @@ const checks = [
   ['blog article', existsSync(join(root, 'blog/kak-vybrat-razmer/index.html'))],
   ['shop styles', existsSync(join(root, 'assets/shop.css'))],
   [
-    'home has competitor-adapted copy',
-    /putin-team\.ru/.test(readFileSync(join(root, 'index.html'), 'utf8')),
+    'home applies client brief principles',
+    /В меру современно, аккуратно, без провокаций/.test(readFileSync(join(root, 'index.html'), 'utf8')),
   ],
   [
     'product has long description',
@@ -30,6 +30,16 @@ const checks = [
       readFileSync(join(root, 'product/futbolka-oranzhevaya/index.html'), 'utf8'),
     ),
   ],
+  [
+    'about page includes brand references',
+    /Фирменные материалы и референсы/.test(readFileSync(join(root, 'about/index.html'), 'utf8')) &&
+      /Герб Универмага/.test(readFileSync(join(root, 'about/index.html'), 'utf8')),
+  ],
+  [
+    'product pages include schema.org Product',
+    /"@type": "Product"/.test(readFileSync(join(root, 'product/futbolka-oranzhevaya/index.html'), 'utf8')),
+  ],
+  ['custom domain is disabled', !existsSync(join(root, 'CNAME'))],
 ];
 
 const failed = checks.filter(([, ok]) => !ok);

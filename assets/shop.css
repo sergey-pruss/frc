@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=PT+Serif:wght@400;700&display=swap");
 
 :root {
   --bg: #f4f0e6;
@@ -10,7 +10,7 @@
   --accent-soft: #f3e4e7;
   --teal: #1f5f68;
   --shadow: 0 18px 50px rgba(26, 26, 28, 0.08);
-  --radius: 14px;
+  --radius: 8px;
 }
 
 * {
@@ -21,10 +21,7 @@ body {
   margin: 0;
   font-family: Manrope, system-ui, sans-serif;
   color: var(--ink);
-  background:
-    radial-gradient(circle at 0% 0%, rgba(155, 28, 49, 0.08), transparent 32%),
-    radial-gradient(circle at 100% 0%, rgba(31, 95, 104, 0.1), transparent 28%),
-    var(--bg);
+  background: var(--bg);
   line-height: 1.5;
 }
 
@@ -96,7 +93,7 @@ a {
 }
 
 .logo strong {
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "PT Serif", Georgia, serif;
   font-size: 28px;
   letter-spacing: 0.02em;
 }
@@ -174,7 +171,7 @@ a {
 
 .hero-copy h1 {
   margin: 0 0 16px;
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "PT Serif", Georgia, serif;
   font-size: clamp(42px, 7vw, 72px);
   line-height: 0.95;
 }
@@ -244,8 +241,42 @@ a {
 
 .section-head h2 {
   margin: 0;
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "PT Serif", Georgia, serif;
   font-size: 40px;
+}
+
+.brief-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.reference-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.reference-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  font-weight: 700;
 }
 
 .section-head p {
@@ -365,7 +396,7 @@ a {
 
 .collection-banner h3 {
   margin: 0 0 12px;
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "PT Serif", Georgia, serif;
   font-size: 34px;
 }
 
@@ -494,7 +525,7 @@ a {
 
 .product-info h1 {
   margin: 0 0 10px;
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "PT Serif", Georgia, serif;
   font-size: clamp(34px, 5vw, 48px);
   line-height: 1;
 }
@@ -560,7 +591,7 @@ a {
 
 .content-block h1 {
   margin: 0 0 12px;
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "PT Serif", Georgia, serif;
   font-size: 42px;
 }
 
@@ -674,7 +705,7 @@ a {
 
 .collection-tile__body h3 {
   margin: 0 0 8px;
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "PT Serif", Georgia, serif;
   font-size: 24px;
 }
 
@@ -710,7 +741,7 @@ a {
 
 .prose h2 {
   margin-top: 28px;
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: "PT Serif", Georgia, serif;
 }
 
 .size-table {
@@ -771,6 +802,7 @@ a {
 
 @media (max-width: 960px) {
   .hero-grid,
+  .brief-grid,
   .product-page,
   .collection-banner,
   .footer-grid {

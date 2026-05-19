@@ -12,11 +12,12 @@
     { href: `${root}collections/`, label: "Коллекции" },
     { href: `${root}gift-cards/`, label: "Подарки" },
     { href: `${root}blog/`, label: "Журнал" },
+    { href: `${root}about/`, label: "О проекте" },
   ];
 
   if (headerMount) {
     headerMount.innerHTML = `
-      <div class="prototype-ribbon">Прототип интернет-магазина · рыбные тексты и фото · <a href="${root}seo/">SEO-проектирование (ТЗ)</a></div>
+      <div class="prototype-ribbon">Прототип интернет-магазина · структура, SEO и клиентский бриф · <a href="${root}seo/">SEO-проектирование (ТЗ)</a></div>
       <header class="site-header">
         <div class="wrap header-inner">
           <a class="logo" href="${root}">
@@ -39,8 +40,8 @@
       <footer class="site-footer">
         <div class="wrap footer-grid">
           <div class="footer-col">
-            <strong style="font-family:'Cormorant Garamond',serif;font-size:28px;">Универмаг «Россия»</strong>
-            <p style="margin:12px 0 0;max-width:34ch;opacity:.8;">Официальный интернет-магазин мерча и одежды. Тексты и цены — заглушки для согласования структуры.</p>
+            <strong style="font-family:'PT Serif',serif;font-size:28px;">Универмаг «Россия»</strong>
+            <p style="margin:12px 0 0;max-width:34ch;opacity:.8;">Официальный интернет-магазин мерча и одежды. Прототип фиксирует структуру, SEO и сценарии покупки.</p>
           </div>
           <div class="footer-col">
             <h4>Покупателям</h4>
