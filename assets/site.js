@@ -8,10 +8,10 @@
 
   const nav = [
     { href: `${root}catalog/`, label: "Каталог" },
+    { href: `${root}catalog/new/`, label: "Новинки" },
     { href: `${root}collections/`, label: "Коллекции" },
     { href: `${root}gift-cards/`, label: "Подарки" },
-    { href: `${root}blog/`, label: "Блог" },
-    { href: `${root}about/`, label: "О проекте" },
+    { href: `${root}blog/`, label: "Журнал" },
   ];
 
   if (headerMount) {
@@ -46,25 +46,27 @@
             <h4>Покупателям</h4>
             <ul>
               <li><a href="${root}catalog/">Каталог</a></li>
+              <li><a href="${root}sizes/">Размеры</a></li>
               <li><a href="${root}delivery/">Доставка и оплата</a></li>
-              <li><a href="${root}delivery/#return">Возврат</a></li>
-              <li><a href="${root}delivery/#faq">FAQ</a></li>
+              <li><a href="${root}loyalty/">Лояльность</a></li>
+              <li><a href="${root}contacts/">Контакты</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h4>Коллекции</h4>
             <ul>
               <li><a href="${root}collections/russia-capsule/">Russia Capsule</a></li>
-              <li><a href="${root}collections/">Сезонные линейки</a></li>
+              <li><a href="${root}collections/mystery-box/">Mystery Box</a></li>
+              <li><a href="${root}collections/zimnyaya-liniya/">Зимняя линейка</a></li>
               <li><a href="${root}gift-cards/">Подарочные карты</a></li>
             </ul>
           </div>
           <div class="footer-col">
-            <h4>Внутреннее</h4>
+            <h4>Бизнес</h4>
             <ul>
-              <li><a href="${root}seo/">SEO-проектирование</a></li>
+              <li><a href="${root}corporate/">Корпоративным</a></li>
               <li><a href="${root}about/">О бренде</a></li>
-              <li><a href="${root}blog/">Журнал</a></li>
+              <li><a href="${root}seo/">SEO-проектирование</a></li>
             </ul>
           </div>
         </div>

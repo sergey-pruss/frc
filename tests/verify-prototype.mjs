@@ -8,14 +8,27 @@ const checks = [
   ['shop home exists', existsSync(join(root, 'index.html'))],
   ['seo doc moved', existsSync(join(root, 'seo/index.html'))],
   ['catalog page', existsSync(join(root, 'catalog/index.html'))],
-  ['category futbolki', existsSync(join(root, 'catalog/futbolki/index.html'))],
+  ['category longslivy', existsSync(join(root, 'catalog/longslivy/index.html'))],
+  ['catalog new', existsSync(join(root, 'catalog/new/index.html'))],
   ['product page', existsSync(join(root, 'product/futbolka-oranzhevaya/index.html'))],
-  ['collection capsule', existsSync(join(root, 'collections/russia-capsule/index.html'))],
+  ['all 11 products', existsSync(join(root, 'product/podarochnyj-nabor/index.html'))],
+  ['collection mystery', existsSync(join(root, 'collections/mystery-box/index.html'))],
   ['delivery page', existsSync(join(root, 'delivery/index.html'))],
+  ['contacts', existsSync(join(root, 'contacts/index.html'))],
+  ['sizes', existsSync(join(root, 'sizes/index.html'))],
+  ['loyalty', existsSync(join(root, 'loyalty/index.html'))],
+  ['corporate', existsSync(join(root, 'corporate/index.html'))],
+  ['blog article', existsSync(join(root, 'blog/kak-vybrat-razmer/index.html'))],
   ['shop styles', existsSync(join(root, 'assets/shop.css'))],
   [
-    'home has products',
-    /Футболка «Оранжевая линия»/.test(readFileSync(join(root, 'index.html'), 'utf8')),
+    'home has competitor-adapted copy',
+    /putin-team\.ru/.test(readFileSync(join(root, 'index.html'), 'utf8')),
+  ],
+  [
+    'product has long description',
+    /Плотный хлопок/.test(
+      readFileSync(join(root, 'product/futbolka-oranzhevaya/index.html'), 'utf8'),
+    ),
   ],
 ];
 

@@ -3,107 +3,42 @@
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-
-PRODUCTS = [
-    {
-        "slug": "futbolka-oranzhevaya",
-        "title": "Футболка «Оранжевая линия»",
-        "cat": "futbolki",
-        "cat_label": "Футболки",
-        "price": 3990,
-        "old": 4590,
-        "tag": "Новинка",
-        "img": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80",
-        "desc": "Плотный хлопок, прямой крой. На груди — стилизованная графика с отсылкой к архитектуре центра. Рыбный текст для демонстрации карточки.",
-    },
-    {
-        "slug": "futbolka-belaya",
-        "title": "Футболка «Белый фасад»",
-        "cat": "futbolki",
-        "cat_label": "Футболки",
-        "price": 3490,
-        "old": None,
-        "tag": "Хит",
-        "img": "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=800&q=80",
-        "desc": "Базовая модель для повседневных образов. Минималистичный принт, мягкая ткань, универсальный размерный ряд.",
-    },
-    {
-        "slug": "svitshot-klassika",
-        "title": "Свитшот «Классика»",
-        "cat": "svitshoty",
-        "cat_label": "Свитшоты",
-        "price": 5990,
-        "old": None,
-        "tag": "Коллекция",
-        "img": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80",
-        "desc": "Утеплённый флис внутри, объёмная вышивка на груди. Подходит для прохладной погоды и городских прогулок.",
-    },
-    {
-        "slug": "svitshot-premium",
-        "title": "Свитшот «Премиум капсула»",
-        "cat": "svitshoty",
-        "cat_label": "Свитшоты",
-        "price": 6490,
-        "old": 7200,
-        "tag": "−10%",
-        "img": "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=800&q=80",
-        "desc": "Оверсайз, плотный материал, контрастные манжеты. Демо-описание для согласования блока характеристик.",
-    },
-    {
-        "slug": "kepka-simvol",
-        "title": "Кепка «Символ»",
-        "cat": "kepki",
-        "cat_label": "Кепки",
-        "price": 2490,
-        "old": None,
-        "tag": "Аксессуар",
-        "img": "https://images.unsplash.com/photo-1588856142877-1aae7062c88f?auto=format&fit=crop&w=800&q=80",
-        "desc": "Регулируемый ремешок, вышивка спереди. Лёгкий акцент к любому образу из каталога.",
-    },
-    {
-        "slug": "kurtka-veter",
-        "title": "Куртка «Ветер с севера»",
-        "cat": "kurtki",
-        "cat_label": "Куртки",
-        "price": 12990,
-        "old": None,
-        "tag": "Премиум",
-        "img": "https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=800&q=80",
-        "desc": "Ветрозащитная ткань, капюшон, утеплённая подкладка. Прототип верхней одежды для витрины.",
-    },
-]
+sys.path.insert(0, str(ROOT / "scripts"))
+from content import BLOG_POSTS, BRAND, BRIEF_PRINCIPLES, CATEGORIES, COLLECTIONS, PRODUCTS, REFERENCES  # noqa: E402
 
 
 def fmt_price(n: int) -> str:
     return f"{n:,}".replace(",", "\u202f") + " ₽"
 
 
-def shell(depth: int, title: str, body: str) -> str:
+def shell(depth: int, title: str, body: str, desc: str | None = None) -> str:
     root = "../" * depth
+    canonical_path = "" if title == "Главная" else f"{title.lower().replace(' ', '-')}/"
     return f"""<!doctype html>
 <html lang="ru">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{title} — Универмаг «Россия»</title>
-    <meta name="description" content="Прототип интернет-магазина мерча Национального центра «Россия».">
+    <title>{title} — {BRAND['name']}</title>
+    <meta name="description" content="{desc or BRAND['tagline']}">
     <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" href="{root}assets/favicon.svg" type="image/svg+xml">
+    <link rel="canonical" href="https://sergey-pruss.github.io/frc/{canonical_path}">
     <link rel="stylesheet" href="{root}assets/shop.css">
   </head>
   <body>
-    <div data-site-header></motion>
+    <div data-site-header></div>
     <main>
 {body}
     </main>
-    <div data-site-footer></motion>
+    <div data-site-footer></div>
     <script src="{root}assets/site.js" data-depth="{depth}"></script>
   </body>
 </html>
-""".replace("<motion", "<div").replace("</motion>", "</div>")
+"""
 
 
 def card(p: dict, depth: int) -> str:
@@ -114,18 +49,18 @@ def card(p: dict, depth: int) -> str:
           <a href="{root}product/{p['slug']}/">
             <div class="product-thumb">
               <span class="product-tag">{p['tag']}</span>
-              <img src="{p['img']}" alt="{p['title']}" loading="lazy" width="400" height="500">
+              <img src="{p['img']}" alt="{p['title']} — {BRAND['name']}" loading="lazy" width="400" height="500">
             </div>
             <div class="product-body">
               <h3>{p['title']}</h3>
-              <p>{p['desc'][:72]}…</p>
-              <motion class="price-row">
+              <p>{p['short']}</p>
+              <div class="price-row">
                 <span class="price">{fmt_price(p['price'])}</span>
                 {old}
-              </motion>
+              </div>
             </div>
           </a>
-        </article>""".replace("<motion", "<div").replace("</motion>", "</div>")
+        </article>"""
 
 
 def write(rel: str, content: str) -> None:
@@ -135,216 +70,299 @@ def write(rel: str, content: str) -> None:
     print("wrote", rel)
 
 
+def category_chips(depth: int, active: str | None) -> str:
+    root = "../" * depth
+    parts = [f'<a href="{root}catalog/" class="{"is-active" if active is None else ""}">Все</a>']
+    for slug, label, _, _ in CATEGORIES:
+        cls = "is-active" if active == slug else ""
+        parts.append(f'<a href="{root}catalog/{slug}/" class="{cls}">{label}</a>')
+    return "\n".join(parts)
+
+
+def products_for_collection(slug: str) -> list:
+    if slug == "russia-capsule":
+        return [p for p in PRODUCTS if p["collection"] == "Russia Capsule"]
+    if slug == "mystery-box":
+        return [p for p in PRODUCTS if p["slug"] in ("podarochnyj-nabor", "sumka-shopper", "kepka-simvol")]
+    if slug == "zimnyaya-liniya":
+        return [p for p in PRODUCTS if p["cat"] in ("kurtki", "svitshoty")]
+    return []
+
+
+def product_body(p: dict) -> str:
+    thumbs = "".join(
+        f'<button type="button" class="{"is-active" if i == 0 else ""}"><img src="{p["img"]}" alt=""></button>'
+        for i in range(4)
+    )
+    related = [x for x in PRODUCTS if x["cat"] == p["cat"] and x["slug"] != p["slug"]][:2]
+    return f"""
+      <div class="wrap">
+        <nav class="breadcrumbs"><a href="../../">Главная</a> / <a href="../../catalog/">Каталог</a> / <a href="../../catalog/{p['cat']}/">{p['cat_label']}</a> / <span>{p['title']}</span></nav>
+        <div class="product-page">
+          <div>
+            <div class="gallery-main"><img src="{p['img']}" alt="{p['title']} — {BRAND['name']}"></div>
+            <div class="gallery-thumbs">{thumbs}</div>
+          </div>
+          <div class="product-info">
+            <p class="pill" style="display:inline-block;">{p['tag']} · {p['collection']}</p>
+            <h1>{p['title']}</h1>
+            <p class="lead-price">{fmt_price(p['price'])}</p>
+            <p>{p['long']}</p>
+            <p><strong>Размер</strong> · <a href="../../sizes/">таблица размеров</a></p>
+            <div class="size-grid">
+              <button type="button">XS</button><button type="button">S</button><button type="button" class="is-active">M</button><button type="button">L</button><button type="button">XL</button>
+            </div>
+            <div class="cta-row">
+              <button class="btn btn-primary" type="button" data-demo-cart>В корзину</button>
+              <a class="btn btn-secondary" href="../../delivery/">Доставка и возврат</a>
+            </div>
+            <ul class="spec-list">
+              <li><span>Коллекция</span><span>{p['collection']}</span></li>
+              <li><span>Аудитория</span><span>{p['gender']}</span></li>
+              <li><span>Состав</span><span>{p['composition']}</span></li>
+              <li><span>Уход</span><span>{p['care']}</span></li>
+              <li><span>Артикул</span><span>UR-{p['slug'][:8].upper()}</span></li>
+              <li><span>Наличие</span><span>В наличии</span></li>
+            </ul>
+            <script type="application/ld+json">
+              {{
+                "@context": "https://schema.org",
+                "@type": "Product",
+                "name": "{p['title']}",
+                "brand": {{"@type": "Brand", "name": "{BRAND['name']}"}},
+                "category": "{p['cat_label']}",
+                "image": "{p['img']}",
+                "description": "{p['short']}",
+                "sku": "UR-{p['slug'][:8].upper()}",
+                "offers": {{
+                  "@type": "Offer",
+                  "priceCurrency": "RUB",
+                  "price": "{p['price']}",
+                  "availability": "https://schema.org/InStock"
+                }}
+              }}
+            </script>
+          </div>
+        </div>
+        <section class="section" style="padding-top:0;">
+          <h2 class="subsection-title">Похожие товары</h2>
+          <div class="product-grid">{"".join(card(x, 2) for x in related)}</div>
+        </section>
+      </div>""".replace("<div class=", "<div class=").replace("<div class=", "<div class=").replace("</div>", "</div>")
+
+
+
 def main() -> None:
-    grid_home = "\n".join(card(p, 0) for p in PRODUCTS[:8])
-    home = shell(
-        0,
-        "Главная",
+    new_items = [p for p in PRODUCTS if p["tag"] in ("Новинка", "−9%", "Набор")][:8]
+    coll_tiles = "".join(
         f"""
+        <a class="collection-tile" href="collections/{c['slug']}/">
+          <div class="collection-tile__img" style="background-image:url('{c['img']}')"></div>
+          <div class="collection-tile__body"><h3>{c['title']}</h3><p>{c['lead'][:110]}…</p></div>
+        </a>"""
+        for c in COLLECTIONS
+    )
+    reference_links = "".join(
+        f'<a class="reference-link" href="{url}" target="_blank" rel="noreferrer">{label}</a>'
+        for label, url in REFERENCES
+    )
+    principles = "".join(f"<li>{item}</li>" for item in BRIEF_PRINCIPLES)
+
+    write(
+        "index.html",
+        shell(
+            0,
+            "Главная",
+            f"""
       <section class="hero-shop">
         <div class="wrap hero-grid">
           <div class="hero-copy">
             <div class="hero-badges">
-              <span class="pill">Официальный мерч</span>
+              <span class="pill">Официальный магазин</span>
               <span class="pill">Доставка по России</span>
-              <span class="pill">Коллекция Russia Capsule</span>
+              <span class="pill">{BRAND['center']}</span>
             </div>
-            <h1>Одежда и мерч Национального центра «Россия»</h1>
-            <p>Демо-витрина для согласования структуры каталога, карточек и сервисных страниц. Все тексты и цены — рыбные заглушки.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:12px;">
-              <a class="btn btn-primary" href="catalog/">Смотреть каталог</a>
-              <a class="btn btn-secondary" href="collections/russia-capsule/">Russia Capsule</a>
+            <h1>Официальный мерч {BRAND['center']}</h1>
+            <p>{BRAND['tagline']}. Прототип учитывает клиентский бриф, SEO-ТЗ, структуру интернет-магазина и референсы Универмага.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="catalog/">Каталог</a>
+              <a class="btn btn-secondary" href="collections/">Коллекции</a>
             </div>
           </div>
           <div class="hero-visual" aria-hidden="true"></div>
         </div>
       </section>
-      <section class="section">
-        <div class="wrap">
-          <div class="section-head">
-            <h2>Новинки сезона</h2>
-            <p>Подборка для прототипа: сетка карточек, цены, бейджи и переход в товар.</p>
+      <section class="section muted">
+        <div class="wrap brief-grid">
+          <div class="content-block">
+            <p class="eyebrow">Бриф клиента</p>
+            <h2>В меру современно, аккуратно, без провокаций</h2>
+            <p>Прототип держит государственный контекст: официальность, спокойная премиальность, понятная коммерческая структура и отдельный слой коллекционных историй.</p>
           </div>
-          <div class="product-grid">{grid_home}
+          <div class="content-block">
+            <h3>Принципы</h3>
+            <ul class="checklist">{principles}</ul>
           </div>
         </div>
       </section>
       <section class="section">
-        <div class="wrap collection-banner">
-          <div class="visual" aria-hidden="true"></div>
-          <div class="copy">
-            <h3>Russia Capsule</h3>
-            <p>Капсульная линейка с акцентом на символику и архитектурные мотивы. Здесь будет отдельная посадочная коллекции с историей и lookbook.</p>
-            <a class="btn btn-primary" href="collections/russia-capsule/">Открыть коллекцию</a>
+        <div class="wrap">
+          <div class="section-head"><h2>Кому подбираем</h2><p>Быстрый вход в ключевые покупательские сценарии.</p></div>
+          <div class="audience-grid">
+            <a class="audience-card" href="catalog/futbolki/"><strong>Мужчинам и женщинам</strong><span>Футболки, свитшоты, куртки</span></a>
+            <a class="audience-card" href="gift-cards/"><strong>Подарки</strong><span>Сертификаты и наборы</span></a>
+            <a class="audience-card" href="collections/mystery-box/"><strong>Mystery Box</strong><span>Сюрприз-набор</span></a>
+            <a class="audience-card" href="corporate/"><strong>Бизнесу</strong><span>Опт и мерч</span></a>
           </div>
+        </div>
+      </section>
+      <section class="section muted">
+        <div class="wrap">
+          <div class="section-head"><h2>Новинки</h2><a class="btn btn-ghost" href="catalog/new/">Все новинки</a></div>
+          <div class="product-grid">{"".join(card(p, 0) for p in new_items)}</div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="wrap">
+          <div class="section-head"><h2>Коллекции</h2><p>Капсулы, сезонные витрины и подарочные сценарии.</p></div>
+          <div class="collection-tiles">{coll_tiles}</div>
         </div>
       </section>
       <section class="section">
         <div class="wrap trust-row">
-          <div class="trust-card"><strong>Доставка по РФ</strong>Курьер, ПВЗ и почта — условия на демо-странице.</div>
-          <motion class="trust-card"><strong>Официальный магазин</strong>Брендовая связка с Национальным центром «Россия».</div>
-          <div class="trust-card"><strong>Примерка и возврат</strong>Блок FAQ и возвратов для SEO и доверия.</div>
-          <div class="trust-card"><strong>Подарочные карты</strong>Отдельный сценарий в структуре каталога.</div>
+          <div class="trust-card"><strong>Официальный магазин</strong>Мерч только здесь.</div>
+          <div class="trust-card"><strong>Доставка по РФ</strong>СДЭК, Почта, курьер.</div>
+          <div class="trust-card"><strong>Возврат 14 дней</strong>При сохранении бирок.</div>
+          <div class="trust-card"><strong>Лояльность</strong><a href="loyalty/">баллы</a> с покупки.</div>
         </div>
-      </section>""".replace("<motion", "<div").replace("</motion>", "</motion>").replace("</motion>", "</motion>"),
+      </section>""",
+        ),
     )
-    home = home.replace("</motion>", "</div>").replace("<motion", "<div")
-    write("index.html", home)
 
-    cats = [
-        ("futbolki", "Футболки", "Базовый слой каталога: футболки с принтом и без."),
-        ("svitshoty", "Свитшоты", "Тёплый сегмент: свитшоты и худи в одной ветке прототипа."),
-        ("kepki", "Кепки", "Аксессуары с низким чеком — хороший вход в корзину."),
-        ("kurtki", "Куртки", "Верхняя одежда с расширенной карточкой и таблицей размеров."),
-    ]
-    for slug, label, intro in cats:
-        items = [p for p in PRODUCTS if p["cat"] == slug]
-        chips = "\n".join(
-            f'<a href="../{c}/" class="{"is-active" if c == slug else ""}">{l}</a>'
-            for c, l, _ in cats
-        )
-        grid = "\n".join(card(p, 2) for p in items) or "<p>Товары появятся после уточнения ассортимента.</p>"
-        body = f"""
-      <div class="wrap">
-        <nav class="breadcrumbs"><a href="../../">Главная</a> / <a href="../">Каталог</a> / <span>{label}</span></nav>
-        <h1>{label}</h1>
-        <p class="page-intro">{intro} Рыбный intro-текст 300–600 знаков будет здесь в продакшене.</p>
-        <div class="category-chips">{chips}</div>
-        <div class="filters-bar">
-          <div>Фильтры: размер · цвет · цена <span style="color:var(--muted)">(демо)</span></motion>
-          <select aria-label="Сортировка"><option>По популярности</option><option>Сначала новые</option><option>Цена ↑</option></select>
-        </div>
-        <div class="product-grid">{grid}</div>
-      </div>"""
-        body = body.replace("<motion", "<div").replace("</motion>", "</div>")
-        write(f"catalog/{slug}/index.html", shell(2, label, body))
-
-    catalog_grid = "\n".join(card(p, 1) for p in PRODUCTS)
+    cat_links = "".join(
+        f'<a class="category-link-card" href="{slug}/"><strong>{label}</strong><span>{seo[:70]}…</span></a>'
+        for slug, label, seo, _ in CATEGORIES
+    )
     write(
         "catalog/index.html",
         shell(
             1,
             "Каталог",
             f"""
-      <div class="wrap">
+      <div class="wrap section">
         <nav class="breadcrumbs"><a href="../">Главная</a> / <span>Каталог</span></nav>
         <h1>Каталог</h1>
-        <p class="page-intro">Разводящая страница ассортимента: категории, новинки и фильтры. В прототипе — 6 демо-товаров.</p>
-        <div class="category-chips">
-          <a class="is-active" href="./">Все</a>
-          <a href="futbolki/">Футболки</a>
-          <a href="svitshoty/">Свитшоты</a>
-          <a href="kepki/">Кепки</a>
-          <a href="kurtki/">Куртки</a>
-        </div>
-        <div class="product-grid">{catalog_grid}</motion>
-      </div>""".replace("<motion", "<motion").replace("</motion>", "</motion>").replace("<motion", "<div").replace("</motion>", "</motion>"),
+        <p class="page-intro">Купить мерч {BRAND['center']} онлайн — все категории и коллекции.</p>
+        <div class="category-chips">{category_chips(1, None)}</div>
+        <div class="category-links">{cat_links}</div>
+        <h2 class="subsection-title">Все товары</h2>
+        <div class="product-grid">{"".join(card(p, 1) for p in PRODUCTS)}</div>
+      </div>""",
+            "Каталог официальной одежды и мерча Национального центра «Россия»: категории, коллекции, подарки и доставка по России.",
         ),
     )
 
-    # fix catalog index
-    text = (ROOT / "catalog/index.html").read_text()
-    write("catalog/index.html", text.replace("</motion>", "</div>").replace("<motion", "<div"))
-
-    for p in PRODUCTS:
-        if p["slug"] not in ("futbolka-oranzhevaya", "svitshot-klassika", "kurtka-veter"):
-            continue
-        thumbs = [p["img"], p["img"], p["img"], p["img"]]
-        thumb_html = "".join(
-            f'<button type="button" class="{"is-active" if i == 0 else ""}"><img src="{u}" alt=""></button>'
-            for i, u in enumerate(thumbs)
+    for slug, label, seo, note in CATEGORIES:
+        items = [p for p in PRODUCTS if p["cat"] == slug]
+        write(
+            f"catalog/{slug}/index.html",
+            shell(
+                2,
+                label,
+                f"""
+      <div class="wrap section">
+        <nav class="breadcrumbs"><a href="../../">Главная</a> / <a href="../">Каталог</a> / <span>{label}</span></nav>
+        <h1>{label}</h1>
+        <p class="page-intro">{seo}</p>
+        <p class="page-note">{note}</p>
+        <div class="category-chips">{category_chips(2, slug)}</div>
+        <div class="filters-bar">
+          <div>Фильтр: размер · цвет · коллекция · цена</div>
+          <select aria-label="Сортировка"><option>По популярности</option><option>Сначала новые</option></select>
+        </div>
+        <div class="product-grid">{"".join(card(p, 2) for p in items)}</div>
+        <div class="faq category-faq">
+          <h2>Вопросы о категории</h2>
+          <details open><summary>Как подобрать размер?</summary><p><a href="../../sizes/">Таблица размеров</a>.</p></details>
+          <details><summary>Доставка в регионы?</summary><p><a href="../../delivery/">Условия доставки</a>.</p></details>
+        </div>
+      </div>""",
+                seo,
+            ),
         )
-        body = f"""
-      <div class="wrap">
-        <nav class="breadcrumbs"><a href="../../">Главная</a> / <a href="../../catalog/">Каталог</a> / <a href="../../catalog/{p['cat']}/">{p['cat_label']}</a> / <span>{p['title']}</span></nav>
-        <div class="product-page">
-          <div>
-            <div class="gallery-main"><img src="{p['img']}" alt="{p['title']}"></div>
-            <div class="gallery-thumbs">{thumb_html}</div>
-          </div>
-          <div class="product-info">
-            <p class="pill" style="display:inline-block;">{p['tag']}</p>
-            <h1>{p['title']}</h1>
-            <p class="lead-price">{fmt_price(p['price'])}</p>
-            <p>{p['desc']} Дополнительный рыбный текст про посадку, состав 80% хлопок / 20% полиэстер и уход при 30°.</p>
-            <p><strong>Размер</strong></p>
-            <div class="size-grid">
-              <button type="button">S</button><button type="button" class="is-active">M</button><button type="button">L</button><button type="button">XL</button>
-            </div>
-            <div style="display:flex;gap:12px;flex-wrap:wrap;">
-              <button class="btn btn-primary" type="button" data-demo-cart>В корзину</button>
-              <a class="btn btn-secondary" href="../../delivery/">Доставка и возврат</a>
-            </div>
-            <ul class="spec-list">
-              <li><span>Коллекция</span><span>Russia Capsule</span></li>
-              <li><span>Артикул</span><span>DEMO-{p['slug'][:6].upper()}</span></li>
-              <li><span>Наличие</span><span>В наличии (рыба)</span></li>
-            </ul>
-          </div>
-        </div>
-      </motion>"""
-        body = body.replace("<motion", "<div").replace("</motion>", "</div>")
-        write(f"product/{p['slug']}/index.html", shell(2, p["title"], body))
 
     write(
-        "collections/index.html",
-        shell(
-            1,
-            "Коллекции",
-            """
-      <div class="wrap">
-        <nav class="breadcrumbs"><a href="../">Главная</a> / <span>Коллекции</span></nav>
-        <h1>Коллекции</h1>
-        <p class="page-intro">Смысловые линейки и капсулы — отдельные посадочные в структуре SEO-ТЗ.</p>
-        <motion class="collection-banner" style="margin-top:24px;">
-          <div class="visual" style="background-image:url('https://images.unsplash.com/photo-1523381210434-271fa511ff93?auto=format&fit=crop&w=1000&q=80');"></div>
-          <div class="copy">
-            <h3>Russia Capsule</h3>
-            <p>Флагманская капсула прототипа: куртки, свитшоты и акцентные принты. Рыбный storytelling блок.</p>
-            <a class="btn btn-primary" href="russia-capsule/">Смотреть товары</a>
-          </div>
-        </div>
-      </div>""".replace("<motion", "<div").replace("</motion>", "</div>"),
-        ),
-    )
-
-    cap_products = [p for p in PRODUCTS if p["cat"] in ("futbolki", "svitshoty", "kurtki")][:4]
-    write(
-        "collections/russia-capsule/index.html",
+        "catalog/new/index.html",
         shell(
             2,
-            "Russia Capsule",
+            "Новинки",
             f"""
-      <div class="wrap">
-        <nav class="breadcrumbs"><a href="../../">Главная</a> / <a href="../">Коллекции</a> / <span>Russia Capsule</span></nav>
-        <h1>Russia Capsule</h1>
-        <p class="page-intro">Коллекционная посадочная: история капсулы, визуал и товары. Текст-рыба для согласования макета с клиентом.</p>
-        <motion class="product-grid">{"".join(card(p, 2) for p in cap_products)}</div>
-      </div>""".replace("<motion", "<div").replace("</motion>", "</div>"),
+      <div class="wrap section">
+        <nav class="breadcrumbs"><a href="../../">Главная</a> / <a href="../">Каталог</a> / <span>Новинки</span></nav>
+        <h1>Новинки</h1>
+        <p class="page-intro">Свежие поступления сезона.</p>
+        <div class="product-grid">{"".join(card(p, 2) for p in new_items)}</div>
+      </div>""",
         ),
     )
+
+    for p in PRODUCTS:
+        write(f"product/{p['slug']}/index.html", shell(2, p["title"], product_body(p), p["short"]))
+
+    banners = "".join(
+        f"""
+        <article class="collection-banner" style="margin-bottom:24px;">
+          <div class="visual" style="background-image:url('{c['img']}')"></div>
+          <div class="copy"><h3>{c['title']}</h3><p>{c['lead']}</p><a class="btn btn-primary" href="{c['slug']}/">Смотреть</a></div>
+        </article>"""
+        for c in COLLECTIONS
+    )
+    write(
+        "collections/index.html",
+        shell(1, "Коллекции", f'<div class="wrap section"><nav class="breadcrumbs"><a href="../">Главная</a> / <span>Коллекции</span></nav><h1>Коллекции</h1><p class="page-intro">Капсулы, подарочные наборы и сезонные витрины: отдельный SEO-слой для историй, образов и товарных подборок.</p>{banners}</div>'),
+    )
+
+    for c in COLLECTIONS:
+        prods = products_for_collection(c["slug"])
+        write(
+            f"collections/{c['slug']}/index.html",
+            shell(
+                2,
+                c["title"],
+                f"""
+      <div class="wrap section">
+        <nav class="breadcrumbs"><a href="../../">Главная</a> / <a href="../">Коллекции</a> / <span>{c['title']}</span></nav>
+        <h1>{c['title']}</h1>
+        <p class="page-intro">{c['lead']}</p>
+        <p class="page-note">{c['story']}</p>
+        <div class="product-grid">{"".join(card(p, 2) for p in prods)}</div>
+      </div>""",
+                c["lead"],
+            ),
+        )
 
     write(
         "delivery/index.html",
         shell(
             1,
             "Доставка и оплата",
-            """
+            f"""
       <div class="wrap section">
         <nav class="breadcrumbs"><a href="../">Главная</a> / <span>Доставка</span></nav>
-        <div class="content-block">
+        <div class="content-block prose">
           <h1>Доставка, оплата и возврат</h1>
-          <p>Сервисная страница из SEO-карты сайта. Ниже — рыбные условия для прототипа.</p>
-          <h2 id="delivery">Доставка по России</h2>
-          <p>Москва — курьер 1–2 дня от 390 ₽. Регионы — СДЭК/Почта 3–7 дней от 290 ₽. Бесплатно от 7 000 ₽ (заглушка).</p>
+          <p>Сервисная страница доверия для {BRAND['name']}: доставка, оплата, возврат, размеры и контакты.</p>
+          <h2 id="delivery">Доставка</h2>
+          <ul><li>Москва — курьер 1–2 дня, от 390 ₽.</li><li>Регионы — СДЭК / Почта 3–7 дней, от 290 ₽.</li><li>Бесплатно от 7 000 ₽.</li></ul>
           <h2>Оплата</h2>
-          <p>Карта, СБП, оплата при получении в пилотных регионах — финальный список уточняется.</p>
+          <p>Карты, СБП. Юрлица — <a href="../corporate/">по счёту</a>.</p>
           <h2 id="return">Возврат</h2>
-          <p>14 дней на возврат нераспроданного товара. Пример текста для блока доверия в карточке товара.</p>
+          <p>14 дней. <a href="../sizes/">Размеры</a>.</p>
           <div class="faq" id="faq">
             <h2>FAQ</h2>
-            <details open><summary>Как подобрать размер?</summary><p>Рыбный ответ со ссылкой на таблицу размеров в карточке и в блоге.</p></details>
-            <details><summary>Есть ли подарочная упаковка?</summary><p>Да, опция появится на чекауте в следующей версии прототипа.</p></details>
+            <details open><summary>Как отследить заказ?</summary><p>SMS и email со ссылкой.</p></details>
+            <details><summary>Подарочная упаковка?</summary><p>+290 ₽ в корзине.</p></details>
+            <details><summary>Контакты?</summary><p><a href="../contacts/">Контакты</a>, {BRAND['email']}</p></details>
           </div>
         </div>
       </div>""",
@@ -356,32 +374,80 @@ def main() -> None:
         shell(
             1,
             "О проекте",
-            """
+            f"""
       <div class="wrap section">
-        <div class="content-block">
-          <h1>О Универмаге «Россия»</h1>
-          <p>Официальный интернет-магазин одежды и мерча Национального центра «Россия». Этот абзац — рыбный текст о миссии, эксклюзивном праве на дизайн и связи с площадкой на ВДНХ.</p>
-          <p>Страница закрывает брендовый и E-E-A-T спрос: кто мы, почему официальный канал, где производство и как связаться.</p>
+        <div class="content-block prose">
+          <h1>О {BRAND['name']}</h1>
+          <p>{BRAND['tagline']} {BRAND['center']} на ВДНХ.</p>
+          <p>Сайт проектируется как официальный интернет-магазин: каталог, коллекции, подарочные сценарии, сервисные страницы и SEO-документ для разработки.</p>
+          <h2>В магазине</h2>
+          <ul><li>Одежда и аксессуары</li><li>Коллекции и капсулы</li><li>Подарки и корпоратив</li></ul>
+          <h2>Фирменные материалы и референсы</h2>
+          <div class="reference-list">{reference_links}</div>
         </div>
       </div>""",
         ),
     )
 
     write(
-        "blog/index.html",
+        "contacts/index.html",
         shell(
             1,
-            "Блог",
+            "Контакты",
+            f"""
+      <div class="wrap section">
+        <div class="content-block prose">
+          <h1>Контакты</h1>
+          <p><strong>Адрес:</strong> {BRAND['address']}</p>
+          <p><strong>Телефон:</strong> <a href="tel:+74950000000">{BRAND['phone']}</a></p>
+          <p><strong>Email:</strong> <a href="mailto:{BRAND['email']}">{BRAND['email']}</a></p>
+          <form class="demo-form" onsubmit="return false;">
+            <label>Имя <input type="text"></label>
+            <label>Email <input type="email"></label>
+            <label>Сообщение <textarea rows="4"></textarea></label>
+            <button class="btn btn-primary" type="submit">Отправить</button>
+          </form>
+        </div>
+      </div>""",
+        ),
+    )
+
+    write(
+        "sizes/index.html",
+        shell(
+            1,
+            "Размеры",
             """
       <div class="wrap section">
-        <h1>Журнал</h1>
-        <p class="page-intro">Информационный кластер: гиды, коллекции, подарки. Три демо-статьи.</p>
-        <div class="blog-grid">
-          <article class="blog-card"><div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1445205170230-053b83016050?w=800');"></div><div class="body"><h3>Как выбрать размер свитшота</h3><p>Рыба · 5 мин</p></div></article>
-          <article class="blog-card"><div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=800');"></div><motion class="body"><h3>Подарки с символикой: гид 2026</h3><p>Рыба · 7 мин</p></div></article>
-          <article class="blog-card"><div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800');"></div><div class="body"><h3>История Russia Capsule</h3><p>Рыба · 4 мин</p></div></article>
+        <div class="content-block prose">
+          <h1>Таблица размеров</h1>
+          <p>Отдельная посадочная для карточек товаров, FAQ и снижения возвратов.</p>
+          <table class="size-table">
+            <thead><tr><th>Размер</th><th>Грудь</th><th>Длина</th><th>Рукав</th></tr></thead>
+            <tbody>
+              <tr><td>XS</td><td>88–92</td><td>66</td><td>60</td></tr>
+              <tr><td>S</td><td>92–96</td><td>68</td><td>61</td></tr>
+              <tr><td>M</td><td>96–100</td><td>70</td><td>62</td></tr>
+              <tr><td>L</td><td>100–104</td><td>72</td><td>63</td></tr>
+              <tr><td>XL</td><td>104–108</td><td>74</td><td>64</td></tr>
+            </tbody>
+          </table>
         </div>
-      </div>""".replace("<motion", "<motion").replace("<motion class", "<div class").replace("</motion>", "</div>"),
+      </div>""",
+        ),
+    )
+
+    write(
+        "loyalty/index.html",
+        shell(1, "Программа лояльности", '<div class="wrap section"><div class="content-block prose"><h1>Программа лояльности</h1><p>5% баллами, 1 балл = 1 ₽, списание до 30%.</p></div></div>'),
+    )
+
+    write(
+        "corporate/index.html",
+        shell(
+            1,
+            "Корпоративным клиентам",
+            f'<div class="wrap section"><div class="content-block prose"><h1>Корпоративным клиентам</h1><p>Опт от 50 шт., брендирование. <a href="mailto:{BRAND["email"]}">{BRAND["email"]}</a></p></div></div>',
         ),
     )
 
@@ -390,12 +456,12 @@ def main() -> None:
         shell(
             1,
             "Подарочные карты",
-            """
+            f"""
       <div class="wrap section">
-        <div class="content-block">
+        <div class="content-block prose">
           <h1>Подарочные карты</h1>
-          <p>Отдельный подарочный сценарий из семантического ТЗ. Номиналы 3 000 · 5 000 · 10 000 ₽ — рыбные данные.</p>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;">
+          <p>Сертификаты и <a href="../product/podarochnyj-nabor/">набор «Старт»</a>.</p>
+          <div class="cta-row">
             <button class="btn btn-secondary" type="button">3 000 ₽</button>
             <button class="btn btn-primary" type="button">5 000 ₽</button>
             <button class="btn btn-secondary" type="button">10 000 ₽</button>
@@ -404,6 +470,31 @@ def main() -> None:
       </div>""",
         ),
     )
+
+    blog_cards = "".join(
+        f'<article class="blog-card"><a href="{post["slug"]}/"><div class="thumb" style="background-image:url(\'{post["img"]}\')"></div><div class="body"><h3>{post["title"]}</h3><p>{post["excerpt"]}</p></div></a></article>'
+        for post in BLOG_POSTS
+    )
+    write("blog/index.html", shell(1, "Журнал", f'<div class="wrap section"><h1>Журнал</h1><p class="page-intro">Гиды и коллекции.</p><div class="blog-grid">{blog_cards}</div></div>'))
+
+    for post in BLOG_POSTS:
+        write(
+            f"blog/{post['slug']}/index.html",
+            shell(
+                2,
+                post["title"],
+                f"""
+      <div class="wrap section">
+        <nav class="breadcrumbs"><a href="../../">Главная</a> / <a href="../">Журнал</a> / <span>{post['title']}</span></nav>
+        <article class="content-block prose">
+          <h1>{post['title']}</h1>
+          <p>{post['excerpt']}</p>
+          <p>{post['body']}</p>
+          <p><a class="btn btn-secondary" href="../../catalog/">В каталог</a></p>
+        </article>
+      </div>""",
+            ),
+        )
 
 
 if __name__ == "__main__":
