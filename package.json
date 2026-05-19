@@ -1,0 +1,9 @@
+{
+  "name": "frc-seo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SEO project documentation for the FRC / National Center Russia merch website.",
+  "scripts": {
+    "test": "node tests/verify-html.mjs"
+  }
+}
