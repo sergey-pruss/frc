@@ -81,6 +81,13 @@ const checks = [
     /stores\//.test(siteJs) && /favorites\//.test(siteJs) && /cart\//.test(siteJs) && /search\//.test(siteJs),
   ],
   [
+    'footer has Serenity credit without SEO project link',
+    /Сделано в Serenity/.test(siteJs) &&
+      /serenity-logo\.svg/.test(siteJs) &&
+      !/SEO-проектирование/.test(siteJs) &&
+      existsSync(join(root, 'assets/serenity-logo.svg')),
+  ],
+  [
     'product has long description',
     /Плотный хлопок/.test(
       readFileSync(join(root, 'product/futbolka-oranzhevaya/index.html'), 'utf8'),

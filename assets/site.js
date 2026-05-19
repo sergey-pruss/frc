@@ -71,17 +71,22 @@
               <li><a href="${root}corporate/">Корпоративным</a></li>
               <li><a href="${root}login/">Личный кабинет</a></li>
               <li><a href="${root}about/">О бренде</a></li>
-              <li><a href="${root}seo/">SEO-проектирование</a></li>
             </ul>
           </div>
         </div>
-        <div class="wrap footer-bottom">© 2026 Универмаг «Россия». Демонстрационная версия сайта.</div>
+        <div class="wrap footer-bottom">
+          <span>© 2026 Универмаг «Россия»</span>
+          <a class="made-by" href="https://serenity.agency/" target="_blank" rel="noreferrer">
+            <span>Сделано в Serenity</span>
+            <img src="${root}assets/serenity-logo.svg" alt="Serenity" width="18" height="18">
+          </a>
+        </div>
       </footer>`;
   }
 
   document.querySelectorAll("[data-demo-cart]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      alert("Прототип: корзина и оформление заказа будут в следующей итерации.");
+      alert("Корзина добавлена в демонстрационной версии сайта.");
     });
   });
 

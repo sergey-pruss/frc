@@ -671,11 +671,30 @@ a {
 }
 
 .footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   margin-top: 28px;
   padding-top: 18px;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   color: rgba(255, 255, 255, 0.55);
   font-size: 13px;
+}
+
+.made-by {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #f2efe7;
+  font-weight: 700;
+  opacity: 0.82;
+}
+
+.made-by img {
+  width: 18px;
+  height: 18px;
+  filter: invert(1);
 }
 
 .audience-grid {
@@ -1035,7 +1054,12 @@ a {
   }
 
   .search-panel,
-  .cart-item {
+  .cart-item,
+  .footer-bottom {
     grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    align-items: flex-start;
   }
 }
