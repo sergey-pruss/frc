@@ -8,9 +8,17 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from content import BLOG_POSTS, BRAND, BRIEF_PRINCIPLES, CATEGORIES, COLLECTIONS, PRODUCTS, REFERENCES  # noqa: E402
+from content import (  # noqa: E402
+    BLOG_POSTS,
+    BRAND,
+    CATEGORIES,
+    COLLECTIONS,
+    EDITORIAL_SHOTS,
+    HERO_MOSAIC_SLUGS,
+    PRODUCTS,
+)
 
-ASSET_VERSION = "20260519d"
+ASSET_VERSION = "20260519g"
 BASE_URL = "https://frc.sergeypruss.ru"
 
 
@@ -18,9 +26,8 @@ def fmt_price(n: int) -> str:
     return f"{n:,}".replace(",", "\u202f") + " ₽"
 
 
-def shell(depth: int, title: str, body: str, desc: str | None = None) -> str:
+def shell(depth: int, title: str, body: str, desc: str | None = None, canonical_path: str = "") -> str:
     root = "../" * depth
-    canonical_path = "" if title == "Главная" else f"{title.lower().replace(' ', '-')}/"
     canonical_url = f"{BASE_URL}/{canonical_path}"
     return f"""<!doctype html>
 <html lang="ru">
@@ -48,11 +55,13 @@ def shell(depth: int, title: str, body: str, desc: str | None = None) -> str:
 """
 
 
-def card(p: dict, depth: int) -> str:
+def card(p: dict, depth: int, *, editorial: bool = False) -> str:
     root = "../" * depth
     old = f'<span class="price-old">{fmt_price(p["old"])}</span>' if p["old"] else ""
+    extra = " product-card--editorial" if editorial else ""
+    short = "" if editorial else f"<p>{p['short']}</p>"
     return f"""
-        <article class="product-card">
+        <article class="product-card{extra}">
           <a href="{root}product/{p['slug']}/">
             <div class="product-thumb">
               <span class="product-tag">{p['tag']}</span>
@@ -60,7 +69,7 @@ def card(p: dict, depth: int) -> str:
             </div>
             <div class="product-body">
               <h3>{p['title']}</h3>
-              <p>{p['short']}</p>
+              {short}
               <div class="price-row">
                 <span class="price">{fmt_price(p['price'])}</span>
                 {old}
@@ -68,6 +77,77 @@ def card(p: dict, depth: int) -> str:
             </div>
           </a>
         </article>"""
+
+
+def product_by_slug(slug: str) -> dict:
+    return next(p for p in PRODUCTS if p["slug"] == slug)
+
+
+def hero_mosaic_html(depth: int = 0) -> str:
+    root = "../" * depth
+    areas = [
+        "hero-mosaic__tile--a",
+        "hero-mosaic__tile--b",
+        "hero-mosaic__tile--c",
+        "hero-mosaic__tile--d",
+    ]
+    tiles = []
+    for area, slug in zip(areas, HERO_MOSAIC_SLUGS):
+        p = product_by_slug(slug)
+        tiles.append(
+            f"""<a class="hero-mosaic__tile {area}" href="{root}product/{p['slug']}/" style="background-image:url('{p['img']}')">
+              <span class="hero-mosaic__label">{p['title']}</span>
+            </a>"""
+        )
+    return f"""
+      <section class="hero-mosaic">
+        <div class="wrap hero-mosaic__layout">
+          <div class="hero-mosaic__intro">
+            <p class="eyebrow">Официальный магазин · {BRAND['center']}</p>
+            <h1>{BRAND['name']}</h1>
+            <p class="hero-lead">Минималистичная витрина с акцентом на визуал: крупные фото, простой каталог и понятные кнопки.</p>
+            <div class="hero-nav-cta">
+              <a class="btn btn-primary btn-xl" href="{root}catalog/">Каталог</a>
+              <a class="btn btn-primary btn-xl" href="{root}collections/">Мерч</a>
+              <a class="btn btn-secondary btn-xl" href="{root}contacts/">Контакты</a>
+            </div>
+          </div>
+          <div class="hero-mosaic__grid" aria-label="Подборка товаров">
+            {"".join(tiles)}
+          </div>
+        </div>
+      </section>"""
+
+
+def editorial_strip_html(depth: int = 0) -> str:
+    root = "../" * depth
+    shots = "".join(
+        f"""<a class="editorial-shot" href="{root}{s['href']}" style="background-image:url('{s['img']}')">
+            <span class="editorial-shot__title">{s['title']}</span>
+          </a>"""
+        for s in EDITORIAL_SHOTS
+    )
+    return f"""
+      <section class="editorial-strip">
+        <div class="wrap">
+          <div class="section-head section-head--minimal">
+            <h2>Образы</h2>
+            <p>Мерч на моделях и крупные планы — как в референсах fashion-брендов.</p>
+          </div>
+          <div class="editorial-grid">{shots}</div>
+        </div>
+      </section>"""
+
+
+def category_visual_tiles(depth: int = 0) -> str:
+    root = "../" * depth
+    parts = []
+    for slug, label, _ in CATEGORIES:
+        img = next((p["img"] for p in PRODUCTS if p["cat"] == slug), "")
+        parts.append(
+            f'<a class="category-visual" href="{root}catalog/{slug}/" style="background-image:url(\'{img}\')"><span>{label}</span></a>'
+        )
+    return "".join(parts)
 
 
 def write(rel: str, content: str) -> None:
@@ -94,7 +174,7 @@ def simple_page(title: str, intro: str, inner: str, depth: int = 1) -> str:
 def category_chips(depth: int, active: str | None) -> str:
     root = "../" * depth
     parts = [f'<a href="{root}catalog/" class="{"is-active" if active is None else ""}">Все</a>']
-    for slug, label, _, _ in CATEGORIES:
+    for slug, label, _ in CATEGORIES:
         cls = "is-active" if active == slug else ""
         parts.append(f'<a href="{root}catalog/{slug}/" class="{cls}">{label}</a>')
     return "\n".join(parts)
@@ -104,9 +184,9 @@ def products_for_collection(slug: str) -> list:
     if slug == "russia-capsule":
         return [p for p in PRODUCTS if p["collection"] == "Russia Capsule"]
     if slug == "mystery-box":
-        return [p for p in PRODUCTS if p["slug"] in ("podarochnyj-nabor", "sumka-shopper", "kepka-simvol")]
+        return [p for p in PRODUCTS if p["collection"] == "Mystery Box" or p["slug"] in ("podarochnyj-nabor", "sumka-shopper")]
     if slug == "zimnyaya-liniya":
-        return [p for p in PRODUCTS if p["cat"] in ("kurtki", "svitshoty")]
+        return [p for p in PRODUCTS if p["collection"] == "Зимняя линейка 2026"]
     return []
 
 
@@ -174,7 +254,7 @@ def product_body(p: dict) -> str:
 
 
 def main() -> None:
-    new_items = [p for p in PRODUCTS if p["tag"] in ("Новинка", "−9%", "Набор")][:8]
+    new_items = [p for p in PRODUCTS if p["tag"] in ("Новинка", "−9%", "−10%", "−38%", "Набор")][:8]
     coll_tiles = "".join(
         f"""
         <a class="collection-tile" href="collections/{c['slug']}/">
@@ -183,98 +263,45 @@ def main() -> None:
         </a>"""
         for c in COLLECTIONS
     )
-    reference_links = "".join(
-        f'<a class="reference-link" href="{url}" target="_blank" rel="noreferrer">{label}</a>'
-        for label, url in REFERENCES
-    )
-    principles = "".join(f"<li>{item}</li>" for item in BRIEF_PRINCIPLES)
-
     write(
         "index.html",
         shell(
             0,
             "Главная",
             f"""
-      <section class="hero-shop">
-        <div class="wrap hero-grid">
-          <div class="hero-copy">
-            <div class="hero-badges">
-              <span class="pill">Официальный магазин</span>
-              <span class="pill">Доставка по России</span>
-              <span class="pill">{BRAND['center']}</span>
-            </div>
-            <h1>{BRAND['name']}</h1>
-            <p>Одежда, аксессуары и подарки с символикой {BRAND['center']}: спокойная современная витрина, официальный тон и понятная покупка с доставкой по России.</p>
-            <div class="cta-row">
-              <a class="btn btn-primary" href="catalog/">Каталог</a>
-              <a class="btn btn-secondary" href="collections/">Коллекции</a>
-            </div>
-          </div>
-          <div class="hero-visual" aria-hidden="true"></div>
-        </div>
-      </section>
-      <section class="section muted">
-        <div class="wrap brief-grid">
-          <div class="content-block">
-            <p class="eyebrow">Новая коллекция</p>
-            <h2>Вещи для визита, подарка и повседневного образа</h2>
-            <p>Лаконичный мерч для гостей Национального центра, туристов, корпоративных заказов и тех, кто выбирает аккуратную символику без лишней декларативности.</p>
-          </div>
-          <div class="content-block">
-            <h3>Как собрана витрина</h3>
-            <ul class="checklist">{principles}</ul>
-          </div>
-        </div>
-      </section>
-      <section class="brand-identity">
-        <div class="wrap brand-identity__grid">
-          <div>
-            <p class="eyebrow">Айдентика</p>
-            <h2>Сдержанный официальный знак и крупная типографика</h2>
-            <p>Визуальный язык опирается на герб, слово «Россия», длинное тире и спокойные композиции с большим воздухом — без лишних декоративных акцентов.</p>
-          </div>
-          <figure class="brand-quote-card">
-            <img src="assets/brand-quote.jpeg" alt="Для меня Россия — вся моя жизнь">
-          </figure>
-        </div>
-      </section>
+      {hero_mosaic_html(0)}
+      {editorial_strip_html(0)}
       <section class="section">
         <div class="wrap">
-          <div class="section-head"><h2>Кому подбираем</h2><p>Быстрый вход по основным сценариям покупки.</p></div>
-          <div class="audience-grid">
-            <a class="audience-card" href="catalog/futbolki/"><strong>Мужчинам и женщинам</strong><span>Футболки, свитшоты, куртки</span></a>
-            <a class="audience-card" href="gift-cards/"><strong>Подарки</strong><span>Сертификаты и наборы</span></a>
-            <a class="audience-card" href="collections/mystery-box/"><strong>Mystery Box</strong><span>Сюрприз-набор</span></a>
-            <a class="audience-card" href="corporate/"><strong>Бизнесу</strong><span>Опт и мерч</span></a>
-          </div>
+          <div class="section-head section-head--minimal"><h2>Новинки</h2><a class="btn btn-ghost" href="catalog/new/">Смотреть все</a></div>
+          <div class="product-grid product-grid--editorial">{"".join(card(p, 0, editorial=True) for p in new_items[:4])}</div>
         </div>
       </section>
       <section class="section muted">
         <div class="wrap">
-          <div class="section-head"><h2>Новинки</h2><a class="btn btn-ghost" href="catalog/new/">Все новинки</a></div>
-          <div class="product-grid">{"".join(card(p, 0) for p in new_items)}</div>
+          <div class="section-head section-head--minimal"><h2>Категории</h2></div>
+          <div class="category-visual-grid">{category_visual_tiles(0)}</div>
         </div>
       </section>
       <section class="section">
         <div class="wrap">
-          <div class="section-head"><h2>Коллекции</h2><p>Капсулы, сезонные витрины и подарочные сценарии с единым визуальным языком.</p></div>
+          <div class="section-head section-head--minimal"><h2>Коллекции</h2></div>
           <div class="collection-tiles">{coll_tiles}</div>
         </div>
       </section>
-      <section class="section">
-        <div class="wrap trust-row">
-          <div class="trust-card"><strong>Официальный магазин</strong>Мерч только здесь.</div>
-          <div class="trust-card"><strong>Доставка по РФ</strong>СДЭК, Почта, курьер.</div>
-          <div class="trust-card"><strong>Возврат 14 дней</strong>При сохранении бирок.</div>
-          <div class="trust-card"><strong>Лояльность</strong><a href="loyalty/">баллы</a> с покупки.</div>
+      <section class="section muted">
+        <div class="wrap site-trust">
+          <p><strong>Официальный магазин</strong> · доставка по России · возврат 14 дней · <a href="loyalty/">программа лояльности</a></p>
         </div>
       </section>""",
+            BRAND["tagline"],
+            canonical_path="",
         ),
     )
 
     cat_links = "".join(
         f'<a class="category-link-card" href="{slug}/"><strong>{label}</strong><span>{seo[:70]}…</span></a>'
-        for slug, label, seo, _ in CATEGORIES
+        for slug, label, seo in CATEGORIES
     )
     write(
         "catalog/index.html",
@@ -287,9 +314,9 @@ def main() -> None:
         <h1>Каталог</h1>
         <p class="page-intro">Купить мерч {BRAND['center']} онлайн — все категории и коллекции.</p>
         <div class="category-chips">{category_chips(1, None)}</div>
-        <div class="category-links">{cat_links}</div>
+        <div class="category-visual-grid">{category_visual_tiles(1)}</div>
         <h2 class="subsection-title">Все товары</h2>
-        <div class="product-grid">{"".join(card(p, 1) for p in PRODUCTS)}</div>
+        <div class="product-grid product-grid--editorial">{"".join(card(p, 1, editorial=True) for p in PRODUCTS)}</div>
       </div>""",
             "Каталог официальной одежды и мерча Национального центра «Россия»: категории, коллекции, подарки и доставка по России.",
         ),
@@ -479,7 +506,7 @@ def main() -> None:
         ),
     )
 
-    for slug, label, seo, note in CATEGORIES:
+    for slug, label, seo in CATEGORIES:
         items = [p for p in PRODUCTS if p["cat"] == slug]
         write(
             f"catalog/{slug}/index.html",
@@ -489,9 +516,8 @@ def main() -> None:
                 f"""
       <div class="wrap section">
         <nav class="breadcrumbs"><a href="../../">Главная</a> / <a href="../">Каталог</a> / <span>{label}</span></nav>
-        <h1>{label}</h1>
+        <h1>{label} — купить с доставкой по России</h1>
         <p class="page-intro">{seo}</p>
-        <p class="page-note">{note}</p>
         <div class="category-chips">{category_chips(2, slug)}</div>
         <div class="filters-bar">
           <div>Фильтр: размер · цвет · коллекция · цена</div>
@@ -595,12 +621,15 @@ def main() -> None:
       <div class="wrap section">
         <div class="content-block prose">
           <h1>О {BRAND['name']}</h1>
-          <p>{BRAND['tagline']} {BRAND['center']} на ВДНХ.</p>
-          <p>Сайт проектируется как официальный интернет-магазин: каталог, коллекции, подарочные сценарии, сервисные страницы и SEO-документ для разработки.</p>
+          <p>{BRAND['tagline']}. Площадка — {BRAND['center']} на ВДНХ.</p>
+          <p>Фирменные цвета универмага — зелёный Pantone 4216 и золотой Pantone 871. Упаковка и бирки выполняются в крафтовой палитре с лентами красного, зелёного и белого цвета.</p>
           <h2>В магазине</h2>
-          <ul><li>Одежда и аксессуары</li><li>Коллекции и капсулы</li><li>Подарки и корпоратив</li></ul>
-          <h2>Фирменные материалы и референсы</h2>
-          <div class="reference-list">{reference_links}</div>
+          <ul><li>Одежда и аксессуары с символикой центра</li><li>Коллекции Russia Capsule, Mystery Box и сезонные линейки</li><li>Подарочные наборы, сертификаты и корпоративные заказы</li></ul>
+          <figure class="brand-quote-card" style="margin-top:28px;">
+            <img src="../assets/brand-quote.jpeg" alt="Для меня Россия — вся моя жизнь">
+          </figure>
+          <h2>Контакты</h2>
+          <p><a href="../contacts/">Связаться с нами</a> · <a href="../stores/">Магазины и самовывоз</a></p>
         </div>
       </div>""",
         ),

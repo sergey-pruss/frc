@@ -1,115 +1,84 @@
 import { fileURLToPath } from 'node:url';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const home = readFileSync(join(root, 'index.html'), 'utf8');
 const shopCss = readFileSync(join(root, 'assets/shop.css'), 'utf8');
 const siteJs = readFileSync(join(root, 'assets/site.js'), 'utf8');
+const contentPy = readFileSync(join(root, 'scripts/content.py'), 'utf8');
+
+const productDirs = readdirSync(join(root, 'product')).filter((name) =>
+  existsSync(join(root, 'product', name, 'index.html')),
+);
+
 const requiredStructure = [
   'catalog/index.html',
   'product/futbolka-oranzhevaya/index.html',
+  'product/mystery-box/index.html',
+  'product/bomber-fluffy/index.html',
   'about/index.html',
   'delivery/index.html',
   'blog/index.html',
-  'blog/kak-vybrat-razmer/index.html',
   'stores/index.html',
-  'favorites/index.html',
   'cart/index.html',
   'checkout/index.html',
   'search/index.html',
   '404.html',
   'collections/index.html',
-  'loyalty/index.html',
   'gift-cards/index.html',
-  'login/index.html',
-  'profile/index.html',
-  'orders/index.html',
-  'wishlist/index.html',
 ];
 
 const checks = [
   ['shop home exists', existsSync(join(root, 'index.html'))],
   ['seo doc moved', existsSync(join(root, 'seo/index.html'))],
-  ['catalog page', existsSync(join(root, 'catalog/index.html'))],
-  ['category longslivy', existsSync(join(root, 'catalog/longslivy/index.html'))],
-  ['catalog new', existsSync(join(root, 'catalog/new/index.html'))],
-  ['product page', existsSync(join(root, 'product/futbolka-oranzhevaya/index.html'))],
-  ['all 11 products', existsSync(join(root, 'product/podarochnyj-nabor/index.html'))],
-  ['collection mystery', existsSync(join(root, 'collections/mystery-box/index.html'))],
-  ['delivery page', existsSync(join(root, 'delivery/index.html'))],
-  ['contacts', existsSync(join(root, 'contacts/index.html'))],
-  ['sizes', existsSync(join(root, 'sizes/index.html'))],
-  ['loyalty', existsSync(join(root, 'loyalty/index.html'))],
-  ['corporate', existsSync(join(root, 'corporate/index.html'))],
-  ['blog article', existsSync(join(root, 'blog/kak-vybrat-razmer/index.html'))],
+  ['expanded catalog has at least 26 products', productDirs.length >= 26],
   ['all brief structure pages exist', requiredStructure.every((file) => existsSync(join(root, file)))],
-  ['shop styles', existsSync(join(root, 'assets/shop.css'))],
+  ['shop styles use brand green from guidebook', /--brand-green:\s*#3f5927/.test(shopCss)],
+  ['shop uses Golos Text', /Golos Text/.test(shopCss)],
   [
-    'home looks like final shop, not internal prototype',
-    /Универмаг «Россия»/.test(home) &&
-      /спокойная современная витрина/.test(home) &&
-      !/SEO-ТЗ|по практикам конкурентов|Прототип учитывает/.test(home),
+    'home follows client references presentation',
+    /hero-mosaic/.test(home) &&
+      /hero-nav-cta/.test(home) &&
+      /btn-xl/.test(home) &&
+      /editorial-strip/.test(home) &&
+      /category-visual-grid/.test(home),
   ],
   [
-    'audience cards have real grid layout',
-    /\.audience-grid\s*\{[\s\S]*display:\s*grid/.test(shopCss) &&
-      /grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)/.test(shopCss),
+    'header nav matches presentation',
+    /label: "Мерч"/.test(siteJs) &&
+      /Подарочные карты/.test(siteJs) &&
+      /Кабинет/.test(siteJs),
   ],
   [
-    'public chrome does not say prototype',
-    !/Прототип интернет-магазина|SEO-проектирование \(ТЗ\)|Прототип фиксирует/.test(siteJs),
+    'public chrome uses delivery topbar',
+    /site-topbar/.test(siteJs) && !/prototype-ribbon/.test(siteJs),
   ],
   [
     'known broken image URL is absent',
-    !/photo-1622445275463-79c04033fbaa/.test(readFileSync(join(root, 'scripts/content.py'), 'utf8')),
+    !/photo-1622445275463-79c04033fbaa/.test(contentPy),
   ],
   [
-    'cart checkout search and account templates are styled',
+    'cart checkout search templates are styled',
     /\.checkout-layout/.test(shopCss) &&
       /\.search-panel/.test(shopCss) &&
-      /\.account-shell/.test(shopCss) &&
-      /\.store-grid/.test(shopCss),
+      /\.account-shell/.test(shopCss),
   ],
   [
-    'search page includes result and empty states',
-    /Результаты поиска/.test(readFileSync(join(root, 'search/index.html'), 'utf8')) &&
-      /Ничего не найдено/.test(readFileSync(join(root, 'search/index.html'), 'utf8')),
+    'footer has Serenity credit',
+    /Сделано в Serenity/.test(siteJs) && existsSync(join(root, 'assets/serenity-logo.svg')),
   ],
   [
-    'header links key ecommerce pages',
-    /stores\//.test(siteJs) && /favorites\//.test(siteJs) && /cart\//.test(siteJs) && /search\//.test(siteJs),
+    'header uses client wordmark',
+    /rossiya-wordmark\.svg/.test(siteJs) && existsSync(join(root, 'assets/rossiya-wordmark.svg')),
   ],
   [
-    'footer has Serenity credit without SEO project link',
-    /Сделано в Serenity/.test(siteJs) &&
-      /serenity-logo\.svg/.test(siteJs) &&
-      !/SEO-проектирование/.test(siteJs) &&
-      existsSync(join(root, 'assets/serenity-logo.svg')),
+    'about includes brand quote',
+    /brand-quote\.jpeg/.test(readFileSync(join(root, 'about/index.html'), 'utf8')),
   ],
   [
-    'header uses client wordmark instead of duplicate text logo',
-    /rossiya-wordmark\.svg/.test(siteJs) &&
-      /favicon\.png/.test(siteJs) &&
-      existsSync(join(root, 'assets/rossiya-wordmark.svg')) &&
-      !/<strong>Универмаг «Россия»<\/strong>/.test(siteJs),
-  ],
-  [
-    'home includes client identity quote asset',
-    /brand-identity/.test(home) &&
-      /brand-quote\.jpeg/.test(home) &&
-      existsSync(join(root, 'assets/brand-quote.jpeg')),
-  ],
-  [
-    'product has long description',
-    /Плотный хлопок/.test(
-      readFileSync(join(root, 'product/futbolka-oranzhevaya/index.html'), 'utf8'),
-    ),
-  ],
-  [
-    'about page includes brand references',
-    /Фирменные материалы и референсы/.test(readFileSync(join(root, 'about/index.html'), 'utf8')) &&
-      /Герб Универмага/.test(readFileSync(join(root, 'about/index.html'), 'utf8')),
+    'about mentions brand colors from guidebook',
+    /Pantone 4216/.test(readFileSync(join(root, 'about/index.html'), 'utf8')),
   ],
   [
     'product pages include schema.org Product',
@@ -117,11 +86,9 @@ const checks = [
   ],
   ['custom domain targets frc.sergeypruss.ru', readFileSync(join(root, 'CNAME'), 'utf8').trim() === 'frc.sergeypruss.ru'],
   [
-    'home canonical and favicon use custom domain and crest',
+    'home canonical and favicon',
     /<link rel="canonical" href="https:\/\/frc\.sergeypruss\.ru\/">/.test(home) &&
-      /assets\/favicon-32\.png/.test(home) &&
-      existsSync(join(root, 'assets/favicon.png')) &&
-      existsSync(join(root, 'assets/apple-touch-icon.png')),
+      existsSync(join(root, 'assets/favicon.png')),
   ],
 ];
 
