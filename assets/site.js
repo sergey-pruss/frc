@@ -11,13 +11,14 @@
     { href: `${root}catalog/new/`, label: "Новинки" },
     { href: `${root}collections/`, label: "Коллекции" },
     { href: `${root}gift-cards/`, label: "Подарки" },
+    { href: `${root}stores/`, label: "Магазины" },
     { href: `${root}blog/`, label: "Журнал" },
     { href: `${root}about/`, label: "О проекте" },
   ];
 
   if (headerMount) {
     headerMount.innerHTML = `
-      <div class="prototype-ribbon">Прототип интернет-магазина · структура, SEO и клиентский бриф · <a href="${root}seo/">SEO-проектирование (ТЗ)</a></div>
+      <div class="prototype-ribbon">Официальный интернет-магазин Универмага «Россия» · доставка по России · <a href="${root}delivery/">условия доставки</a></div>
       <header class="site-header">
         <div class="wrap header-inner">
           <a class="logo" href="${root}">
@@ -28,8 +29,9 @@
             ${nav.map((item) => `<a href="${item.href}">${item.label}</a>`).join("")}
           </nav>
           <div class="header-actions">
-            <a class="btn btn-ghost" href="${root}delivery/">Доставка</a>
-            <button class="btn btn-primary" type="button" data-demo-cart>Корзина · 0</button>
+            <a class="btn btn-ghost" href="${root}search/">Поиск</a>
+            <a class="btn btn-ghost" href="${root}favorites/">Избранное</a>
+            <a class="btn btn-primary" href="${root}cart/">Корзина · 3</a>
           </div>
         </div>
       </header>`;
@@ -41,7 +43,7 @@
         <div class="wrap footer-grid">
           <div class="footer-col">
             <strong style="font-family:'PT Serif',serif;font-size:28px;">Универмаг «Россия»</strong>
-            <p style="margin:12px 0 0;max-width:34ch;opacity:.8;">Официальный интернет-магазин мерча и одежды. Прототип фиксирует структуру, SEO и сценарии покупки.</p>
+            <p style="margin:12px 0 0;max-width:34ch;opacity:.8;">Официальный интернет-магазин одежды, аксессуаров и подарков Национального центра «Россия».</p>
           </div>
           <div class="footer-col">
             <h4>Покупателям</h4>
@@ -50,6 +52,7 @@
               <li><a href="${root}sizes/">Размеры</a></li>
               <li><a href="${root}delivery/">Доставка и оплата</a></li>
               <li><a href="${root}loyalty/">Лояльность</a></li>
+              <li><a href="${root}stores/">Магазины</a></li>
               <li><a href="${root}contacts/">Контакты</a></li>
             </ul>
           </div>
@@ -66,12 +69,13 @@
             <h4>Бизнес</h4>
             <ul>
               <li><a href="${root}corporate/">Корпоративным</a></li>
+              <li><a href="${root}login/">Личный кабинет</a></li>
               <li><a href="${root}about/">О бренде</a></li>
               <li><a href="${root}seo/">SEO-проектирование</a></li>
             </ul>
           </div>
         </div>
-        <div class="wrap footer-bottom">© 2026 Прототип. Не является публичной офертой.</div>
+        <div class="wrap footer-bottom">© 2026 Универмаг «Россия». Демонстрационная версия сайта.</div>
       </footer>`;
   }
 

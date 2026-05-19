@@ -10,6 +10,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from content import BLOG_POSTS, BRAND, BRIEF_PRINCIPLES, CATEGORIES, COLLECTIONS, PRODUCTS, REFERENCES  # noqa: E402
 
+ASSET_VERSION = "20260519c"
+BASE_URL = "https://frc.sergeypruss.ru"
+
 
 def fmt_price(n: int) -> str:
     return f"{n:,}".replace(",", "\u202f") + " ₽"
@@ -18,6 +21,7 @@ def fmt_price(n: int) -> str:
 def shell(depth: int, title: str, body: str, desc: str | None = None) -> str:
     root = "../" * depth
     canonical_path = "" if title == "Главная" else f"{title.lower().replace(' ', '-')}/"
+    canonical_url = f"{BASE_URL}/{canonical_path}"
     return f"""<!doctype html>
 <html lang="ru">
   <head>
@@ -26,8 +30,11 @@ def shell(depth: int, title: str, body: str, desc: str | None = None) -> str:
     <title>{title} — {BRAND['name']}</title>
     <meta name="description" content="{desc or BRAND['tagline']}">
     <meta name="robots" content="noindex, nofollow">
-    <link rel="canonical" href="https://sergey-pruss.github.io/frc/{canonical_path}">
-    <link rel="stylesheet" href="{root}assets/shop.css">
+    <link rel="canonical" href="{canonical_url}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{root}assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="{root}assets/favicon.png">
+    <link rel="apple-touch-icon" href="{root}assets/apple-touch-icon.png">
+    <link rel="stylesheet" href="{root}assets/shop.css?v={ASSET_VERSION}">
   </head>
   <body>
     <div data-site-header></div>
@@ -35,7 +42,7 @@ def shell(depth: int, title: str, body: str, desc: str | None = None) -> str:
 {body}
     </main>
     <div data-site-footer></div>
-    <script src="{root}assets/site.js" data-depth="{depth}"></script>
+    <script src="{root}assets/site.js?v={ASSET_VERSION}" data-depth="{depth}"></script>
   </body>
 </html>
 """
@@ -68,6 +75,20 @@ def write(rel: str, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
     print("wrote", rel)
+
+
+def simple_page(title: str, intro: str, inner: str, depth: int = 1) -> str:
+    root = "../" * depth
+    return f"""
+      <div class="wrap section">
+        <nav class="breadcrumbs"><a href="{root}">Главная</a> / <span>{title}</span></nav>
+        <div class="page-hero">
+          <p class="eyebrow">{BRAND['name']}</p>
+          <h1>{title}</h1>
+          <p>{intro}</p>
+        </div>
+{inner}
+      </div>"""
 
 
 def category_chips(depth: int, active: str | None) -> str:
@@ -182,8 +203,8 @@ def main() -> None:
               <span class="pill">Доставка по России</span>
               <span class="pill">{BRAND['center']}</span>
             </div>
-            <h1>Официальный мерч {BRAND['center']}</h1>
-            <p>{BRAND['tagline']}. Прототип учитывает клиентский бриф, SEO-ТЗ, структуру интернет-магазина и референсы Универмага.</p>
+            <h1>{BRAND['name']}</h1>
+            <p>Одежда, аксессуары и подарки с символикой {BRAND['center']}: спокойная современная витрина, официальный тон и понятная покупка с доставкой по России.</p>
             <div class="cta-row">
               <a class="btn btn-primary" href="catalog/">Каталог</a>
               <a class="btn btn-secondary" href="collections/">Коллекции</a>
@@ -195,19 +216,19 @@ def main() -> None:
       <section class="section muted">
         <div class="wrap brief-grid">
           <div class="content-block">
-            <p class="eyebrow">Бриф клиента</p>
-            <h2>В меру современно, аккуратно, без провокаций</h2>
-            <p>Прототип держит государственный контекст: официальность, спокойная премиальность, понятная коммерческая структура и отдельный слой коллекционных историй.</p>
+            <p class="eyebrow">Новая коллекция</p>
+            <h2>Вещи для визита, подарка и повседневного образа</h2>
+            <p>Лаконичный мерч для гостей Национального центра, туристов, корпоративных заказов и тех, кто выбирает аккуратную символику без лишней декларативности.</p>
           </div>
           <div class="content-block">
-            <h3>Принципы</h3>
+            <h3>Как собрана витрина</h3>
             <ul class="checklist">{principles}</ul>
           </div>
         </div>
       </section>
       <section class="section">
         <div class="wrap">
-          <div class="section-head"><h2>Кому подбираем</h2><p>Быстрый вход в ключевые покупательские сценарии.</p></div>
+          <div class="section-head"><h2>Кому подбираем</h2><p>Быстрый вход по основным сценариям покупки.</p></div>
           <div class="audience-grid">
             <a class="audience-card" href="catalog/futbolki/"><strong>Мужчинам и женщинам</strong><span>Футболки, свитшоты, куртки</span></a>
             <a class="audience-card" href="gift-cards/"><strong>Подарки</strong><span>Сертификаты и наборы</span></a>
@@ -224,7 +245,7 @@ def main() -> None:
       </section>
       <section class="section">
         <div class="wrap">
-          <div class="section-head"><h2>Коллекции</h2><p>Капсулы, сезонные витрины и подарочные сценарии.</p></div>
+          <div class="section-head"><h2>Коллекции</h2><p>Капсулы, сезонные витрины и подарочные сценарии с единым визуальным языком.</p></div>
           <div class="collection-tiles">{coll_tiles}</div>
         </div>
       </section>
@@ -259,6 +280,190 @@ def main() -> None:
         <div class="product-grid">{"".join(card(p, 1) for p in PRODUCTS)}</div>
       </div>""",
             "Каталог официальной одежды и мерча Национального центра «Россия»: категории, коллекции, подарки и доставка по России.",
+        ),
+    )
+
+    search_results = "".join(card(p, 1) for p in PRODUCTS[:4])
+    favorite_items = "".join(card(p, 1) for p in (PRODUCTS[0], PRODUCTS[4], PRODUCTS[10]))
+    cart_rows = "".join(
+        f"""
+        <li class="cart-item">
+          <img src="{p['img']}" alt="{p['title']} — {BRAND['name']}">
+          <div><strong>{p['title']}</strong><span>{p['cat_label']} · размер M</span></div>
+          <b>{fmt_price(p['price'])}</b>
+        </li>"""
+        for p in PRODUCTS[:3]
+    )
+    order_rows = "".join(
+        f"<li><span>{p['title']}</span><strong>{fmt_price(p['price'])}</strong></li>"
+        for p in PRODUCTS[:3]
+    )
+    store_cards = """
+        <article class="store-card"><strong>ВДНХ, павильон Национального центра «Россия»</strong><span>Главная точка продаж, примерка и самовывоз заказов.</span><small>Ежедневно 10:00–21:00</small></article>
+        <article class="store-card"><strong>Временная витрина мероприятий</strong><span>Поп-ап формат для форумов, выставок и специальных программ центра.</span><small>По расписанию мероприятий</small></article>
+        <article class="store-card"><strong>Онлайн-заказ по России</strong><span>Доставка СДЭК, Почтой России и курьером по Москве.</span><small>Отправка 1–2 рабочих дня</small></article>"""
+    account_nav = """
+        <div class="account-shell">
+          <aside class="account-nav">
+            <a href="../login/">Вход</a>
+            <a href="../profile/">Профиль</a>
+            <a href="../orders/">Заказы</a>
+            <a href="../wishlist/">Wish list</a>
+          </aside>"""
+
+    write(
+        "stores/index.html",
+        shell(
+            1,
+            "Магазины",
+            simple_page(
+                "Магазины",
+                "Точки продаж, самовывоз и временные витрины Универмага «Россия».",
+                f'<div class="store-grid">{store_cards}</div><div class="map-panel">Карта магазинов и зон самовывоза</div>',
+            ),
+        ),
+    )
+
+    write(
+        "favorites/index.html",
+        shell(
+            1,
+            "Избранное",
+            simple_page(
+                "Избранное",
+                "Сохраненные товары для быстрой покупки или сравнения перед визитом в магазин.",
+                f'<div class="product-grid">{favorite_items}</div>',
+            ),
+        ),
+    )
+
+    write(
+        "cart/index.html",
+        shell(
+            1,
+            "Корзина",
+            simple_page(
+                "Корзина",
+                "Проверьте состав заказа, размеры и условия доставки.",
+                f"""
+        <div class="checkout-layout">
+          <section class="content-block"><ul class="cart-list">{cart_rows}</ul></section>
+          <aside class="summary-card"><h2>Итого</h2><p>3 товара</p><strong>{fmt_price(sum(p['price'] for p in PRODUCTS[:3]))}</strong><a class="btn btn-primary" href="../checkout/">Оформить заказ</a></aside>
+        </div>""",
+            ),
+        ),
+    )
+
+    write(
+        "checkout/index.html",
+        shell(
+            1,
+            "Оформление заказа",
+            simple_page(
+                "Оформление заказа",
+                "Контакты, доставка, оплата и подтверждение заказа в одном спокойном сценарии.",
+                f"""
+        <div class="checkout-layout">
+          <form class="content-block demo-form" onsubmit="return false;">
+            <label>Имя <input type="text" value="Сергей"></label>
+            <label>Телефон <input type="tel" value="+7"></label>
+            <label>Город <input type="text" value="Москва"></label>
+            <label>Способ доставки <select><option>Курьер</option><option>Самовывоз с ВДНХ</option><option>СДЭК</option></select></label>
+            <label>Комментарий <textarea rows="4">Подарочная упаковка</textarea></label>
+          </form>
+          <aside class="summary-card"><h2>Ваш заказ</h2><ul>{order_rows}</ul><strong>{fmt_price(sum(p['price'] for p in PRODUCTS[:3]))}</strong><button class="btn btn-primary" type="button">Подтвердить</button></aside>
+        </div>""",
+            ),
+        ),
+    )
+
+    write(
+        "search/index.html",
+        shell(
+            1,
+            "Поиск",
+            simple_page(
+                "Поиск",
+                "Результаты поиска по каталогу, коллекциям и материалам журнала.",
+                f"""
+        <form class="search-panel" onsubmit="return false;"><input type="search" value="футболка россия" aria-label="Поиск"><button class="btn btn-primary" type="submit">Найти</button></form>
+        <h2 class="subsection-title">Результаты поиска</h2>
+        <div class="product-grid">{search_results}</div>
+        <section class="empty-state"><h2>Ничего не найдено</h2><p>Проверьте запрос или перейдите в каталог. Для такой страницы нужен отдельный текст, чтобы не оставлять пользователя в тупике.</p><a class="btn btn-secondary" href="../catalog/">В каталог</a></section>""",
+            ),
+        ),
+    )
+
+    write(
+        "404.html",
+        shell(
+            0,
+            "404",
+            """
+      <div class="wrap section">
+        <section class="not-found">
+          <p class="eyebrow">Страница не найдена</p>
+          <h1>404</h1>
+          <p>Такой страницы в Универмаге «Россия» нет. Можно вернуться в каталог, посмотреть коллекции или воспользоваться поиском.</p>
+          <div class="cta-row"><a class="btn btn-primary" href="catalog/">Каталог</a><a class="btn btn-secondary" href="search/">Поиск</a></div>
+        </section>
+      </div>""",
+        ),
+    )
+
+    write(
+        "login/index.html",
+        shell(
+            1,
+            "Вход и регистрация",
+            simple_page(
+                "Вход и регистрация",
+                "Личный кабинет хранит заказы, избранное, адреса доставки и бонусные баллы.",
+                """
+        <div class="auth-grid">
+          <form class="content-block demo-form" onsubmit="return false;"><h2>Войти</h2><label>Email <input type="email"></label><label>Пароль <input type="password"></label><button class="btn btn-primary" type="submit">Войти</button></form>
+          <form class="content-block demo-form" onsubmit="return false;"><h2>Регистрация</h2><label>Имя <input type="text"></label><label>Email <input type="email"></label><label>Телефон <input type="tel"></label><button class="btn btn-secondary" type="submit">Создать аккаунт</button></form>
+        </div>""",
+            ),
+        ),
+    )
+
+    write(
+        "profile/index.html",
+        shell(
+            1,
+            "Профиль",
+            simple_page(
+                "Профиль",
+                "Персональные данные, адреса доставки и настройки уведомлений.",
+                f"""{account_nav}<section class="content-block"><h2>Личные данные</h2><p><strong>Имя:</strong> Сергей</p><p><strong>Email:</strong> sergey@example.com</p><p><strong>Адрес:</strong> Москва, ВДНХ</p></section></div>""",
+            ),
+        ),
+    )
+
+    write(
+        "orders/index.html",
+        shell(
+            1,
+            "Заказы",
+            simple_page(
+                "Заказы",
+                "История покупок и статусы доставки.",
+                f"""{account_nav}<section class="content-block"><h2>Последние заказы</h2><ul class="order-list"><li><span>UR-260519-01 · Сборка</span><strong>18 470 ₽</strong></li><li><span>UR-250519-04 · Доставлен</span><strong>5 490 ₽</strong></li></ul></section></div>""",
+            ),
+        ),
+    )
+
+    write(
+        "wishlist/index.html",
+        shell(
+            1,
+            "Wish list",
+            simple_page(
+                "Wish list",
+                "Личный список желаний внутри кабинета.",
+                f"""{account_nav}<section><div class="product-grid">{favorite_items}</div></section></div>""",
+            ),
         ),
     )
 
