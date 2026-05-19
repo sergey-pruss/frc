@@ -16,6 +16,8 @@ const checks = [
   ['primary semantic core section exists', /Первичная семантика по текущему брифу/.test(html)],
   ['client catalog questions exist', /Вопросы к заказчику: ассортимент и каталог/.test(html) && /Что выясняем сами/.test(html) && /id="client-catalog-questions"/.test(html)],
   ['document table of contents exists', /Содержание/.test(html) && /doc-toc/.test(html) && /href="#client-catalog-questions"/.test(html)],
+  ['custom domain CNAME exists', /frc\.sergeypruss\.ru/.test(readFileSync(join(root, 'CNAME'), 'utf8'))],
+  ['neutral favicon exists', /assets\/favicon\.svg/.test(html)],
   ['brand query cluster exists', /Универмаг Россия/.test(html) && /Национальный центр Россия мерч/.test(html)],
   ['category query cluster exists', /футболки Россия/.test(html) && /свитшоты Россия/.test(html)],
   ['delivery query cluster exists', /доставка по России/.test(html)],
