@@ -18,7 +18,7 @@ from content import (  # noqa: E402
     PRODUCTS,
 )
 
-ASSET_VERSION = "20260519g"
+ASSET_VERSION = "20260519i"
 BASE_URL = "https://frc.sergeypruss.ru"
 
 
@@ -38,9 +38,9 @@ def shell(depth: int, title: str, body: str, desc: str | None = None, canonical_
     <meta name="description" content="{desc or BRAND['tagline']}">
     <meta name="robots" content="noindex, nofollow">
     <link rel="canonical" href="{canonical_url}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{root}assets/favicon-32.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="{root}assets/favicon.png">
-    <link rel="apple-touch-icon" href="{root}assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{root}assets/favicon-32.png?v={ASSET_VERSION}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{root}assets/favicon.png?v={ASSET_VERSION}">
+    <link rel="apple-touch-icon" href="{root}assets/apple-touch-icon.png?v={ASSET_VERSION}">
     <link rel="stylesheet" href="{root}assets/shop.css?v={ASSET_VERSION}">
   </head>
   <body>
@@ -287,11 +287,6 @@ def main() -> None:
         <div class="wrap">
           <div class="section-head section-head--minimal"><h2>Коллекции</h2></div>
           <div class="collection-tiles">{coll_tiles}</div>
-        </div>
-      </section>
-      <section class="section muted">
-        <div class="wrap site-trust">
-          <p><strong>Официальный магазин</strong> · доставка по России · возврат 14 дней · <a href="loyalty/">программа лояльности</a></p>
         </div>
       </section>""",
             BRAND["tagline"],

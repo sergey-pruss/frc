@@ -2,6 +2,8 @@
   const script = document.currentScript;
   const depth = Number(script?.dataset.depth || 0);
   const root = depth ? "../".repeat(depth) : "./";
+  const assetV = script?.src?.match(/[?&]v=([^&]+)/)?.[1] || "";
+  const crestSrc = `${root}assets/rossiya-crest.png${assetV ? `?v=${assetV}` : ""}`;
 
   const headerMount = document.querySelector("[data-site-header]");
   const footerMount = document.querySelector("[data-site-footer]");
@@ -20,7 +22,7 @@
       <header class="site-header">
         <div class="wrap header-inner">
           <a class="logo" href="${root}" aria-label="Универмаг Россия">
-            <img class="logo-mark" src="${root}assets/favicon.png" alt="" width="36" height="36">
+            <img class="logo-mark" src="${crestSrc}" alt="" width="36" height="36">
             <img class="logo-wordmark" src="${root}assets/rossiya-wordmark.svg" alt="Универмаг Россия" width="150" height="44">
           </a>
           <nav class="site-nav" aria-label="Основное меню">
