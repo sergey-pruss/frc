@@ -21,6 +21,8 @@ const checks = [
   ['Putin Team competitor is covered', /putin-team\.ru/.test(html) && /Глубина каталога/.test(html)],
   ['Glory Season competitor is covered', /gloryseason\.ru/.test(html) && /Коллекционные витрины/.test(html)],
   ['competitor semantic core analysis exists', /Семантическое ядро конкурентов по открытой структуре/.test(html)],
+  ['competitor VH and SCH semantics exist', /Основная семантика конкурентов: ВЧ и СЧ/.test(html) && /ВЧ-запросы по кластерам/.test(html) && /СЧ-запросы по кластерам/.test(html)],
+  ['competitor semantics recommendations exist', /Сводные рекомендации по семантике конкурентов/.test(html)],
   ['semantic recommendations exist', /Рекомендации по семантике для нашего сайта/.test(html)],
   ['commercial semantic modifiers exist', /Коммерческие модификаторы/.test(html)],
   ['site structure recommendations exist', /Рекомендации по структуре сайта/.test(html)],
