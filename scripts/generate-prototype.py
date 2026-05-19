@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from content import BLOG_POSTS, BRAND, BRIEF_PRINCIPLES, CATEGORIES, COLLECTIONS, PRODUCTS, REFERENCES  # noqa: E402
 
-ASSET_VERSION = "20260519c"
+ASSET_VERSION = "20260519d"
 BASE_URL = "https://frc.sergeypruss.ru"
 
 
@@ -224,6 +224,18 @@ def main() -> None:
             <h3>Как собрана витрина</h3>
             <ul class="checklist">{principles}</ul>
           </div>
+        </div>
+      </section>
+      <section class="brand-identity">
+        <div class="wrap brand-identity__grid">
+          <div>
+            <p class="eyebrow">Айдентика</p>
+            <h2>Сдержанный официальный знак и крупная типографика</h2>
+            <p>Визуальный язык опирается на герб, слово «Россия», длинное тире и спокойные композиции с большим воздухом — без лишних декоративных акцентов.</p>
+          </div>
+          <figure class="brand-quote-card">
+            <img src="assets/brand-quote.jpeg" alt="Для меня Россия — вся моя жизнь">
+          </figure>
         </div>
       </section>
       <section class="section">

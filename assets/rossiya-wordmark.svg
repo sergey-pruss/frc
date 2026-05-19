@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 124" role="img" aria-label="Универмаг Россия">
+  <defs>
+    <style>
+      .small{font:500 18px Manrope,Arial,sans-serif;letter-spacing:.22em}
+      .word{font:700 64px "PT Serif",Georgia,serif;letter-spacing:.01em}
+      .line{stroke:#1a1a1c;stroke-width:2}
+    </style>
+  </defs>
+  <text class="small" x="0" y="20" fill="#1a1a1c">УНИВЕРМАГ</text>
+  <text class="word" x="0" y="88" fill="#1a1a1c">РОССИЯ</text>
+  <line class="line" x1="4" y1="112" x2="86" y2="112"/>
+  <text class="small" x="108" y="118" fill="#1a1a1c">НАЦИОНАЛЬНЫЙ ЦЕНТР</text>
+</svg>

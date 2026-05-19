@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=PT+Serif:wght@400;700&display=swap");
 
 :root {
-  --bg: #f4f0e6;
+  --bg: #f8f6ef;
   --ink: #1a1a1c;
   --muted: #6b6560;
   --line: #ddd5c6;
@@ -21,7 +21,7 @@ body {
   margin: 0;
   font-family: Manrope, system-ui, sans-serif;
   color: var(--ink);
-  background: var(--bg);
+  background: #fffdf8;
   line-height: 1.5;
 }
 
@@ -88,21 +88,20 @@ a {
 
 .logo {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: center;
+  gap: 12px;
+  min-width: 210px;
 }
 
-.logo strong {
-  font-family: "PT Serif", Georgia, serif;
-  font-size: 28px;
-  letter-spacing: 0.02em;
+.logo-mark {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
 }
 
-.logo span {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--muted);
+.logo-wordmark {
+  width: 150px;
+  height: auto;
 }
 
 .site-nav {
@@ -159,7 +158,9 @@ a {
 }
 
 .hero-shop {
-  padding: 56px 0 32px;
+  padding: 64px 0 42px;
+  background: linear-gradient(90deg, #fffdf8 0 52%, #f1eadc 52% 100%);
+  border-bottom: 1px solid var(--line);
 }
 
 .hero-grid {
@@ -172,7 +173,7 @@ a {
 .hero-copy h1 {
   margin: 0 0 16px;
   font-family: "PT Serif", Georgia, serif;
-  font-size: clamp(42px, 7vw, 72px);
+  font-size: clamp(46px, 7.4vw, 82px);
   line-height: 0.95;
 }
 
@@ -201,23 +202,23 @@ a {
 
 .hero-visual {
   position: relative;
-  min-height: 420px;
-  border-radius: calc(var(--radius) + 8px);
+  min-height: 430px;
+  border-radius: var(--radius);
   overflow: hidden;
   background:
-    linear-gradient(145deg, rgba(155, 28, 49, 0.9), rgba(31, 95, 104, 0.85)),
+    linear-gradient(90deg, rgba(255, 253, 248, 0.04), rgba(155, 28, 49, 0.42)),
     url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80") center/cover;
   box-shadow: var(--shadow);
 }
 
 .hero-visual::after {
-  content: "Коллекция Russia Capsule · демо-витрина";
+  content: "Коллекция Russia Capsule";
   position: absolute;
   left: 20px;
   right: 20px;
   bottom: 20px;
   padding: 14px 16px;
-  border-radius: 12px;
+  border-radius: 8px;
   background: rgba(255, 253, 248, 0.92);
   font-weight: 700;
 }
@@ -277,6 +278,46 @@ a {
   border-radius: 999px;
   background: var(--paper);
   font-weight: 700;
+}
+
+.brand-identity {
+  padding: 58px 0;
+  background: #fff;
+  border-block: 1px solid var(--line);
+}
+
+.brand-identity__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(320px, 0.7fr);
+  gap: 36px;
+  align-items: center;
+}
+
+.brand-identity h2 {
+  margin: 0 0 16px;
+  max-width: 11ch;
+  font-family: "PT Serif", Georgia, serif;
+  font-size: clamp(38px, 5vw, 58px);
+  line-height: 1;
+}
+
+.brand-identity p:not(.eyebrow) {
+  max-width: 48ch;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.brand-quote-card {
+  margin: 0;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.brand-quote-card img {
+  width: 100%;
+  border-radius: 4px;
 }
 
 .section-head p {
@@ -1017,6 +1058,7 @@ a {
 @media (max-width: 960px) {
   .hero-grid,
   .brief-grid,
+  .brand-identity__grid,
   .product-page,
   .collection-banner,
   .footer-grid,

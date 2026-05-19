@@ -88,6 +88,19 @@ const checks = [
       existsSync(join(root, 'assets/serenity-logo.svg')),
   ],
   [
+    'header uses client wordmark instead of duplicate text logo',
+    /rossiya-wordmark\.svg/.test(siteJs) &&
+      /favicon\.png/.test(siteJs) &&
+      existsSync(join(root, 'assets/rossiya-wordmark.svg')) &&
+      !/<strong>Универмаг «Россия»<\/strong>/.test(siteJs),
+  ],
+  [
+    'home includes client identity quote asset',
+    /brand-identity/.test(home) &&
+      /brand-quote\.jpeg/.test(home) &&
+      existsSync(join(root, 'assets/brand-quote.jpeg')),
+  ],
+  [
     'product has long description',
     /Плотный хлопок/.test(
       readFileSync(join(root, 'product/futbolka-oranzhevaya/index.html'), 'utf8'),

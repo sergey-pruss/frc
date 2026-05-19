@@ -21,9 +21,9 @@
       <div class="prototype-ribbon">Официальный интернет-магазин Универмага «Россия» · доставка по России · <a href="${root}delivery/">условия доставки</a></div>
       <header class="site-header">
         <div class="wrap header-inner">
-          <a class="logo" href="${root}">
-            <strong>Универмаг «Россия»</strong>
-            <span>Национальный центр «Россия»</span>
+          <a class="logo" href="${root}" aria-label="Универмаг Россия">
+            <img class="logo-mark" src="${root}assets/favicon.png" alt="" width="36" height="36">
+            <img class="logo-wordmark" src="${root}assets/rossiya-wordmark.svg" alt="Универмаг Россия" width="150" height="44">
           </a>
           <nav class="site-nav" aria-label="Основное меню">
             ${nav.map((item) => `<a href="${item.href}">${item.label}</a>`).join("")}
