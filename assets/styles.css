@@ -116,6 +116,32 @@ h3 {
   background: #ece8dd;
 }
 
+.section.highlight {
+  box-shadow: inset 0 0 0 2px var(--accent, #8b1e1e);
+}
+
+.doc-toc {
+  margin: 0;
+}
+
+.doc-toc ol {
+  margin: 0;
+  padding-left: 22px;
+  columns: 1;
+}
+
+.doc-toc li {
+  margin-bottom: 8px;
+}
+
+.doc-toc a {
+  color: inherit;
+}
+
+.doc-toc a:hover {
+  color: var(--accent, #8b1e1e);
+}
+
 .grid,
 .code-grid {
   display: grid;
