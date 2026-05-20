@@ -132,8 +132,9 @@ a {
   display: block;
   width: auto;
   height: 52px;
-  max-width: min(200px, 46vw);
+  max-width: min(240px, 48vw);
   object-fit: contain;
+  object-position: left center;
 }
 
 .site-nav {
@@ -960,9 +961,15 @@ a {
 
 .site-footer {
   margin-top: 48px;
-  padding: 40px 0 24px;
-  background: var(--nc-red);
+  padding: 40px 0 28px;
+  background: var(--brand-green);
   color: #f2efe7;
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .footer-grid {
@@ -970,7 +977,7 @@ a {
   grid-template-columns: 1.2fr repeat(3, 1fr);
   gap: 24px;
   padding-bottom: 32px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .site-footer a {
@@ -1002,24 +1009,17 @@ a {
 }
 
 .footer-brand {
+  display: inline-block;
   margin-bottom: 4px;
 }
 
-.logo--on-red .logo-mark {
-  height: 64px;
-}
-
-.logo--on-red .logo-wordmark {
-  color: var(--brand-gold);
-}
-
-.logo--on-red .logo-wordmark__line {
-  font-size: 12px;
-}
-
-.logo--on-red .logo-wordmark__line--brand {
-  font-size: 14px;
-  color: #fffdf8;
+.footer-lockup {
+  display: block;
+  width: auto;
+  height: 56px;
+  max-width: min(260px, 90vw);
+  object-fit: contain;
+  object-position: left center;
 }
 
 .footer-tagline {
@@ -1056,9 +1056,10 @@ a {
 .footer-project__link img {
   display: block;
   width: auto;
-  height: 52px;
-  max-width: min(320px, 80vw);
+  height: 36px;
+  max-width: min(220px, 72vw);
   object-fit: contain;
+  object-position: left center;
 }
 
 .sr-only {

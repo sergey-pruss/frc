@@ -3,9 +3,9 @@
   const depth = Number(script?.dataset.depth || 0);
   const root = depth ? "../".repeat(depth) : "./";
   const assetV = script?.src?.match(/[?&]v=([^&]+)/)?.[1] || "";
-  const logoSrc = `${root}assets/univermag-logo.svg${assetV ? `?v=${assetV}` : ""}`;
-  const crestSrc = `${root}assets/rossiya-crest.png${assetV ? `?v=${assetV}` : ""}`;
-  const ncLogoSrc = `${root}assets/nc-russia-logo.png${assetV ? `?v=${assetV}` : ""}`;
+  const lockupSrc = `${root}assets/univermag-lockup-light.png${assetV ? `?v=${assetV}` : ""}`;
+  const lockupFooterSrc = `${root}assets/univermag-lockup.png${assetV ? `?v=${assetV}` : ""}`;
+  const ncLogoSrc = `${root}assets/nc-logo-black.png${assetV ? `?v=${assetV}` : ""}`;
 
   const headerMount = document.querySelector("[data-site-header]");
   const footerMount = document.querySelector("[data-site-footer]");
@@ -24,11 +24,7 @@
       <header class="site-header">
         <div class="wrap header-inner">
           <a class="logo" href="${root}" aria-label="Универмаг «Россия»">
-            <img class="logo-mark" src="${crestSrc}" alt="" width="56" height="56">
-            <span class="logo-wordmark">
-              <span class="logo-wordmark__line">Универмаг</span>
-              <span class="logo-wordmark__line logo-wordmark__line--brand">«Россия»</span>
-            </span>
+            <img class="logo-lockup" src="${lockupSrc}" alt="Универмаг «Россия»" width="220" height="52">
           </a>
           <nav class="site-nav" aria-label="Основное меню">
             ${nav.map((item) => `<a href="${item.href}">${item.label}</a>`).join("")}
@@ -45,59 +41,57 @@
   if (footerMount) {
     footerMount.innerHTML = `
       <footer class="site-footer">
-        <div class="wrap footer-grid">
-          <div class="footer-col">
-            <a class="footer-brand logo logo--on-red" href="${root}">
-              <img class="logo-mark" src="${crestSrc}" alt="" width="64" height="64">
-              <span class="logo-wordmark">
-                <span class="logo-wordmark__line">Универмаг</span>
-                <span class="logo-wordmark__line logo-wordmark__line--brand">«Россия»</span>
-              </span>
+        <div class="wrap site-footer__inner">
+          <div class="footer-grid">
+            <div class="footer-col">
+              <a class="footer-brand" href="${root}">
+                <img class="footer-lockup" src="${lockupFooterSrc}" alt="Универмаг «Россия»" width="240" height="56">
+              </a>
+              <p class="footer-tagline">Официальный интернет-магазин одежды, аксессуаров и подарков Национального центра «Россия».</p>
+            </div>
+            <div class="footer-col">
+              <h4>Покупателям</h4>
+              <ul>
+                <li><a href="${root}catalog/">Каталог</a></li>
+                <li><a href="${root}login/">Личный кабинет</a></li>
+                <li><a href="${root}cart/">Корзина</a></li>
+                <li><a href="${root}sizes/">Размеры</a></li>
+                <li><a href="${root}delivery/">Доставка и оплата</a></li>
+                <li><a href="${root}stores/">Магазины</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Коллекции</h4>
+              <ul>
+                <li><a href="${root}collections/russia-capsule/">Russia Capsule</a></li>
+                <li><a href="${root}collections/mystery-box/">Mystery Box</a></li>
+                <li><a href="${root}gift-cards/">Подарочные карты</a></li>
+                <li><a href="${root}blog/">Журнал</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Контакты</h4>
+              <ul>
+                <li><a href="${root}contacts/">Связаться с нами</a></li>
+                <li><a href="${root}corporate/">Корпоративным</a></li>
+                <li><a href="${root}about/">О бренде</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-project">
+            <p class="footer-project__label">Проект</p>
+            <a class="footer-project__link" href="https://russia.ru/" target="_blank" rel="noopener noreferrer">
+              <img src="${ncLogoSrc}" alt="Национальный центр «Россия»" width="200" height="36">
+              <span class="sr-only">Национального центра «Россия»</span>
             </a>
-            <p class="footer-tagline">Официальный интернет-магазин одежды, аксессуаров и подарков Национального центра «Россия».</p>
           </div>
-          <div class="footer-col">
-            <h4>Покупателям</h4>
-            <ul>
-              <li><a href="${root}catalog/">Каталог</a></li>
-              <li><a href="${root}login/">Личный кабинет</a></li>
-              <li><a href="${root}cart/">Корзина</a></li>
-              <li><a href="${root}sizes/">Размеры</a></li>
-              <li><a href="${root}delivery/">Доставка и оплата</a></li>
-              <li><a href="${root}stores/">Магазины</a></li>
-            </ul>
+          <div class="footer-bottom">
+            <span>© 2026 Универмаг «Россия» · проект Национального центра «Россия»</span>
+            <a class="made-by" href="https://serenity.agency/" target="_blank" rel="noreferrer">
+              <img src="${root}assets/serenity-logo.svg" alt="" width="18" height="18">
+              <span>Сделано в Serenity</span>
+            </a>
           </div>
-          <div class="footer-col">
-            <h4>Коллекции</h4>
-            <ul>
-              <li><a href="${root}collections/russia-capsule/">Russia Capsule</a></li>
-              <li><a href="${root}collections/mystery-box/">Mystery Box</a></li>
-              <li><a href="${root}gift-cards/">Подарочные карты</a></li>
-              <li><a href="${root}blog/">Журнал</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Контакты</h4>
-            <ul>
-              <li><a href="${root}contacts/">Связаться с нами</a></li>
-              <li><a href="${root}corporate/">Корпоративным</a></li>
-              <li><a href="${root}about/">О бренде</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="wrap footer-project">
-          <p class="footer-project__label">Проект</p>
-          <a class="footer-project__link" href="https://russia.ru/" target="_blank" rel="noopener noreferrer">
-            <img src="${ncLogoSrc}" alt="Национальный центр «Россия»" width="300" height="58">
-            <span class="sr-only">Национального центра «Россия»</span>
-          </a>
-        </div>
-        <div class="wrap footer-bottom">
-          <span>© 2026 Универмаг «Россия» · проект Национального центра «Россия»</span>
-          <a class="made-by" href="https://serenity.agency/" target="_blank" rel="noreferrer">
-            <img src="${root}assets/serenity-logo.svg" alt="" width="18" height="18">
-            <span>Сделано в Serenity</span>
-          </a>
         </div>
       </footer>`;
   }
