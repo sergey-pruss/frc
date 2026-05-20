@@ -128,15 +128,6 @@ a {
   letter-spacing: 0.04em;
 }
 
-.logo-lockup {
-  display: block;
-  width: auto;
-  height: 52px;
-  max-width: min(240px, 48vw);
-  object-fit: contain;
-  object-position: left center;
-}
-
 .site-nav {
   display: flex;
   flex-wrap: wrap;
@@ -1013,13 +1004,11 @@ a {
   margin-bottom: 4px;
 }
 
-.footer-lockup {
+.footer-mark {
   display: block;
   width: auto;
   height: 56px;
-  max-width: min(260px, 90vw);
   object-fit: contain;
-  object-position: left center;
 }
 
 .footer-tagline {

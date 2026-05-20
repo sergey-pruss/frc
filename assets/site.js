@@ -3,8 +3,8 @@
   const depth = Number(script?.dataset.depth || 0);
   const root = depth ? "../".repeat(depth) : "./";
   const assetV = script?.src?.match(/[?&]v=([^&]+)/)?.[1] || "";
-  const lockupSrc = `${root}assets/univermag-lockup-light.png${assetV ? `?v=${assetV}` : ""}`;
-  const lockupFooterSrc = `${root}assets/univermag-lockup.png${assetV ? `?v=${assetV}` : ""}`;
+  const markSrc = `${root}assets/u-mark-green.png${assetV ? `?v=${assetV}` : ""}`;
+  const markLightSrc = `${root}assets/u-mark-light.png${assetV ? `?v=${assetV}` : ""}`;
   const ncLogoSrc = `${root}assets/nc-logo-black.png${assetV ? `?v=${assetV}` : ""}`;
 
   const headerMount = document.querySelector("[data-site-header]");
@@ -24,7 +24,11 @@
       <header class="site-header">
         <div class="wrap header-inner">
           <a class="logo" href="${root}" aria-label="Универмаг «Россия»">
-            <img class="logo-lockup" src="${lockupSrc}" alt="Универмаг «Россия»" width="220" height="52">
+            <img class="logo-mark" src="${markSrc}" alt="" width="56" height="56">
+            <span class="logo-wordmark">
+              <span class="logo-wordmark__line">Универмаг</span>
+              <span class="logo-wordmark__line logo-wordmark__line--brand">«Россия»</span>
+            </span>
           </a>
           <nav class="site-nav" aria-label="Основное меню">
             ${nav.map((item) => `<a href="${item.href}">${item.label}</a>`).join("")}
@@ -45,7 +49,7 @@
           <div class="footer-grid">
             <div class="footer-col">
               <a class="footer-brand" href="${root}">
-                <img class="footer-lockup" src="${lockupFooterSrc}" alt="Универмаг «Россия»" width="240" height="56">
+                <img class="footer-mark" src="${markLightSrc}" alt="Универмаг «Россия»" width="56" height="56">
               </a>
               <p class="footer-tagline">Официальный интернет-магазин одежды, аксессуаров и подарков Национального центра «Россия».</p>
             </div>

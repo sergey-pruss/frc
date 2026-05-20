@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "assets"
-DEFAULT_PDF = Path.home() / "Downloads" / "УНИВЕРМАГ РОССИЯ гайдбук (1).pdf"
+DEFAULT_SRC = ASSETS / "u-mark-green.png"
 
 
 def crop_mark_from_pdf(pdf: Path) -> Path:
@@ -50,9 +50,9 @@ def sips_resize(src: Path, size: int, dest: Path) -> None:
 
 
 def main() -> None:
-    src = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_PDF
+    src = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_SRC
     if not src.is_file():
-        sys.exit(f"Brand guide not found: {src}")
+        sys.exit(f"Source not found: {src}")
 
     if src.suffix.lower() == ".pdf":
         tmp = crop_mark_from_pdf(src)
@@ -67,7 +67,7 @@ def main() -> None:
             mark = mark.crop(bbox)
         pad = int(max(mark.size) * 0.14)
         side = max(mark.size) + pad * 2
-        square = Image.new("RGBA", (side, side), (255, 253, 248, 255))
+        square = Image.new("RGBA", (side, side), (255, 255, 255, 255))
         square.paste(mark, ((side - mark.width) // 2, (side - mark.height) // 2), mark)
         tmp = ASSETS / ".crest-src.png"
         square.save(tmp)
