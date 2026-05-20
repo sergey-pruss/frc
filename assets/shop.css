@@ -99,7 +99,7 @@ a {
   display: block;
   width: auto;
   height: 52px;
-  max-width: min(168px, 42vw);
+  max-width: min(200px, 46vw);
   object-fit: contain;
 }
 

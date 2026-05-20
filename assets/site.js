@@ -3,7 +3,7 @@
   const depth = Number(script?.dataset.depth || 0);
   const root = depth ? "../".repeat(depth) : "./";
   const assetV = script?.src?.match(/[?&]v=([^&]+)/)?.[1] || "";
-  const logoSrc = `${root}assets/univermag-logo.png${assetV ? `?v=${assetV}` : ""}`;
+  const logoSrc = `${root}assets/univermag-logo.svg${assetV ? `?v=${assetV}` : ""}`;
   const ncLogoSrc = `${root}assets/nc-russia-logo.png${assetV ? `?v=${assetV}` : ""}`;
 
   const headerMount = document.querySelector("[data-site-header]");
