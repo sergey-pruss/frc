@@ -1011,6 +1011,27 @@ a {
   object-fit: contain;
 }
 
+.footer-col--brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.footer-nc {
+  display: inline-block;
+  margin-top: 18px;
+}
+
+.footer-nc img {
+  display: block;
+  width: auto;
+  height: 40px;
+  max-width: min(220px, 90vw);
+  object-fit: contain;
+  object-position: left center;
+}
+
 .footer-tagline {
   margin: 12px 0 0;
   max-width: 34ch;

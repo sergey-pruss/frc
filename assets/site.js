@@ -5,7 +5,7 @@
   const assetV = script?.src?.match(/[?&]v=([^&]+)/)?.[1] || "";
   const markSrc = `${root}assets/u-mark-green.png${assetV ? `?v=${assetV}` : ""}`;
   const markLightSrc = `${root}assets/u-mark-light.png${assetV ? `?v=${assetV}` : ""}`;
-  const ncLogoSrc = `${root}assets/nc-logo-black.png${assetV ? `?v=${assetV}` : ""}`;
+  const ncLogoSrc = `${root}assets/nc-logo-white.png${assetV ? `?v=${assetV}` : ""}`;
 
   const headerMount = document.querySelector("[data-site-header]");
   const footerMount = document.querySelector("[data-site-footer]");
@@ -47,11 +47,14 @@
       <footer class="site-footer">
         <div class="wrap site-footer__inner">
           <div class="footer-grid">
-            <div class="footer-col">
+            <div class="footer-col footer-col--brand">
               <a class="footer-brand" href="${root}">
                 <img class="footer-mark" src="${markLightSrc}" alt="Универмаг «Россия»" width="56" height="56">
               </a>
               <p class="footer-tagline">Официальный интернет-магазин одежды, аксессуаров и подарков Национального центра «Россия».</p>
+              <a class="footer-nc" href="https://russia.ru/" target="_blank" rel="noopener noreferrer">
+                <img src="${ncLogoSrc}" alt="Национальный центр «Россия»" width="200" height="40">
+              </a>
             </div>
             <div class="footer-col">
               <h4>Покупателям</h4>
@@ -81,13 +84,6 @@
                 <li><a href="${root}about/">О бренде</a></li>
               </ul>
             </div>
-          </div>
-          <div class="footer-project">
-            <p class="footer-project__label">Проект</p>
-            <a class="footer-project__link" href="https://russia.ru/" target="_blank" rel="noopener noreferrer">
-              <img src="${ncLogoSrc}" alt="Национальный центр «Россия»" width="200" height="36">
-              <span class="sr-only">Национального центра «Россия»</span>
-            </a>
           </div>
           <div class="footer-bottom">
             <span>© 2026 Универмаг «Россия» · проект Национального центра «Россия»</span>
