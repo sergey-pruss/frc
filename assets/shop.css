@@ -86,14 +86,46 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  min-height: 72px;
+  min-height: 76px;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-width: 210px;
+  gap: 10px;
+  min-width: 0;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.logo-mark {
+  display: block;
+  width: auto;
+  height: 56px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.logo-wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: var(--brand-green);
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.logo-wordmark__line {
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.logo-wordmark__line--brand {
+  font-size: 13px;
+  letter-spacing: 0.04em;
 }
 
 .logo-lockup {

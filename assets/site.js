@@ -4,6 +4,7 @@
   const root = depth ? "../".repeat(depth) : "./";
   const assetV = script?.src?.match(/[?&]v=([^&]+)/)?.[1] || "";
   const logoSrc = `${root}assets/univermag-logo.svg${assetV ? `?v=${assetV}` : ""}`;
+  const crestSrc = `${root}assets/rossiya-crest.png${assetV ? `?v=${assetV}` : ""}`;
   const ncLogoSrc = `${root}assets/nc-russia-logo.png${assetV ? `?v=${assetV}` : ""}`;
 
   const headerMount = document.querySelector("[data-site-header]");
@@ -23,7 +24,11 @@
       <header class="site-header">
         <div class="wrap header-inner">
           <a class="logo" href="${root}" aria-label="Универмаг «Россия»">
-            <img class="logo-lockup" src="${logoSrc}" alt="Универмаг «Россия»" width="168" height="52">
+            <img class="logo-mark" src="${crestSrc}" alt="" width="56" height="56">
+            <span class="logo-wordmark">
+              <span class="logo-wordmark__line">Универмаг</span>
+              <span class="logo-wordmark__line logo-wordmark__line--brand">«Россия»</span>
+            </span>
           </a>
           <nav class="site-nav" aria-label="Основное меню">
             ${nav.map((item) => `<a href="${item.href}">${item.label}</a>`).join("")}
