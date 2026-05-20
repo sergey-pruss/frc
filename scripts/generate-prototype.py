@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from content import (  # noqa: E402
     BLOG_POSTS,
     BRAND,
+    BRAND_QUOTE,
     CATEGORIES,
     COLLECTIONS,
     EDITORIAL_SHOTS,
@@ -18,7 +19,7 @@ from content import (  # noqa: E402
     PRODUCTS,
 )
 
-ASSET_VERSION = "20260520b"
+ASSET_VERSION = "20260520c"
 BASE_URL = "https://frc.sergeypruss.ru"
 
 
@@ -620,9 +621,11 @@ def main() -> None:
           <p>Фирменные цвета универмага — зелёный Pantone 4216 и золотой Pantone 871. Упаковка и бирки выполняются в крафтовой палитре с лентами красного, зелёного и белого цвета.</p>
           <h2>В магазине</h2>
           <ul><li>Одежда и аксессуары с символикой центра</li><li>Коллекции Russia Capsule, Mystery Box и сезонные линейки</li><li>Подарочные наборы, сертификаты и корпоративные заказы</li></ul>
-          <figure class="brand-quote-card" style="margin-top:28px;">
-            <img src="../assets/brand-quote.jpeg" alt="Для меня Россия — вся моя жизнь">
-          </figure>
+          <blockquote class="brand-quote-card brand-quote">
+            <p class="brand-quote__lead">{BRAND_QUOTE['before']} <span class="brand-quote__accent">{BRAND_QUOTE['accent']}</span></p>
+            <p class="brand-quote__dash" aria-hidden="true">—</p>
+            <p class="brand-quote__rest">{BRAND_QUOTE['after']}</p>
+          </blockquote>
           <h2>Контакты</h2>
           <p><a href="../contacts/">Связаться с нами</a> · <a href="../stores/">Магазины и самовывоз</a></p>
         </div>

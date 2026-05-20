@@ -13,6 +13,13 @@ BRAND = {
     "domain": "shop.russia.ru",
 }
 
+# Цитата ФС (гайд-драфт ФРК): акцент только на «Россия», длинное тире — под словом.
+BRAND_QUOTE = {
+    "before": "Для меня",
+    "accent": "Россия",
+    "after": "вся моя жизнь",
+}
+
 # Референсные фото (CDN gloryseason.ru) — замена битых Unsplash.
 REF = {
     "polo": "https://thb.tildacdn.com/tild6135-3439-4533-a632-356233303737/-/resize/800x/333.jpg",
