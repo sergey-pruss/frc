@@ -934,13 +934,10 @@ a {
 }
 
 .footer-grid {
-  padding-bottom: 40px;
-}
-
-.footer-grid {
   display: grid;
   grid-template-columns: 1.2fr repeat(3, 1fr);
   gap: 24px;
+  padding-bottom: 40px;
 }
 
 .site-footer a {
