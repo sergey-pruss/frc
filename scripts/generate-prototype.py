@@ -19,7 +19,7 @@ from content import (  # noqa: E402
     PRODUCTS,
 )
 
-ASSET_VERSION = "20260520c"
+ASSET_VERSION = "20260520d"
 BASE_URL = "https://frc.sergeypruss.ru"
 
 
