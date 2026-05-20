@@ -47,8 +47,12 @@
       <footer class="site-footer">
         <div class="wrap footer-grid">
           <div class="footer-col">
-            <a class="footer-brand" href="${root}">
-              <img src="${logoSrc}" alt="Универмаг «Россия»" width="200" height="64">
+            <a class="footer-brand logo logo--on-red" href="${root}">
+              <img class="logo-mark" src="${crestSrc}" alt="" width="64" height="64">
+              <span class="logo-wordmark">
+                <span class="logo-wordmark__line">Универмаг</span>
+                <span class="logo-wordmark__line logo-wordmark__line--brand">«Россия»</span>
+              </span>
             </a>
             <p class="footer-tagline">Официальный интернет-магазин одежды, аксессуаров и подарков Национального центра «Россия».</p>
           </div>
@@ -81,23 +85,19 @@
             </ul>
           </div>
         </div>
-        <div class="footer-ribbon">
-          <div class="wrap footer-ribbon__inner">
-            <div class="footer-project">
-              <p class="footer-project__label">Проект</p>
-              <a class="footer-project__link" href="https://russia.ru/" target="_blank" rel="noopener noreferrer">
-                <img src="${ncLogoSrc}" alt="Национальный центр «Россия»" width="300" height="58">
-                <span class="sr-only">Национального центра «Россия»</span>
-              </a>
-            </div>
-            <div class="footer-bottom">
+        <div class="wrap footer-project">
+          <p class="footer-project__label">Проект</p>
+          <a class="footer-project__link" href="https://russia.ru/" target="_blank" rel="noopener noreferrer">
+            <img src="${ncLogoSrc}" alt="Национальный центр «Россия»" width="300" height="58">
+            <span class="sr-only">Национального центра «Россия»</span>
+          </a>
+        </div>
+        <div class="wrap footer-bottom">
           <span>© 2026 Универмаг «Россия» · проект Национального центра «Россия»</span>
           <a class="made-by" href="https://serenity.agency/" target="_blank" rel="noreferrer">
             <img src="${root}assets/serenity-logo.svg" alt="" width="18" height="18">
             <span>Сделано в Serenity</span>
           </a>
-            </div>
-          </div>
         </div>
       </footer>`;
   }
