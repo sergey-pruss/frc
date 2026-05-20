@@ -1,32 +1,33 @@
 #!/usr/bin/env python3
-"""Build favicon PNGs from the client crest in the brand book (PDF page 7)."""
+"""Build favicon PNGs from the Универмаг «Россия» У-mark (assets/u-mark-source.png)."""
 
 from __future__ import annotations
 
-import io
 import subprocess
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "assets"
-DEFAULT_PDF = Path.home() / "Downloads" / "Брендбук НЦ Россия_removed.pdf"
+DEFAULT_SRC = ASSETS / "u-mark-source.png"
 
 
-def crop_crest(pdf: Path) -> "object":
-    import fitz
-    from PIL import Image
+def prepare_square(src: Path) -> Path:
+    from PIL import Image, ImageChops
 
-    doc = fitz.open(pdf)
-    page = doc[6]
-    pix = page.get_pixmap(matrix=fitz.Matrix(5, 5), alpha=False)
-    img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
-    w, h = img.size
-    crop = img.crop((int(w * 0.54), int(h * 0.30), int(w * 0.74), int(h * 0.82)))
-    side = max(crop.size) + 40
+    mark = Image.open(src).convert("RGBA")
+    bg = Image.new("RGBA", mark.size, (255, 255, 255, 255))
+    diff = ImageChops.difference(mark, bg)
+    bbox = diff.getbbox()
+    if bbox:
+        mark = mark.crop(bbox)
+    pad = int(max(mark.size) * 0.14)
+    side = max(mark.size) + pad * 2
     square = Image.new("RGBA", (side, side), (255, 253, 248, 255))
-    square.paste(crop, ((side - crop.width) // 2, (side - crop.height) // 2))
-    return square
+    square.paste(mark, ((side - mark.width) // 2, (side - mark.height) // 2), mark)
+    tmp = ASSETS / ".crest-src.png"
+    square.save(tmp)
+    return tmp
 
 
 def sips_resize(src: Path, size: int, dest: Path) -> None:
@@ -38,15 +39,11 @@ def sips_resize(src: Path, size: int, dest: Path) -> None:
 
 
 def main() -> None:
-    pdf = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_PDF
-    if not pdf.is_file():
-        sys.exit(f"Brand book not found: {pdf}")
+    src = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_SRC
+    if not src.is_file():
+        sys.exit(f"Source image not found: {src}")
 
-    buf = io.BytesIO()
-    crop_crest(pdf).save(buf, format="PNG")
-    tmp = ASSETS / ".crest-src.png"
-    tmp.write_bytes(buf.getvalue())
-
+    tmp = prepare_square(src)
     sips_resize(tmp, 256, ASSETS / "rossiya-crest.png")
     sips_resize(tmp, 512, ASSETS / "favicon.png")
     sips_resize(tmp, 32, ASSETS / "favicon-32.png")

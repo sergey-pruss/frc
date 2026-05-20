@@ -3,7 +3,8 @@
   const depth = Number(script?.dataset.depth || 0);
   const root = depth ? "../".repeat(depth) : "./";
   const assetV = script?.src?.match(/[?&]v=([^&]+)/)?.[1] || "";
-  const crestSrc = `${root}assets/rossiya-crest.png${assetV ? `?v=${assetV}` : ""}`;
+  const logoSrc = `${root}assets/univermag-logo.png${assetV ? `?v=${assetV}` : ""}`;
+  const ncLogoSrc = `${root}assets/nc-russia-logo.png${assetV ? `?v=${assetV}` : ""}`;
 
   const headerMount = document.querySelector("[data-site-header]");
   const footerMount = document.querySelector("[data-site-footer]");
@@ -21,9 +22,8 @@
       <div class="site-topbar">Бесплатная доставка по России от 7&nbsp;000&nbsp;₽ · <a href="${root}delivery/">условия доставки и возврата</a></div>
       <header class="site-header">
         <div class="wrap header-inner">
-          <a class="logo" href="${root}" aria-label="Универмаг Россия">
-            <img class="logo-mark" src="${crestSrc}" alt="" width="36" height="36">
-            <img class="logo-wordmark" src="${root}assets/rossiya-wordmark.svg" alt="Универмаг Россия" width="150" height="44">
+          <a class="logo" href="${root}" aria-label="Универмаг «Россия»">
+            <img class="logo-lockup" src="${logoSrc}" alt="Универмаг «Россия»" width="168" height="52">
           </a>
           <nav class="site-nav" aria-label="Основное меню">
             ${nav.map((item) => `<a href="${item.href}">${item.label}</a>`).join("")}
@@ -42,8 +42,10 @@
       <footer class="site-footer">
         <div class="wrap footer-grid">
           <div class="footer-col">
-            <strong style="font-family:'PT Serif',serif;font-size:28px;">Универмаг «Россия»</strong>
-            <p style="margin:12px 0 0;max-width:34ch;opacity:.8;">Официальный интернет-магазин одежды, аксессуаров и подарков Национального центра «Россия».</p>
+            <a class="footer-brand" href="${root}">
+              <img src="${logoSrc}" alt="Универмаг «Россия»" width="200" height="64">
+            </a>
+            <p class="footer-tagline">Официальный интернет-магазин одежды, аксессуаров и подарков Национального центра «Россия».</p>
           </div>
           <div class="footer-col">
             <h4>Покупателям</h4>
@@ -74,8 +76,15 @@
             </ul>
           </div>
         </div>
+        <div class="wrap footer-project">
+          <p class="footer-project__label">Проект</p>
+          <a class="footer-project__link" href="https://russia.ru/" target="_blank" rel="noopener noreferrer">
+            <img src="${ncLogoSrc}" alt="Национальный центр «Россия»" width="220" height="48">
+            <span class="sr-only">Национального центра «Россия»</span>
+          </a>
+        </div>
         <div class="wrap footer-bottom">
-          <span>© 2026 Универмаг «Россия»</span>
+          <span>© 2026 Универмаг «Россия» · проект Национального центра «Россия»</span>
           <a class="made-by" href="https://serenity.agency/" target="_blank" rel="noreferrer">
             <img src="${root}assets/serenity-logo.svg" alt="" width="18" height="18">
             <span>Сделано в Serenity</span>
