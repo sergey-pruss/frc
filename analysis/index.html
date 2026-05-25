@@ -189,8 +189,8 @@
       .matrix-table thead th a:hover { border-bottom-style: solid; }
       .matrix-table .yes { background: #e8f5e9; color: #2e7d32; font-weight: 600; }
       .matrix-table .no { background: #fafafa; color: #ccc; }
-      .matrix-table .col-ours { background: #1a3518 !important; color: #fff !important; font-weight: 700; }
-      .matrix-table thead .col-ours { background: #1a3518; font-size: .7rem; font-weight: 800; letter-spacing: .03em; }
+      .matrix-table .col-ours { background: #1a3518 !important; color: #fff !important; font-weight: 700; position: sticky; left: 180px; z-index: 2; }
+      .matrix-table thead .col-ours { background: #1a3518; font-size: .7rem; font-weight: 800; letter-spacing: .03em; z-index: 3; }
       .matrix-table tbody tr:hover td { background-color: rgba(47,77,43,.04); }
       .matrix-table tbody tr:hover td:first-child { background: rgba(47,77,43,.04); }
       .matrix-table tbody tr:hover .col-ours { background: #1a3518 !important; }
@@ -314,24 +314,6 @@
           визуальные решения, сравнение по функциональным блокам и gap-анализ
           относительно нашего дизайн-прототипа.
         </p>
-        <dl class="facts">
-          <div>
-            <dt>Конкурентов</dt>
-            <dd>20 сайтов из топ Яндекс/Google</dd>
-          </div>
-          <div>
-            <dt>Запросы</dt>
-            <dd>«футболки купить», «худи россия», «одежда с символикой», «патриотическая одежда», «мерч россия»</dd>
-          </div>
-          <div>
-            <dt>Сегменты</dt>
-            <dd>Прямые конкуренты, Print-on-demand, Премиум/институциональные, Нишевые</dd>
-          </div>
-          <div>
-            <dt>Дата</dt>
-            <dd>25 мая 2026</dd>
-          </div>
-        </dl>
       </div>
     </header>
 
@@ -441,55 +423,159 @@
           <div class="screen-grid">
 
             <figure class="screen-card" onclick="openLightbox(this)">
-              <img src="../assets/generated/competitors/kremlin-symbol-home.png" alt="kremlin-symbol.ru — главная" loading="lazy">
+              <img src="../assets/generated/competitors/kremlin-symbol-home.png" alt="kremlin-symbol.ru" loading="lazy">
               <div class="screen-card-body">
                 <strong><a href="https://kremlin-symbol.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">kremlin-symbol.ru</a></strong>
-                <span>Книжная Экспедиция — подарки и сувениры с государственной символикой</span>
+                <span>Книжная Экспедиция — подарки и сувениры с символикой</span>
               </div>
             </figure>
 
             <figure class="screen-card" onclick="openLightbox(this)">
-              <img src="../assets/generated/competitors/yarussia-home.png" alt="yarussia.com — главная" loading="lazy">
+              <img src="../assets/generated/competitors/yarussia-home.png" alt="yarussia.com" loading="lazy">
               <div class="screen-card-body">
                 <strong><a href="https://www.yarussia.com" target="_blank" rel="noopener" onclick="event.stopPropagation()">yarussia.com</a></strong>
-                <span>ЯRUSSIA — бренд патриотической одежды с линейками коллекций</span>
+                <span>ЯRUSSIA — бренд патриотической одежды</span>
               </div>
             </figure>
 
             <figure class="screen-card" onclick="openLightbox(this)">
-              <img src="../assets/generated/competitors/vsemayki-catalog.png" alt="vsemayki.ru — каталог" loading="lazy">
+              <img src="../assets/generated/competitors/putin-team-home.png" alt="putin-team.ru" loading="lazy">
+              <div class="screen-card-body">
+                <strong><a href="https://putin-team.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">putin-team.ru</a></strong>
+                <span>Putin Team — официальный мерч</span>
+              </div>
+            </figure>
+
+            <figure class="screen-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/victorydayshop-home.png" alt="victorydayshop.ru" loading="lazy">
+              <div class="screen-card-body">
+                <strong><a href="https://victorydayshop.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">victorydayshop.ru</a></strong>
+                <span>Victory Day Shop — патриотическая одежда</span>
+              </div>
+            </figure>
+
+            <figure class="screen-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/myhomeland-home.png" alt="myhomeland.ru" loading="lazy">
+              <div class="screen-card-body">
+                <strong><a href="https://myhomeland.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">myhomeland.ru</a></strong>
+                <span>MyHomeland — худи с вышивкой герба России</span>
+              </div>
+            </figure>
+
+            <figure class="screen-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/russian-tshirts-home.png" alt="russian-t-shirts.shop" loading="lazy">
+              <div class="screen-card-body">
+                <strong><a href="https://russian-t-shirts.shop" target="_blank" rel="noopener" onclick="event.stopPropagation()">russian-t-shirts.shop</a></strong>
+                <span>Russian T-Shirts — мерч с символикой</span>
+              </div>
+            </figure>
+
+            <figure class="screen-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/velikoross-home.png" alt="greatrussianstyle.ru" loading="lazy">
+              <div class="screen-card-body">
+                <strong><a href="https://greatrussianstyle.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">greatrussianstyle.ru</a></strong>
+                <span>Великоросс — русский мужской бренд</span>
+              </div>
+            </figure>
+
+            <figure class="screen-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/lutchshop-home.png" alt="lutchshop.ru" loading="lazy">
+              <div class="screen-card-body">
+                <strong><a href="https://lutchshop.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">lutchshop.ru</a></strong>
+                <span>Lutch Shop — толстовки с символикой России</span>
+              </div>
+            </figure>
+
+            <figure class="screen-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/atributika-home.png" alt="shop.atributika.ru" loading="lazy">
+              <div class="screen-card-body">
+                <strong><a href="https://shop.atributika.ru/katalog/russia/" target="_blank" rel="noopener" onclick="event.stopPropagation()">shop.atributika.ru</a></strong>
+                <span>Атрибутика&amp;Club — спортивная символика</span>
+              </div>
+            </figure>
+
+            <figure class="screen-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/gloryseason-home.png" alt="gloryseason.ru" loading="lazy">
+              <div class="screen-card-body">
+                <strong><a href="https://gloryseason.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">gloryseason.ru</a></strong>
+                <span>Glory Season — визуальный референс (Tilda)</span>
+              </div>
+            </figure>
+
+            <figure class="screen-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/vsemayki-catalog.png" alt="vsemayki.ru" loading="lazy">
               <div class="screen-card-body">
                 <strong><a href="https://www.vsemayki.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">vsemayki.ru</a></strong>
-                <span>Все Майки — крупнейший print-on-demand маркетплейс принтов</span>
+                <span>Все Майки — print-on-demand маркетплейс</span>
               </div>
             </figure>
 
             <figure class="screen-card" onclick="openLightbox(this)">
-              <img src="../assets/generated/competitors/printbar-home.png" alt="printbar.ru — главная" loading="lazy">
+              <img src="../assets/generated/competitors/printbar-home.png" alt="printbar.ru" loading="lazy">
               <div class="screen-card-body">
                 <strong><a href="https://printbar.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">printbar.ru</a></strong>
-                <span>Print Bar — полная запечатка 360°, производство за 72 часа</span>
+                <span>Print Bar — полная запечатка 360°</span>
               </div>
             </figure>
 
             <figure class="screen-card" onclick="openLightbox(this)">
-              <img src="../assets/generated/competitors/zenit-home.png" alt="shop.fc-zenit.ru — главная" loading="lazy">
+              <img src="../assets/generated/competitors/printio-home.png" alt="printio.ru" loading="lazy">
+              <div class="screen-card-body">
+                <strong><a href="https://printio.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">printio.ru</a></strong>
+                <span>Printio — кастомизация и мерч на заказ</span>
+              </div>
+            </figure>
+
+            <figure class="screen-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/bosco-home.png" alt="bosco.ru" loading="lazy">
+              <div class="screen-card-body">
+                <strong><a href="https://www.bosco.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">bosco.ru</a></strong>
+                <span>Bosco Sport — экипировщик сборной России</span>
+              </div>
+            </figure>
+
+            <figure class="screen-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/zenit-home.png" alt="shop.fc-zenit.ru" loading="lazy">
               <div class="screen-card-body">
                 <strong><a href="https://shop.fc-zenit.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">shop.fc-zenit.ru</a></strong>
-                <span>ФК Зенит — премиальный editorial-подход, модельная съёмка</span>
+                <span>ФК Зенит — премиальный editorial-подход</span>
               </div>
             </figure>
 
             <figure class="screen-card" onclick="openLightbox(this)">
-              <img src="../assets/generated/competitors/tretyakov-home.png" alt="shop.tretyakovgallery.ru — главная" loading="lazy">
+              <img src="../assets/generated/competitors/tretyakov-home.png" alt="shop.tretyakovgallery.ru" loading="lazy">
               <div class="screen-card-body">
                 <strong><a href="https://shop.tretyakovgallery.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">shop.tretyakovgallery.ru</a></strong>
-                <span>Третьяковская галерея — арт-мерч со смелой типографикой</span>
+                <span>Третьяковская галерея — арт-мерч</span>
               </div>
             </figure>
 
             <figure class="screen-card" onclick="openLightbox(this)">
-              <img src="../assets/generated/competitors/rus-vit-home.png" alt="rus-vit.ru — главная" loading="lazy">
+              <img src="../assets/generated/competitors/hermitage-home.png" alt="hermitageshop.ru" loading="lazy">
+              <div class="screen-card-body">
+                <strong><a href="https://www.hermitageshop.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">hermitageshop.ru</a></strong>
+                <span>Эрмитаж — магазин музея</span>
+              </div>
+            </figure>
+
+            <figure class="screen-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/shm-home.png" alt="shop.shm.ru" loading="lazy">
+              <div class="screen-card-body">
+                <strong><a href="https://shop.shm.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">shop.shm.ru</a></strong>
+                <span>Исторический музей — Красная площадь</span>
+              </div>
+            </figure>
+
+            <figure class="screen-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/pushkin-home.png" alt="theartsmuseum.store" loading="lazy">
+              <div class="screen-card-body">
+                <strong><a href="https://theartsmuseum.store" target="_blank" rel="noopener" onclick="event.stopPropagation()">theartsmuseum.store</a></strong>
+                <span>Пушкинский музей — арт-мерч</span>
+              </div>
+            </figure>
+
+            <figure class="screen-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/rus-vit-home.png" alt="rus-vit.ru" loading="lazy">
               <div class="screen-card-body">
                 <strong><a href="https://rus-vit.ru" target="_blank" rel="noopener" onclick="event.stopPropagation()">rus-vit.ru</a></strong>
                 <span>Русские Витязи — нишевый мерч авиагруппы</span>
@@ -514,6 +600,7 @@
               <thead>
                 <tr>
                   <th style="min-width:180px">Тип страницы</th>
+                  <th class="col-ours">НАШ</th>
                   <th><a href="https://kremlin-symbol.ru" target="_blank" rel="noopener">Кремлёв-<wbr>ский символ</a></th>
                   <th><a href="https://www.yarussia.com" target="_blank" rel="noopener">ЯRUSSIA</a></th>
                   <th><a href="https://putin-team.ru" target="_blank" rel="noopener">Putin Team</a></th>
@@ -534,129 +621,68 @@
                   <th><a href="https://shop.shm.ru" target="_blank" rel="noopener">Ист. музей</a></th>
                   <th><a href="https://theartsmuseum.store" target="_blank" rel="noopener">Пушкин-<wbr>ский</a></th>
                   <th><a href="https://rus-vit.ru" target="_blank" rel="noopener">Русские Витязи</a></th>
-                  <th class="col-ours">НАШ</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Главная (герой)</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Главная (герой)</td><td class="col-ours">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
                 </tr>
-                <tr>
-                  <td>Каталог</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Каталог</td><td class="col-ours">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
                 </tr>
-                <tr>
-                  <td>Категории</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Категории</td><td class="col-ours">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
                 </tr>
-                <tr>
-                  <td>Фильтры (цвет/размер)</td>
-                  <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Фильтры (цвет/размер)</td><td class="col-ours">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
                 </tr>
-                <tr>
-                  <td>Карточка товара</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Карточка товара</td><td class="col-ours">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
                 </tr>
-                <tr>
-                  <td>Коллекции</td>
-                  <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td>
-                  <td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Коллекции</td><td class="col-ours">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td>
                 </tr>
-                <tr>
-                  <td>Корзина / Чекаут</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Корзина / Чекаут</td><td class="col-ours">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
                 </tr>
-                <tr>
-                  <td>Доставка и оплата</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Доставка и оплата</td><td class="col-ours">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
                 </tr>
-                <tr>
-                  <td>О компании / О проекте</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>О компании / О проекте</td><td class="col-ours">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
                 </tr>
-                <tr>
-                  <td>Блог / Журнал</td>
-                  <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
-                  <td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Блог / Журнал</td><td class="col-ours">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
                 </tr>
-                <tr>
-                  <td>Размерная сетка</td>
-                  <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
-                  <td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Размерная сетка</td><td class="col-ours">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
                 </tr>
-                <tr>
-                  <td>Акции / Распродажа</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="no">—</td>
+                                <tr>
+                  <td>Акции / Распродажа</td><td class="col-ours">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
                 </tr>
-                <tr>
-                  <td>Подарочные сертификаты</td>
-                  <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
-                  <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Подарочные сертификаты</td><td class="col-ours">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td>
                 </tr>
-                <tr>
-                  <td>Магазины / Где купить</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td>
-                  <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Магазины / Где купить</td><td class="col-ours">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td>
                 </tr>
-                <tr>
-                  <td>Корпоративным клиентам</td>
-                  <td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Корпоративным клиентам</td><td class="col-ours">✓</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
                 </tr>
-                <tr>
-                  <td>Избранное / Вишлист</td>
-                  <td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Избранное / Вишлист</td><td class="col-ours">✓</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
                 </tr>
-                <tr>
-                  <td>Личный кабинет</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Личный кабинет</td><td class="col-ours">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td>
                 </tr>
-                <tr>
-                  <td>Поиск</td>
-                  <td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Поиск</td><td class="col-ours">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
                 </tr>
-                <tr>
-                  <td>Программа лояльности</td>
-                  <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
-                  <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Программа лояльности</td><td class="col-ours">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td>
                 </tr>
-                <tr>
-                  <td>Контакты</td>
-                  <td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
-                  <td class="col-ours">✓</td>
+                                <tr>
+                  <td>Контакты</td><td class="col-ours">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td>
                 </tr>
               </tbody>
             </table>
@@ -843,9 +869,9 @@
           <div class="benchmark-card">
             <h3>Ближайшие бенчмарки по уровню дизайна:</h3>
             <ul style="margin:0;padding-left:20px">
-              <li style="margin-bottom:8px"><strong>shop.fc-zenit.ru</strong> — премиальный editorial подход, коллекции как hero, модельная съёмка</li>
-              <li style="margin-bottom:8px"><strong>shop.tretyakovgallery.ru</strong> — институциональный мерч с арт-направленностью, смелая типографика</li>
-              <li style="margin-bottom:8px"><strong>bosco.ru</strong> — luxury-позиционирование, спортивное наследие, полноценный e-com</li>
+              <li style="margin-bottom:8px"><strong><a href="https://shop.fc-zenit.ru" target="_blank" rel="noopener">shop.fc-zenit.ru</a></strong> — премиальный editorial подход, коллекции как hero, модельная съёмка</li>
+              <li style="margin-bottom:8px"><strong><a href="https://shop.tretyakovgallery.ru" target="_blank" rel="noopener">shop.tretyakovgallery.ru</a></strong> — институциональный мерч с арт-направленностью, смелая типографика</li>
+              <li style="margin-bottom:8px"><strong><a href="https://www.bosco.ru" target="_blank" rel="noopener">bosco.ru</a></strong> — luxury-позиционирование, спортивное наследие, полноценный e-com</li>
             </ul>
             <p class="benchmark-note">
               Наш прототип стоит на уровне этих трёх лидеров, при этом значительно превосходит
