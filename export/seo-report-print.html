@@ -110,7 +110,7 @@
     <li>Мета-теги по страницам</li>
     <li>Микроразметка</li>
     <li>Sitemap, robots и canonical</li>
-    <li>SEO-ТЗ для разработки</li>
+    <li>Что передать в разработку после согласования</li>
   </ol>
 
   <div class="page-break"></div>
@@ -206,7 +206,7 @@
       <tr><td>Значки</td><td>150+</td><td style="text-align:left">категория, россия, города, сувениры</td><td style="text-align:left">Категория; фильтры не приоритетны.</td></tr>
       <tr><td>Шоперы</td><td>2</td><td style="text-align:left">шопер, сумка шопер</td><td style="text-align:left">Категория без SEO-фильтров на старте.</td></tr>
       <tr><td>Детские игры</td><td>4+</td><td style="text-align:left">детская игра, настольная игра</td><td style="text-align:left">Категория после уточнения типов.</td></tr>
-      <tr><td>Сертификаты</td><td>50+</td><td style="text-align:left">подарочный, электронный, онлайн</td><td style="text-align:left">Отдельная страница сертификата.</td></tr>
+      <tr><td>Сертификаты</td><td>50+</td><td style="text-align:left">подарочный, электронный, онлайн</td><td style="text-align:left">Мета-теги и коммерческая страница нужны; как SEO-кластер продвижения не берем на старт.</td></tr>
     </tbody>
   </table>
 
@@ -292,7 +292,7 @@
       <tr><td>Категория</td><td style="text-align:left">Да</td><td style="text-align:left">/catalog/futbolki/</td><td style="text-align:left">Базовая посадочная, всегда индексируется.</td></tr>
       <tr><td>Категория + цвет</td><td style="text-align:left">Да, после проверки спроса</td><td style="text-align:left">/catalog/hudi/krasnye/</td><td style="text-align:left">Статичный слой для запросов от 100 показов.</td></tr>
       <tr><td>Категория + размер</td><td style="text-align:left">Да, для одежды при 100+</td><td style="text-align:left">/catalog/futbolki/xs/</td><td style="text-align:left">Размерные посадочные для точного интента.</td></tr>
-      <tr><td>Категория + цвет + размер</td><td style="text-align:left">Да, при 100+ и 2-3 товарах</td><td style="text-align:left">/catalog/hudi/krasnye-xs/</td><td style="text-align:left">Long-tail для статичных страниц.</td></tr>
+      <tr><td>Категория + цвет + размер</td><td style="text-align:left">Нет</td><td style="text-align:left">?color=red&amp;size=xs</td><td style="text-align:left">Динамическая комбинация фильтров: noindex, canonical на категорию или одиночный фильтр.</td></tr>
       <tr><td>Категория + материал</td><td style="text-align:left">Точечно</td><td style="text-align:left">/catalog/svitshoty/flis/</td><td style="text-align:left">Для подтвержденных свойств.</td></tr>
       <tr><td>Категория + конструкция</td><td style="text-align:left">Точечно</td><td style="text-align:left">/catalog/hudi/na-molnii/</td><td style="text-align:left">Худи на молнии, ветровки с капюшоном.</td></tr>
       <tr><td>Цена, наличие, сортировка</td><td style="text-align:left">Нет</td><td style="text-align:left">?price_to=5000&amp;sort=price</td><td style="text-align:left">Закрыть через noindex/canonical.</td></tr>
@@ -301,12 +301,12 @@
 
   <h3>Пример canonical</h3>
   <div class="code-block">&lt;!-- Индексируемый статичный фильтр --&gt;
-&lt;title&gt;Красные худи XS — купить с доставкой по России&lt;/title&gt;
-&lt;link rel="canonical" href="https://frc.serenity-dev.ru/catalog/hudi/krasnye-xs/"&gt;
+&lt;title&gt;Красные худи — купить с доставкой по России&lt;/title&gt;
+&lt;link rel="canonical" href="https://frc.serenity-dev.ru/catalog/hudi/krasnye/"&gt;
 
 &lt;!-- Неиндексируемая служебная комбинация --&gt;
 &lt;meta name="robots" content="noindex, follow"&gt;
-&lt;link rel="canonical" href="https://frc.serenity-dev.ru/catalog/hudi/"&gt;</div>
+&lt;link rel="canonical" href="https://frc.serenity-dev.ru/catalog/hudi/krasnye/"&gt;</div>
 
   <h2>7. Правила генерации мета-тегов</h2>
   <p><b>Общие принципы:</b> Title до 65-70 знаков, главный запрос ближе к началу; Description до 150-170 знаков, без дубля Title; H1 один на страницу; canonical у индексируемых страниц на себя, у служебных фильтров на базовую категорию; пустые выдачи и параметры сортировки закрывать noindex, follow.</p>
@@ -316,7 +316,7 @@
       <tr><td>Главная</td><td style="text-align:left">Универмаг «Россия» — одежда и аксессуары с доставкой</td><td style="text-align:left">Одежда и аксессуары Универмага «Россия»: худи, свитшоты, футболки, куртки, кепки, шоперы, сертификаты.</td><td style="text-align:left">Универмаг «Россия»</td></tr>
       <tr><td>Каталог</td><td style="text-align:left">Каталог одежды и аксессуаров — купить с доставкой</td><td style="text-align:left">Каталог: худи, свитшоты, футболки, ветровки, куртки, кепки, шапки, шоперы, значки, книги, игры, сертификаты.</td><td style="text-align:left">Каталог одежды и аксессуаров</td></tr>
       <tr><td>Категория</td><td style="text-align:left">{Категория} — купить с доставкой по России</td><td style="text-align:left">{Категория}: модели, размеры, цвета, цены, состав и доставка СДЭК или Яндекс.</td><td style="text-align:left">{Категория}</td></tr>
-      <tr><td>Фильтр</td><td style="text-align:left">{Цвет} {категория} {размер} — купить с доставкой</td><td style="text-align:left">{Цвет} {категория} {размер}: товары в наличии, состав, цена, размерная сетка.</td><td style="text-align:left">{Цвет} {категория} {размер}</td></tr>
+      <tr><td>Фильтр</td><td style="text-align:left">{Свойство} {категория} — купить с доставкой</td><td style="text-align:left">{Свойство} {категория}: товары в наличии, состав, цена, размерная сетка.</td><td style="text-align:left">{Свойство} {категория}</td></tr>
       <tr><td>Карточка</td><td style="text-align:left">{Название} — купить в Универмаге «Россия»</td><td style="text-align:left">{Название}: фото, цена, наличие, размеры, цвета, состав, уход, доставка.</td><td style="text-align:left">{Название товара}</td></tr>
     </tbody>
   </table>
@@ -427,7 +427,7 @@ Sitemap: https://frc.serenity-dev.ru/sitemap.xml</div>
 
   <div class="page-break"></div>
 
-  <h2>11. SEO-ТЗ для разработки</h2>
+  <h2>11. Что передать в разработку после согласования</h2>
   <div class="cards">
     <div class="card"><h3>URL и sitemap</h3><p>В sitemap: главная, каталог, категории, карточки, gift-cards и выбранные статичные фильтры.</p></div>
     <div class="card"><h3>Canonical</h3><p>Индексируемая страница → canonical на себя; неиндексируемые фильтры → на базовую категорию.</p></div>

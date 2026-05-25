@@ -381,6 +381,16 @@ const checks = [
       /Не брать на старт/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')),
   ],
   [
+    'competitor analysis addresses product feedback',
+      /id="commercial-seo"/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')) &&
+      /Коммерческий SEO-анализ конкурентов/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')) &&
+      /Рекомендации для проектирования/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')) &&
+      /href="#screenshots"/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')) &&
+      /id="screenshots"/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')) &&
+      !/id="screenshots" hidden/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')) &&
+      !/Print-on-demand|print-on-demand|Наш прототип|gap-анализ|Apple-style|JSON-LD schema/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')),
+  ],
+  [
     'requested footer and filter helper texts are removed',
     !/проект Национального центра «Россия»/.test(siteJs) &&
       !/собраны в одном сценарии/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')) &&
