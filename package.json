@@ -4,6 +4,14 @@
   "private": true,
   "description": "SEO project documentation for the FRC / National Center Russia merch website.",
   "scripts": {
+    "build:site": "python3 scripts/generate-prototype.py",
+    "build:pdf": "node scripts/generate-pdf.mjs",
+    "build": "npm run build:site && npm run build:pdf",
+    "watch": "node scripts/watch.mjs",
     "test": "node tests/verify-html.mjs && node tests/verify-prototype.mjs"
+  },
+  "devDependencies": {
+    "chokidar": "^5.0.0",
+    "puppeteer": "^25.0.4"
   }
 }

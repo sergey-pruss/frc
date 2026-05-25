@@ -20,7 +20,7 @@ const reports = [
     name: "SEO Strategy",
   },
   {
-    src: resolve(ROOT, "export/analysis-print.html"),
+    src: resolve(ROOT, "analysis/index.html"),
     dst: resolve(ROOT, "export/competitor-analysis-report.pdf"),
     name: "Competitor Analysis",
   },
