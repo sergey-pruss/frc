@@ -19,8 +19,25 @@ from content import (  # noqa: E402
     PRODUCTS,
 )
 
-ASSET_VERSION = "20260520k"
-BASE_URL = "https://frc.sergeypruss.ru"
+ASSET_VERSION = "20260525a"
+BASE_URL = "https://frc.serenity-dev.ru"
+FILTER_SIZES = ("XS", "S", "M", "L", "XL", "2XL", "3XL")
+FILTER_COLORS = [
+    ("belye", "белый", "белые"),
+    ("sinie", "синий", "синие"),
+    ("krasnye", "красный", "красные"),
+    ("chernye", "чёрный", "чёрные"),
+    ("rozovye", "розовый", "розовые"),
+]
+
+CATEGORY_SEO_NOUNS = {
+    "khudi": ("худи", "худи"),
+    "svitshoty": ("свитшот", "свитшоты"),
+    "futbolki": ("футболка", "футболки"),
+    "vetrovki": ("ветровка", "ветровки"),
+    "kurtki": ("куртка", "куртки"),
+    "aksessuary": ("аксессуар", "аксессуары"),
+}
 
 
 def fmt_price(n: int) -> str:
@@ -56,17 +73,65 @@ def shell(depth: int, title: str, body: str, desc: str | None = None, canonical_
 """
 
 
-def card(p: dict, depth: int, *, editorial: bool = False) -> str:
+def normalize_color(value: str) -> str:
+    normalized = value.replace("ё", "е").lower()
+    if "чер" in normalized:
+        return "chernye"
+    if "бел" in normalized or "молоч" in normalized:
+        return "belye"
+    if "син" in normalized or "голуб" in normalized:
+        return "sinie"
+    if "крас" in normalized or "борд" in normalized:
+        return "krasnye"
+    if "роз" in normalized:
+        return "rozovye"
+    return normalized
+
+
+MODEL_CARD_IMAGES = {
+    "khudi": "/assets/generated/fashion/khudi-models.png",
+    "svitshoty": "/assets/generated/fashion/svitshoty-bez-flisa-models.png",
+    "futbolki": "/assets/generated/fashion/futbolki-models.png",
+    "vetrovki": "/assets/generated/fashion/vetrovki-models.png",
+    "kurtki": "/assets/generated/fashion/kurtki-models.png",
+    "aksessuary": "/assets/generated/fashion/aksessuary-models.png",
+}
+
+def project_image_path(image: str, depth: int) -> str:
+    if image.startswith("/"):
+        return "../" * depth + image.lstrip("/")
+    return image
+
+
+def model_card_image(p: dict, depth: int) -> str:
+    return project_image_path(MODEL_CARD_IMAGES.get(p["cat"], p["img"]), depth)
+
+
+def card(
+    p: dict,
+    depth: int,
+    *,
+    editorial: bool = False,
+    seo_keyword: str | None = None,
+    image_override: str | None = None,
+    extra_class: str = "",
+) -> str:
     root = "../" * depth
     old = f'<span class="price-old">{fmt_price(p["old"])}</span>' if p["old"] else ""
     extra = " product-card--editorial" if editorial else ""
+    extra += f" {extra_class}" if extra_class else ""
     short = "" if editorial else f"<p>{p['short']}</p>"
+    colors = " ".join(sorted({normalize_color(c) for c in p["colors"]}))
+    sizes = " ".join(size.lower() for size in FILTER_SIZES)
+    alt = seo_keyword or f"{p['title']} — {BRAND['name']}"
+    image = image_override or model_card_image(p, depth)
+    subcategory = p.get("subcat", "")
     return f"""
-        <article class="product-card{extra}">
+        <article class="product-card{extra}" data-product-card data-category="{p['cat']}" data-subcategory="{subcategory}" data-colors="{colors}" data-sizes="{sizes}" data-price="{p['price']}">
           <a href="{root}product/{p['slug']}/">
             <div class="product-thumb">
               <span class="product-tag">{p['tag']}</span>
-              <img src="{p['img']}" alt="{p['title']} — {BRAND['name']}" loading="lazy" width="400" height="500">
+              <img src="{image}" alt="{alt}" loading="lazy" width="400" height="500">
             </div>
             <div class="product-body">
               <h3>{p['title']}</h3>
@@ -106,10 +171,10 @@ def hero_mosaic_html(depth: int = 0) -> str:
           <div class="hero-mosaic__intro">
             <p class="eyebrow">Официальный магазин · {BRAND['center']}</p>
             <h1>{BRAND['name']}</h1>
-            <p class="hero-lead">Минималистичная витрина с акцентом на визуал: крупные фото, простой каталог и понятные кнопки.</p>
+            <p class="hero-lead">Lifestyle-мерч в премиальной сдержанной подаче: качество, посадка, материалы и цитаты видны до карточки товара.</p>
             <div class="hero-nav-cta">
               <a class="btn btn-primary btn-xl" href="{root}catalog/">Каталог</a>
-              <a class="btn btn-primary btn-xl" href="{root}collections/">Мерч</a>
+              <a class="btn btn-primary btn-xl" href="{root}gift-cards/">Сертификаты</a>
               <a class="btn btn-secondary btn-xl" href="{root}contacts/">Контакты</a>
             </div>
           </div>
@@ -133,22 +198,162 @@ def editorial_strip_html(depth: int = 0) -> str:
         <div class="wrap">
           <div class="section-head section-head--minimal">
             <h2>Образы</h2>
-            <p>Мерч на моделях и крупные планы — как в референсах fashion-брендов.</p>
+            <p>Фотологика по ТЗ: вертикальные кадры, запас фона, полный рост, 3/4, детали и взаимодействия с вещью.</p>
           </div>
           <div class="editorial-grid">{shots}</div>
         </div>
       </section>"""
 
 
+def home_apple_html(depth: int = 0) -> str:
+    root = "../" * depth
+    new_items = [
+        p for p in PRODUCTS if p["tag"] in ("Новинка", "−9%", "−10%", "−38%", "Набор")
+    ][:8]
+    popular_items = [
+        p for p in PRODUCTS if p["tag"] in ("Хит", "Премиум", "Зима", "Подарок")
+    ][:8]
+    product_rails = (
+        product_rail_html("Новинки", f"{root}catalog/new/", "Смотреть все", new_items, depth, root),
+        product_rail_html("Популярное", f"{root}catalog/", "Весь каталог", popular_items, depth, root),
+    )
+    return f"""
+      <section class="apple-hero">
+        <div class="apple-hero__content" data-parallax="text" data-parallax-speed="0.018" data-parallax-limit="14">
+          <h1>Мерч — как любимая вещь</h1>
+          <p>Премиальная одежда и аксессуары Национального центра «Россия»: спокойная современность, качественные материалы и точная посадка.</p>
+          <div class="hero-nav-cta">
+            <a class="btn btn-primary btn-xl" href="{root}catalog/">Смотреть каталог</a>
+            <a class="btn btn-secondary btn-xl" href="{root}gift-cards/">Подарочные сертификаты</a>
+          </div>
+        </div>
+        <div class="apple-hero__media" data-parallax="image" data-parallax-speed="0.042" data-parallax-limit="34">
+          <img src="{root}assets/generated/editorial/home-hero-apple-wall.png" alt="Модели в одежде и аксессуарах Универмага «Россия»">
+        </div>
+      </section>
+      <section class="apple-feature apple-feature--light">
+        <div class="apple-feature__copy" data-parallax="text" data-parallax-speed="0.018" data-parallax-limit="16">
+          <p class="eyebrow">Lifestyle-мерч</p>
+          <h2>Для себя. Для подарка. Для спокойного ежедневного образа.</h2>
+          <p>Без визуального шума и лишнего пафоса: одежда, которую можно носить каждый день, сохраняя официальный характер проекта.</p>
+        </div>
+        <img data-parallax="image" data-parallax-speed="0.052" data-parallax-limit="48" src="{root}assets/generated/editorial/home-feature-style.png" alt="Модели в одежде и аксессуарах Универмага «Россия»">
+      </section>
+      <section class="apple-feature apple-feature--dark">
+        <div class="apple-feature__copy" data-parallax="text" data-parallax-speed="0.018" data-parallax-limit="16">
+          <p class="eyebrow">Одежда и аксессуары</p>
+          <h2>Категории сразу ведут к выбору.</h2>
+          <p>Худи, свитшоты, футболки, ветровки, куртки, кепки, шапки, шоперы, книги, значки и детские игры — в одном каталоге с понятными фильтрами.</p>
+        </div>
+        <img data-parallax="image" data-parallax-speed="0.052" data-parallax-limit="48" src="{root}assets/generated/editorial/home-feature-family.png" alt="Верхняя одежда, сумки и аксессуары Универмага «Россия»">
+      </section>
+      {"".join(product_rails)}
+      <section class="apple-category-band">
+        <div class="wrap">
+          <div class="apple-section-head">
+            <h2>Выберите категорию.</h2>
+            <a href="{root}catalog/">Весь каталог</a>
+          </div>
+          <div class="apple-category-row">{category_visual_tiles(depth)}</div>
+        </div>
+      </section>"""
+
+
+def product_rail_html(title: str, url: str, link_label: str, products: list[dict], depth: int, root: str) -> str:
+    cards = []
+    for index, product in enumerate(products):
+        extra_class = "product-card--model" if index == 0 and title == "Новинки" else ""
+        cards.append(card(product, depth, editorial=True, extra_class=extra_class))
+    return f"""
+      <section class="apple-shop-preview">
+        <div class="wrap">
+          <div class="apple-section-head">
+            <h2>{title}</h2>
+            <a href="{url}">{link_label}</a>
+          </div>
+          <div class="apple-store-grid">{"".join(cards)}</div>
+        </div>
+      </section>"""
+
+
+def unique_products(candidates: list[dict], limit: int, exclude_slug: str = "") -> list[dict]:
+    selected = []
+    seen = {exclude_slug}
+    for product in candidates:
+        if product["slug"] in seen:
+            continue
+        selected.append(product)
+        seen.add(product["slug"])
+        if len(selected) == limit:
+            break
+    return selected
+
+
+def product_recommendation_rails(p: dict, depth: int, root: str) -> str:
+    viewed_with = unique_products(
+        [x for x in PRODUCTS if x["cat"] == p["cat"]]
+        + [x for x in PRODUCTS if x["collection"] == p["collection"]]
+        + PRODUCTS,
+        8,
+        p["slug"],
+    )
+    popular_items = unique_products(
+        [x for x in PRODUCTS if x["tag"] in ("Хит", "Премиум", "Зима", "Подарок")] + PRODUCTS,
+        8,
+        p["slug"],
+    )
+    new_items = unique_products(
+        [x for x in PRODUCTS if x["tag"] in ("Новинка", "−9%", "−10%", "−38%", "Набор")] + PRODUCTS,
+        8,
+        p["slug"],
+    )
+    return "".join(
+        (
+            product_rail_html("С этим смотрят", f"{root}catalog/{p['cat']}/", "В категорию", viewed_with, depth, root),
+            product_rail_html("Популярное", f"{root}catalog/", "Весь каталог", popular_items, depth, root),
+            product_rail_html("Новинки", f"{root}catalog/new/", "Смотреть все", new_items, depth, root),
+        )
+    )
+
+
+def store_category_row(depth: int = 1) -> str:
+    root = "../" * depth
+    icons = "".join(
+        f"""<a class="store-category" href="{root}catalog/{slug}/">
+          <img src="{next((p['img'] for p in PRODUCTS if p['cat'] == slug), '')}" alt="">
+          <span>{label}</span>
+        </a>"""
+        for slug, label, _ in CATEGORIES
+    )
+    return f'<div class="store-category-row">{icons}</div>'
+
+
 def category_visual_tiles(depth: int = 0) -> str:
     root = "../" * depth
     parts = []
     for slug, label, _ in CATEGORIES:
-        img = next((p["img"] for p in PRODUCTS if p["cat"] == slug), "")
+        img = project_image_path(MODEL_CARD_IMAGES.get(slug, next((p["img"] for p in PRODUCTS if p["cat"] == slug), "")), depth)
         parts.append(
-            f'<a class="category-visual" href="{root}catalog/{slug}/" style="background-image:url(\'{img}\')"><span>{label}</span></a>'
+            f'<a class="category-visual" href="{root}catalog/{slug}/" style="background-image:url(\'{img}\')"><span class="category-visual__title">{label}</span></a>'
         )
     return "".join(parts)
+
+
+def subcategory_chips(active: str | None = None) -> str:
+    options = [
+        ("", "Все свитшоты"),
+        ("С флисом", "С флисом"),
+        ("Без флиса", "Без флиса"),
+    ]
+    links = "".join(
+        f'<button type="button" class="{"is-active" if active == value else ""}" data-filter-subcategory="{value}">{label}</button>'
+        for value, label in options
+    )
+    return f"""
+            <fieldset>
+              <legend>Тип свитшота</legend>
+              <div class="filter-pills filter-pills--buttons">{links}</div>
+            </fieldset>"""
 
 
 def write(rel: str, content: str) -> None:
@@ -181,6 +386,83 @@ def category_chips(depth: int, active: str | None) -> str:
     return "\n".join(parts)
 
 
+def catalog_filter_panel(depth: int, *, active: str | None = None, color: str | None = None, size: str | None = None) -> str:
+    root = "../" * depth
+    active_label = "Все товары"
+    if active:
+        active_label = next((label for slug, label, _ in CATEGORIES if slug == active), active_label)
+    color_options = "".join(
+        f'<button type="button" class="{"is-active" if color == slug else ""}" data-filter-color="{slug}" style="--swatch:{swatch}" aria-label="{label}"></button>'
+        for slug, label, _label_plural, swatch in [
+            ("belye", "Белый", "белые", "#fff"),
+            ("sinie", "Синий", "синие", "#12345a"),
+            ("chernye", "Чёрный", "чёрные", "#111"),
+            ("krasnye", "Красный", "красные", "#9b1c31"),
+            ("rozovye", "Розовый", "розовые", "#e8b7c7"),
+        ]
+    )
+    size_options = "".join(
+        f'<label class="{"is-active" if size == item.lower() else ""}"><input type="checkbox" data-filter-size="{item.lower()}" {"checked" if size == item.lower() else ""}> {item}</label>'
+        for item in FILTER_SIZES
+    )
+    return f"""
+        <aside class="store-filter-panel" aria-label="Фильтры каталога">
+          <div class="store-filter-panel__head">
+            <span>Фильтры</span>
+            <a href="{root}catalog/" data-filter-reset>Сбросить</a>
+          </div>
+          <fieldset>
+            <legend>Категория</legend>
+            <div class="filter-pills">
+              <a class="{"is-active" if active is None else ""}" href="{root}catalog/" data-filter-category="all">Все</a>
+              {''.join(f'<a class="{"is-active" if active == slug else ""}" href="{root}catalog/{slug}/" data-filter-category="{slug}">{label}</a>' for slug, label, _ in CATEGORIES)}
+            </div>
+          </fieldset>
+          {subcategory_chips() if active == "svitshoty" else ""}
+          <fieldset>
+            <legend>Размер</legend>
+            <div class="filter-options">{size_options}</div>
+          </fieldset>
+          <fieldset>
+            <legend>Цвет</legend>
+            <div class="color-options">{color_options}</div>
+          </fieldset>
+          <fieldset>
+            <legend>Цена</legend>
+            <div class="filter-options"><label><input type="checkbox" data-filter-price="0-5000"> до 5 000 ₽</label><label><input type="checkbox" data-filter-price="5000-10000"> 5 000–10 000 ₽</label><label><input type="checkbox" data-filter-price="10000-999999"> от 10 000 ₽</label></div>
+          </fieldset>
+          <fieldset>
+            <legend>Наличие</legend>
+            <div class="filter-options"><label class="is-active"><input type="checkbox" checked data-filter-stock> В наличии</label><label><input type="checkbox" data-filter-gift> Подарочные сертификаты</label></div>
+          </fieldset>
+        </aside>"""
+
+
+def store_collection_cards(depth: int = 1) -> str:
+    root = "../" * depth
+    picks = [
+        ("Одежда на каждый день", "Футболки, лонгсливы, худи и костюмы с нейтральной посадкой.", "futbolka-oranzhevaya", "catalog/futbolki/"),
+        ("Аксессуары и поездки", "Кепки, шапки, шоперы, значки, книги и детские игры в одной ветке.", "sumka-shopper", "catalog/aksessuary/"),
+        ("Подарочные сценарии", "Электронные сертификаты и наборы, когда размер лучше выбрать позже.", "podarochnyj-nabor", "catalog/aksessuary/"),
+    ]
+    return "".join(
+        f"""<a class="store-promo-card" href="{root}{href}">
+          <img src="{product_by_slug(slug)['img']}" alt="">
+          <span>{title}</span>
+          <p>{text}</p>
+        </a>"""
+        for title, text, slug, href in picks
+    )
+
+
+def seo_filter_keyword(category_slug: str, color_slug: str, size: str) -> tuple[str, str]:
+    singular, plural = CATEGORY_SEO_NOUNS[category_slug]
+    color = next(color_label for slug, _base, color_label in FILTER_COLORS if slug == color_slug)
+    keyword = f"{singular} {color} {size.upper()}"
+    heading = f"{plural.capitalize()} {color} {size.upper()} — купить с доставкой по России"
+    return keyword, heading
+
+
 def products_for_collection(slug: str) -> list:
     if slug == "russia-capsule":
         return [p for p in PRODUCTS if p["collection"] == "Russia Capsule"]
@@ -192,17 +474,20 @@ def products_for_collection(slug: str) -> list:
 
 
 def product_body(p: dict) -> str:
+    root = "../../"
+    primary_image = model_card_image(p, 2)
+    gallery_images = [primary_image, p["img"], p["img"], p["img"]]
     thumbs = "".join(
-        f'<button type="button" class="{"is-active" if i == 0 else ""}"><img src="{p["img"]}" alt=""></button>'
-        for i in range(4)
+        f'<button type="button" class="{"is-active" if i == 0 else ""}"><img src="{src}" alt=""></button>'
+        for i, src in enumerate(gallery_images)
     )
-    related = [x for x in PRODUCTS if x["cat"] == p["cat"] and x["slug"] != p["slug"]][:2]
+    recommendation_rails = product_recommendation_rails(p, 2, root)
     return f"""
       <div class="wrap">
         <nav class="breadcrumbs"><a href="../../">Главная</a> / <a href="../../catalog/">Каталог</a> / <a href="../../catalog/{p['cat']}/">{p['cat_label']}</a> / <span>{p['title']}</span></nav>
         <div class="product-page">
-          <div>
-            <div class="gallery-main"><img src="{p['img']}" alt="{p['title']} — {BRAND['name']}"></div>
+          <div class="product-gallery">
+            <div class="gallery-main"><img src="{primary_image}" alt="{p['title']} на модели — {BRAND['name']}"></div>
             <div class="gallery-thumbs">{thumbs}</div>
           </div>
           <div class="product-info">
@@ -233,7 +518,7 @@ def product_body(p: dict) -> str:
                 "name": "{p['title']}",
                 "brand": {{"@type": "Brand", "name": "{BRAND['name']}"}},
                 "category": "{p['cat_label']}",
-                "image": "{p['img']}",
+                "image": "{primary_image}",
                 "description": "{p['short']}",
                 "sku": "UR-{p['slug'][:8].upper()}",
                 "offers": {{
@@ -246,11 +531,8 @@ def product_body(p: dict) -> str:
             </script>
           </div>
         </div>
-        <section class="section" style="padding-top:0;">
-          <h2 class="subsection-title">Похожие товары</h2>
-          <div class="product-grid">{"".join(card(x, 2) for x in related)}</div>
-        </section>
-      </div>""".replace("<div class=", "<div class=").replace("<div class=", "<div class=").replace("</div>", "</div>")
+      </div>
+      {recommendation_rails}""".replace("<div class=", "<div class=").replace("<div class=", "<div class=").replace("</div>", "</div>")
 
 
 
@@ -269,27 +551,7 @@ def main() -> None:
         shell(
             0,
             "Главная",
-            f"""
-      {hero_mosaic_html(0)}
-      {editorial_strip_html(0)}
-      <section class="section">
-        <div class="wrap">
-          <div class="section-head section-head--minimal"><h2>Новинки</h2><a class="btn btn-ghost" href="catalog/new/">Смотреть все</a></div>
-          <div class="product-grid product-grid--editorial">{"".join(card(p, 0, editorial=True) for p in new_items[:4])}</div>
-        </div>
-      </section>
-      <section class="section muted">
-        <div class="wrap">
-          <div class="section-head section-head--minimal"><h2>Категории</h2></div>
-          <div class="category-visual-grid">{category_visual_tiles(0)}</div>
-        </div>
-      </section>
-      <section class="section">
-        <div class="wrap">
-          <div class="section-head section-head--minimal"><h2>Коллекции</h2></div>
-          <div class="collection-tiles">{coll_tiles}</div>
-        </div>
-      </section>""",
+            home_apple_html(0),
             BRAND["tagline"],
             canonical_path="",
         ),
@@ -305,16 +567,33 @@ def main() -> None:
             1,
             "Каталог",
             f"""
-      <div class="wrap section">
-        <nav class="breadcrumbs"><a href="../">Главная</a> / <span>Каталог</span></nav>
-        <h1>Каталог</h1>
-        <p class="page-intro">Купить мерч {BRAND['center']} онлайн — все категории и коллекции.</p>
-        <div class="category-chips">{category_chips(1, None)}</div>
-        <div class="category-visual-grid">{category_visual_tiles(1)}</div>
-        <h2 class="subsection-title">Все товары</h2>
-        <div class="product-grid product-grid--editorial">{"".join(card(p, 1, editorial=True) for p in PRODUCTS)}</div>
-      </div>""",
-            "Каталог официальной одежды и мерча Национального центра «Россия»: категории, коллекции, подарки и доставка по России.",
+      <section class="store-hero">
+        <div class="wrap">
+          <nav class="breadcrumbs"><a href="../">Главная</a> / <span>Каталог</span></nav>
+          <h1>Магазин. <span>Выберите вещь для себя или в подарок.</span></h1>
+          <p>Один каталог с фильтрами: размер S–3XL, цвет, цена и наличие. СДЭК или Яндекс, оплата сразу или при получении.</p>
+        </div>
+      </section>
+      <section class="store-categories">
+        <div class="wrap">{store_category_row(1)}</div>
+      </section>
+      <section class="store-products" id="odezhda">
+        <div class="wrap">
+          <div class="apple-section-head"><h2>Все товары.</h2><a href="../delivery/">Доставка и оплата</a></div>
+          <div class="store-layout">
+            {catalog_filter_panel(1)}
+            <div>
+              <div class="store-sortbar">
+                <span><b data-filter-count>{len(PRODUCTS)}</b> товаров · размер S–3XL · цвета из брифа</span>
+                <select aria-label="Сортировка"><option>Рекомендованные</option><option>Сначала новые</option><option>По возрастанию цены</option></select>
+              </div>
+              <div class="apple-store-grid apple-store-grid--catalog">{"".join(card(p, 1, editorial=True) for p in PRODUCTS)}</div>
+              <div class="filter-empty" data-filter-empty>По выбранным фильтрам товаров не найдено. Сбросьте фильтр или выберите соседний размер.</div>
+            </div>
+          </div>
+        </div>
+      </section>""",
+            "Каталог официальной одежды и мерча Национального центра «Россия»: категории, фильтры, подарки, СДЭК, Яндекс и оплата при получении.",
         ),
     )
 
@@ -336,7 +615,7 @@ def main() -> None:
     store_cards = """
         <article class="store-card"><strong>ВДНХ, павильон Национального центра «Россия»</strong><span>Главная точка продаж, примерка и самовывоз заказов.</span><small>Ежедневно 10:00–21:00</small></article>
         <article class="store-card"><strong>Временная витрина мероприятий</strong><span>Поп-ап формат для форумов, выставок и специальных программ центра.</span><small>По расписанию мероприятий</small></article>
-        <article class="store-card"><strong>Онлайн-заказ по России</strong><span>Доставка СДЭК, Почтой России и курьером по Москве.</span><small>Отправка 1–2 рабочих дня</small></article>"""
+        <article class="store-card"><strong>Онлайн-заказ по России</strong><span>Доставка СДЭК или Яндекс. Стоимость доставки клиент оплачивает отдельно.</span><small>Оплата сразу или при получении</small></article>"""
     account_nav = """
         <div class="account-shell">
           <aside class="account-nav">
@@ -396,14 +675,15 @@ def main() -> None:
             "Оформление заказа",
             simple_page(
                 "Оформление заказа",
-                "Контакты, доставка, оплата и подтверждение заказа в одном спокойном сценарии.",
+                "Контакты, СДЭК или Яндекс, оплата сразу или при получении и подтверждение заказа в одном спокойном сценарии.",
                 f"""
         <div class="checkout-layout">
           <form class="content-block demo-form" onsubmit="return false;">
             <label>Имя <input type="text" value="Сергей"></label>
             <label>Телефон <input type="tel" value="+7"></label>
             <label>Город <input type="text" value="Москва"></label>
-            <label>Способ доставки <select><option>Курьер</option><option>Самовывоз с ВДНХ</option><option>СДЭК</option></select></label>
+            <label>Способ доставки <select><option>СДЭК</option><option>Яндекс</option><option>Самовывоз из магазина</option></select></label>
+            <label>Оплата <select><option>Сразу на сайте</option><option>При получении</option></select></label>
             <label>Комментарий <textarea rows="4">Подарочная упаковка</textarea></label>
           </form>
           <aside class="summary-card"><h2>Ваш заказ</h2><ul>{order_rows}</ul><strong>{fmt_price(sum(p['price'] for p in PRODUCTS[:3]))}</strong><button class="btn btn-primary" type="button">Подтвердить</button></aside>
@@ -510,25 +790,82 @@ def main() -> None:
                 2,
                 label,
                 f"""
-      <div class="wrap section">
-        <nav class="breadcrumbs"><a href="../../">Главная</a> / <a href="../">Каталог</a> / <span>{label}</span></nav>
-        <h1>{label} — купить с доставкой по России</h1>
-        <p class="page-intro">{seo}</p>
-        <div class="category-chips">{category_chips(2, slug)}</div>
-        <div class="filters-bar">
-          <div>Фильтр: размер · цвет · коллекция · цена</div>
-          <select aria-label="Сортировка"><option>По популярности</option><option>Сначала новые</option></select>
+      <section class="store-hero store-hero--category">
+        <div class="wrap">
+          <nav class="breadcrumbs"><a href="../../">Главная</a> / <a href="../">Каталог</a> / <span>{label}</span></nav>
+          <h1>{label}. <span>Выберите вещь без лишнего шума.</span></h1>
+          <p>{seo}</p>
         </div>
-        <div class="product-grid">{"".join(card(p, 2) for p in items)}</div>
-        <div class="faq category-faq">
-          <h2>Вопросы о категории</h2>
-          <details open><summary>Как подобрать размер?</summary><p><a href="../../sizes/">Таблица размеров</a>.</p></details>
-          <details><summary>Доставка в регионы?</summary><p><a href="../../delivery/">Условия доставки</a>.</p></details>
+      </section>
+      <section class="store-categories">
+        <div class="wrap">{store_category_row(2)}</div>
+      </section>
+      <section class="store-products">
+        <div class="wrap">
+          <div class="apple-section-head"><h2>{label}.</h2><a href="../../catalog/">Весь каталог</a></div>
+          <div class="store-layout">
+            {catalog_filter_panel(2, active=slug)}
+            <div>
+              <div class="store-sortbar">
+                <span><b data-filter-count>{len(items)}</b> товаров · СДЭК или Яндекс · оплата сразу или при получении</span>
+                <select aria-label="Сортировка"><option>Рекомендованные</option><option>Сначала новые</option><option>По возрастанию цены</option></select>
+              </div>
+              <div class="apple-store-grid apple-store-grid--catalog">{"".join(card(p, 2, editorial=True) for p in items)}</div>
+              <div class="filter-empty" data-filter-empty>По выбранным фильтрам товаров не найдено. Сбросьте фильтр или выберите соседний размер.</div>
+            </div>
+          </div>
+          <div class="faq category-faq store-faq">
+            <h2>Вопросы о категории</h2>
+            <details open><summary>Как подобрать размер?</summary><p>Используйте фильтр S–3XL и таблицу размеров в карточке товара.</p></details>
+            <details><summary>Как доставляют заказ?</summary><p>Доступны СДЭК или Яндекс. Стоимость доставки оплачивается отдельно.</p></details>
+          </div>
         </div>
-      </div>""",
+      </section>""",
                 seo,
             ),
         )
+
+        for color_slug, _color_base, color_plural in FILTER_COLORS:
+            for size in FILTER_SIZES:
+                keyword, heading = seo_filter_keyword(slug, color_slug, size)
+                color_products = [
+                    p for p in items if color_slug in {normalize_color(c) for c in p["colors"]}
+                ] or items[: min(4, len(items))]
+                write(
+                    f"catalog/{slug}/{color_slug}-{size.lower()}/index.html",
+                    shell(
+                        3,
+                        heading,
+                        f"""
+      <section class="store-hero store-hero--category">
+        <div class="wrap">
+          <nav class="breadcrumbs"><a href="../../../">Главная</a> / <a href="../../">Каталог</a> / <a href="../">{label}</a> / <span>{keyword}</span></nav>
+          <h1>{heading}</h1>
+          <p>{keyword}: статичная SEO-страница фильтра с постоянным адресом, отдельными метатегами, заголовком, хлебными крошками и alt у товарных фото.</p>
+        </div>
+      </section>
+      <section class="store-products store-products--seo-filter">
+        <div class="wrap">
+          <div class="store-layout">
+            {catalog_filter_panel(3, active=slug, color=color_slug, size=size.lower())}
+            <div>
+              <div class="store-sortbar">
+                <span><b data-filter-count>{len(color_products)}</b> товаров · фильтр: {color_plural}, размер {size.upper()}</span>
+                <select aria-label="Сортировка"><option>Рекомендованные</option><option>Сначала новые</option><option>По возрастанию цены</option></select>
+              </div>
+              <div class="apple-store-grid apple-store-grid--catalog">{"".join(card(p, 3, editorial=True, seo_keyword=f"{keyword} — {p['title']} в Универмаге «Россия»") for p in color_products)}</div>
+              <div class="filter-empty" data-filter-empty>По выбранным фильтрам товаров не найдено. Сбросьте фильтр или выберите соседний размер.</div>
+            </div>
+          </div>
+          <section class="content-block prose seo-filter-copy">
+            <h2>{keyword}: посадочная страница под поисковый спрос</h2>
+            <p>Эта страница показывает принцип SEO-структуры: URL фиксирован, ключевая фраза есть в title, description, h1, хлебных крошках, тексте и alt-атрибутах изображений. Такие страницы можно индексировать отдельно от общего каталога и связывать внутренней перелинковкой из фильтров.</p>
+          </section>
+        </div>
+      </section>""",
+                        f"{keyword} в официальном магазине Национального центра «Россия»: размер {size.upper()}, цвет {color_plural}, доставка СДЭК или Яндекс, оплата сразу или при получении.",
+                    ),
+                )
 
     write(
         "catalog/new/index.html",

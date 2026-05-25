@@ -5,7 +5,7 @@ BRAND = {
     "name": "Универмаг «Россия»",
     "center": "Национальный центр «Россия»",
     "center_url": "https://russia.ru/",
-    "footer_project": "проект Национального центра «Россия»",
+    "footer_project": "",
     "tagline": "Официальный интернет-магазин одежды и мерча Национального центра «Россия»",
     "address": "Москва, территория ВДНХ, павильон Национального центра «Россия»",
     "email": "shop@rossiya-centre.ru",
@@ -494,70 +494,103 @@ PRODUCTS = [
     },
 ]
 
+for product in PRODUCTS:
+    product["img"] = f"/assets/generated/products/{product['slug']}.jpg"
+
+PRODUCT_CATEGORY_OVERRIDES = {
+    "longsliv-grafika": ("svitshoty", "Свитшоты"),
+    "longsliv-minimal": ("svitshoty", "Свитшоты"),
+    "longsliv-zhenskij": ("svitshoty", "Свитшоты"),
+    "svitshot-klassika": ("svitshoty", "Свитшоты"),
+    "svitshot-premium": ("khudi", "Худи"),
+    "khudi-molniya-trikolor": ("khudi", "Худи"),
+    "tolstovka-futer": ("svitshoty", "Свитшоты"),
+    "sport-kostyum-rossiya": ("khudi", "Худи"),
+    "kostyum-zhenskij-comfort": ("svitshoty", "Свитшоты"),
+    "kepka-simvol": ("aksessuary", "Аксессуары"),
+    "shapka-teremok": ("aksessuary", "Аксессуары"),
+    "sharf-zimnij": ("aksessuary", "Аксессуары"),
+    "sumka-shopper": ("aksessuary", "Аксессуары"),
+    "ryukzak-gorod": ("aksessuary", "Аксессуары"),
+    "kurtka-veter": ("vetrovki", "Ветровки"),
+    "kurtka-puhovik": ("kurtki", "Куртки"),
+    "bomber-fluffy": ("kurtki", "Куртки"),
+    "parka-zimnyaya": ("kurtki", "Куртки"),
+    "podarochnyj-nabor": ("aksessuary", "Аксессуары"),
+    "mystery-box": ("aksessuary", "Аксессуары"),
+    "podarochnyj-sertifikat": ("aksessuary", "Аксессуары"),
+}
+
+for product in PRODUCTS:
+    if product["slug"] in PRODUCT_CATEGORY_OVERRIDES:
+        product["cat"], product["cat_label"] = PRODUCT_CATEGORY_OVERRIDES[product["slug"]]
+
+PRODUCT_SUBCATEGORY_OVERRIDES = {
+    "longsliv-grafika": "Без флиса",
+    "longsliv-minimal": "Без флиса",
+    "longsliv-zhenskij": "Без флиса",
+    "svitshot-klassika": "Без флиса",
+    "kostyum-zhenskij-comfort": "Без флиса",
+    "tolstovka-futer": "С флисом",
+}
+
+for product in PRODUCTS:
+    product["subcat"] = PRODUCT_SUBCATEGORY_OVERRIDES.get(product["slug"], "")
+
 CATEGORIES = [
+    (
+        "khudi",
+        "Худи",
+        "Купить худи Универмага «Россия» — плотные модели с капюшоном, молнией и спокойной фирменной графикой. Доставка СДЭК или Яндекс по России.",
+    ),
+    (
+        "svitshoty",
+        "Свитшоты",
+        "Свитшоты Универмага «Россия» — единая категория с фильтрами «с флисом» и «без флиса», размеры S–3XL, оплата сразу или при получении.",
+    ),
     (
         "futbolki",
         "Футболки",
         "Купить футболки с символикой Национального центра «Россия» — базовые модели, поло, oversize и детская линия. Доставка по России.",
     ),
     (
-        "longslivy",
-        "Лонгсливы",
-        "Лонгсливы с принтом и вышивкой — удобный слой в прохладную погоду. Официальный магазин Универмага «Россия».",
-    ),
-    (
-        "svitshoty",
-        "Свитшоты и худи",
-        "Свитшоты и худи с флисом — тёплый мерч с вышивкой и принтами. Купить онлайн с доставкой по России.",
-    ),
-    (
-        "kostyumy",
-        "Спортивные костюмы",
-        "Спортивные костюмы с логотипом центра — комфорт для города и путешествий.",
-    ),
-    (
-        "kepki",
-        "Кепки и аксессуары",
-        "Кепки, шапки, шарфы и мелкий мерч — завершите образ или выберите подарок.",
-    ),
-    (
-        "sumki",
-        "Сумки",
-        "Шопперы и рюкзаки с фирменной символикой — крафт и зелёное покрытие по гайдбуку.",
+        "vetrovki",
+        "Ветровки",
+        "Ветровки Универмага «Россия» — лёгкая верхняя одежда с капюшоном, водоотталкивающей тканью и фирменной сдержанной подачей.",
     ),
     (
         "kurtki",
-        "Верхняя одежда",
-        "Куртки, пуховики и бомберы — защита от ветра и холода с узнаваемым дизайном центра.",
+        "Куртки",
+        "Куртки Универмага «Россия» — пуховики, бомберы и парки для холодного сезона, размеры S–3XL, доставка по России.",
     ),
     (
-        "podarki",
-        "Подарки и наборы",
-        "Подарочные наборы, Mystery Box и сертификаты с доставкой по России.",
+        "aksessuary",
+        "Аксессуары",
+        "Аксессуары Универмага «Россия»: кепки, шапки, значки, книги, шоперы, детские игры и электронные подарочные сертификаты.",
     ),
 ]
 
 COLLECTIONS = [
     {
         "slug": "russia-capsule",
-        "title": "Russia Capsule",
-        "lead": "Капсульная коллекция с архитектурными мотивами и фирменной палитрой центра.",
-        "story": "Вдохновение — современная Россия и площадка на ВДНХ. Куртки, худи, футболки и лонгсливы с согласованным визуалом.",
-        "img": REF["lifestyle"],
+        "title": "Единая партия",
+        "lead": "Товары отшиваются партиями под запрос заказчика: без отдельной коллекционной логики.",
+        "story": "В основе каталога — простые категории: футболки, свитшоты, худи, верхняя одежда и аксессуары.",
+        "img": "/assets/generated/products/svitshot-premium.jpg",
     },
     {
         "slug": "mystery-box",
-        "title": "Mystery Box",
-        "lead": "Сюрприз-набор по фиксированной цене: 2–3 вещи со скидкой до 40%.",
-        "story": "Выберите размер — мы соберём набор из доступных позиций. Идеально для подарка и повторных покупок.",
-        "img": REF["accessory"],
+        "title": "Подарочные сценарии",
+        "lead": "Электронные сертификаты и наборы для покупки без выбора конкретного размера.",
+        "story": "Сертификат можно оформить на сайте; наборы помогают закрыть подарочный сценарий без лишнего выбора.",
+        "img": "/assets/generated/products/podarochnyj-sertifikat.jpg",
     },
     {
         "slug": "zimnyaya-liniya",
-        "title": "Зимняя линейка 2026",
-        "lead": "Сезонная коллекция: пуховики, парки, свитшоты и аксессуары.",
-        "story": "Тёплый мерч к зимнему сезону на площадке. Ограниченный тираж; остатки уходят в Mystery Box.",
-        "img": REF["winter_lg"],
+        "title": "Одежда и аксессуары",
+        "lead": "Единая витрина для худи, свитшотов, футболок, ветровок, курток, кепок, шапок, значков, книг, шоперов и детских игр.",
+        "story": "Покупатель сразу видит категории, визуализацию, выбирает товар, добавляет в корзину и оплачивает.",
+        "img": "/assets/generated/products/kurtka-veter.jpg",
     },
 ]
 
@@ -572,18 +605,18 @@ HERO_MOSAIC_SLUGS = [
 # Редакционный блок «мерч на моделях» (плейсхолдеры до фотосессии)
 EDITORIAL_SHOTS = [
     {
-        "img": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
-        "title": "Russia Capsule",
-        "href": "collections/russia-capsule/",
+        "img": "/assets/generated/products/sport-kostyum-rossiya.jpg",
+        "title": "Посадка",
+        "href": "sizes/",
     },
     {
-        "img": REF["winter_lg"],
-        "title": "Зимняя линейка",
-        "href": "collections/zimnyaya-liniya/",
+        "img": "/assets/generated/products/kurtka-puhovik.jpg",
+        "title": "Материалы",
+        "href": "catalog/kurtki/",
     },
     {
-        "img": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1200&q=80",
-        "title": "Повседневный мерч",
+        "img": "/assets/generated/products/futbolka-oranzhevaya.jpg",
+        "title": "Цитаты",
         "href": "catalog/futbolki/",
     },
 ]
