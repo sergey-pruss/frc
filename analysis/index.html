@@ -291,9 +291,194 @@
         .block-table th { width: 120px; font-size: 13px; }
         .conclusion-card, .gap-card, .benchmark-card { padding: 22px 20px; }
       }
+
+      /* ══════════════════════════════════════════════════
+         PRINT STYLES — Premium report layout
+         ══════════════════════════════════════════════════ */
+      @page {
+        size: A4;
+        margin: 20mm 18mm 24mm 18mm;
+        @bottom-center {
+          content: "Serenity";
+          font-family: "Golos Text", sans-serif;
+          font-size: 9pt;
+          color: #999;
+          letter-spacing: .03em;
+        }
+        @bottom-right {
+          content: counter(page) " / " counter(pages);
+          font-family: "Golos Text", sans-serif;
+          font-size: 9pt;
+          color: #999;
+        }
+      }
+      @page :first { margin-top: 0; margin-bottom: 0; }
+
+      @media print {
+        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+        body {
+          background: #fff !important;
+          font-size: 10pt;
+          line-height: 1.5;
+          color: #1a1a1a;
+        }
+
+        .site-topbar, .lightbox, .lightbox-close { display: none !important; }
+
+        .print-cover {
+          display: flex !important;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          page-break-after: always;
+          break-after: page;
+          text-align: center;
+          padding: 0;
+        }
+        .print-cover__logo {
+          width: 64px;
+          height: 64px;
+          margin-bottom: 48px;
+          color: #2f4d2b;
+        }
+        .print-cover__title {
+          font-family: "PT Serif", Georgia, serif;
+          font-size: 32pt;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0 0 16px;
+          line-height: 1.2;
+        }
+        .print-cover__subtitle {
+          font-size: 14pt;
+          color: #666;
+          margin: 0 0 8px;
+          font-weight: 400;
+        }
+        .print-cover__meta {
+          margin-top: 64px;
+          font-size: 10pt;
+          color: #999;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+        .print-cover__divider {
+          width: 80px;
+          height: 2px;
+          background: #2f4d2b;
+          margin: 32px auto;
+          border: none;
+        }
+        .print-cover__agency {
+          font-size: 11pt;
+          font-weight: 600;
+          color: #2f4d2b;
+          letter-spacing: .06em;
+          text-transform: uppercase;
+          margin-top: 80px;
+        }
+
+        .hero {
+          page-break-after: avoid;
+          padding: 24pt 0 16pt !important;
+        }
+        .hero .wrap { padding: 0 !important; }
+        .hero h1 { font-size: 22pt !important; margin-bottom: 8pt !important; }
+        .hero .lead { font-size: 11pt !important; color: #444 !important; }
+
+        .section { page-break-before: auto; padding: 16pt 0 !important; }
+        .section h2 { font-size: 16pt !important; page-break-after: avoid; }
+        .section-label { font-size: 8pt !important; }
+
+        .wrap { max-width: 100% !important; padding: 0 !important; }
+
+        .toc-grid { display: none !important; }
+
+        .screen-grid {
+          grid-template-columns: repeat(3, 1fr) !important;
+          gap: 10pt !important;
+        }
+        .screen-card {
+          box-shadow: none !important;
+          border: 1px solid #ddd !important;
+          page-break-inside: avoid;
+          break-inside: avoid;
+        }
+        .screen-card img { height: 140px !important; }
+        .screen-card-body { padding: 8pt 10pt !important; }
+        .screen-card-body strong { font-size: 9pt !important; }
+        .screen-card-body span { font-size: 8pt !important; }
+
+        .matrix-wrap {
+          overflow: visible !important;
+          border: none !important;
+        }
+        .matrix-table {
+          font-size: 7pt !important;
+          min-width: auto !important;
+        }
+        .matrix-table th, .matrix-table td {
+          padding: 4px 3px !important;
+          border-color: #ccc !important;
+        }
+        .matrix-table thead th {
+          font-size: 6.5pt !important;
+          padding: 6px 3px !important;
+        }
+        .matrix-table td:first-child, .matrix-table thead th:first-child {
+          position: static !important;
+        }
+        .matrix-table .col-ours {
+          position: static !important;
+        }
+
+        .block-section { page-break-inside: avoid; break-inside: avoid; margin-top: 20pt !important; }
+        .block-section h3 { font-size: 12pt !important; }
+        .block-table th { font-size: 8pt !important; width: 100px !important; }
+        .block-table td { font-size: 9pt !important; }
+
+        .conclusion-card, .gap-card, .benchmark-card {
+          page-break-inside: avoid;
+          break-inside: avoid;
+          padding: 16pt 20pt !important;
+          margin-top: 12pt !important;
+          box-shadow: none !important;
+        }
+
+        .segment-header { page-break-after: avoid; }
+        .comp-list-table { font-size: 9pt !important; }
+
+        a { color: inherit !important; text-decoration: none !important; }
+        a[href]::after { content: none !important; }
+      }
     </style>
   </head>
   <body>
+    <!-- ── Print Cover Page (visible only in print/PDF) ── -->
+    <div class="print-cover" style="display:none">
+      <svg class="print-cover__logo" viewBox="0 0 96 96" aria-label="Serenity">
+        <path fill="currentColor" d="M73.2,86.5c-1.1,1.1-2.6,2-4,2.9c0.9-1.4,1.1-2.9,1.4-4.6c1.1-8.6-5.1-18.3-16-24
+c-2.3-1.4-7.7-4.3-16.3-8.3c-7.1-3.4-12.6-7.1-15.8-11.1c-3.4-4-5.1-8.9-5.1-14c0-8,2.9-14,8.9-18.6c2.6-1.7,5.4-3.4,8.6-4.6
+c-1.7,2-2.9,4.6-3.4,7.1c-1.4,9.1,5.4,18,18.9,23.8l0,0c1.1,0.6,2.6,1.1,4,2c10.3,5.1,17.5,10,21.5,14.3s6,9.5,6,15.1
+C81.9,75,79,81.6,73.2,86.5z M64.4,3.5c-4.3-1.1-8.9-1.7-13.8-1.7c-0.1,0-0.2,0-0.2,0c-7.3,0.1-11.7,4-12.6,9.5
+c-0.4,2.9,0.3,5.8,2.1,8.8c0.4-0.6,0.9-1,1.6-1.6c4.6-2.9,12.9-2.9,22.6,0.6c2.3,0.9,4.3,1.7,6.6,2.6l6.9-13.1
+C73,6.1,68.7,4.3,64.4,3.5z M60.3,73.4c-0.7,1-1.7,1.8-2.8,2.4c-2.6,1.4-6.6,2-10.6,2c-6,0-12.9-1.7-20.9-5.4l-7.4,14
+c3.4,1.7,13.5,7.1,27.8,7.7c4.2,0.3,8.3-0.3,10.6-0.9C66.1,90.3,65,79.6,60.3,73.4z"/>
+      </svg>
+      <h1 class="print-cover__title">Анализ конкурентов</h1>
+      <p class="print-cover__subtitle">Универмаг «Россия» — UX-исследование рынка</p>
+      <hr class="print-cover__divider">
+      <p class="print-cover__subtitle" style="font-size:11pt; color:#888">20 конкурентов &middot; 4 сегмента &middot; 5 функциональных блоков</p>
+      <div class="print-cover__meta">
+        <span>25 мая 2026</span>
+        <span>Конфиденциально</span>
+      </div>
+      <p class="print-cover__agency">Serenity</p>
+    </div>
+
     <!-- ── Topbar ── -->
     <div class="site-topbar" id="projectTopbar">
       <div class="site-topbar__tabs">
