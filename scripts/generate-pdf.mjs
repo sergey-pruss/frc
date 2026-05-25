@@ -20,7 +20,7 @@ const reports = [
     name: "SEO Strategy",
   },
   {
-    src: resolve(ROOT, "analysis/index.html"),
+    src: resolve(ROOT, "export/analysis-print.html"),
     dst: resolve(ROOT, "export/competitor-analysis-report.pdf"),
     name: "Competitor Analysis",
   },
@@ -35,7 +35,7 @@ for (const { src, dst, name } of reports) {
     path: dst,
     format: "A4",
     landscape: true,
-    margin: { top: "16mm", bottom: "20mm", left: "14mm", right: "14mm" },
+    margin: { top: "16mm", bottom: "20mm", left: "10mm", right: "10mm" },
     printBackground: true,
     displayHeaderFooter: true,
     headerTemplate: '<span></span>',

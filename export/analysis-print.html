@@ -9,7 +9,7 @@
     <title>Анализ конкурентов — Универмаг «Россия»</title>
     <link rel="stylesheet" href="../assets/styles.css">
     <style>
-      @page { size: A4 landscape; margin: 16mm 14mm 20mm 14mm; }
+      @page { size: A4 landscape; margin: 16mm 10mm 20mm 10mm; }
       * { box-sizing: border-box; }
       body {
         font-family: "Golos Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
@@ -90,7 +90,9 @@
       }
       h2 { font-size: 14pt; margin: 18pt 0 6pt; page-break-after: avoid; color: #1a1a1a; }
       .section-intro { font-size: 9pt; color: #666; margin-bottom: 10pt; }
-      .section { margin-bottom: 14pt; }
+      .section { margin-bottom: 14pt; page-break-before: always; }
+      .section:first-of-type { page-break-before: avoid; }
+      .page-break { page-break-after: always; height: 0; margin: 0; padding: 0; border: 0; }
 
       /* ── Segment headers ── */
       .segment-header {
@@ -106,9 +108,11 @@
       .segment-header:first-of-type { margin-top: 8pt; }
 
       /* ── Tables (shared) ── */
-      table { width: 100%; border-collapse: collapse; font-size: 8pt; page-break-inside: auto; }
+      table { width: 100%; border-collapse: collapse; font-size: 7.5pt; table-layout: fixed; page-break-inside: auto; }
+      thead { display: table-header-group; }
+      tbody { page-break-inside: auto; }
       tr { page-break-inside: avoid; }
-      th, td { border: 0.5pt solid #ddd; padding: 3pt 5pt; text-align: left; vertical-align: top; }
+      th, td { border: 0.5pt solid #ddd; padding: 2pt 4pt; text-align: left; vertical-align: top; word-wrap: break-word; overflow-wrap: break-word; overflow: hidden; }
 
       /* ── Competitor list ── */
       .comp-list-table th {
@@ -162,9 +166,9 @@
       .matrix-table td:first-child, .matrix-table thead th:first-child {
         text-align: left;
         font-weight: 500;
-        white-space: nowrap;
-        width: 120px;
-        font-size: 6.5pt;
+        white-space: normal;
+        width: 80px;
+        font-size: 6pt;
       }
       .matrix-table tbody td:first-child { background: #fafafa; }
       .matrix-table thead th a { color: #fff; text-decoration: none; }
@@ -174,9 +178,9 @@
       .matrix-table thead .col-ours { background: #1a3518; font-weight: 800; }
 
       /* ── Block comparison tables ── */
-      .block-section { margin-top: 14pt; page-break-inside: avoid; }
+      .block-section { margin-top: 14pt; page-break-inside: auto; }
       .block-section h3 { font-size: 10.5pt; margin-bottom: 4pt; padding-bottom: 3pt; border-bottom: 1pt solid #ddd; page-break-after: avoid; }
-      .block-table th { font-weight: 600; width: 105px; white-space: nowrap; font-size: 7pt; }
+      .block-table th { font-weight: 600; width: 100px; white-space: normal; font-size: 7pt; }
       .block-table th a { color: #1a1a1a; text-decoration: none; }
       .block-table td { font-size: 7.5pt; color: #555; line-height: 1.4; }
       .block-table tr:last-child td, .block-table tr:last-child th { border-bottom: none; }
@@ -314,35 +318,6 @@
             <tr><td>20</td><td><a href="https://rus-vit.ru">rus-vit.ru</a></td><td>Русские Витязи — мерч авиагруппы</td><td class="price-range">1 000–4 000 ₽</td></tr>
           </tbody>
         </table>
-      </section>
-
-      <!-- ══ 2. SCREENSHOTS ══ -->
-      <div class="page-break"></div>
-      <section class="section">
-        <span class="section-label">Раздел 2</span>
-        <h2>Скриншоты главных страниц</h2>
-        <div class="screen-grid">
-          <figure class="screen-card"><img src="../assets/generated/competitors/kremlin-symbol-home.png" alt="kremlin-symbol.ru"><div class="screen-card-body"><strong>kremlin-symbol.ru</strong><span>Подарки с символикой</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/yarussia-home.png" alt="yarussia.com"><div class="screen-card-body"><strong>yarussia.com</strong><span>ЯRUSSIA — бренд одежды</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/putin-team-home.png" alt="putin-team.ru"><div class="screen-card-body"><strong>putin-team.ru</strong><span>Мерч Putin Team</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/victorydayshop-home.png" alt="victorydayshop.ru"><div class="screen-card-body"><strong>victorydayshop.ru</strong><span>Патриотическая одежда</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/myhomeland-home.png" alt="myhomeland.ru"><div class="screen-card-body"><strong>myhomeland.ru</strong><span>Худи с вышивкой</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/russian-tshirts-home.png" alt="russian-t-shirts.shop"><div class="screen-card-body"><strong>russian-t-shirts.shop</strong><span>Мерч с символикой</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/velikoross-home.png" alt="greatrussianstyle.ru"><div class="screen-card-body"><strong>greatrussianstyle.ru</strong><span>Великоросс</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/lutchshop-home.png" alt="lutchshop.ru"><div class="screen-card-body"><strong>lutchshop.ru</strong><span>Толстовки Россия</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/atributika-home.png" alt="shop.atributika.ru"><div class="screen-card-body"><strong>shop.atributika.ru</strong><span>Атрибутика&amp;Club</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/gloryseason-home.png" alt="gloryseason.ru"><div class="screen-card-body"><strong>gloryseason.ru</strong><span>Glory Season</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/vsemayki-catalog.png" alt="vsemayki.ru"><div class="screen-card-body"><strong>vsemayki.ru</strong><span>Print-on-demand</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/printbar-home.png" alt="printbar.ru"><div class="screen-card-body"><strong>printbar.ru</strong><span>Print Bar — 360°</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/printio-home.png" alt="printio.ru"><div class="screen-card-body"><strong>printio.ru</strong><span>Кастомизация</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/bosco-home.png" alt="bosco.ru"><div class="screen-card-body"><strong>bosco.ru</strong><span>Bosco Sport</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/zenit-home.png" alt="shop.fc-zenit.ru"><div class="screen-card-body"><strong>shop.fc-zenit.ru</strong><span>ФК Зенит</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/tretyakov-home.png" alt="tretyakovgallery.ru"><div class="screen-card-body"><strong>tretyakovgallery.ru</strong><span>Третьяковка</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/hermitage-home.png" alt="hermitageshop.ru"><div class="screen-card-body"><strong>hermitageshop.ru</strong><span>Эрмитаж</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/shm-home.png" alt="shop.shm.ru"><div class="screen-card-body"><strong>shop.shm.ru</strong><span>Ист. музей</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/pushkin-home.png" alt="theartsmuseum.store"><div class="screen-card-body"><strong>theartsmuseum.store</strong><span>Пушкинский</span></div></figure>
-          <figure class="screen-card"><img src="../assets/generated/competitors/rus-vit-home.png" alt="rus-vit.ru"><div class="screen-card-body"><strong>rus-vit.ru</strong><span>Русские Витязи</span></div></figure>
-        </div>
       </section>
 
       <!-- ══ 3. MATRIX ══ -->
