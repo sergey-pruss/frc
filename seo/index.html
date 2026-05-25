@@ -136,12 +136,14 @@
           <nav class="doc-toc" aria-label="Содержание документа">
             <ol>
               <li><a href="#client-input">Зафиксированные ответы клиента</a></li>
+              <li><a href="#recommended-structure">Рекомендуемая структура сайта</a></li>
               <li><a href="#transactional-core">Транзакционная семантика каталога</a></li>
               <li><a href="#top-competitors">Топ-20 конкурентов по семантике каталога</a></li>
               <li><a href="#top-competitors">↳ UX-анализ прямых конкурентов (скриншоты и матрица)</a></li>
               <li><a href="#page-theses">Тезисы по типам страниц</a></li>
               <li><a href="#static-filters">Статичные SEO-фильтры</a></li>
               <li><a href="#generation-rules">Правила генерации мета-тегов</a></li>
+              <li><a href="#meta-tags-by-page">Мета-теги по страницам</a></li>
               <li><a href="#structured-data">Микроразметка</a></li>
               <li><a href="#indexation">Sitemap, robots и canonical</a></li>
               <li><a href="#dev-brief">SEO-ТЗ для разработки</a></li>
@@ -205,6 +207,87 @@
               </tbody>
             </table>
           </div>
+        </div>
+      </section>
+
+      <section class="section muted" id="recommended-structure">
+        <div class="wrap">
+          <h2>Рекомендуемая структура сайта</h2>
+          <p>
+            Это итоговая карта страниц для разработки. Формат близок к структурам в прошлых SEO-ТЗ:
+            уровень страницы, рекомендуемый URL, назначение и условие запуска. Прототип показывает,
+            как такая структура может выглядеть визуально, но клиенту передаем именно эту карту как
+            SEO-рекомендацию.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Уровень</th>
+                  <th>Страница</th>
+                  <th>Рекомендуемый URL</th>
+                  <th>Зачем нужна</th>
+                  <th>Статус запуска</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>Главная</td><td>/</td><td>Бренд, быстрый вход в каталог, доверие к официальному магазину.</td><td>В MVP.</td></tr>
+                <tr><td>1</td><td>Каталог</td><td>/catalog/</td><td>Разводящая по всем подтвержденным товарным группам.</td><td>В MVP.</td></tr>
+                <tr><td>2</td><td>Худи</td><td>/catalog/hudi/</td><td>Отдельная посадочная под спрос «худи купить»; не смешивать со свитшотами.</td><td>В MVP.</td></tr>
+                <tr><td>2</td><td>Свитшоты</td><td>/catalog/svitshoty/</td><td>Категория с подфильтрами «с флисом» и «без флиса».</td><td>В MVP.</td></tr>
+                <tr><td>2</td><td>Футболки</td><td>/catalog/futbolki/</td><td>Самый частотный товарный кластер; основная SEO-посадочная.</td><td>В MVP.</td></tr>
+                <tr><td>2</td><td>Ветровки</td><td>/catalog/vetrovki/</td><td>Отдельный спрос по легкой верхней одежде.</td><td>В MVP при наличии SKU.</td></tr>
+                <tr><td>2</td><td>Куртки</td><td>/catalog/kurtki/</td><td>Высокочастотная категория; фильтры по сезону и конструкции открывать только при ассортименте.</td><td>В MVP при наличии SKU.</td></tr>
+                <tr><td>2</td><td>Аксессуары</td><td>/catalog/aksessuary/</td><td>Единый вход для кепок, шапок, значков, шоперов, книг и детских игр на старте.</td><td>В MVP.</td></tr>
+                <tr><td>3</td><td>Приоритетные статичные фильтры</td><td>/catalog/futbolki/belye/, /catalog/hudi/chernye/</td><td>Забирать спрос по цвету/размеру только там, где есть частотность и товары.</td><td>Открывать точечно.</td></tr>
+                <tr><td>1</td><td>Подарочный сертификат</td><td>/gift-cards/</td><td>Отдельная коммерческая посадочная под запрос «купить подарочный сертификат».</td><td>В MVP.</td></tr>
+                <tr><td>1</td><td>Доставка и оплата</td><td>/delivery/</td><td>Сервисная страница для доверия, сниппетов и снятия возражений.</td><td>В MVP.</td></tr>
+                <tr><td>1</td><td>Размеры</td><td>/sizes/</td><td>Поддержка карточек и размерных запросов; снижает возвраты.</td><td>В MVP.</td></tr>
+                <tr><td>1</td><td>О бренде</td><td>/about/</td><td>Объяснить официальный статус, стиль и смысл мерча без перегруза главной.</td><td>В MVP.</td></tr>
+                <tr><td>1</td><td>Блог / журнал</td><td>/blog/</td><td>Не основной SEO-канал на старте; нужен позже для подборок, подарочных сценариев и внутренней перелинковки.</td><td>После запуска каталога.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="recommended-structure-tree">
+        <div class="wrap">
+          <h2>Структура сайта в формате дерева</h2>
+          <p>
+            Та же рекомендация, но в виде URL-дерева для быстрой передачи в разработку.
+          </p>
+          <pre><code>/
+├── catalog/
+│   ├── hudi/
+│   │   ├── chernye/              # открыть при наличии товаров и спроса
+│   │   └── s-kapyushonom/        # открыть при наличии свойства
+│   ├── svitshoty/
+│   │   ├── s-flisom/             # фильтр/подборка по подтвержденному ассортименту
+│   │   └── bez-flisa/            # фильтр/подборка по подтвержденному ассортименту
+│   ├── futbolki/
+│   │   ├── belye/                # приоритетный статичный SEO-фильтр
+│   │   ├── chernye/              # приоритетный статичный SEO-фильтр
+│   │   ├── krasnye/              # открыть при наличии красных футболок
+│   │   ├── razmery/              # размерная посадочная / размерная сетка
+│   │   └── s-printom/            # открыть, если принт есть как свойство
+│   ├── vetrovki/
+│   │   └── s-kapyushonom/        # открыть при наличии свойства
+│   ├── kurtki/
+│   │   ├── demisezonnye/         # только при подтвержденном типе
+│   │   └── s-kapyushonom/        # только при подтвержденном свойстве
+│   └── aksessuary/
+│       ├── kepki/                # можно выделить при расширении ассортимента
+│       ├── shapki/               # можно выделить при расширении ассортимента
+│       ├── znachki/              # категория без фильтров на старте
+│       ├── shopery/              # категория без фильтров на старте
+│       ├── knigi/                # после подтверждения товарной матрицы
+│       └── detskie-igry/         # после уточнения типов игр
+├── gift-cards/
+├── delivery/
+├── sizes/
+├── about/
+└── blog/                         # после запуска каталога</code></pre>
         </div>
       </section>
 
@@ -409,10 +492,11 @@
         <div class="wrap">
           <h2>Топ-20 конкурентов по семантике каталога</h2>
           <p>
-            Анализируем выдачу по всей каталожной семантике: худи, свитшоты, футболки, куртки,
-            ветровки, кепки, шапки, шоперы, значки, подарочные сертификаты. В таблице ниже —
-            сайты, у которых нужно смотреть структуру посадочных, фильтры, сниппеты и
-            микроразметку.
+            Это семантические конкуренты: сайты, которые занимают выдачу по коммерческим запросам
+            каталога. Поэтому в списке есть маркетплейсы и агрегаторы: они нужны не как визуальные
+            референсы, а как источник SEO-решений по посадочным, фильтрам, сниппетам и микроразметке.
+            Прямые конкуренты по нише и дизайну вынесены в отдельный UX-анализ со скриншотами.
+            Маркетплейсы оставляем в SEO-части, но не используем как бенчмарк визуального уровня.
           </p>
           <div class="table-wrap">
             <table>
@@ -771,6 +855,14 @@
             посадочных с частотностью от 100 показов/мес. В шаблонах не обещаем свойства, которых
             нет в товарной выдаче.
           </p>
+          <h3 class="subsection-title">Общие принципы</h3>
+          <ul class="checklist">
+            <li>Title: до 65-70 знаков, главный коммерческий запрос ближе к началу, бренд добавлять только там, где это не перегружает сниппет.</li>
+            <li>Description: до 150-170 знаков, не дублировать Title, указывать ассортимент, размеры, цвета, доставку и коммерческое преимущество.</li>
+            <li>H1: один на страницу, без переспама; для категории — название категории, для фильтра — точная комбинация свойства и категории.</li>
+            <li>Canonical: у индексируемых категорий и статичных фильтров ведет на себя; у служебных фильтров, сортировок и параметров — на базовую категорию.</li>
+            <li>Robots: индексируемые страницы без noindex; служебные комбинации, сортировки, пустые выдачи и параметры цены/наличия — noindex, follow.</li>
+          </ul>
           <div class="table-wrap">
             <table>
               <thead>
@@ -827,6 +919,75 @@
 &lt;title&gt;Красные худи XS — купить с доставкой&lt;/title&gt;
 &lt;meta name="description" content="Красные худи XS: товары в наличии, состав, цена, размерная сетка и доставка по России."&gt;
 &lt;h1&gt;Красные худи XS&lt;/h1&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="meta-tags-by-page">
+        <div class="wrap">
+          <h2>Мета-теги по страницам</h2>
+          <p>
+            Постраничная таблица в формате старых SEO-ТЗ, но расширенная до современного head:
+            Title, Description, H1, canonical, robots, Open Graph, Twitter/X Card и тип микроразметки.
+            Это не пример прототипа, а конкретная рекомендация для страниц из стартовой структуры.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>URL</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>H1</th>
+                  <th>Canonical</th>
+                  <th>Robots</th>
+                  <th>Open Graph / Twitter</th>
+                  <th>Schema</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>/</td><td>Универмаг «Россия» — одежда и аксессуары с доставкой</td><td>Одежда и аксессуары Универмага «Россия»: худи, свитшоты, футболки, куртки, кепки, шоперы, сертификаты и подарочные товары.</td><td>Универмаг «Россия»</td><td>https://frc.serenity-dev.ru/</td><td>index, follow</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/home.jpg; twitter:card=summary_large_image.</td><td>Organization, WebSite</td></tr>
+                <tr><td>/catalog/</td><td>Каталог одежды и аксессуаров — купить с доставкой по России</td><td>Каталог Универмага «Россия»: худи, свитшоты, футболки, ветровки, куртки, аксессуары, подарки, размеры S-3XL и доставка.</td><td>Каталог одежды и аксессуаров</td><td>https://frc.serenity-dev.ru/catalog/</td><td>index, follow</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/catalog.jpg; twitter:card=summary_large_image.</td><td>BreadcrumbList, ItemList</td></tr>
+                <tr><td>/catalog/hudi/</td><td>Худи — купить с доставкой по России</td><td>Худи Универмага «Россия»: модели с капюшоном и на молнии, размеры S-3XL, цвета, состав, цены и доставка СДЭК или Яндекс.</td><td>Худи</td><td>https://frc.serenity-dev.ru/catalog/hudi/</td><td>index, follow</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/hudi.jpg; twitter:card=summary_large_image.</td><td>BreadcrumbList, ItemList</td></tr>
+                <tr><td>/catalog/svitshoty/</td><td>Свитшоты — купить с доставкой по России</td><td>Свитшоты Универмага «Россия»: модели с флисом и без флиса, размеры S-3XL, цвета, состав, цены и доставка по России.</td><td>Свитшоты</td><td>https://frc.serenity-dev.ru/catalog/svitshoty/</td><td>index, follow</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/svitshoty.jpg; twitter:card=summary_large_image.</td><td>BreadcrumbList, ItemList</td></tr>
+                <tr><td>/catalog/futbolki/</td><td>Футболки — купить с доставкой по России</td><td>Футболки Универмага «Россия»: базовые, oversize, детские и с принтом, размеры S-3XL, цвета, состав и доставка.</td><td>Футболки</td><td>https://frc.serenity-dev.ru/catalog/futbolki/</td><td>index, follow</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/futbolki.jpg; twitter:card=summary_large_image.</td><td>BreadcrumbList, ItemList</td></tr>
+                <tr><td>/catalog/vetrovki/</td><td>Ветровки — купить с доставкой по России</td><td>Ветровки Универмага «Россия»: легкие модели, размеры S-3XL, цвета, состав, наличие и доставка СДЭК или Яндекс.</td><td>Ветровки</td><td>https://frc.serenity-dev.ru/catalog/vetrovki/</td><td>index, follow при наличии товаров</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/vetrovki.jpg; twitter:card=summary_large_image.</td><td>BreadcrumbList, ItemList</td></tr>
+                <tr><td>/catalog/kurtki/</td><td>Куртки — купить с доставкой по России</td><td>Куртки Универмага «Россия»: демисезонные модели, размеры S-3XL, цвета, состав, цены, наличие и доставка.</td><td>Куртки</td><td>https://frc.serenity-dev.ru/catalog/kurtki/</td><td>index, follow при наличии товаров</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/kurtki.jpg; twitter:card=summary_large_image.</td><td>BreadcrumbList, ItemList</td></tr>
+                <tr><td>/catalog/aksessuary/</td><td>Аксессуары и подарки — купить с доставкой по России</td><td>Аксессуары Универмага «Россия»: кепки, шапки, значки, шоперы, книги, детские игры и подарочные товары.</td><td>Аксессуары и подарки</td><td>https://frc.serenity-dev.ru/catalog/aksessuary/</td><td>index, follow</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/aksessuary.jpg; twitter:card=summary_large_image.</td><td>BreadcrumbList, ItemList</td></tr>
+                <tr><td>/catalog/futbolki/belye/</td><td>Белые футболки — купить с доставкой по России</td><td>Белые футболки Универмага «Россия»: товары в наличии, размеры S-3XL, состав, цены, размерная сетка и доставка.</td><td>Белые футболки</td><td>https://frc.serenity-dev.ru/catalog/futbolki/belye/</td><td>index, follow при наличии товаров</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/futbolki-belye.jpg; twitter:card=summary_large_image.</td><td>BreadcrumbList, ItemList</td></tr>
+                <tr><td>/catalog/futbolki/chernye/</td><td>Черные футболки — купить с доставкой по России</td><td>Черные футболки Универмага «Россия»: актуальные модели, размеры S-3XL, состав, цены, наличие и доставка по России.</td><td>Черные футболки</td><td>https://frc.serenity-dev.ru/catalog/futbolki/chernye/</td><td>index, follow при наличии товаров</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/futbolki-chernye.jpg; twitter:card=summary_large_image.</td><td>BreadcrumbList, ItemList</td></tr>
+                <tr><td>/catalog/hudi/chernye/</td><td>Черные худи — купить с доставкой по России</td><td>Черные худи Универмага «Россия»: модели с капюшоном и на молнии, размеры S-3XL, состав, цены и доставка.</td><td>Черные худи</td><td>https://frc.serenity-dev.ru/catalog/hudi/chernye/</td><td>index, follow при наличии товаров</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/hudi-chernye.jpg; twitter:card=summary_large_image.</td><td>BreadcrumbList, ItemList</td></tr>
+                <tr><td>/gift-cards/</td><td>Подарочный сертификат Универмага «Россия» — купить онлайн</td><td>Подарочный сертификат Универмага «Россия»: электронный подарок на одежду, аксессуары и сувениры с быстрой оплатой.</td><td>Подарочный сертификат</td><td>https://frc.serenity-dev.ru/gift-cards/</td><td>index, follow</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/gift-cards.jpg; twitter:card=summary_large_image.</td><td>BreadcrumbList, Product или OfferCatalog</td></tr>
+                <tr><td>/delivery/</td><td>Доставка и оплата — Универмаг «Россия»</td><td>Условия доставки и оплаты в Универмаге «Россия»: СДЭК, Яндекс, оплата сразу или при получении, возврат и сроки.</td><td>Доставка и оплата</td><td>https://frc.serenity-dev.ru/delivery/</td><td>index, follow</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/service.jpg; twitter:card=summary_large_image.</td><td>BreadcrumbList, FAQPage при реальном FAQ</td></tr>
+                <tr><td>/sizes/</td><td>Размерная сетка — Универмаг «Россия»</td><td>Размерная сетка Универмага «Россия»: как выбрать худи, свитшот, футболку, ветровку или куртку по параметрам.</td><td>Размерная сетка</td><td>https://frc.serenity-dev.ru/sizes/</td><td>index, follow</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/service.jpg; twitter:card=summary_large_image.</td><td>BreadcrumbList, FAQPage при реальном FAQ</td></tr>
+                <tr><td>/about/</td><td>О бренде Универмаг «Россия»</td><td>Универмаг «Россия»: официальный магазин Национального центра «Россия», премиальный lifestyle-мерч и товары для подарка.</td><td>О бренде</td><td>https://frc.serenity-dev.ru/about/</td><td>index, follow</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/about.jpg; twitter:card=summary_large_image.</td><td>Organization, BreadcrumbList</td></tr>
+                <tr><td>/blog/</td><td>Журнал Универмага «Россия»: идеи подарков и образы</td><td>Журнал Универмага «Россия»: подборки одежды, идеи подарков, уход за вещами и истории коллекций после запуска каталога.</td><td>Журнал</td><td>https://frc.serenity-dev.ru/blog/</td><td>index, follow после появления материалов</td><td>og:type=website; og:title=Title; og:description=Description; og:url=canonical; og:image=/assets/og/blog.jpg; twitter:card=summary_large_image.</td><td>BreadcrumbList, Blog</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="code-block">
+            <h3>Базовый head-шаблон для каждой индексируемой страницы</h3>
+            <p>Значения подставляются из таблицы выше. Для карточек товара добавляется Product JSON-LD, для категорий — ItemList и BreadcrumbList.</p>
+            <pre><code>&lt;title&gt;{Title}&lt;/title&gt;
+&lt;meta name="description" content="{Description}"&gt;
+&lt;link rel="canonical" href="{Canonical}"&gt;
+&lt;meta name="robots" content="{Robots}"&gt;
+
+&lt;meta property="og:site_name" content="Универмаг «Россия»"&gt;
+&lt;meta property="og:locale" content="ru_RU"&gt;
+&lt;meta property="og:type" content="{og:type}"&gt;
+&lt;meta property="og:title" content="{Title}"&gt;
+&lt;meta property="og:description" content="{Description}"&gt;
+&lt;meta property="og:url" content="{Canonical}"&gt;
+&lt;meta property="og:image" content="{OG image 1200x630}"&gt;
+&lt;meta property="og:image:width" content="1200"&gt;
+&lt;meta property="og:image:height" content="630"&gt;
+&lt;meta property="og:image:alt" content="{Описание изображения}"&gt;
+
+&lt;meta name="twitter:card" content="summary_large_image"&gt;
+&lt;meta name="twitter:title" content="{Title}"&gt;
+&lt;meta name="twitter:description" content="{Description}"&gt;
+&lt;meta name="twitter:image" content="{OG image 1200x630}"&gt;</code></pre>
           </div>
         </div>
       </section>

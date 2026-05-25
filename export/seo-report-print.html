@@ -101,11 +101,13 @@
   <h2>Содержание</h2>
   <ol style="padding-left:14pt; margin-bottom:10pt; columns:2;">
     <li>Зафиксированные ответы клиента</li>
+    <li>Рекомендуемая структура сайта</li>
     <li>Транзакционная семантика каталога</li>
     <li>Топ-20 конкурентов по семантике</li>
     <li>Тезисы по типам страниц</li>
     <li>Статичные SEO-фильтры</li>
     <li>Правила генерации мета-тегов</li>
+    <li>Мета-теги по страницам</li>
     <li>Микроразметка</li>
     <li>Sitemap, robots и canonical</li>
     <li>SEO-ТЗ для разработки</li>
@@ -127,7 +129,25 @@
     </tbody>
   </table>
 
-  <h2>2. Транзакционная семантика каталога</h2>
+  <h2>2. Рекомендуемая структура сайта</h2>
+  <p>Итоговая карта страниц для разработки: прототип показывает визуальный пример, а эта таблица фиксирует SEO-рекомендацию по структуре.</p>
+  <table>
+    <thead><tr><th>Уровень</th><th style="text-align:left">Страница</th><th style="text-align:left">URL</th><th style="text-align:left">Зачем нужна</th><th>Статус</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td style="text-align:left">Главная</td><td style="text-align:left">/</td><td style="text-align:left">Бренд, быстрый вход в каталог, доверие.</td><td>MVP</td></tr>
+      <tr><td>1</td><td style="text-align:left">Каталог</td><td style="text-align:left">/catalog/</td><td style="text-align:left">Разводящая по товарным группам.</td><td>MVP</td></tr>
+      <tr><td>2</td><td style="text-align:left">Худи</td><td style="text-align:left">/catalog/hudi/</td><td style="text-align:left">Отдельная посадочная под «худи купить».</td><td>MVP</td></tr>
+      <tr><td>2</td><td style="text-align:left">Свитшоты</td><td style="text-align:left">/catalog/svitshoty/</td><td style="text-align:left">Категория с фильтрами «с флисом» / «без флиса».</td><td>MVP</td></tr>
+      <tr><td>2</td><td style="text-align:left">Футболки</td><td style="text-align:left">/catalog/futbolki/</td><td style="text-align:left">Самый частотный товарный кластер.</td><td>MVP</td></tr>
+      <tr><td>2</td><td style="text-align:left">Ветровки, куртки, аксессуары</td><td style="text-align:left">/catalog/vetrovki/, /catalog/kurtki/, /catalog/aksessuary/</td><td style="text-align:left">Категории под подтвержденный ассортимент.</td><td>MVP при SKU</td></tr>
+      <tr><td>3</td><td style="text-align:left">Статичные фильтры</td><td style="text-align:left">/catalog/futbolki/belye/, /catalog/hudi/chernye/</td><td style="text-align:left">Спрос по цвету/размеру при наличии товаров.</td><td>Точечно</td></tr>
+      <tr><td>1</td><td style="text-align:left">Подарочный сертификат</td><td style="text-align:left">/gift-cards/</td><td style="text-align:left">Отдельная коммерческая посадочная.</td><td>MVP</td></tr>
+      <tr><td>1</td><td style="text-align:left">Доставка, размеры, о бренде</td><td style="text-align:left">/delivery/, /sizes/, /about/</td><td style="text-align:left">Доверие, снятие возражений, поддержка карточек.</td><td>MVP</td></tr>
+      <tr><td>1</td><td style="text-align:left">Блог / журнал</td><td style="text-align:left">/blog/</td><td style="text-align:left">Подборки и внутренняя перелинковка.</td><td>После запуска</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. Транзакционная семантика каталога</h2>
   <p>Частотность: Яндекс Wordstat, 24.05.2026, регион Россия, все устройства, вкладка «Популярные». В ядро включены запросы от 100 показов/мес.</p>
   <ul class="checklist">
     <li>11 базовых товарных масок → 1256 строк 100+ до чистки.</li>
@@ -190,7 +210,8 @@
     </tbody>
   </table>
 
-  <h2>3. Топ-20 конкурентов по семантике каталога</h2>
+  <h2>4. Топ-20 конкурентов по семантике каталога</h2>
+  <p>Это семантические конкуренты, поэтому в списке есть маркетплейсы и агрегаторы. Их используем для SEO-решений по посадочным, фильтрам и сниппетам; прямые конкуренты по нише и дизайну разобраны отдельно в UX-анализе. Маркетплейсы не являются визуальным бенчмарком.</p>
   <table>
     <thead><tr><th>#</th><th>Конкурент</th><th style="text-align:left">Почему входит в анализ</th><th style="text-align:left">Что смотреть</th></tr></thead>
     <tbody>
@@ -219,7 +240,7 @@
 
   <div class="page-break"></div>
 
-  <h2>4. Тезисы по типам страниц</h2>
+  <h2>5. Тезисы по типам страниц</h2>
   <table>
     <thead><tr><th>Тип страницы</th><th style="text-align:left">SEO-задача</th><th style="text-align:left">Основные тезисы</th></tr></thead>
     <tbody>
@@ -231,7 +252,7 @@
     </tbody>
   </table>
 
-  <h2>5. Статичные SEO-фильтры</h2>
+  <h2>6. Статичные SEO-фильтры</h2>
   <h3>Ключевые запросы для статичных фильтров</h3>
   <table>
     <colgroup>
@@ -287,7 +308,8 @@
 &lt;meta name="robots" content="noindex, follow"&gt;
 &lt;link rel="canonical" href="https://frc.serenity-dev.ru/catalog/hudi/"&gt;</div>
 
-  <h2>6. Правила генерации мета-тегов</h2>
+  <h2>7. Правила генерации мета-тегов</h2>
+  <p><b>Общие принципы:</b> Title до 65-70 знаков, главный запрос ближе к началу; Description до 150-170 знаков, без дубля Title; H1 один на страницу; canonical у индексируемых страниц на себя, у служебных фильтров на базовую категорию; пустые выдачи и параметры сортировки закрывать noindex, follow.</p>
   <table>
     <thead><tr><th>Тип страницы</th><th style="text-align:left">Title</th><th style="text-align:left">Description</th><th style="text-align:left">H1</th></tr></thead>
     <tbody>
@@ -301,7 +323,49 @@
 
   <div class="page-break"></div>
 
-  <h2>7. Микроразметка</h2>
+  <h2>8. Мета-теги по страницам</h2>
+  <p>Постраничная таблица в формате старых SEO-ТЗ, расширенная до современного head: URL, Title, Description, H1, canonical, robots, Open Graph, Twitter/X Card и schema.</p>
+  <table>
+    <thead><tr><th>Поле</th><th style="text-align:left">Правило для всех индексируемых страниц</th></tr></thead>
+    <tbody>
+      <tr><td>Canonical</td><td style="text-align:left">Абсолютный URL страницы; для служебных фильтров и параметров — базовая категория.</td></tr>
+      <tr><td>Robots</td><td style="text-align:left">index, follow для категорий/статичных фильтров с товарами; noindex, follow для пустых выдач, сортировок, цены и наличия.</td></tr>
+      <tr><td>Open Graph</td><td style="text-align:left">og:site_name, og:locale=ru_RU, og:type, og:title, og:description, og:url, og:image, og:image:width/height/alt.</td></tr>
+      <tr><td>Twitter/X Card</td><td style="text-align:left">twitter:card=summary_large_image, twitter:title, twitter:description, twitter:image.</td></tr>
+      <tr><td>Schema</td><td style="text-align:left">Organization/WebSite на главной, BreadcrumbList+ItemList на категориях, Product+Offer на карточках.</td></tr>
+    </tbody>
+  </table>
+  <table>
+    <colgroup>
+      <col style="width:18%">
+      <col style="width:27%">
+      <col style="width:40%">
+      <col style="width:15%">
+    </colgroup>
+    <thead><tr><th style="text-align:left">URL</th><th style="text-align:left">Title</th><th style="text-align:left">Description</th><th style="text-align:left">H1</th></tr></thead>
+    <tbody>
+      <tr><td style="text-align:left">/</td><td style="text-align:left">Универмаг «Россия» — одежда и аксессуары с доставкой</td><td style="text-align:left">Одежда и аксессуары Универмага «Россия»: худи, свитшоты, футболки, куртки, кепки, шоперы, сертификаты.</td><td style="text-align:left">Универмаг «Россия»</td></tr>
+      <tr><td style="text-align:left">/catalog/</td><td style="text-align:left">Каталог одежды и аксессуаров — купить с доставкой по России</td><td style="text-align:left">Каталог Универмага «Россия»: худи, свитшоты, футболки, ветровки, куртки, аксессуары, подарки, размеры S-3XL.</td><td style="text-align:left">Каталог одежды и аксессуаров</td></tr>
+      <tr><td style="text-align:left">/catalog/hudi/</td><td style="text-align:left">Худи — купить с доставкой по России</td><td style="text-align:left">Худи Универмага «Россия»: модели с капюшоном и на молнии, размеры S-3XL, цвета, состав, цены и доставка.</td><td style="text-align:left">Худи</td></tr>
+      <tr><td style="text-align:left">/catalog/svitshoty/</td><td style="text-align:left">Свитшоты — купить с доставкой по России</td><td style="text-align:left">Свитшоты Универмага «Россия»: модели с флисом и без флиса, размеры S-3XL, цвета, состав, цены и доставка.</td><td style="text-align:left">Свитшоты</td></tr>
+      <tr><td style="text-align:left">/catalog/futbolki/</td><td style="text-align:left">Футболки — купить с доставкой по России</td><td style="text-align:left">Футболки Универмага «Россия»: базовые, oversize, детские и с принтом, размеры S-3XL, цвета, состав и доставка.</td><td style="text-align:left">Футболки</td></tr>
+      <tr><td style="text-align:left">/catalog/vetrovki/</td><td style="text-align:left">Ветровки — купить с доставкой по России</td><td style="text-align:left">Ветровки Универмага «Россия»: легкие модели, размеры S-3XL, цвета, состав, наличие и доставка.</td><td style="text-align:left">Ветровки</td></tr>
+      <tr><td style="text-align:left">/catalog/kurtki/</td><td style="text-align:left">Куртки — купить с доставкой по России</td><td style="text-align:left">Куртки Универмага «Россия»: демисезонные модели, размеры S-3XL, цвета, состав, цены, наличие и доставка.</td><td style="text-align:left">Куртки</td></tr>
+      <tr><td style="text-align:left">/catalog/aksessuary/</td><td style="text-align:left">Аксессуары и подарки — купить с доставкой по России</td><td style="text-align:left">Аксессуары Универмага «Россия»: кепки, шапки, значки, шоперы, книги, детские игры и подарочные товары.</td><td style="text-align:left">Аксессуары и подарки</td></tr>
+      <tr><td style="text-align:left">/catalog/futbolki/belye/</td><td style="text-align:left">Белые футболки — купить с доставкой по России</td><td style="text-align:left">Белые футболки Универмага «Россия»: товары в наличии, размеры S-3XL, состав, цены, размерная сетка и доставка.</td><td style="text-align:left">Белые футболки</td></tr>
+      <tr><td style="text-align:left">/catalog/futbolki/chernye/</td><td style="text-align:left">Черные футболки — купить с доставкой по России</td><td style="text-align:left">Черные футболки Универмага «Россия»: актуальные модели, размеры S-3XL, состав, цены, наличие и доставка.</td><td style="text-align:left">Черные футболки</td></tr>
+      <tr><td style="text-align:left">/catalog/hudi/chernye/</td><td style="text-align:left">Черные худи — купить с доставкой по России</td><td style="text-align:left">Черные худи Универмага «Россия»: модели с капюшоном и на молнии, размеры S-3XL, состав, цены и доставка.</td><td style="text-align:left">Черные худи</td></tr>
+      <tr><td style="text-align:left">/gift-cards/</td><td style="text-align:left">Подарочный сертификат Универмага «Россия» — купить онлайн</td><td style="text-align:left">Подарочный сертификат Универмага «Россия»: электронный подарок на одежду, аксессуары и сувениры.</td><td style="text-align:left">Подарочный сертификат</td></tr>
+      <tr><td style="text-align:left">/delivery/</td><td style="text-align:left">Доставка и оплата — Универмаг «Россия»</td><td style="text-align:left">Условия доставки и оплаты: СДЭК, Яндекс, оплата сразу или при получении, возврат и сроки.</td><td style="text-align:left">Доставка и оплата</td></tr>
+      <tr><td style="text-align:left">/sizes/</td><td style="text-align:left">Размерная сетка — Универмаг «Россия»</td><td style="text-align:left">Размерная сетка Универмага «Россия»: как выбрать худи, свитшот, футболку, ветровку или куртку.</td><td style="text-align:left">Размерная сетка</td></tr>
+      <tr><td style="text-align:left">/about/</td><td style="text-align:left">О бренде Универмаг «Россия»</td><td style="text-align:left">Универмаг «Россия»: официальный магазин Национального центра «Россия», премиальный lifestyle-мерч.</td><td style="text-align:left">О бренде</td></tr>
+      <tr><td style="text-align:left">/blog/</td><td style="text-align:left">Журнал Универмага «Россия»: идеи подарков и образы</td><td style="text-align:left">Журнал Универмага «Россия»: подборки одежды, идеи подарков, уход за вещами и истории коллекций.</td><td style="text-align:left">Журнал</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <h2>9. Микроразметка</h2>
   <table>
     <thead><tr><th>Страница</th><th style="text-align:left">Schema.org</th><th style="text-align:left">Обязательные поля</th></tr></thead>
     <tbody>
@@ -330,7 +394,7 @@
 }
 &lt;/script&gt;</div>
 
-  <h2>8. Sitemap, robots и canonical</h2>
+  <h2>10. Sitemap, robots и canonical</h2>
   <table>
     <thead><tr><th>Тип URL</th><th>Индексация</th><th>Sitemap</th><th style="text-align:left">Canonical</th></tr></thead>
     <tbody>
@@ -363,7 +427,7 @@ Sitemap: https://frc.serenity-dev.ru/sitemap.xml</div>
 
   <div class="page-break"></div>
 
-  <h2>9. SEO-ТЗ для разработки</h2>
+  <h2>11. SEO-ТЗ для разработки</h2>
   <div class="cards">
     <div class="card"><h3>URL и sitemap</h3><p>В sitemap: главная, каталог, категории, карточки, gift-cards и выбранные статичные фильтры.</p></div>
     <div class="card"><h3>Canonical</h3><p>Индексируемая страница → canonical на себя; неиндексируемые фильтры → на базовую категорию.</p></div>

@@ -80,7 +80,7 @@ function runTopbarHarness(initialCookie = '') {
     html: '',
     set innerHTML(value) {
       this.html = value;
-      topbar = /data-topbar-dismiss/.test(value)
+      topbar = /class="site-topbar"/.test(value)
         ? { removed: false, remove() { this.removed = true; } }
         : null;
     },
@@ -136,7 +136,6 @@ function runTopbarHarness(initialCookie = '') {
   vm.runInNewContext(siteJs, { document, window, alert() {} });
 
   return {
-    closeButton,
     get cookie() {
       return document.cookie;
     },
@@ -147,16 +146,16 @@ function runTopbarHarness(initialCookie = '') {
   };
 }
 
-function topbarDismissPersistsInCookie() {
+function topbarAlwaysVisibleWithoutDismiss() {
   const firstVisit = runTopbarHarness();
-  if (!firstVisit.topbarVisible || !firstVisit.closeButton.listener) return false;
-  firstVisit.closeButton.click();
-  if (firstVisit.topbarVisible) return false;
-  if (!/frc_project_topbar_hidden=1/.test(firstVisit.cookie)) return false;
-  if (!firstVisit.hasBodyClass('site-topbar-hidden')) return false;
+  const nextVisit = runTopbarHarness('frc_project_topbar_hidden=1');
 
-  const nextVisit = runTopbarHarness(firstVisit.cookie);
-  return !nextVisit.topbarVisible && nextVisit.hasBodyClass('site-topbar-hidden');
+  return firstVisit.topbarVisible &&
+    nextVisit.topbarVisible &&
+    !firstVisit.hasBodyClass('site-topbar-hidden') &&
+    !nextVisit.hasBodyClass('site-topbar-hidden') &&
+    !/data-topbar-dismiss/.test(siteJs) &&
+    !/frc_project_topbar_hidden/.test(siteJs);
 }
 
 const requiredStructure = [
@@ -356,11 +355,9 @@ const checks = [
     /site-topbar/.test(siteJs) && !/prototype-ribbon/.test(siteJs),
   ],
   [
-    'delivery topbar close persists in cookie',
-    topbarDismissPersistsInCookie() &&
-      /data-topbar-dismiss/.test(siteJs) &&
-      /frc_project_topbar_hidden/.test(siteJs) &&
-      /site-topbar-hidden/.test(shopCss),
+    'delivery topbar is always visible without dismiss cookie',
+    topbarAlwaysVisibleWithoutDismiss() &&
+      !/site-topbar-hidden/.test(shopCss),
   ],
   [
     'known broken image URL is absent',
@@ -375,6 +372,13 @@ const checks = [
   [
     'footer has Serenity credit',
     /Сделано в Serenity/.test(siteJs) && existsSync(join(root, 'assets/serenity-logo.svg')),
+  ],
+  [
+    'competitor analysis has actionable recommendations',
+    /id="conclusions"/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')) &&
+      /Что рекомендуем взять в проект/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')) &&
+      /Взять в MVP/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')) &&
+      /Не брать на старт/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')),
   ],
   [
     'requested footer and filter helper texts are removed',
