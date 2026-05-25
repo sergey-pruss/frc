@@ -6,21 +6,9 @@
   const markSrc = `${root}assets/u-mark-green.png${assetV ? `?v=${assetV}` : ""}`;
   const markLightSrc = `${root}assets/u-mark-light.png${assetV ? `?v=${assetV}` : ""}`;
   const ncLogoSrc = `${root}assets/nc-logo-white.png${assetV ? `?v=${assetV}` : ""}`;
-  const topbarCookie = "frc_project_topbar_hidden";
 
   const headerMount = document.querySelector("[data-site-header]");
   const footerMount = document.querySelector("[data-site-footer]");
-
-  function hasCookie(name) {
-    return document.cookie
-      .split(";")
-      .map((item) => item.trim())
-      .some((item) => item === `${name}=1`);
-  }
-
-  function setCookie(name) {
-    document.cookie = `${name}=1; Max-Age=31536000; Path=/; SameSite=Lax`;
-  }
 
   const nav = [
     { href: `${root}catalog/`, label: "Каталог" },
@@ -31,18 +19,14 @@
   ];
 
   if (headerMount) {
-    const isTopbarHidden = hasCookie(topbarCookie);
-    document.body.classList.toggle("site-topbar-hidden", isTopbarHidden);
-
     headerMount.innerHTML = `
-      ${isTopbarHidden ? "" : `
       <div class="site-topbar">
         <div class="site-topbar__tabs">
           <a class="site-topbar__tab" href="${root}seo/">SEO-стратегия</a>
+          <a class="site-topbar__tab" href="${root}analysis/">Анализ конкурентов</a>
           <a class="site-topbar__tab is-active">Дизайн-прототип</a>
         </div>
-        <button class="site-topbar__close" type="button" aria-label="Скрыть панель проекта" data-topbar-dismiss>×</button>
-      </div>`}
+      </div>
       <header class="site-header">
         <div class="wrap header-inner">
           <a class="logo" href="${root}" aria-label="Универмаг «Россия»">
@@ -62,19 +46,6 @@
           </div>
         </div>
       </header>`;
-
-    headerMount.querySelector("[data-topbar-dismiss]")?.addEventListener("click", () => {
-      setCookie(topbarCookie);
-      document.body.classList.add("site-topbar-hidden");
-      const bar = headerMount.querySelector(".site-topbar");
-      if (bar) {
-        bar.style.transition = "transform 320ms ease, opacity 240ms ease";
-        bar.style.transform = "translateY(-100%)";
-        bar.style.opacity = "0";
-        bar.addEventListener("transitionend", () => bar.remove(), { once: true });
-      }
-      updateSmartHeader();
-    });
   }
 
   if (footerMount) {
