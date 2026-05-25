@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Анализ конкурентов — Универмаг «Россия»</title>
+    <meta name="description" content="UX-анализ конкурентов интернет-магазина Универмаг Россия: структура сайтов, сравнение по блокам, скриншоты и выводы.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png?v=20260519i">
+    <link rel="icon" type="image/png" sizes="512x512" href="../assets/favicon.png?v=20260519i">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=20260519i">
+    <link rel="stylesheet" href="../assets/styles.css">
+    <style>
+      .comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:24px}
+      .comp-card{border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);cursor:pointer;transition:transform .2s,box-shadow .2s}
+      .comp-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.12)}
+      .comp-card img{width:100%;height:180px;object-fit:cover;object-position:top;display:block}
+      .comp-card figcaption{padding:12px 16px}
+      .comp-card figcaption strong{display:block;margin-bottom:4px}
+      .comp-card figcaption span{font-size:.85rem;color:var(--muted)}
+      .lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+      .lightbox.is-open{display:flex}
+      .lightbox img{max-width:100%;max-height:100%;border-radius:8px;box-shadow:0 8px 60px rgba(0,0,0,.5)}
+      .lightbox-close{position:fixed;top:20px;right:24px;color:#fff;font-size:32px;cursor:pointer;z-index:10000;line-height:1}
+      .matrix-table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:20px}
+      .matrix-table th,.matrix-table td{padding:6px 5px;border:1px solid var(--line);text-align:center;vertical-align:middle}
+      .matrix-table thead th{background:#2f4d2b;color:#fff;font-weight:600;font-size:.75rem;padding:16px 8px;vertical-align:middle;white-space:normal;line-height:1.3}
+      .matrix-table td:first-child,.matrix-table thead th:first-child{text-align:left;font-weight:500;white-space:nowrap}
+      .matrix-table thead th a{color:#fff;text-decoration:none;border-bottom:1px dashed rgba(255,255,255,.6)}
+      .matrix-table thead th a:hover{border-bottom-style:solid}
+      .matrix-table .yes{background:#e8f5e9;color:#2e7d32}
+      .matrix-table .no{background:#fafafa;color:#bbb}
+      .matrix-table .ours{background:#2f4d2b;color:#fff;font-weight:700}
+      .block-section{margin-top:40px}
+      .block-section h3{margin-bottom:8px}
+      .block-table{width:100%;border-collapse:collapse;margin-top:12px}
+      .block-table th,.block-table td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+      .block-table th{font-weight:600;width:160px;white-space:nowrap}
+      .block-table th a{color:inherit;text-decoration:none;border-bottom:1px dashed var(--line)}
+      .block-table th a:hover{color:#2f4d2b;border-bottom-color:#2f4d2b}
+      .block-table tr:last-child td{border-bottom:none}
+      .block-table tr.highlight{background:rgba(47,77,43,.06)}
+      .conclusions{background:var(--paper);border-radius:12px;padding:28px 32px;margin-top:32px}
+      .conclusions h3{margin-bottom:12px}
+      .conclusions ul{margin:0;padding-left:20px}
+      .conclusions li{margin-bottom:6px}
+      .gap-list{margin-top:24px;padding:20px 24px;background:#fff3e0;border-radius:10px}
+      .gap-list h4{margin:0 0 10px;color:#e65100}
+    </style>
+  </head>
+  <body>
+    <div class="site-topbar" id="projectTopbar">
+      <div class="site-topbar__tabs">
+        <a class="site-topbar__tab" href="../seo/">SEO-стратегия</a>
+        <a class="site-topbar__tab is-active">Анализ конкурентов</a>
+        <a class="site-topbar__tab" href="../">Дизайн-прототип</a>
+      </div>
+      <button class="site-topbar__close" type="button" aria-label="Скрыть панель проекта" onclick="(function(btn){var bar=btn.closest('.site-topbar');document.cookie='frc_project_topbar_hidden=1;Max-Age=31536000;Path=/;SameSite=Lax';bar.style.transition='transform 320ms ease, opacity 240ms ease';bar.style.transform='translateY(-100%)';bar.style.opacity='0';bar.addEventListener('transitionend',function(){bar.remove()},{once:true})})(this)">×</button>
+    </div>
+
+    <header class="hero">
+      <div class="wrap">
+        <p class="eyebrow">ФРК / Национальный центр «Россия»</p>
+        <h1>Анализ конкурентов</h1>
+        <p class="lead">
+          UX-исследование: структура сайтов конкурентов из топа поисковой выдачи по целевым запросам,
+          сравнение по блокам и выводы относительно нашего дизайн-прототипа.
+        </p>
+        <dl class="facts">
+          <div>
+            <dt>Конкурентов</dt>
+            <dd>9 сайтов из топ-10 Яндекс/Google</dd>
+          </div>
+          <div>
+            <dt>Запросы</dt>
+            <dd>«мерч россия купить», «одежда с символикой»</dd>
+          </div>
+          <div>
+            <dt>Блоков анализа</dt>
+            <dd>Hero, Каталог, Карточка, О проекте</dd>
+          </div>
+          <div>
+            <dt>Дата</dt>
+            <dd>25 мая 2026</dd>
+          </div>
+        </dl>
+      </div>
+    </header>
+
+    <main>
+      <!-- СОДЕРЖАНИЕ -->
+      <section class="section muted">
+        <div class="wrap">
+          <h2>Содержание</h2>
+          <nav class="doc-toc" aria-label="Содержание">
+            <ol>
+              <li><a href="#competitors">Список конкурентов</a></li>
+              <li><a href="#screenshots">Скриншоты главных страниц</a></li>
+              <li><a href="#matrix">Матрица структуры сайтов</a></li>
+              <li><a href="#blocks">Сравнение по блокам</a></li>
+              <li><a href="#conclusions">Выводы и gap-анализ</a></li>
+            </ol>
+          </nav>
+        </div>
+      </section>
+
+      <!-- КОНКУРЕНТЫ -->
+      <section class="section" id="competitors">
+        <div class="wrap">
+          <h2>Список конкурентов</h2>
+          <p>
+            Отобраны из топ-10 поисковой выдачи Яндекс и Google по запросам:
+            «мерч россия купить», «одежда с символикой россии», «патриотическая одежда купить»,
+            «худи россия интернет-магазин».
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Сайт</th>
+                  <th>Позиционирование</th>
+                  <th>Сегмент</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><a href="https://kremlin-symbol.ru" target="_blank">kremlin-symbol.ru</a></td>
+                  <td>Подарки и сувениры с гос. символикой</td>
+                  <td>3 000–14 000 ₽</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><a href="https://www.yarussia.com" target="_blank">yarussia.com</a></td>
+                  <td>Бренд патриотической одежды</td>
+                  <td>1 500–6 000 ₽</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><a href="https://www.vsemayki.ru" target="_blank">vsemayki.ru</a></td>
+                  <td>Print-on-demand маркетплейс</td>
+                  <td>1 000–5 000 ₽</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td><a href="https://printbar.ru" target="_blank">printbar.ru</a></td>
+                  <td>Print-on-demand с полной запечаткой</td>
+                  <td>1 500–5 000 ₽</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td><a href="https://rus-vit.ru" target="_blank">rus-vit.ru</a></td>
+                  <td>Нишевый мерч (авиагруппа «Русские Витязи»)</td>
+                  <td>1 000–4 000 ₽</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td><a href="https://www.shop.fc-zenit.ru" target="_blank">shop.fc-zenit.ru</a></td>
+                  <td>Официальный спортивный мерч (ФК Зенит)</td>
+                  <td>2 000–8 000 ₽</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td><a href="https://shop.tretyakovgallery.ru" target="_blank">shop.tretyakovgallery.ru</a></td>
+                  <td>Институциональный музейный мерч</td>
+                  <td>500–5 000 ₽</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td><a href="https://putin-team.ru" target="_blank">putin-team.ru</a></td>
+                  <td>Официальный мерч (близкая тематика)</td>
+                  <td>1 500–6 000 ₽</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td><a href="https://gloryseason.ru" target="_blank">gloryseason.ru</a></td>
+                  <td>Визуальный и товарный референс (Tilda)</td>
+                  <td>2 000–7 000 ₽</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- СКРИНШОТЫ -->
+      <section class="section muted" id="screenshots">
+        <div class="wrap">
+          <h2>Скриншоты главных страниц</h2>
+          <p>Кликните на карточку, чтобы увеличить скриншот.</p>
+          <div class="comp-grid">
+            <figure class="comp-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/kremlin-symbol-home.png" alt="kremlin-symbol.ru — главная" loading="lazy">
+              <figcaption>
+                <strong>kremlin-symbol.ru</strong>
+                <span>Книжная Экспедиция — сувениры с гос. символикой</span>
+              </figcaption>
+            </figure>
+            <figure class="comp-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/yarussia-home.png" alt="yarussia.com — главная" loading="lazy">
+              <figcaption>
+                <strong>yarussia.com</strong>
+                <span>ЯRUSSIA — бренд патриотической одежды</span>
+              </figcaption>
+            </figure>
+            <figure class="comp-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/vsemayki-catalog.png" alt="vsemayki.ru — каталог" loading="lazy">
+              <figcaption>
+                <strong>vsemayki.ru</strong>
+                <span>Все Майки — print-on-demand маркетплейс</span>
+              </figcaption>
+            </figure>
+            <figure class="comp-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/printbar-home.png" alt="printbar.ru — главная" loading="lazy">
+              <figcaption>
+                <strong>printbar.ru</strong>
+                <span>Print Bar — полная запечатка, 72ч производство</span>
+              </figcaption>
+            </figure>
+            <figure class="comp-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/rus-vit-home.png" alt="rus-vit.ru — главная" loading="lazy">
+              <figcaption>
+                <strong>rus-vit.ru</strong>
+                <span>Русские Витязи — мерч авиагруппы</span>
+              </figcaption>
+            </figure>
+            <figure class="comp-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/zenit-home.png" alt="shop.fc-zenit.ru — главная" loading="lazy">
+              <figcaption>
+                <strong>shop.fc-zenit.ru</strong>
+                <span>ФК Зенит — премиум спортивный мерч</span>
+              </figcaption>
+            </figure>
+            <figure class="comp-card" onclick="openLightbox(this)">
+              <img src="../assets/generated/competitors/tretyakov-home.png" alt="shop.tretyakovgallery.ru — главная" loading="lazy">
+              <figcaption>
+                <strong>shop.tretyakovgallery.ru</strong>
+                <span>Третьяковская галерея — музейный мерч</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- МАТРИЦА -->
+      <section class="section" id="matrix">
+        <div class="wrap">
+          <h2>Матрица структуры сайтов</h2>
+          <p>Какие типы страниц реализованы у каждого конкурента. Зелёные ячейки = страница есть.</p>
+          <div class="table-wrap" style="overflow-x:auto">
+            <table class="matrix-table">
+              <thead>
+                <tr>
+                  <th style="min-width:170px">Тип страницы</th>
+                  <th><a href="https://kremlin-symbol.ru" target="_blank">kremlin-<wbr>symbol</a></th>
+                  <th><a href="https://www.yarussia.com" target="_blank">yarussia</a></th>
+                  <th><a href="https://www.vsemayki.ru" target="_blank">vsemayki</a></th>
+                  <th><a href="https://printbar.ru" target="_blank">printbar</a></th>
+                  <th><a href="https://rus-vit.ru" target="_blank">rus-vit</a></th>
+                  <th><a href="https://www.shop.fc-zenit.ru" target="_blank">fc-zenit</a></th>
+                  <th><a href="https://shop.tretyakovgallery.ru" target="_blank">третья-<wbr>ковка</a></th>
+                  <th><a href="https://putin-team.ru" target="_blank">putin-<wbr>team</a></th>
+                  <th><a href="https://gloryseason.ru" target="_blank">glory-<wbr>season</a></th>
+                  <th style="background:#1a3518;font-size:.72rem;font-weight:800">НАШ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Главная (герой)</td>
+                  <td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Каталог</td>
+                  <td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Категории</td>
+                  <td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Фильтры (цвет/размер)</td>
+                  <td class="no">—</td><td class="no">—</td><td class="yes">+</td><td class="yes">+</td><td class="no">—</td><td class="yes">+</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Карточка товара</td>
+                  <td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Коллекции</td>
+                  <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">+</td><td class="no">—</td><td class="yes">+</td><td class="yes">+</td><td class="no">—</td><td class="yes">+</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Корзина / Чекаут</td>
+                  <td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Доставка и оплата</td>
+                  <td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>О компании / О проекте</td>
+                  <td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="no">—</td><td class="yes">+</td><td class="no">—</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Блог / Журнал</td>
+                  <td class="no">—</td><td class="no">—</td><td class="yes">+</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Размерная сетка</td>
+                  <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">+</td><td class="no">—</td><td class="yes">+</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Акции / Распродажа</td>
+                  <td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="no">—</td>
+                </tr>
+                <tr>
+                  <td>Подарочные сертификаты</td>
+                  <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">+</td><td class="yes">+</td><td class="no">—</td><td class="no">—</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Магазины / Где купить</td>
+                  <td class="yes">+</td><td class="yes">+</td><td class="no">—</td><td class="no">—</td><td class="yes">+</td><td class="yes">+</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Корпоративным клиентам</td>
+                  <td class="no">—</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Избранное / Вишлист</td>
+                  <td class="yes">+</td><td class="no">—</td><td class="yes">+</td><td class="yes">+</td><td class="no">—</td><td class="yes">+</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Личный кабинет</td>
+                  <td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="no">—</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Поиск</td>
+                  <td class="yes">+</td><td class="no">—</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Программа лояльности</td>
+                  <td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">+</td><td class="no">—</td><td class="no">—</td><td class="ours">+</td>
+                </tr>
+                <tr>
+                  <td>Контакты</td>
+                  <td class="no">—</td><td class="yes">+</td><td class="yes">+</td><td class="no">—</td><td class="yes">+</td><td class="no">—</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="ours">+</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- БЛОКИ -->
+      <section class="section muted" id="blocks">
+        <div class="wrap">
+          <h2>Сравнение по блокам</h2>
+          <p>Как каждый конкурент решает типовые блоки — и чем наш прототип отличается.</p>
+
+          <div class="block-section">
+            <h3>1. Hero / Фасадный блок</h3>
+            <table class="block-table">
+              <tr><th><a href="https://kremlin-symbol.ru" target="_blank">kremlin-symbol.ru</a></th><td>Статичная иллюстрация Кремля, без CTA, без lifestyle-фото</td></tr>
+              <tr><th><a href="https://www.yarussia.com" target="_blank">yarussia.com</a></th><td>Баннер-слайдер с коллекциями (5 слайдов), минимальный текст, USP-блок под героем</td></tr>
+              <tr><th><a href="https://www.vsemayki.ru" target="_blank">vsemayki.ru</a></th><td>Промо-баннер со скидкой «ЛЕТНИЙ СЕЗОН -25%», продающий подход</td></tr>
+              <tr><th><a href="https://printbar.ru" target="_blank">printbar.ru</a></th><td>Модельная съёмка full-bleed + USP-бейджи (72ч, 360° печать, сделано в России)</td></tr>
+              <tr><th><a href="https://rus-vit.ru" target="_blank">rus-vit.ru</a></th><td>Фото авиагруппы в полёте, тематический баннер</td></tr>
+              <tr><th><a href="https://www.shop.fc-zenit.ru" target="_blank">shop.fc-zenit.ru</a></th><td>Премиум: полноэкранный hero с моделями, editorial фото, текст коллекции, минимальный UI</td></tr>
+              <tr><th><a href="https://shop.tretyakovgallery.ru" target="_blank">tretyakovgallery.ru</a></th><td>Арт-hero: продуктовый flat-lay на цветном фоне, смелая типографика «Архетипы Авангарда»</td></tr>
+              <tr><th><a href="https://putin-team.ru" target="_blank">putin-team.ru</a></th><td>Лаконичный баннер с фотографией, минимум текста, аскетичный стиль</td></tr>
+              <tr><th><a href="https://gloryseason.ru" target="_blank">gloryseason.ru</a></th><td>Tilda-шаблон, полноэкранное фото с CTA, чистый минималистичный стиль</td></tr>
+              <tr class="highlight"><th>Наш прототип</th><td><strong>Apple-style полноэкранный герой с параллаксом, модельная съёмка, 2 CTA, feature-секции light/dark</strong></td></tr>
+            </table>
+          </div>
+
+          <div class="block-section">
+            <h3>2. Каталог / Сетка товаров</h3>
+            <table class="block-table">
+              <tr><th><a href="https://kremlin-symbol.ru" target="_blank">kremlin-symbol.ru</a></th><td>Горизонтальная карусель, без фильтров на главной</td></tr>
+              <tr><th><a href="https://www.yarussia.com" target="_blank">yarussia.com</a></th><td>Плоская сетка 4 колонки, без фильтров, «Весь каталог» ссылка</td></tr>
+              <tr><th><a href="https://www.vsemayki.ru" target="_blank">vsemayki.ru</a></th><td>Сайдбар с категориями + сетка 4 колонки, тег-фильтры, сортировка</td></tr>
+              <tr><th><a href="https://printbar.ru" target="_blank">printbar.ru</a></th><td>Mega-menu каталог, категории по полу, тематические подборки</td></tr>
+              <tr><th><a href="https://rus-vit.ru" target="_blank">rus-vit.ru</a></th><td>Простая сетка 4 колонки, пагинация, без фильтров</td></tr>
+              <tr><th><a href="https://www.shop.fc-zenit.ru" target="_blank">shop.fc-zenit.ru</a></th><td>Коллекция-first подход, hero-баннеры для каждой линейки</td></tr>
+              <tr><th><a href="https://shop.tretyakovgallery.ru" target="_blank">tretyakovgallery.ru</a></th><td>Категории + Новинки + Бестселлеры, горизонтальные блоки</td></tr>
+              <tr><th><a href="https://putin-team.ru" target="_blank">putin-team.ru</a></th><td>Простая сетка 3 колонки, без фильтров, категории в меню</td></tr>
+              <tr><th><a href="https://gloryseason.ru" target="_blank">gloryseason.ru</a></th><td>Tilda-каталог с визуальными блоками, карточки с фото и ценой</td></tr>
+              <tr class="highlight"><th>Наш прототип</th><td><strong>Сайдбар фильтров (категория/размер/цвет/цена/наличие) + 3-колоночная сетка Apple Store + 245 статических SEO-страниц фильтров</strong></td></tr>
+            </table>
+          </div>
+
+          <div class="block-section">
+            <h3>3. Карточка товара</h3>
+            <table class="block-table">
+              <tr><th><a href="https://kremlin-symbol.ru" target="_blank">kremlin-symbol.ru</a></th><td>Фото + описание + наличие, без размерной сетки</td></tr>
+              <tr><th><a href="https://www.yarussia.com" target="_blank">yarussia.com</a></th><td>Фото + состав + размеры dropdown, кнопка «Сравнить»</td></tr>
+              <tr><th><a href="https://www.vsemayki.ru" target="_blank">vsemayki.ru</a></th><td>3D-превью, конструктор печати, размерная линейка</td></tr>
+              <tr><th><a href="https://printbar.ru" target="_blank">printbar.ru</a></th><td>360° превью, выбор ткани, детализация состава</td></tr>
+              <tr><th><a href="https://rus-vit.ru" target="_blank">rus-vit.ru</a></th><td>Минимальная: фото + цена + кнопка «В корзину»</td></tr>
+              <tr><th><a href="https://www.shop.fc-zenit.ru" target="_blank">shop.fc-zenit.ru</a></th><td>Lifestyle фото, полная размерная сетка, кросс-сейл блоки</td></tr>
+              <tr><th><a href="https://shop.tretyakovgallery.ru" target="_blank">tretyakovgallery.ru</a></th><td>Чистая карточка, «В корзину» inline, минимум деталей</td></tr>
+              <tr><th><a href="https://putin-team.ru" target="_blank">putin-team.ru</a></th><td>Базовая карточка, фото + цена + описание, без размерной сетки</td></tr>
+              <tr><th><a href="https://gloryseason.ru" target="_blank">gloryseason.ru</a></th><td>Tilda-карточка: фото, описание, кнопка купить. Нет фильтров</td></tr>
+              <tr class="highlight"><th>Наш прототип</th><td><strong>Галерея, размерная сетка (интерактивная), спецификации (коллекция, состав, уход, SKU, наличие), 3 блока кросс-сейла, JSON-LD schema</strong></td></tr>
+            </table>
+          </div>
+
+          <div class="block-section">
+            <h3>4. О проекте / Бренд-стори</h3>
+            <table class="block-table">
+              <tr><th><a href="https://kremlin-symbol.ru" target="_blank">kremlin-symbol.ru</a></th><td>Страница «Книжная экспедиция» — история компании</td></tr>
+              <tr><th><a href="https://www.yarussia.com" target="_blank">yarussia.com</a></th><td>Блок на главной — миссия бренда, патриотический манифест</td></tr>
+              <tr><th><a href="https://www.vsemayki.ru" target="_blank">vsemayki.ru</a></th><td>«Наше производство» + сертификаты качества</td></tr>
+              <tr><th><a href="https://rus-vit.ru" target="_blank">rus-vit.ru</a></th><td>Блок на главной — описание организации поддержки АГВП</td></tr>
+              <tr><th><a href="https://shop.tretyakovgallery.ru" target="_blank">tretyakovgallery.ru</a></th><td>«О магазине» + программа «Друг Третьяковской галереи»</td></tr>
+              <tr><th><a href="https://putin-team.ru" target="_blank">putin-team.ru</a></th><td>Раздел «О нас» с миссией и фото</td></tr>
+              <tr><th><a href="https://gloryseason.ru" target="_blank">gloryseason.ru</a></th><td>Секция «О бренде» на Tilda с lifestyle-фото</td></tr>
+              <tr class="highlight"><th>Наш прототип</th><td><strong>Отдельная страница /about/ с brand-стори, цитатой и позиционированием «мерч как любимая вещь»</strong></td></tr>
+            </table>
+          </div>
+
+          <div class="block-section">
+            <h3>5. Навигация и header</h3>
+            <table class="block-table">
+              <tr><th><a href="https://kremlin-symbol.ru" target="_blank">kremlin-symbol.ru</a></th><td>Классический e-com header: лого, поиск, телефон, корзина, мега-меню</td></tr>
+              <tr><th><a href="https://www.yarussia.com" target="_blank">yarussia.com</a></th><td>Горизонтальная навигация, лого по центру, иконки справа</td></tr>
+              <tr><th><a href="https://www.vsemayki.ru" target="_blank">vsemayki.ru</a></th><td>Двухуровневый: сервисный бар + категорийная навигация</td></tr>
+              <tr><th><a href="https://printbar.ru" target="_blank">printbar.ru</a></th><td>Каталог dropdown + поиск + корзина, подменю с подкатегориями</td></tr>
+              <tr><th><a href="https://rus-vit.ru" target="_blank">rus-vit.ru</a></th><td>Простой header с горизонтальным меню + телефоны</td></tr>
+              <tr><th><a href="https://www.shop.fc-zenit.ru" target="_blank">shop.fc-zenit.ru</a></th><td>Минималистичный: лого, гамбургер-каталог, горизонтальные ссылки коллекций</td></tr>
+              <tr><th><a href="https://shop.tretyakovgallery.ru" target="_blank">tretyakovgallery.ru</a></th><td>Чистый: лого + горизонтальные категории, без излишеств</td></tr>
+              <tr><th><a href="https://putin-team.ru" target="_blank">putin-team.ru</a></th><td>Лого + бургер-меню, минимальная навигация</td></tr>
+              <tr><th><a href="https://gloryseason.ru" target="_blank">gloryseason.ru</a></th><td>Tilda-header: лого + корзина + телефон, гамбургер-меню</td></tr>
+              <tr class="highlight"><th>Наш прототип</th><td><strong>Умный auto-hide header с backdrop blur, лого + wordmark, 5 ссылок, действия (кабинет, поиск, корзина)</strong></td></tr>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ВЫВОДЫ -->
+      <section class="section" id="conclusions">
+        <div class="wrap">
+          <h2>Выводы и gap-анализ</h2>
+
+          <div class="conclusions">
+            <h3>Наш прототип сильнее конкурентов в:</h3>
+            <ul>
+              <li><strong>Визуальное качество</strong> — Apple-level дизайн vs шаблонные решения у 5 из 7 конкурентов</li>
+              <li><strong>SEO-инфраструктура</strong> — 245 фильтровых страниц, JSON-LD, уникальный контент (никто из конкурентов так не делает)</li>
+              <li><strong>Фильтрация каталога</strong> — полноценный faceted search с live-обновлением (есть только у vsemayki и printbar в упрощённом виде)</li>
+              <li><strong>Контент-маркетинг</strong> — блог/журнал (единственные из прямых конкурентов в сегменте)</li>
+              <li><strong>Подарочные механики</strong> — сертификаты + Mystery Box (уникально для ниши)</li>
+              <li><strong>Коллекции</strong> — отдельная сущность (есть только у Зенита и Третьяковки)</li>
+              <li><strong>Программа лояльности</strong> — реализована (есть только у Третьяковки)</li>
+            </ul>
+          </div>
+
+          <div class="gap-list">
+            <h4>Что есть у конкурентов, но пока нет у нас (возможности для развития):</h4>
+            <ul>
+              <li><strong>Акции/Распродажа</strong> — страница со скидками (есть у всех 7 конкурентов)</li>
+              <li><strong>Конструктор / Свой дизайн</strong> — кастомизация принтов (vsemayki, printbar)</li>
+              <li><strong>3D/360° просмотр товара</strong> — визуализация на модели (vsemayki, printbar)</li>
+              <li><strong>Отзывы на товары</strong> — UGC-контент на карточках</li>
+              <li><strong>Трекинг заказа</strong> — «Где мой заказ?» (vsemayki)</li>
+              <li><strong>Сравнение товаров</strong> — функция сравнения (kremlin-symbol, yarussia)</li>
+            </ul>
+          </div>
+
+          <div class="conclusions" style="margin-top:24px">
+            <h3>Ближайшие бенчмарки по уровню дизайна:</h3>
+            <ul>
+              <li><strong>shop.fc-zenit.ru</strong> — премиальный editorial подход, коллекции как hero, модельная съёмка</li>
+              <li><strong>shop.tretyakovgallery.ru</strong> — институциональный мерч с арт-направленностью, смелая типографика</li>
+            </ul>
+            <p style="margin-top:12px;color:var(--muted)">
+              Наш прототип стоит на уровне этих двух лидеров, при этом значительно превосходит
+              прямых конкурентов в нише (ЯRUSSIA, Кремлёвский символ, Русские Витязи) —
+              как по дизайну, так и по техническому SEO.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+      <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+      <img id="lightboxImg" src="" alt="">
+    </div>
+
+    <script>
+      function openLightbox(card) {
+        var img = card.querySelector('img');
+        var lb = document.getElementById('lightbox');
+        var lbImg = document.getElementById('lightboxImg');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLightbox() {
+        var lb = document.getElementById('lightbox');
+        lb.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeLightbox();
+      });
+    </script>
+  </body>
+</html>

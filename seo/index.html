@@ -18,6 +18,7 @@
     <div class="site-topbar" id="projectTopbar">
       <div class="site-topbar__tabs">
         <a class="site-topbar__tab is-active">SEO-стратегия</a>
+        <a class="site-topbar__tab" href="../analysis/">Анализ конкурентов</a>
         <a class="site-topbar__tab" href="../">Дизайн-прототип</a>
       </div>
       <button class="site-topbar__close" type="button" aria-label="Скрыть панель проекта" onclick="(function(btn){var bar=btn.closest('.site-topbar');document.cookie='frc_project_topbar_hidden=1;Max-Age=31536000;Path=/;SameSite=Lax';bar.style.transition='transform 320ms ease, opacity 240ms ease';bar.style.transform='translateY(-100%)';bar.style.opacity='0';bar.addEventListener('transitionend',function(){bar.remove()},{once:true})})(this)">×</button>
@@ -60,6 +61,7 @@
               <li><a href="#client-input">Зафиксированные ответы клиента</a></li>
               <li><a href="#transactional-core">Транзакционная семантика каталога</a></li>
               <li><a href="#top-competitors">Топ-20 конкурентов по семантике каталога</a></li>
+              <li><a href="#top-competitors">↳ UX-анализ прямых конкурентов (скриншоты и матрица)</a></li>
               <li><a href="#page-theses">Тезисы по типам страниц</a></li>
               <li><a href="#static-filters">Статичные SEO-фильтры</a></li>
               <li><a href="#generation-rules">Правила генерации мета-тегов</a></li>
@@ -368,6 +370,15 @@
                 <tr><td>20</td><td><a href="https://www.labirint.ru/" target="_blank" rel="noopener">labirint.ru</a></td><td>Книги и подарочные издания как отдельная товарная группа.</td><td>Книжные карточки, атрибуты, сниппеты.</td></tr>
               </tbody>
             </table>
+          </div>
+
+          <div class="card" style="margin-top:2.5rem; border-left:4px solid var(--brand-green); padding:1.5rem 2rem; background:var(--paper);">
+            <h3 style="margin-top:0;">UX-анализ прямых конкурентов по дизайну и структуре</h3>
+            <p>
+              Проведён детальный аудит 7 прямых конкурентов из топа выдачи по целевым запросам: kremlin-symbol.ru, yarussia.com, vsemayki.ru, printbar.ru, rus-vit.ru, shop.fc-zenit.ru, shop.tretyakovgallery.ru.
+              Сравнение по блокам (герой, каталог, карточка товара, бренд-стори) и матрица страниц показывают, что наш прототип по визуальному качеству находится на уровне лучших институциональных магазинов (Зенит, Третьяковка), а по SEO-инфраструктуре и фильтрации значительно превосходит всех прямых конкурентов в нише.
+            </p>
+            <p><a href="../analysis/" style="font-weight:600; color:var(--brand-green);">→ Открыть полный анализ конкурентов со скриншотами</a></p>
           </div>
         </div>
       </section>
