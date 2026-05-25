@@ -13,5 +13,8 @@
   "devDependencies": {
     "chokidar": "^5.0.0",
     "puppeteer": "^25.0.4"
+  },
+  "dependencies": {
+    "googleapis": "^172.0.0"
   }
 }

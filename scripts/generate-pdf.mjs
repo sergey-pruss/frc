@@ -35,7 +35,7 @@ for (const { src, dst, name } of reports) {
     path: dst,
     format: "A4",
     landscape: true,
-    margin: { top: "16mm", bottom: "20mm", left: "10mm", right: "10mm" },
+    margin: { top: "10mm", bottom: "16mm", left: "10mm", right: "10mm" },
     printBackground: true,
     displayHeaderFooter: true,
     headerTemplate: '<span></span>',
