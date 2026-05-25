@@ -41,6 +41,7 @@ const checks = [
   ['top 20 competitor section exists', /id="top-competitors"/.test(html) && /Топ-20 конкурентов по семантике каталога/.test(html)],
   ['top 20 competitor table has key domains', /wildberries\.ru/.test(html) && /ozon\.ru/.test(html) && /vsemayki\.ru/.test(html) && /putin-team\.ru/.test(html) && /gloryseason\.ru/.test(html)],
   ['semantic competitors are separated from direct competitors', /семантические конкуренты/.test(html) && /[Пп]рямые конкуренты/.test(html) && /Маркетплейсы оставляем/.test(html)],
+  ['ux competitor summary covers all 20 competitors', /Проведён детальный аудит 20 конкурентов из 4 сегментов/.test(html) && !/детальный аудит 7 прямых конкурентов/.test(html)],
   ['competitor domains are clickable external links', /<a href="https:\/\/www\.wildberries\.ru\/" target="_blank" rel="noopener">wildberries\.ru<\/a>/.test(html) && /<a href="https:\/\/www\.ozon\.ru\/" target="_blank" rel="noopener">ozon\.ru<\/a>/.test(html) && /<a href="https:\/\/putin-team\.ru\/" target="_blank" rel="noopener">putin-team\.ru<\/a>/.test(html)],
   ['page theses section exists', /id="page-theses"/.test(html) && /Тезисы по типам страниц/.test(html)],
   ['static filter strategy exists', /id="static-filters"/.test(html) && /\/catalog\/hudi\/krasnye-xs\//.test(html) && /Категория \+ размер/.test(html)],
