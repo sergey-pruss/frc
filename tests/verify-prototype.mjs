@@ -389,7 +389,7 @@ const checks = [
       /id="screenshots"[\s\S]*<span class="section-label">Раздел 2<\/span>[\s\S]*<h2>Скриншоты конкурентов<\/h2>/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')) &&
       /id="matrix"[\s\S]*<span class="section-label">Раздел 3<\/span>[\s\S]*<h2>Матрица структуры сайтов<\/h2>/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')) &&
       !/id="screenshots" hidden/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')) &&
-      !/Print-on-demand|print-on-demand|Наш прототип|gap-анализ|Apple-style|JSON-LD schema/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')),
+      !/Print-on-demand|print-on-demand|наш прототип|Последний столбец|gap-анализ|Apple-style|JSON-LD schema/i.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')),
   ],
   [
     'requested footer and filter helper texts are removed',
