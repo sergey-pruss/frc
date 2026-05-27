@@ -225,6 +225,66 @@ h3 {
   gap: 16px;
 }
 
+.drive-cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 20px;
+}
+
+.drive-card h4 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  line-height: 1.35;
+  color: var(--accent-2);
+}
+
+.drive-card p {
+  margin-bottom: 12px;
+}
+
+.drive-tabs {
+  margin: 0 0 16px;
+  padding-left: 18px;
+  color: var(--ink);
+}
+
+.drive-tabs li {
+  margin-bottom: 10px;
+}
+
+.drive-tabs li:last-child {
+  margin-bottom: 0;
+}
+
+.drive-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-bottom: 0 !important;
+}
+
+.drive-links a {
+  font-weight: 600;
+  color: #2f4d2b;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(47, 77, 43, 0.35);
+}
+
+.drive-links a:hover {
+  border-bottom-style: solid;
+}
+
+.sync-meta {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .drive-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
 .card {
   min-height: 190px;
   padding: 22px;

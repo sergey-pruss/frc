@@ -39,6 +39,7 @@ const checks = [
   ['excluded badge noise absent from doc', !/значок бмв купить/.test(html) && !/значки купить сайт/.test(html)],
   ['recommended structure has tree code view', /id="recommended-structure-tree"/.test(html) && /Структура сайта в формате дерева/.test(html) && /<pre><code>\/\s*├── catalog\//.test(html) && /└── blog\/\s*# после запуска каталога/.test(html)],
   ['transactional semantic core exists', /id="transactional-core"/.test(html) && /Транзакционная семантика каталога/.test(html)],
+  ['semantic drive tables linked from report', /id="semantics-drive"/.test(html) && /Семантическое ядро каталога \(910 запросов\)/.test(html) && /Вкладка 2 — «Топ 5–10 на категорию»/.test(html) && /docs\.google\.com\/spreadsheets\/d\/1Mf6l6HwDZJuIVXMmuSiT3StB1AG6yUMCT_5juw9-v14/.test(html)],
   ['frequency threshold is 100 plus', /собираем запросы от 100 показов\/мес/.test(html) && /В ядро берем запросы от 100 показов\/мес и выше/.test(html)],
   ['keyword tables use query, frequency and priority columns', /Ключевые запросы 100\+ для структуры/.test(html) && /Ключевые запросы для статичных фильтров/.test(html) && /<th>Запрос<\/th>\s*<th>Частота<\/th>/.test(html) && /<th>Как использовать<\/th>\s*<th>Приоритет<\/th>/.test(html)],
   ['duplicate semantic mask table is absent', !/Запросы для снятия частотности/.test(html)],
