@@ -8,11 +8,15 @@ import html
 import io
 import json
 import re
+import sys
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from gate_snippet import GATE_GUARD_SCRIPT  # noqa: E402
+
 DATA_DIR = ROOT / "data"
 OUT_HTML = ROOT / "content-strategy" / "index.html"
 
@@ -350,6 +354,7 @@ def build_page(
 <html lang="ru">
   <head>
     <meta charset="utf-8">
+{GATE_GUARD_SCRIPT}
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">

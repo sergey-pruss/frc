@@ -178,7 +178,11 @@ const requiredStructure = [
 
 const checks = [
   ['shop home exists under design', existsSync(join(shopRoot, 'index.html'))],
-  ['site root redirects clients to seo', /url=seo\//.test(readFileSync(join(root, 'index.html'), 'utf8'))],
+  [
+    'site root is gated and sends authed users to seo',
+    /frc-gate-v1/.test(readFileSync(join(root, 'index.html'), 'utf8')) &&
+      readFileSync(join(root, 'gate/index.html'), 'utf8').includes('gate-form'),
+  ],
   ['seo doc moved', existsSync(join(root, 'seo/index.html'))],
   [
     'client docs hide design prototype tab',

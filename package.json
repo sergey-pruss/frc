@@ -4,7 +4,8 @@
   "private": true,
   "description": "SEO project documentation for the FRC / National Center Russia merch website.",
   "scripts": {
-    "build:site": "python3 scripts/generate-prototype.py",
+    "build:site": "python3 scripts/generate-prototype.py && python3 scripts/inject-site-gate.py",
+    "inject:gate": "python3 scripts/inject-site-gate.py",
     "build:content": "python3 scripts/sync-content-strategy.py",
     "build:wordstat": "python3 scripts/build-catalog-wordstat.py && python3 scripts/render-catalog-tables.py && python3 scripts/export-static-filters-csv.py",
     "sync:seo-drive": "node scripts/sync-seo-drive.mjs",

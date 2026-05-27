@@ -17,6 +17,7 @@ def asset_root(prototype_depth: int) -> str:
 def page_root(prototype_depth: int) -> str:
     return "../" * prototype_depth
 sys.path.insert(0, str(ROOT / "scripts"))
+from gate_snippet import GATE_GUARD_SCRIPT  # noqa: E402
 from content import (  # noqa: E402
     BLOG_POSTS,
     BRAND,
@@ -60,6 +61,7 @@ def shell(prototype_depth: int, title: str, body: str, desc: str | None = None, 
 <html lang="ru">
   <head>
     <meta charset="utf-8">
+{GATE_GUARD_SCRIPT}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{title} — {BRAND['name']}</title>
     <meta name="description" content="{desc or BRAND['tagline']}">

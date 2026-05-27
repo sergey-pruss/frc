@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="ru" class="gate-pending">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Вход — FRC</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+    <style>
+      :root {
+        color-scheme: dark;
+        --gate-bg: #000;
+        --gate-glow: rgba(66, 84, 255, 0.35);
+        --gate-glow-2: rgba(138, 99, 255, 0.22);
+        --gate-surface: #1e1f20;
+        --gate-surface-border: rgba(255, 255, 255, 0.08);
+        --gate-text: #e8eaed;
+        --gate-muted: #9aa0a6;
+        --gate-error: #f28b82;
+        --gate-font: "Segoe UI", system-ui, -apple-system, sans-serif;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      html.gate-pending body { visibility: hidden; }
+      html.gate-ready body { visibility: visible; }
+      body.gate-page {
+        margin: 0;
+        min-height: 100dvh;
+        font-family: var(--gate-font);
+        background: var(--gate-bg);
+        color: var(--gate-text);
+        -webkit-font-smoothing: antialiased;
+      }
+      .gate-scene {
+        position: relative;
+        display: flex;
+        min-height: 100dvh;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        overflow: hidden;
+      }
+      .gate-scene::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 70% 50% at 50% 42%, var(--gate-glow), transparent 70%),
+          radial-gradient(ellipse 50% 40% at 55% 55%, var(--gate-glow-2), transparent 65%);
+        pointer-events: none;
+      }
+      .gate-panel {
+        position: relative;
+        z-index: 1;
+        width: min(640px, 100%);
+        text-align: center;
+      }
+      .gate-logo {
+        width: 48px;
+        height: 48px;
+        margin: 0 auto 28px;
+        color: #fff;
+        opacity: 0.92;
+      }
+      .gate-greeting {
+        margin: 0 0 32px;
+        font-size: clamp(28px, 5vw, 40px);
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+      }
+      .gate-form { margin: 0; }
+      .gate-input-wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        min-height: 56px;
+        padding: 8px 8px 8px 20px;
+        border-radius: 999px;
+        background: var(--gate-surface);
+        border: 1px solid var(--gate-surface-border);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .gate-input-wrap:focus-within {
+        border-color: rgba(138, 180, 255, 0.35);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(138, 180, 255, 0.15);
+      }
+      .gate-input-wrap.is-error {
+        border-color: rgba(242, 139, 130, 0.55);
+        animation: gate-shake 0.45s ease;
+      }
+      @keyframes gate-shake {
+        0%, 100% { transform: translateX(0); }
+        20% { transform: translateX(-6px); }
+        40% { transform: translateX(6px); }
+        60% { transform: translateX(-4px); }
+        80% { transform: translateX(4px); }
+      }
+      .gate-input {
+        flex: 1;
+        min-width: 0;
+        border: 0;
+        background: transparent;
+        color: var(--gate-text);
+        font: inherit;
+        font-size: 16px;
+        outline: none;
+      }
+      .gate-input::placeholder { color: var(--gate-muted); }
+      .gate-submit {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--gate-text);
+        cursor: pointer;
+        transition: background 0.2s, transform 0.15s;
+      }
+      .gate-submit:hover { background: rgba(255, 255, 255, 0.16); }
+      .gate-submit:active { transform: scale(0.96); }
+      .gate-submit svg { width: 20px; height: 20px; }
+      .gate-hint {
+        margin: 16px 0 0;
+        min-height: 20px;
+        font-size: 14px;
+        color: var(--gate-error);
+      }
+      .gate-footer {
+        margin-top: 48px;
+        font-size: 13px;
+        color: var(--gate-muted);
+        letter-spacing: 0.02em;
+      }
+    </style>
+  </head>
+  <body class="gate-page">
+    <div class="gate-scene">
+      <div class="gate-panel">
+        <img class="gate-logo" src="../assets/serenity-logo.svg" width="48" height="48" alt="Serenity">
+        <h1 class="gate-greeting">Материалы проекта</h1>
+        <form id="gate-form" class="gate-form" autocomplete="off">
+          <div class="gate-input-wrap">
+            <input
+              id="gate-password"
+              class="gate-input"
+              type="password"
+              name="password"
+              placeholder="Пароль"
+              required
+              autofocus
+            >
+            <button class="gate-submit" type="submit" aria-label="Войти">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <p id="gate-hint" class="gate-hint" role="status" aria-live="polite"></p>
+        </form>
+        <p class="gate-footer">Serenity · frc.serenity-dev.ru</p>
+      </div>
+    </div>
+    <script>
+      (function () {
+        "use strict";
+        var STORAGE_KEY = "frc-gate-v1";
+        var PASS_HASH = "c6c2307ac025abfed680cb646bc38ca3c3d6e02662a0f2faa143dcff22268a49";
+        var DEFAULT_NEXT = "/seo/";
+
+        function authed() {
+          try {
+            return sessionStorage.getItem(STORAGE_KEY) === PASS_HASH;
+          } catch (e) {
+            return false;
+          }
+        }
+
+        function grant() {
+          try {
+            sessionStorage.setItem(STORAGE_KEY, PASS_HASH);
+          } catch (e) {}
+        }
+
+        function safeNext(raw) {
+          if (!raw || !raw.startsWith("/") || raw.startsWith("//") || raw.startsWith("/gate/")) {
+            return DEFAULT_NEXT;
+          }
+          return raw;
+        }
+
+        function redirectAfterLogin() {
+          var next = safeNext(new URLSearchParams(location.search).get("next") || "");
+          location.replace(next);
+        }
+
+        async function hashPassword(value) {
+          var bytes = new TextEncoder().encode(value);
+          var digest = await crypto.subtle.digest("SHA-256", bytes);
+          return Array.from(new Uint8Array(digest), function (b) {
+            return b.toString(16).padStart(2, "0");
+          }).join("");
+        }
+
+        async function tryLogin(password) {
+          var hash = await hashPassword(password);
+          if (hash !== PASS_HASH) return false;
+          grant();
+          return true;
+        }
+
+        function initLogin() {
+          if (authed()) {
+            redirectAfterLogin();
+            return;
+          }
+
+          document.documentElement.classList.replace("gate-pending", "gate-ready");
+
+          var form = document.getElementById("gate-form");
+          var input = document.getElementById("gate-password");
+          var wrap = document.querySelector(".gate-input-wrap");
+          var hint = document.getElementById("gate-hint");
+          if (!form || !input) return;
+
+          form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            hint.textContent = "";
+            wrap.classList.remove("is-error");
+
+            var ok = await tryLogin(input.value);
+            if (ok) {
+              redirectAfterLogin();
+              return;
+            }
+
+            wrap.classList.add("is-error");
+            hint.textContent = "Неверный пароль";
+            input.select();
+          });
+
+          input.focus();
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", initLogin);
+        } else {
+          initLogin();
+        }
+      })();
+    </script>
+  </body>
+</html>
