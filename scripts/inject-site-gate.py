@@ -37,7 +37,7 @@ def inject(html: str) -> tuple[str, bool]:
             return new_html, True
         return updated, changed
 
-    if GATE_GUARD_MARKER in updated and "document.cookie.split" in updated:
+    if GATE_GUARD_MARKER in updated and "function ga()" in updated:
         return updated, changed
 
     match = re.search(r'(<meta charset="utf-8">\n)', updated, re.IGNORECASE)

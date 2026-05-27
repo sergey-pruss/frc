@@ -1,7 +1,10 @@
 <!doctype html>
-<html lang="ru" class="gate-pending">
+<html lang="ru">
   <head>
     <meta charset="utf-8">
+    <script>
+(function(){var k="frc-gate-v1",h="c6c2307ac025abfed680cb646bc38ca3c3d6e02662a0f2faa143dcff22268a49",d="/seo/";function ga(){try{if(localStorage.getItem(k)===h)return!0}catch(e){}var c=document.cookie.split(";");for(var i=0;i<c.length;i++){var p=c[i].trim().split("=");if(p[0]===k)return decodeURIComponent(p.slice(1).join("="))===h}return!1}function sn(n){if(!n||n==="/"||n==="/index.html"||!n.startsWith("/")||n.startsWith("//")||n.indexOf("/gate")===0)return d;return n}if(ga())location.replace(sn(new URLSearchParams(location.search).get("next")||""));})();
+</script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Вход — FRC</title>
     <meta name="robots" content="noindex, nofollow">
@@ -20,8 +23,7 @@
         --gate-font: "Segoe UI", system-ui, -apple-system, sans-serif;
       }
       *, *::before, *::after { box-sizing: border-box; }
-      html.gate-pending body { visibility: hidden; }
-      html.gate-ready body { visibility: visible; }
+      html { background: var(--gate-bg); }
       body.gate-page {
         margin: 0;
         min-height: 100dvh;
@@ -175,21 +177,30 @@
         var COOKIE_MAX_AGE = 31536000;
 
         function readCookie(name) {
-          var parts = document.cookie.split("; ");
+          var parts = document.cookie.split(";");
           for (var i = 0; i < parts.length; i++) {
-            var pair = parts[i].split("=");
-            if (pair[0] === name) {
-              return decodeURIComponent(pair.slice(1).join("="));
+            var chunk = parts[i].trim();
+            if (!chunk) continue;
+            var eq = chunk.indexOf("=");
+            if (eq === -1) continue;
+            if (chunk.slice(0, eq) === name) {
+              return decodeURIComponent(chunk.slice(eq + 1));
             }
           }
           return "";
         }
 
         function authed() {
+          try {
+            if (localStorage.getItem(COOKIE_KEY) === PASS_HASH) return true;
+          } catch (e) {}
           return readCookie(COOKIE_KEY) === PASS_HASH;
         }
 
         function grant() {
+          try {
+            localStorage.setItem(COOKIE_KEY, PASS_HASH);
+          } catch (e) {}
           var secure = location.protocol === "https:" ? "; Secure" : "";
           document.cookie =
             COOKIE_KEY +
@@ -202,7 +213,14 @@
         }
 
         function safeNext(raw) {
-          if (!raw || !raw.startsWith("/") || raw.startsWith("//") || raw.startsWith("/gate/")) {
+          if (
+            !raw ||
+            raw === "/" ||
+            raw === "/index.html" ||
+            !raw.startsWith("/") ||
+            raw.startsWith("//") ||
+            raw.indexOf("/gate") === 0
+          ) {
             return DEFAULT_NEXT;
           }
           return raw;
@@ -233,8 +251,6 @@
             redirectAfterLogin();
             return;
           }
-
-          document.documentElement.classList.replace("gate-pending", "gate-ready");
 
           var form = document.getElementById("gate-form");
           var input = document.getElementById("gate-password");

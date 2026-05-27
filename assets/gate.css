@@ -21,6 +21,10 @@ html.gate-pending body {
   visibility: hidden;
 }
 
+html {
+  background: var(--gate-bg);
+}
+
 html.gate-ready body {
   visibility: visible;
 }

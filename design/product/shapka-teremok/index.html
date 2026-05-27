@@ -3,7 +3,12 @@
   <head>
     <meta charset="utf-8">
     <script>
-(function(){var k="frc-gate-v1",h="c6c2307ac025abfed680cb646bc38ca3c3d6e02662a0f2faa143dcff22268a49",g="/gate/",d="/seo/",v="",c=document.cookie.split("; ");for(var i=0;i<c.length;i++){var p=c[i].split("=");if(p[0]===k){v=decodeURIComponent(p.slice(1).join("="));break}}if(v===h){if(location.pathname==="/"||location.pathname==="/index.html")location.replace(d);return}var p=location.pathname+location.search+location.hash;location.replace(g+(p&&p!=="/"&&p!=="/index.html"?"?next="+encodeURIComponent(p):""));})();
+(function(){var k="frc-gate-v1",h="c6c2307ac025abfed680cb646bc38ca3c3d6e02662a0f2faa143dcff22268a49",g="/gate/",d="/seo/";function ga(){try{if(localStorage.getItem(k)===h)return!0}catch(e){}var c=document.cookie.split(";");for(var i=0;i<c.length;i++){var p=c[i].trim().split("=");if(p[0]===k)return decodeURIComponent(p.slice(1).join("="))===h}return!1}function sn(n){if(!n||n==="/"||n==="/index.html"||!n.startsWith("/")||n.startsWith("//")||n.indexOf("/gate")===0)return d;return n}
+if(location.pathname.indexOf("/gate")===0)return;
+if(ga()){if(location.pathname==="/"||location.pathname==="/index.html")location.replace(d);return}
+var n=location.pathname+location.search+location.hash;
+location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n):""));
+})();
 </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Шапка «Теремок» — Универмаг «Россия»</title>

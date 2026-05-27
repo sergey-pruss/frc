@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const COOKIE_KEY = "frc-gate-v1";
+  const AUTH_KEY = "frc-gate-v1";
   const PASS_HASH = "c6c2307ac025abfed680cb646bc38ca3c3d6e02662a0f2faa143dcff22268a49";
   const GATE_URL = "/gate/";
   const DEFAULT_NEXT = "/seo/";
@@ -11,18 +11,49 @@
   const isLoginPage = script?.hasAttribute("data-gate-login");
 
   function readCookie(name) {
-    const match = document.cookie.split("; ").find((part) => part.startsWith(`${name}=`));
-    if (!match) return "";
-    return decodeURIComponent(match.slice(name.length + 1));
+    for (const part of document.cookie.split(";")) {
+      const chunk = part.trim();
+      if (!chunk) continue;
+      const eq = chunk.indexOf("=");
+      if (eq === -1) continue;
+      if (chunk.slice(0, eq) === name) {
+        return decodeURIComponent(chunk.slice(eq + 1));
+      }
+    }
+    return "";
   }
 
   function authed() {
-    return readCookie(COOKIE_KEY) === PASS_HASH;
+    try {
+      if (localStorage.getItem(AUTH_KEY) === PASS_HASH) return true;
+    } catch {
+      /* private mode */
+    }
+    return readCookie(AUTH_KEY) === PASS_HASH;
   }
 
   function grant() {
+    try {
+      localStorage.setItem(AUTH_KEY, PASS_HASH);
+    } catch {
+      /* private mode */
+    }
     const secure = location.protocol === "https:" ? "; Secure" : "";
-    document.cookie = `${COOKIE_KEY}=${PASS_HASH}; Path=/; Max-Age=${COOKIE_MAX_AGE}; SameSite=Lax${secure}`;
+    document.cookie = `${AUTH_KEY}=${PASS_HASH}; Path=/; Max-Age=${COOKIE_MAX_AGE}; SameSite=Lax${secure}`;
+  }
+
+  function safeNext(raw) {
+    if (
+      !raw ||
+      raw === "/" ||
+      raw === "/index.html" ||
+      !raw.startsWith("/") ||
+      raw.startsWith("//") ||
+      raw.startsWith(GATE_URL)
+    ) {
+      return DEFAULT_NEXT;
+    }
+    return raw;
   }
 
   async function hashPassword(value) {
@@ -31,19 +62,14 @@
     return Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, "0")).join("");
   }
 
-  function safeNext(raw) {
-    if (!raw || !raw.startsWith("/") || raw.startsWith("//") || raw.startsWith(GATE_URL)) {
-      return DEFAULT_NEXT;
-    }
-    return raw;
-  }
-
   function redirectAfterLogin() {
     const next = safeNext(new URLSearchParams(location.search).get("next") || "");
     location.replace(next);
   }
 
   if (!isLoginPage) {
+    if (location.pathname.startsWith("/gate")) return;
+
     if (!authed()) {
       const returnTo = location.pathname + location.search + location.hash;
       const suffix =
@@ -60,7 +86,10 @@
     return;
   }
 
-  document.documentElement.classList.add("gate-pending");
+  if (authed()) {
+    redirectAfterLogin();
+    return;
+  }
 
   async function tryLogin(password) {
     const hash = await hashPassword(password);
@@ -70,13 +99,6 @@
   }
 
   function initLogin() {
-    if (authed()) {
-      redirectAfterLogin();
-      return;
-    }
-
-    document.documentElement.classList.replace("gate-pending", "gate-ready");
-
     const form = document.getElementById("gate-form");
     const input = document.getElementById("gate-password");
     const wrap = document.querySelector(".gate-input-wrap");
