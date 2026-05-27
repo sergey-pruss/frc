@@ -154,6 +154,69 @@ AUTO_BADGES = re.compile(
     re.I,
 )
 
+# Editorial review flags for Drive tab «Полный спрос 100+» (column «Спорный»).
+CONTROVERSIAL_RULES: list[tuple[str, re.Pattern[str], str]] = [
+    (
+        "Видеоигры / CS / TF2 / онлайн-значки",
+        re.compile(
+            r"кс\s*2|cs\s*2|cs2|counter.?strike|бравл|brawl|"
+            r"тф\s*2|tf\s*2|tf2|team.?fortress|"
+            r"значки?\s*кс(?:\s|$)|значки?\s*cs(?:\s|$)|(?:^|\s)кс2(?:\s|$)|"
+            r"(?:значк.*игр|игр.*значк|шапк.*тф|тф.*шапк)",
+            re.I,
+        ),
+        "high",
+    ),
+    (
+        "Авто-бренды / авто-значки",
+        re.compile(
+            r"тойота|форд|шевроле|киа|рено|хендай|мазда|шкода|nissan|"
+            r"бмв|bmw|мерседes|фольксваген|volkswagen|"
+            r"на бампер|на руль|передний значок|авто|машин|капот|радиатор",
+            re.I,
+        ),
+        "high",
+    ),
+    (
+        "Спортклубы",
+        re.compile(r"футбольн.*значк|значк.*футбольн|спартак|цска|динамо|локомотив", re.I),
+        "high",
+    ),
+    (
+        "Коллекционеры / заготовки",
+        re.compile(
+            r"советск|старые значк|заготовк|альбом для значк|изготовлен|закатн|"
+            r"оригинальные значк|наклейки и значк|магнит",
+            re.I,
+        ),
+        "med",
+    ),
+    (
+        "Школа / пионеры / ведомства",
+        re.compile(
+            r"пионер|октябр|орленок|орлята|комсомол|отличник|классность|"
+            r"ветеран|мвд|парашют|мастер спорт|день химика|мгу|юнарм|вмф|кмс|"
+            r"разряда|выпускник|об окончани|классност",
+            re.I,
+        ),
+        "med",
+    ),
+    (
+        "Фрагменты / навигация",
+        re.compile(
+            r"^значок \d|купить значок \d$|можно купить|на пиджак|"
+            r"в каком магазине|в интернете|сайт|где ",
+            re.I,
+        ),
+        "med",
+    ),
+    (
+        "Локальный спрос (город)",
+        re.compile(r"значк.*(москв|новосиб|краснояр|самар|перм|омск|иркут)", re.I),
+        "med",
+    ),
+]
+
 
 def has_incomplete_fragment(phrase: str) -> bool:
     """Wordstat autocomplete tails like «купить книгу м» or «футболку х б»."""
@@ -165,6 +228,27 @@ def has_incomplete_fragment(phrase: str) -> bool:
     if len(words) >= 2 and all(len(w) == 1 and w.isalpha() for w in words[-2:]):
         return True
     return False
+
+
+def classify_controversial(phrase: str) -> tuple[str, str] | None:
+    """Return (reason, severity) when a query needs editorial review."""
+    for reason, pattern, severity in CONTROVERSIAL_RULES:
+        if pattern.search(phrase):
+            return reason, severity
+    return None
+
+
+def annotate_controversial(queries: list[dict]) -> None:
+    for row in queries:
+        hit = classify_controversial(row["phrase"])
+        if hit:
+            row["controversial"] = "Да"
+            row["controversial_reason"] = hit[0]
+            row["controversial_severity"] = hit[1]
+        else:
+            row["controversial"] = ""
+            row["controversial_reason"] = ""
+            row["controversial_severity"] = ""
 
 
 def is_junk_query(phrase: str) -> bool:
@@ -378,6 +462,7 @@ def main() -> None:
         for q in cleaned
         if q["cluster"] != "Книги" or is_commercial_book(q["phrase"])
     ]
+    annotate_controversial(cleaned)
 
     full_doc = {
         "generated_at": date.today().isoformat(),
@@ -404,6 +489,8 @@ def main() -> None:
             ("seed", "Маска (seed)"),
             ("phrase", "Запрос"),
             ("shows", "Показы/мес"),
+            ("controversial", "Спорный"),
+            ("controversial_reason", "Причина"),
         ],
     )
     top_rows: list[dict] = []
@@ -416,6 +503,8 @@ def main() -> None:
                     "phrase": item["phrase"],
                     "shows": item["shows"],
                     "seed": item.get("seed", ""),
+                    "controversial": item.get("controversial", ""),
+                    "controversial_reason": item.get("controversial_reason", ""),
                 }
             )
     write_csv(
@@ -427,6 +516,8 @@ def main() -> None:
             ("seed", "Маска (seed)"),
             ("phrase", "Запрос"),
             ("shows", "Показы/мес"),
+            ("controversial", "Спорный"),
+            ("controversial_reason", "Причина"),
         ],
     )
 

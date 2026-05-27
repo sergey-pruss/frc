@@ -8,61 +8,91 @@
         "seed": "ветровка купить",
         "phrase": "купить ветровку",
         "shows": 47534,
-        "cluster": "Ветровки"
+        "cluster": "Ветровки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "ветровка купить",
         "phrase": "ветровка с капюшоном купить",
         "shows": 1488,
-        "cluster": "Ветровки"
+        "cluster": "Ветровки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "ветровка купить",
         "phrase": "ветровка мужская купить",
         "shows": 15762,
-        "cluster": "Ветровки"
+        "cluster": "Ветровки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "ветровка купить",
         "phrase": "купить ветровку женскую",
         "shows": 15654,
-        "cluster": "Ветровки"
+        "cluster": "Ветровки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "ветровка купить",
         "phrase": "купить ветровка размер",
         "shows": 4708,
-        "cluster": "Ветровки"
+        "cluster": "Ветровки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "ветровка купить",
         "phrase": "купить летнюю ветровку",
         "shows": 4140,
-        "cluster": "Ветровки"
+        "cluster": "Ветровки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "ветровка купить",
         "phrase": "ветровки размер женские купить",
         "shows": 2684,
-        "cluster": "Ветровки"
+        "cluster": "Ветровки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "ветровка купить",
         "phrase": "купить ветровку больших",
         "shows": 2682,
-        "cluster": "Ветровки"
+        "cluster": "Ветровки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "ветровка купить",
         "phrase": "ветровка мужская летняя купить",
         "shows": 2626,
-        "cluster": "Ветровки"
+        "cluster": "Ветровки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "ветровка купить",
         "phrase": "купить куртку ветровку",
         "shows": 2615,
-        "cluster": "Ветровки"
+        "cluster": "Ветровки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       }
     ],
     "Детские игры": [
@@ -70,43 +100,64 @@
         "seed": "детская игра купить",
         "phrase": "детская игра купить",
         "shows": 2006,
-        "cluster": "Детские игры"
+        "cluster": "Детские игры",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "детская игра купить",
         "phrase": "детские настольные игры купить",
         "shows": 269,
-        "cluster": "Детские игры"
+        "cluster": "Детские игры",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "настольная игра для детей",
         "phrase": "настольные игры для детей купить",
         "shows": 365,
-        "cluster": "Детские игры"
+        "cluster": "Детские игры",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "настольная игра для детей",
         "phrase": "настольные игры для детей",
         "shows": 14931,
-        "cluster": "Детские игры"
+        "cluster": "Детские игры",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "настольная игра для детей",
         "phrase": "развивающие настольные игры для детей",
         "shows": 738,
-        "cluster": "Детские игры"
+        "cluster": "Детские игры",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "детская игра купить",
         "phrase": "игра детский сад купить",
         "shows": 487,
-        "cluster": "Детские игры"
+        "cluster": "Детские игры",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "детская игра купить",
         "phrase": "купить игру детский магазин",
         "shows": 104,
-        "cluster": "Детские игры"
+        "cluster": "Детские игры",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       }
     ],
     "Значки": [
@@ -114,61 +165,91 @@
         "seed": "значок купить",
         "phrase": "значки купить",
         "shows": 45263,
-        "cluster": "Значки"
+        "cluster": "Значки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "значок купить",
         "phrase": "купить значок лента",
         "shows": 2023,
-        "cluster": "Значки"
+        "cluster": "Значки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "значок купить",
         "phrase": "значок можно купить",
         "shows": 1761,
-        "cluster": "Значки"
+        "cluster": "Значки",
+        "controversial": "Да",
+        "controversial_reason": "Фрагменты / навигация",
+        "controversial_severity": "med"
       },
       {
         "seed": "значок купить",
         "phrase": "значок 1 купить",
         "shows": 1268,
-        "cluster": "Значки"
+        "cluster": "Значки",
+        "controversial": "Да",
+        "controversial_reason": "Фрагменты / навигация",
+        "controversial_severity": "med"
       },
       {
         "seed": "значок купить",
         "phrase": "купить значок 5",
         "shows": 1174,
-        "cluster": "Значки"
+        "cluster": "Значки",
+        "controversial": "Да",
+        "controversial_reason": "Фрагменты / навигация",
+        "controversial_severity": "med"
       },
       {
         "seed": "значок купить",
         "phrase": "значки россия купить",
         "shows": 1124,
-        "cluster": "Значки"
+        "cluster": "Значки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "значок купить",
         "phrase": "значок победа купить",
         "shows": 716,
-        "cluster": "Значки"
+        "cluster": "Значки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "значок купить",
         "phrase": "купить значок спорт",
         "shows": 657,
-        "cluster": "Значки"
+        "cluster": "Значки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "значок купить",
         "phrase": "значки большие купить",
         "shows": 636,
-        "cluster": "Значки"
+        "cluster": "Значки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "значок купить",
         "phrase": "магазин купить значки",
         "shows": 505,
-        "cluster": "Значки"
+        "cluster": "Значки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       }
     ],
     "Кепки": [
@@ -176,61 +257,91 @@
         "seed": "кепка купить",
         "phrase": "купить кепку",
         "shows": 50222,
-        "cluster": "Кепки"
+        "cluster": "Кепки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "кепка купить",
         "phrase": "купить черную кепку",
         "shows": 804,
-        "cluster": "Кепки"
+        "cluster": "Кепки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "кепка купить",
         "phrase": "купить кепку мужскую",
         "shows": 10639,
-        "cluster": "Кепки"
+        "cluster": "Кепки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "кепка купить",
         "phrase": "купить кепку летнюю",
         "shows": 4111,
-        "cluster": "Кепки"
+        "cluster": "Кепки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "кепка купить",
         "phrase": "купить кепку мужскую летнюю",
         "shows": 2868,
-        "cluster": "Кепки"
+        "cluster": "Кепки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "кепка купить",
         "phrase": "купить кепку женскую",
         "shows": 1742,
-        "cluster": "Кепки"
+        "cluster": "Кепки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "кепка купить",
         "phrase": "кепка восьмиклинка купить",
         "shows": 1736,
-        "cluster": "Кепки"
+        "cluster": "Кепки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "кепка купить",
         "phrase": "купить кепку оригинал",
         "shows": 1509,
-        "cluster": "Кепки"
+        "cluster": "Кепки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "кепка купить",
         "phrase": "кепка восьмиклинка мужская купить",
         "shows": 1257,
-        "cluster": "Кепки"
+        "cluster": "Кепки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "кепка купить",
         "phrase": "купить кепку бони",
         "shows": 1199,
-        "cluster": "Кепки"
+        "cluster": "Кепки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       }
     ],
     "Книги": [
@@ -238,31 +349,46 @@
         "seed": "подарочная книга",
         "phrase": "подарочные книги",
         "shows": 16021,
-        "cluster": "Книги"
+        "cluster": "Книги",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "книга купить",
         "phrase": "купить подарочную книгу",
         "shows": 1995,
-        "cluster": "Книги"
+        "cluster": "Книги",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "книга купить",
         "phrase": "книга россия купить",
         "shows": 7948,
-        "cluster": "Книги"
+        "cluster": "Книги",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "книга о россии",
         "phrase": "купить книгу о россии",
         "shows": 253,
-        "cluster": "Книги"
+        "cluster": "Книги",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "сувенирная книга",
         "phrase": "сувенирные книги",
         "shows": 401,
-        "cluster": "Книги"
+        "cluster": "Книги",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       }
     ],
     "Куртки": [
@@ -270,61 +396,91 @@
         "seed": "куртка купить",
         "phrase": "купить куртку",
         "shows": 170193,
-        "cluster": "Куртки"
+        "cluster": "Куртки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "куртка купить",
         "phrase": "купить демисезонную куртку",
         "shows": 13719,
-        "cluster": "Куртки"
+        "cluster": "Куртки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "куртка купить",
         "phrase": "купить куртку с капюшоном",
         "shows": 4012,
-        "cluster": "Куртки"
+        "cluster": "Куртки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "куртка купить",
         "phrase": "купить куртку мужскую",
         "shows": 52920,
-        "cluster": "Куртки"
+        "cluster": "Куртки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "куртка купить",
         "phrase": "купить куртку женскую",
         "shows": 36798,
-        "cluster": "Куртки"
+        "cluster": "Куртки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "куртка купить",
         "phrase": "купить кожаную куртку",
         "shows": 28037,
-        "cluster": "Куртки"
+        "cluster": "Куртки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "куртка купить",
         "phrase": "купить джинсовую куртку",
         "shows": 14391,
-        "cluster": "Куртки"
+        "cluster": "Куртки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "куртка купить",
         "phrase": "кожаная куртка мужская купить",
         "shows": 12268,
-        "cluster": "Куртки"
+        "cluster": "Куртки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "куртка купить",
         "phrase": "купить куртку размера",
         "shows": 9102,
-        "cluster": "Куртки"
+        "cluster": "Куртки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "куртка купить",
         "phrase": "купить зимнюю куртку",
         "shows": 7278,
-        "cluster": "Куртки"
+        "cluster": "Куртки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       }
     ],
     "Свитшоты": [
@@ -332,55 +488,82 @@
         "seed": "свитшот купить",
         "phrase": "купить свитшот",
         "shows": 4803,
-        "cluster": "Свитшоты"
+        "cluster": "Свитшоты",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "свитшот купить",
         "phrase": "свитшоты черные купить",
         "shows": 110,
-        "cluster": "Свитшоты"
+        "cluster": "Свитшоты",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "свитшот купить",
         "phrase": "купить свитшот женский",
         "shows": 1055,
-        "cluster": "Свитшоты"
+        "cluster": "Свитшоты",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "свитшот купить",
         "phrase": "купить свитшот мужской",
         "shows": 966,
-        "cluster": "Свитшоты"
+        "cluster": "Свитшоты",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "свитшот купить",
         "phrase": "купить свитшот с вышивкой",
         "shows": 158,
-        "cluster": "Свитшоты"
+        "cluster": "Свитшоты",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "свитшот купить",
         "phrase": "свитшот оверсайз купить",
         "shows": 122,
-        "cluster": "Свитшоты"
+        "cluster": "Свитшоты",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "свитшот купить",
         "phrase": "купить белые свитшоты",
         "shows": 110,
-        "cluster": "Свитшоты"
+        "cluster": "Свитшоты",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "свитшот купить",
         "phrase": "купить свитшот мужской с вышивкой",
         "shows": 109,
-        "cluster": "Свитшоты"
+        "cluster": "Свитшоты",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "свитшот купить",
         "phrase": "купить свитшот на молнии",
         "shows": 104,
-        "cluster": "Свитшоты"
+        "cluster": "Свитшоты",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       }
     ],
     "Футболки": [
@@ -388,61 +571,91 @@
         "seed": "футболка купить",
         "phrase": "футболки купить",
         "shows": 191270,
-        "cluster": "Футболки"
+        "cluster": "Футболки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "футболка купить",
         "phrase": "купить белую футболку",
         "shows": 6880,
-        "cluster": "Футболки"
+        "cluster": "Футболки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "футболка купить",
         "phrase": "купить черную футболку",
         "shows": 3879,
-        "cluster": "Футболки"
+        "cluster": "Футболки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "футболка купить",
         "phrase": "купить футболку с принтом",
         "shows": 4418,
-        "cluster": "Футболки"
+        "cluster": "Футболки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "футболка купить",
         "phrase": "футболка мужская купить",
         "shows": 41407,
-        "cluster": "Футболки"
+        "cluster": "Футболки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "футболка купить",
         "phrase": "футболка женская купить",
         "shows": 36255,
-        "cluster": "Футболки"
+        "cluster": "Футболки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "футболка купить",
         "phrase": "купить футболку размер",
         "shows": 11646,
-        "cluster": "Футболки"
+        "cluster": "Футболки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "футболка купить",
         "phrase": "футболки большие купить",
         "shows": 9207,
-        "cluster": "Футболки"
+        "cluster": "Футболки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "футболка купить",
         "phrase": "футболка хлопок купить",
         "shows": 7289,
-        "cluster": "Футболки"
+        "cluster": "Футболки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "футболка купить",
         "phrase": "купить футболку большого размера",
         "shows": 6952,
-        "cluster": "Футболки"
+        "cluster": "Футболки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       }
     ],
     "Худи": [
@@ -450,61 +663,91 @@
         "seed": "худи купить",
         "phrase": "худи купить",
         "shows": 16847,
-        "cluster": "Худи"
+        "cluster": "Худи",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "худи купить",
         "phrase": "купить худи с капюшоном",
         "shows": 1478,
-        "cluster": "Худи"
+        "cluster": "Худи",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "худи купить",
         "phrase": "купить черный худи",
         "shows": 568,
-        "cluster": "Худи"
+        "cluster": "Худи",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "худи купить",
         "phrase": "купить худи мужскую",
         "shows": 2350,
-        "cluster": "Худи"
+        "cluster": "Худи",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "худи купить",
         "phrase": "худи женское купить",
         "shows": 1615,
-        "cluster": "Худи"
+        "cluster": "Худи",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "худи купить",
         "phrase": "купить зип худи",
         "shows": 1315,
-        "cluster": "Худи"
+        "cluster": "Худи",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "худи купить",
         "phrase": "купить худи мужскую с капюшоном",
         "shows": 664,
-        "cluster": "Худи"
+        "cluster": "Худи",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "худи купить",
         "phrase": "купить худи оригинал",
         "shows": 574,
-        "cluster": "Худи"
+        "cluster": "Худи",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "худи купить",
         "phrase": "худи на молнии купить",
         "shows": 569,
-        "cluster": "Худи"
+        "cluster": "Худи",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "худи купить",
         "phrase": "худи с капюшоном женская купить",
         "shows": 511,
-        "cluster": "Худи"
+        "cluster": "Худи",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       }
     ],
     "Шапки": [
@@ -512,61 +755,91 @@
         "seed": "шапка купить",
         "phrase": "купить шапку",
         "shows": 22732,
-        "cluster": "Шапки"
+        "cluster": "Шапки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "шапка купить",
         "phrase": "шапка мужская купить",
         "shows": 2478,
-        "cluster": "Шапки"
+        "cluster": "Шапки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "шапка купить",
         "phrase": "шапки женские купить",
         "shows": 2265,
-        "cluster": "Шапки"
+        "cluster": "Шапки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "шапка купить",
         "phrase": "зимний шапка купить",
         "shows": 1038,
-        "cluster": "Шапки"
+        "cluster": "Шапки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "шапка купить",
         "phrase": "шапка ушанка купить",
         "shows": 779,
-        "cluster": "Шапки"
+        "cluster": "Шапки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "шапка купить",
         "phrase": "шапка для бани купить",
         "shows": 619,
-        "cluster": "Шапки"
+        "cluster": "Шапки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "шапка купить",
         "phrase": "купить меховую шапку",
         "shows": 503,
-        "cluster": "Шапки"
+        "cluster": "Шапки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "шапка купить",
         "phrase": "купить летнюю шапку",
         "shows": 493,
-        "cluster": "Шапки"
+        "cluster": "Шапки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "шапка купить",
         "phrase": "купить шапку шарф",
         "shows": 491,
-        "cluster": "Шапки"
+        "cluster": "Шапки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "шапка купить",
         "phrase": "шапка зимняя мужская купить",
         "shows": 483,
-        "cluster": "Шапки"
+        "cluster": "Шапки",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       }
     ],
     "Шоперы": [
@@ -574,13 +847,19 @@
         "seed": "шопер купить",
         "phrase": "шопер купить",
         "shows": 1749,
-        "cluster": "Шоперы"
+        "cluster": "Шоперы",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       },
       {
         "seed": "шопер купить",
         "phrase": "сумка шопер купить",
         "shows": 601,
-        "cluster": "Шоперы"
+        "cluster": "Шоперы",
+        "controversial": "",
+        "controversial_reason": "",
+        "controversial_severity": ""
       }
     ]
   }
