@@ -433,16 +433,15 @@ location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n)
             <li>Первый проход: 11 базовых товарных масок, 1256 строк 100+ до ручной смысловой чистки.</li>
             <li>После первичной очистки от маркетплейсов, чужих брендов, нерелевантных сценариев и информационного мусора: 910 запроса 100+.</li>
             <li>Второй проход по статичным фильтрам: цвет, размер и цвет+размер для худи, свитшотов и футболок; размерные запросы в чистом виде чаще ниже 100, но «большой размер», XL/2XL/3XL и цветовые посадочные дают спрос.</li>
-            <li>Досбор 27.05.2026: книги, подарочные и сувенирные маски; полные выгрузки — в <a href="#semantics-drive">таблицах на Google Drive</a>, локальные JSON — <code>data/catalog-wordstat-full.json</code> и <code>data/catalog-keywords-top10.json</code>.</li>
-            <li>Минус-лист и сбор: <code>data/wordstat-exclude-patterns.txt</code>, <code>scripts/build-catalog-wordstat.py</code>.</li>
+            <li>Досбор 27.05.2026: книги, подарочные и сувенирные маски; полный массив запросов — в <a href="#semantics-drive">таблицах на Google Drive</a>.</li>
           </ul>
 
           <div class="section-label-wrap" id="semantics-drive">
             <h3 class="subsection-title">Рабочие таблицы семантики на Google Drive</h3>
             <p>
-              Полные массивы для фильтрации, согласования с клиентом и передачи в разработку лежат в
+              Полные массивы для фильтрации, согласования и работы с подрядчиками лежат в
               <a href="https://drive.google.com/drive/folders/1lNe8YZ3axwHMfVJ-AgcH-pXWC5KJ4LWm" target="_blank" rel="noopener">общей папке SEO на Google Drive</a>.
-              Ниже в отчёте — сжатые выборки; в таблицах — все строки с автофильтром и форматированием.
+              Ниже в отчёте — сжатые выборки; в таблицах — все строки с фильтрами и удобной навигацией по вкладкам.
             </p>
             <div class="cards drive-cards">
               <article class="card drive-card">
@@ -454,7 +453,7 @@ location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n)
                   <li>
                     <strong>Вкладка 1 — «Полный спрос 100+»</strong> — все 910 очищенных запросов Wordstat:
                     кластер, показы/мес, посев, пометка спорных фраз. Нужна для полного просмотра ядра,
-                    поиска хвостов и проверки минус-листа.
+                    поиска хвостов и согласования минус-листа.
                   </li>
                   <li>
                     <strong>Вкладка 2 — «Топ 5–10 на категорию»</strong> — по каждому товарному кластеру
@@ -469,10 +468,10 @@ location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n)
                 </p>
               </article>
               <article class="card drive-card">
-                <h4>Кандидаты на статичные фильтры (SEO whitelist)</h4>
+                <h4>Кандидаты на статичные фильтры</h4>
                 <p>
-                  White-list одиночных фильтров: запрос, частота, пример URL и решение — открывать
-                  статичную посадочную или оставить комбинацию в AJAX/noindex.
+                  Список одиночных фильтров: запрос, частота, пример URL и решение — открывать
+                  отдельную посадочную или оставить комбинацию только в каталоге без индексации.
                 </p>
                 <p class="drive-links">
                   <a href="https://docs.google.com/spreadsheets/d/1jeVYuaGnOb9umrpWLReO9kZJNZ2pTidYxgse_LeYD3s/edit#gid=120823179" target="_blank" rel="noopener">Открыть таблицу</a>
@@ -480,10 +479,7 @@ location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n)
                 </p>
               </article>
             </div>
-            <p class="sync-meta">
-              Обновление выгрузок: <code>npm run build:wordstat</code>, затем <code>npm run sync:seo-drive</code>.
-              Последний досбор Wordstat — 27.05.2026.
-            </p>
+            <p class="sync-meta">Данные в таблицах актуальны по состоянию на 27.05.2026.</p>
           </div>
 
           <h3 class="subsection-title">Как считать частотность</h3>
@@ -819,7 +815,7 @@ location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n)
           <h3 class="subsection-title">Ключевые запросы для статичных фильтров</h3>
           <p>
             Эта таблица показывает, какие фильтры можно превращать в отдельные статичные
-            SEO-страницы. Полный white-list с частотами и URL — в
+            SEO-страницы. Полный список с частотами и URL — в
             <a href="https://docs.google.com/spreadsheets/d/1jeVYuaGnOb9umrpWLReO9kZJNZ2pTidYxgse_LeYD3s/edit#gid=120823179" target="_blank" rel="noopener">таблице на Drive</a>
             (<a href="#semantics-drive">описание</a>).
             Если запрос имеет 100+ показов, есть товары в наличии и страница не
