@@ -40,7 +40,7 @@ FILTER_COLORS = [
 ]
 
 CATEGORY_SEO_NOUNS = {
-    "khudi": ("худи", "худи"),
+    "hudi": ("худи", "худи"),
     "svitshoty": ("свитшот", "свитшоты"),
     "futbolki": ("футболка", "футболки"),
     "vetrovki": ("ветровка", "ветровки"),
@@ -98,7 +98,7 @@ def normalize_color(value: str) -> str:
 
 
 MODEL_CARD_IMAGES = {
-    "khudi": "/assets/generated/fashion/khudi-models.png",
+    "hudi": "/assets/generated/fashion/khudi-models.png",
     "svitshoty": "/assets/generated/fashion/svitshoty-bez-flisa-models.png",
     "futbolki": "/assets/generated/fashion/futbolki-models.png",
     "vetrovki": "/assets/generated/fashion/vetrovki-models.png",
@@ -447,6 +447,7 @@ def catalog_filter_panel(depth: int, *, active: str | None = None, color: str | 
             <legend>Наличие</legend>
             <div class="filter-options"><label class="is-active"><input type="checkbox" checked data-filter-stock> В наличии</label><label><input type="checkbox" data-filter-gift> Подарочные сертификаты</label></div>
           </fieldset>
+          <p class="filter-demo-note">Комбинации цвет + размер меняют выдачу через AJAX без смены URL. В индекс попадают только одиночные ЧПУ-фильтры из SEO-белого списка.</p>
         </aside>"""
 
 
@@ -467,12 +468,29 @@ def store_collection_cards(prototype_depth: int = 1) -> str:
     )
 
 
-def seo_filter_keyword(category_slug: str, color_slug: str, size: str) -> tuple[str, str]:
-    singular, plural = CATEGORY_SEO_NOUNS[category_slug]
-    color = next(color_label for slug, _base, color_label in FILTER_COLORS if slug == color_slug)
-    keyword = f"{singular} {color} {size.upper()}"
-    heading = f"{plural.capitalize()} {color} {size.upper()} — купить с доставкой по России"
-    return keyword, heading
+# (category_slug, url_slug, title_keyword, optional color_slug for product filter)
+SEO_FILTER_PAGES: list[tuple[str, str, str, str | None]] = [
+    ("futbolki", "belye", "купить белую футболку", "belye"),
+    ("futbolki", "chernye", "купить черную футболку", "chernye"),
+    ("futbolki", "krasnye", "купить красную футболку", "krasnye"),
+    ("futbolki", "razmery", "купить футболку размер", None),
+    ("futbolki", "bolshie-razmery", "купить футболку большого размера", None),
+    ("futbolki", "s-printom", "купить футболку с принтом", None),
+    ("hudi", "chernye", "купить черный худи", "chernye"),
+    ("hudi", "belye", "купить белое худи", "belye"),
+    ("hudi", "s-kapyushonom", "купить худи с капюшоном", None),
+    ("hudi", "na-molnii", "худи на молнии купить", None),
+    ("svitshoty", "chernye", "свитшоты черные купить", "chernye"),
+    ("kurtki", "razmery", "купить куртку размера", None),
+    ("kurtki", "demisezonnye", "купить демисезонную куртку", None),
+    ("kurtki", "s-kapyushonom", "купить куртку с капюшоном", None),
+    ("vetrovki", "s-kapyushonom", "ветровка с капюшоном купить", None),
+]
+
+
+def seo_filter_heading(category_slug: str, keyword: str) -> str:
+    plural = CATEGORY_SEO_NOUNS.get(category_slug, ("товар", "товары"))[1]
+    return f"{keyword.capitalize()} — {plural} Универмага «Россия»"
 
 
 def products_for_collection(slug: str) -> list:
@@ -837,47 +855,57 @@ def main() -> None:
             ),
         )
 
-        for color_slug, _color_base, color_plural in FILTER_COLORS:
-            for size in FILTER_SIZES:
-                keyword, heading = seo_filter_keyword(slug, color_slug, size)
-                color_products = [
-                    p for p in items if color_slug in {normalize_color(c) for c in p["colors"]}
+        for cat_slug, url_slug, keyword, color_slug in SEO_FILTER_PAGES:
+            if cat_slug != slug:
+                continue
+            if color_slug:
+                filter_products = [
+                    p
+                    for p in items
+                    if color_slug in {normalize_color(c) for c in p["colors"]}
                 ] or items[: min(4, len(items))]
-                write(
-                    f"catalog/{slug}/{color_slug}-{size.lower()}/index.html",
-                    shell(
-                        3,
-                        heading,
-                        f"""
+            else:
+                filter_products = items[: min(8, len(items))] or items
+            heading = seo_filter_heading(slug, keyword)
+            color_plural = next(
+                (plural for s, _b, plural in FILTER_COLORS if s == color_slug),
+                "все цвета",
+            )
+            write(
+                f"catalog/{slug}/{url_slug}/index.html",
+                shell(
+                    3,
+                    heading,
+                    f"""
       <section class="store-hero store-hero--category">
         <div class="wrap">
           <nav class="breadcrumbs"><a href="../../../">Главная</a> / <a href="../../">Каталог</a> / <a href="../">{label}</a> / <span>{keyword}</span></nav>
           <h1>{heading}</h1>
-          <p>{keyword}: статичная SEO-страница фильтра с постоянным адресом, отдельными метатегами, заголовком, хлебными крошками и alt у товарных фото.</p>
+          <p>{keyword}: статичная SEO-страница с ЧПУ-адресом <code>/catalog/{slug}/{url_slug}/</code>. Отдельные title, description, h1 и alt у товарных фото.</p>
         </div>
       </section>
       <section class="store-products store-products--seo-filter">
         <div class="wrap">
           <div class="store-layout">
-            {catalog_filter_panel(3, active=slug, color=color_slug, size=size.lower())}
+            {catalog_filter_panel(3, active=slug, color=color_slug)}
             <div>
               <div class="store-sortbar">
-                <span><b data-filter-count>{len(color_products)}</b> товаров · фильтр: {color_plural}, размер {size.upper()}</span>
+                <span><b data-filter-count>{len(filter_products)}</b> товаров · одиночный SEO-фильтр{f" · {color_plural}" if color_slug else ""}</span>
                 <select aria-label="Сортировка"><option>Рекомендованные</option><option>Сначала новые</option><option>По возрастанию цены</option></select>
               </div>
-              <div class="apple-store-grid apple-store-grid--catalog">{"".join(card(p, 3, editorial=True, seo_keyword=f"{keyword} — {p['title']} в Универмаге «Россия»") for p in color_products)}</div>
+              <div class="apple-store-grid apple-store-grid--catalog">{"".join(card(p, 3, editorial=True, seo_keyword=f"{keyword} — {p['title']} в Универмаге «Россия»") for p in filter_products)}</div>
               <div class="filter-empty" data-filter-empty>По выбранным фильтрам товаров не найдено. Сбросьте фильтр или выберите соседний размер.</div>
             </div>
           </div>
           <section class="content-block prose seo-filter-copy">
-            <h2>{keyword}: посадочная страница под поисковый спрос</h2>
-            <p>Эта страница показывает принцип SEO-структуры: URL фиксирован, ключевая фраза есть в title, description, h1, хлебных крошках, тексте и alt-атрибутах изображений. Такие страницы можно индексировать отдельно от общего каталога и связывать внутренней перелинковкой из фильтров.</p>
+            <h2>{keyword}: посадочная под поисковый спрос</h2>
+            <p>Одиночное свойство в URL индексируется отдельно. Комбинации «цвет + размер» в боковой панели работают через AJAX и не создают новых адресов — как в ТЗ для CMS.</p>
           </section>
         </div>
       </section>""",
-                        f"{keyword} в официальном магазине Национального центра «Россия»: размер {size.upper()}, цвет {color_plural}, доставка СДЭК или Яндекс, оплата сразу или при получении.",
-                    ),
-                )
+                    f"{keyword} в официальном магазине Национального центра «Россия». Доставка СДЭК или Яндекс, оплата сразу или при получении.",
+                ),
+            )
 
     write(
         "catalog/new/index.html",

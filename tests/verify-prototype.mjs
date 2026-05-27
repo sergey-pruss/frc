@@ -186,10 +186,20 @@ const checks = [
       !/Дизайн-прототип/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')),
   ],
   [
-    'internal design route exposes three project tabs',
+    'internal design route exposes project doc tabs',
     /Дизайн-прототип/.test(siteJs) &&
       /docsRoot/.test(siteJs) &&
-      /href="\$\{docsRoot\}seo\/"/.test(siteJs),
+      /href="\$\{docsRoot\}seo\/"/.test(siteJs) &&
+      /href="\$\{docsRoot\}content-strategy\/"/.test(siteJs),
+  ],
+  [
+    'client docs expose content strategy tab',
+    /href="\.\.\/content-strategy\/">Контент-стратегия<\/a>/.test(
+      readFileSync(join(root, 'seo/index.html'), 'utf8'),
+    ) &&
+      /href="\.\.\/content-strategy\/">Контент-стратегия<\/a>/.test(
+        readFileSync(join(root, 'analysis/index.html'), 'utf8'),
+      ),
   ],
   ['expanded catalog has at least 26 products', productDirs.length >= 26],
   ['all products have generated local images', generatedProductImages.length >= productDirs.length],
@@ -273,9 +283,10 @@ const checks = [
   ],
   [
     'catalog categories match client brief',
-    ['khudi', 'svitshoty', 'futbolki', 'vetrovki', 'kurtki', 'aksessuary'].every((slug) =>
+    ['hudi', 'svitshoty', 'futbolki', 'vetrovki', 'kurtki', 'aksessuary'].every((slug) =>
       catalogDirs.includes(slug),
     ) &&
+      !catalogDirs.includes('khudi') &&
       ['longslivy', 'svitshoty-flis', 'svitshoty-bez-flisa', 'kostyumy', 'kepki', 'sumki', 'podarki'].every((slug) => !catalogDirs.includes(slug)) &&
       /Худи/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) &&
       /Свитшоты/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) &&
@@ -331,16 +342,17 @@ const checks = [
     /data-product-card/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) &&
       /data-filter-size/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) &&
       /data-filter-subcategory/.test(readFileSync(join(shopRoot, 'catalog/svitshoty/index.html'), 'utf8')) &&
+      /filter-demo-note/.test(readFileSync(join(shopRoot, 'catalog/futbolki/index.html'), 'utf8')) &&
       /applyFilters/.test(siteJs) &&
       /filterSubcategory/.test(siteJs) &&
       /card\.hidden = !shown/.test(siteJs),
   ],
   [
     'static SEO filter page has keyword metadata',
-    existsSync(join(shopRoot, 'catalog/futbolki/chernye-xs/index.html')) &&
-      /Футболки чёрные XS — купить с доставкой по России/.test(readFileSync(join(shopRoot, 'catalog/futbolki/chernye-xs/index.html'), 'utf8')) &&
-      /футболка чёрные XS/.test(readFileSync(join(shopRoot, 'catalog/futbolki/chernye-xs/index.html'), 'utf8')) &&
-      /alt="футболка чёрные XS/.test(readFileSync(join(shopRoot, 'catalog/futbolki/chernye-xs/index.html'), 'utf8')),
+    existsSync(join(shopRoot, 'catalog/futbolki/chernye/index.html')) &&
+      /купить черную футболку/.test(readFileSync(join(shopRoot, 'catalog/futbolki/chernye/index.html'), 'utf8')) &&
+      /одиночный SEO-фильтр/.test(readFileSync(join(shopRoot, 'catalog/futbolki/chernye/index.html'), 'utf8')) &&
+      !existsSync(join(shopRoot, 'catalog/futbolki/chernye-xs/index.html')),
   ],
   [
     'home parallax uses text and image layers',

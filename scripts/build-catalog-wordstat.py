@@ -38,14 +38,12 @@ CLUSTER_ANCHORS: dict[str, list[str]] = {
     "Шоперы": ["шопер купить", "сумка шопер купить"],
     "Детские игры": ["детская игра купить", "детские настольные игры купить", "настольные игры для детей купить"],
     "Книги": [
-        "купить книгу",
         "подарочные книги",
         "купить подарочную книгу",
         "книга россия купить",
         "купить книгу о россии",
         "сувенирные книги",
     ],
-    "Сертификаты": ["купить подарочный сертификат", "электронный подарочный сертификат"],
 }
 
 SEED_CLUSTER: dict[str, str] = {
@@ -59,7 +57,6 @@ SEED_CLUSTER: dict[str, str] = {
     "значок купить": "Значки",
     "шопер купить": "Шоперы",
     "детская игра купить": "Детские игры",
-    "подарочный сертификат купить": "Сертификаты",
     "книга купить": "Книги",
     "подарочная книга": "Книги",
     "книга о россии": "Книги",
@@ -84,7 +81,6 @@ CLUSTER_PHRASE_HINTS: list[tuple[str, str]] = [
     (r"\bшопер|\bсумка шопер", "Шоперы"),
     (r"\bкниг", "Книги"),
     (r"\bигр", "Детские игры"),
-    (r"сертификат", "Сертификаты"),
 ]
 
 
@@ -109,24 +105,92 @@ BOOK_NOISE = re.compile(
     r"можно купить|куплено \d|история книги|книга жизни|"
     r"книга покупок|блокнот|книжный купить|стоя книга|"
     r"какую книгу|читай|где купить|где можно|"
-    r"^\d+ | \d+ \d+ книг|книга \d|книги \d",
+    r"^\d+ | \d+ \d+ книг|книга \d|книги \d|"
+    r"^купить книгу$|^купить книги$",
+    re.I,
+)
+
+BOOK_KEEP = re.compile(
+    r"подарочн.*книг|сувенир.*книг|"
+    r"книг.*о россии|книг.*росси|"
+    r"^подарочные книги$|^сувенирные книги$|"
+    r"^купить подарочную книгу$|"
+    r"книга россия",
+    re.I,
+)
+
+BOOK_FICTION = re.compile(
+    r"автор|александр|издательств|серию|сказк|"
+    r"ответ|решени|предложени|человек|потрачено|суммах|мир книг|"
+    r"кинг\b|библиотек|календар|"
+    r"книгу друг|книгу мам|"
+    r"тайна купить|сердце купить|времени купить|"
+    r"искусство|английск|стивен|николаев|"
+    r"скачать|электронн|томами|"
+    r"маленьких купить|великие книги|"
+    r"детские книги купить|бумажную книгу|"
+    r"класс книга|игра купить|ел книга",
+    re.I,
+)
+
+JUNK_VERB_FORMS = re.compile(
+    r"куплю|купила|купим|купит[^ьу]|купите|куплено|"
+    r"мам купи|нина купила|сезон славы|"
+    r"купили \d",
+    re.I,
+)
+
+COMMERCIAL_EXCLUDE = re.compile(
+    r"\b(бу\b|б/у|оптом|опт\b|недорого|распродаж)\b",
+    re.I,
+)
+
+INFO_NAV = re.compile(r"^(где |как |можно ли|какой |сколько )", re.I)
+
+SPORTS_CLUBS = re.compile(r"спартак|цска|динамо|локомотив|кхл|футбольных клуб", re.I)
+
+AUTO_BADGES = re.compile(
+    r"мерседес|ауди\b|audi\b|капот|авто знач|значки машин|bmw|бмв|фольксваген",
     re.I,
 )
 
 
-def is_commercial_book(phrase: str) -> bool:
-    low = phrase.lower()
-    if BOOK_NOISE.search(low):
-        return False
-    if re.search(r"подарочн.*книг|сувенир.*книг", low):
+def has_incomplete_fragment(phrase: str) -> bool:
+    """Wordstat autocomplete tails like «купить книгу м» or «футболку х б»."""
+    words = phrase.lower().split()
+    if not words:
         return True
-    if re.search(r"книг.*росси", low) and re.search(r"купить", low):
+    if len(words[-1]) == 1 and words[-1].isalpha():
         return True
-    if re.search(r"купить", low) and re.search(r"книг", low):
-        if re.search(r"на озон|томами|больше|про$|город купить|магазины", low):
-            return False
-        return len(low.split()) <= 4
+    if len(words) >= 2 and all(len(w) == 1 and w.isalpha() for w in words[-2:]):
+        return True
     return False
+
+
+def is_junk_query(phrase: str) -> bool:
+    low = phrase.lower().strip()
+    if has_incomplete_fragment(low):
+        return True
+    if JUNK_VERB_FORMS.search(low):
+        return True
+    if COMMERCIAL_EXCLUDE.search(low):
+        return True
+    if INFO_NAV.search(low):
+        return True
+    if SPORTS_CLUBS.search(low):
+        return True
+    if AUTO_BADGES.search(low):
+        return True
+    if re.search(r"\bвб\b", low):
+        return True
+    return False
+
+
+def is_commercial_book(phrase: str) -> bool:
+    low = phrase.lower().strip()
+    if is_junk_query(phrase) or BOOK_NOISE.search(low) or BOOK_FICTION.search(low):
+        return False
+    return bool(BOOK_KEEP.search(low))
 
 
 def parse_snapshot(path: Path) -> list[tuple[str, int]]:
@@ -274,12 +338,15 @@ def cluster_counts(queries: list[dict]) -> dict[str, int]:
     return dict(counts)
 
 
-def write_csv(path: Path, rows: list[dict], fieldnames: list[str]) -> None:
+def write_csv(path: Path, rows: list[dict], columns: list[tuple[str, str]]) -> None:
+    """Write CSV with Russian headers; columns = [(field_key, header_label), ...]."""
     path.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = [label for _, label in columns]
     with path.open("w", encoding="utf-8-sig", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
-        writer.writerows(rows)
+        for row in rows:
+            writer.writerow({label: row.get(key, "") for key, label in columns})
 
 
 def main() -> None:
@@ -297,6 +364,10 @@ def main() -> None:
     ]
     merged = merge_queries(raw_sources)
     cleaned = [q for q in merged if q["shows"] >= THRESHOLD and not is_excluded(q["phrase"], patterns)]
+    cleaned = [q for q in cleaned if not is_junk_query(q["phrase"])]
+
+    # Gift certificates: service page only, not catalog SEO core
+    cleaned = [q for q in cleaned if q["cluster"] != "Сертификаты" and "сертификат" not in q["phrase"].lower()]
 
     # Drop unclustered noise unless clearly product-related
     cleaned = [q for q in cleaned if q["cluster"] != "Прочее" or infer_cluster(q["phrase"])]
@@ -328,7 +399,12 @@ def main() -> None:
     write_csv(
         OUT_CSV_FULL,
         cleaned,
-        ["cluster", "phrase", "shows", "seed"],
+        [
+            ("cluster", "Кластер"),
+            ("seed", "Маска (seed)"),
+            ("phrase", "Запрос"),
+            ("shows", "Показы/мес"),
+        ],
     )
     top_rows: list[dict] = []
     for cluster, items in top_doc["clusters"].items():
@@ -342,7 +418,17 @@ def main() -> None:
                     "seed": item.get("seed", ""),
                 }
             )
-    write_csv(OUT_CSV_TOP, top_rows, ["cluster", "rank", "phrase", "shows", "seed"])
+    write_csv(
+        OUT_CSV_TOP,
+        top_rows,
+        [
+            ("cluster", "Кластер"),
+            ("rank", "№"),
+            ("seed", "Маска (seed)"),
+            ("phrase", "Запрос"),
+            ("shows", "Показы/мес"),
+        ],
+    )
 
     # Keep legacy path in sync for tests until migrated
     LEGACY.write_text(json.dumps(full_doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

@@ -73,3 +73,26 @@ steam
 # Repair / services
 химчистк
 ремонт куртк
+
+# Wordstat autocomplete fragments (single-letter tails)
+купить книгу [а-яё]$
+купить книги [а-яё]$
+купить куртку [а-яё]$
+купить футболку [а-яё] [а-яё]?$
+купить ветровку [а-яё] [а-яё]?$
+
+# Wrong verb forms / lyrics / resale
+куплю|купила|купим|купит[^ь]|сезон славы|мам купи|нина купила
+\b(бу\b|б/у|оптом|опт\b|недорого|распродаж)\b
+
+# Sports clubs (unless licensed merch confirmed)
+спартак|цска|динамо|локомотив|кхл|футбольных клуб
+
+# Auto badges
+мерседес|ауди\b|audi\b|на капот|авто знач|значки машин
+
+# Navigational info queries
+^где |^как |^можно ли|^какой |^сколько 
+
+# Gift certificates — service page, not catalog SEO
+подарочный сертификат|сертификат.*купить|купить.*сертификат

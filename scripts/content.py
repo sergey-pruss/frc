@@ -502,10 +502,10 @@ PRODUCT_CATEGORY_OVERRIDES = {
     "longsliv-minimal": ("svitshoty", "Свитшоты"),
     "longsliv-zhenskij": ("svitshoty", "Свитшоты"),
     "svitshot-klassika": ("svitshoty", "Свитшоты"),
-    "svitshot-premium": ("khudi", "Худи"),
-    "khudi-molniya-trikolor": ("khudi", "Худи"),
+    "svitshot-premium": ("hudi", "Худи"),
+    "khudi-molniya-trikolor": ("hudi", "Худи"),
     "tolstovka-futer": ("svitshoty", "Свитшоты"),
-    "sport-kostyum-rossiya": ("khudi", "Худи"),
+    "sport-kostyum-rossiya": ("hudi", "Худи"),
     "kostyum-zhenskij-comfort": ("svitshoty", "Свитшоты"),
     "kepka-simvol": ("aksessuary", "Аксессуары"),
     "shapka-teremok": ("aksessuary", "Аксессуары"),
@@ -539,7 +539,7 @@ for product in PRODUCTS:
 
 CATEGORIES = [
     (
-        "khudi",
+        "hudi",
         "Худи",
         "Купить худи Универмага «Россия» — плотные модели с капюшоном, молнией и спокойной фирменной графикой. Доставка СДЭК или Яндекс по России.",
     ),

@@ -26,6 +26,7 @@
         <div class="site-topbar__tabs">
           <a class="site-topbar__tab" href="${docsRoot}seo/">SEO-стратегия</a>
           <a class="site-topbar__tab" href="${docsRoot}analysis/">Анализ конкурентов</a>
+          <a class="site-topbar__tab" href="${docsRoot}content-strategy/">Контент-стратегия</a>
           <a class="site-topbar__tab is-active">Дизайн-прототип</a>
         </div>
       </div>

@@ -990,6 +990,13 @@ body.smart-header-active .site-topbar {
   font-weight: 800;
 }
 
+.filter-demo-note {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #6e6e73;
+}
+
 .filter-pills,
 .filter-options,
 .color-options {

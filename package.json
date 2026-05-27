@@ -5,8 +5,12 @@
   "description": "SEO project documentation for the FRC / National Center Russia merch website.",
   "scripts": {
     "build:site": "python3 scripts/generate-prototype.py",
+    "build:content": "python3 scripts/sync-content-strategy.py",
+    "build:wordstat": "python3 scripts/build-catalog-wordstat.py && python3 scripts/render-catalog-tables.py && python3 scripts/export-static-filters-csv.py",
+    "sync:seo-drive": "node scripts/sync-seo-drive.mjs",
+    "sync:manager-feedback-2": "node scripts/sync-manager-feedback-report.mjs",
     "build:pdf": "node scripts/generate-pdf.mjs",
-    "build": "npm run build:site && npm run build:pdf",
+    "build": "npm run build:content && npm run build:site && npm run build:pdf",
     "watch": "node scripts/watch.mjs",
     "test": "node tests/verify-html.mjs && node tests/verify-prototype.mjs"
   },

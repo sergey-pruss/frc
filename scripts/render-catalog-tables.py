@@ -111,7 +111,10 @@ def main() -> None:
 
     # Ключевые запросы 100+ — top anchor per cluster (first 2 from top file)
     rows = []
+    skip_clusters = {"Сертификаты"}
     for cluster, items in top["clusters"].items():
+        if cluster in skip_clusters:
+            continue
         for item in items[:2]:
             rows.append(
                 tr(
@@ -130,7 +133,10 @@ def main() -> None:
 
     # Сводка по кластерам
     summary_rows = []
+    skip_clusters = {"Сертификаты"}
     for cluster, count in sorted(full["cluster_counts"].items(), key=lambda x: -x[1]):
+        if cluster in skip_clusters:
+            continue
         directions = ", ".join(x["phrase"] for x in top["clusters"].get(cluster, [])[:3])
         decision = {
             "Футболки": "Категория + цветовые и размерные SEO-фильтры.",
@@ -190,6 +196,14 @@ def main() -> None:
             '<a class="toc-item" href="#recommended-filters-by-category"><span class="toc-num">2a</span> Рекомендуемые фильтры</a>\n            '
             '<a class="toc-item" href="#recommended-structure"><span class="toc-num">2</span>',
         )
+
+    count = full["total_clean_queries"]
+    html = re.sub(
+        r"После первичной очистки[^<]+",
+        f"После первичной очистки от маркетплейсов, чужих брендов, нерелевантных сценариев и информационного мусора: {count} запроса 100+.",
+        html,
+        count=1,
+    )
 
     SEO.write_text(html, encoding="utf-8")
     print(f"Updated {SEO}")
