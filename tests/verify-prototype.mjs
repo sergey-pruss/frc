@@ -95,7 +95,7 @@ function runTopbarHarness(initialCookie = '') {
     },
   };
   const document = {
-    currentScript: { dataset: { depth: '1' }, src: 'https://frc.serenity-dev.ru/design/assets/site.js?v=test' },
+    currentScript: { dataset: { depth: '0' }, src: 'https://frc.serenity-dev.ru/design/assets/site.js?v=test' },
     body: {
       classList: {
         add: (...names) => names.forEach((name) => classNames.add(name)),
@@ -320,8 +320,8 @@ const checks = [
   [
     'product detail page uses Apple-style model-led gallery',
     /<div class="product-gallery">/.test(readFileSync(join(shopRoot, 'product/bomber-fluffy/index.html'), 'utf8')) &&
-      /gallery-main"><img src="\.\.\/\.\.\/assets\/generated\/fashion\/kurtki-models\.png" alt="Бомбер «Объём» на модели/.test(readFileSync(join(shopRoot, 'product/bomber-fluffy/index.html'), 'utf8')) &&
-      /gallery-thumbs"><button type="button" class="is-active"><img src="\.\.\/\.\.\/assets\/generated\/fashion\/kurtki-models\.png"/.test(readFileSync(join(shopRoot, 'product/bomber-fluffy/index.html'), 'utf8')) &&
+      /gallery-main"><img src="\.\.\/\.\.\/\.\.\/assets\/generated\/fashion\/kurtki-models\.png" alt="Бомбер «Объём» на модели/.test(readFileSync(join(shopRoot, 'product/bomber-fluffy/index.html'), 'utf8')) &&
+      /gallery-thumbs"><button type="button" class="is-active"><img src="\.\.\/\.\.\/\.\.\/assets\/generated\/fashion\/kurtki-models\.png"/.test(readFileSync(join(shopRoot, 'product/bomber-fluffy/index.html'), 'utf8')) &&
       /\.product-page\s*\{[\s\S]*grid-template-columns:\s*minmax\(0,\s*1\.08fr\) minmax\(360px,\s*0\.92fr\);[\s\S]*gap:\s*clamp\(56px,\s*7vw,\s*96px\);/.test(shopCss) &&
       /\.product-page \.gallery-main\s*\{[\s\S]*border:\s*0;[\s\S]*border-radius:\s*0;[\s\S]*box-shadow:\s*none;/.test(shopCss) &&
       /\.product-info\s*\{[\s\S]*position:\s*sticky;[\s\S]*top:\s*112px;/.test(shopCss),

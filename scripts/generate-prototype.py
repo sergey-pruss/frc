@@ -8,6 +8,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PROTOTYPE_DIR = "design"
+
+
+def asset_root(prototype_depth: int) -> str:
+    return "../" * (prototype_depth + 1)
+
+
+def page_root(prototype_depth: int) -> str:
+    return "../" * prototype_depth
 sys.path.insert(0, str(ROOT / "scripts"))
 from content import (  # noqa: E402
     BLOG_POSTS,
@@ -45,9 +53,8 @@ def fmt_price(n: int) -> str:
     return f"{n:,}".replace(",", "\u202f") + " ₽"
 
 
-def shell(depth: int, title: str, body: str, desc: str | None = None, canonical_path: str = "") -> str:
-    depth += 1
-    root = "../" * depth
+def shell(prototype_depth: int, title: str, body: str, desc: str | None = None, canonical_path: str = "") -> str:
+    root = asset_root(prototype_depth)
     canonical_url = f"{BASE_URL}/{PROTOTYPE_DIR}/{canonical_path}"
     return f"""<!doctype html>
 <html lang="ru">
@@ -69,7 +76,7 @@ def shell(depth: int, title: str, body: str, desc: str | None = None, canonical_
 {body}
     </main>
     <div data-site-footer></div>
-    <script src="{root}assets/site.js?v={ASSET_VERSION}" data-depth="{depth}"></script>
+    <script src="{root}assets/site.js?v={ASSET_VERSION}" data-depth="{prototype_depth}"></script>
   </body>
 </html>
 """
@@ -99,9 +106,11 @@ MODEL_CARD_IMAGES = {
     "aksessuary": "/assets/generated/fashion/aksessuary-models.png",
 }
 
-def project_image_path(image: str, depth: int) -> str:
+def project_image_path(image: str, prototype_depth: int) -> str:
+    if image.startswith(("http://", "https://")):
+        return image
     if image.startswith("/"):
-        return "../" * depth + image.lstrip("/")
+        return f"{asset_root(prototype_depth)}{image.lstrip('/')}"
     return image
 
 
@@ -118,7 +127,7 @@ def card(
     image_override: str | None = None,
     extra_class: str = "",
 ) -> str:
-    root = "../" * depth
+    root = page_root(depth)
     old = f'<span class="price-old">{fmt_price(p["old"])}</span>' if p["old"] else ""
     extra = " product-card--editorial" if editorial else ""
     extra += f" {extra_class}" if extra_class else ""
@@ -163,7 +172,7 @@ def hero_mosaic_html(depth: int = 0) -> str:
     for area, slug in zip(areas, HERO_MOSAIC_SLUGS):
         p = product_by_slug(slug)
         tiles.append(
-            f"""<a class="hero-mosaic__tile {area}" href="{root}product/{p['slug']}/" style="background-image:url('{p['img']}')">
+            f"""<a class="hero-mosaic__tile {area}" href="{root}product/{p['slug']}/" style="background-image:url('{project_image_path(p['img'], depth)}')">
               <span class="hero-mosaic__label">{p['title']}</span>
             </a>"""
         )
@@ -190,7 +199,7 @@ def hero_mosaic_html(depth: int = 0) -> str:
 def editorial_strip_html(depth: int = 0) -> str:
     root = "../" * depth
     shots = "".join(
-        f"""<a class="editorial-shot" href="{root}{s['href']}" style="background-image:url('{s['img']}')">
+        f"""<a class="editorial-shot" href="{root}{s['href']}" style="background-image:url('{project_image_path(s['img'], depth)}')">
             <span class="editorial-shot__title">{s['title']}</span>
           </a>"""
         for s in EDITORIAL_SHOTS
@@ -207,8 +216,9 @@ def editorial_strip_html(depth: int = 0) -> str:
       </section>"""
 
 
-def home_apple_html(depth: int = 0) -> str:
-    root = "../" * depth
+def home_apple_html(prototype_depth: int = 0) -> str:
+    root = page_root(prototype_depth)
+    assets = asset_root(prototype_depth)
     new_items = [
         p for p in PRODUCTS if p["tag"] in ("Новинка", "−9%", "−10%", "−38%", "Набор")
     ][:8]
@@ -216,8 +226,8 @@ def home_apple_html(depth: int = 0) -> str:
         p for p in PRODUCTS if p["tag"] in ("Хит", "Премиум", "Зима", "Подарок")
     ][:8]
     product_rails = (
-        product_rail_html("Новинки", f"{root}catalog/new/", "Смотреть все", new_items, depth, root),
-        product_rail_html("Популярное", f"{root}catalog/", "Весь каталог", popular_items, depth, root),
+        product_rail_html("Новинки", f"{root}catalog/new/", "Смотреть все", new_items, prototype_depth, root),
+        product_rail_html("Популярное", f"{root}catalog/", "Весь каталог", popular_items, prototype_depth, root),
     )
     return f"""
       <section class="apple-hero">
@@ -230,7 +240,7 @@ def home_apple_html(depth: int = 0) -> str:
           </div>
         </div>
         <div class="apple-hero__media" data-parallax="image" data-parallax-speed="0.042" data-parallax-limit="34">
-          <img src="{root}assets/generated/editorial/home-hero-apple-wall.png" alt="Модели в одежде и аксессуарах Универмага «Россия»">
+          <img src="{assets}assets/generated/editorial/home-hero-apple-wall.png" alt="Модели в одежде и аксессуарах Универмага «Россия»">
         </div>
       </section>
       <section class="apple-feature apple-feature--light">
@@ -239,7 +249,7 @@ def home_apple_html(depth: int = 0) -> str:
           <h2>Для себя. Для подарка. Для спокойного ежедневного образа.</h2>
           <p>Без визуального шума и лишнего пафоса: одежда, которую можно носить каждый день, сохраняя официальный характер проекта.</p>
         </div>
-        <img data-parallax="image" data-parallax-speed="0.052" data-parallax-limit="48" src="{root}assets/generated/editorial/home-feature-style.png" alt="Модели в одежде и аксессуарах Универмага «Россия»">
+        <img data-parallax="image" data-parallax-speed="0.052" data-parallax-limit="48" src="{assets}assets/generated/editorial/home-feature-style.png" alt="Модели в одежде и аксессуарах Универмага «Россия»">
       </section>
       <section class="apple-feature apple-feature--dark">
         <div class="apple-feature__copy" data-parallax="text" data-parallax-speed="0.018" data-parallax-limit="16">
@@ -247,7 +257,7 @@ def home_apple_html(depth: int = 0) -> str:
           <h2>Категории сразу ведут к выбору.</h2>
           <p>Худи, свитшоты, футболки, ветровки, куртки, кепки, шапки, шоперы, книги, значки и детские игры — в одном каталоге с понятными фильтрами.</p>
         </div>
-        <img data-parallax="image" data-parallax-speed="0.052" data-parallax-limit="48" src="{root}assets/generated/editorial/home-feature-family.png" alt="Верхняя одежда, сумки и аксессуары Универмага «Россия»">
+        <img data-parallax="image" data-parallax-speed="0.052" data-parallax-limit="48" src="{assets}assets/generated/editorial/home-feature-family.png" alt="Верхняя одежда, сумки и аксессуары Универмага «Россия»">
       </section>
       {"".join(product_rails)}
       <section class="apple-category-band">
@@ -256,7 +266,7 @@ def home_apple_html(depth: int = 0) -> str:
             <h2>Выберите категорию.</h2>
             <a href="{root}catalog/">Весь каталог</a>
           </div>
-          <div class="apple-category-row">{category_visual_tiles(depth)}</div>
+          <div class="apple-category-row">{category_visual_tiles(prototype_depth)}</div>
         </div>
       </section>"""
 
@@ -318,11 +328,11 @@ def product_recommendation_rails(p: dict, depth: int, root: str) -> str:
     )
 
 
-def store_category_row(depth: int = 1) -> str:
-    root = "../" * depth
+def store_category_row(prototype_depth: int = 1) -> str:
+    root = page_root(prototype_depth)
     icons = "".join(
         f"""<a class="store-category" href="{root}catalog/{slug}/">
-          <img src="{next((p['img'] for p in PRODUCTS if p['cat'] == slug), '')}" alt="">
+          <img src="{project_image_path(next((p['img'] for p in PRODUCTS if p['cat'] == slug), ''), prototype_depth)}" alt="">
           <span>{label}</span>
         </a>"""
         for slug, label, _ in CATEGORIES
@@ -330,11 +340,11 @@ def store_category_row(depth: int = 1) -> str:
     return f'<div class="store-category-row">{icons}</div>'
 
 
-def category_visual_tiles(depth: int = 0) -> str:
-    root = "../" * depth
+def category_visual_tiles(prototype_depth: int = 0) -> str:
+    root = page_root(prototype_depth)
     parts = []
     for slug, label, _ in CATEGORIES:
-        img = project_image_path(MODEL_CARD_IMAGES.get(slug, next((p["img"] for p in PRODUCTS if p["cat"] == slug), "")), depth)
+        img = project_image_path(MODEL_CARD_IMAGES.get(slug, next((p["img"] for p in PRODUCTS if p["cat"] == slug), "")), prototype_depth)
         parts.append(
             f'<a class="category-visual" href="{root}catalog/{slug}/" style="background-image:url(\'{img}\')"><span class="category-visual__title">{label}</span></a>'
         )
@@ -440,8 +450,8 @@ def catalog_filter_panel(depth: int, *, active: str | None = None, color: str | 
         </aside>"""
 
 
-def store_collection_cards(depth: int = 1) -> str:
-    root = "../" * depth
+def store_collection_cards(prototype_depth: int = 1) -> str:
+    root = page_root(prototype_depth)
     picks = [
         ("Одежда на каждый день", "Футболки, лонгсливы, худи и костюмы с нейтральной посадкой.", "futbolka-oranzhevaya", "catalog/futbolki/"),
         ("Аксессуары и поездки", "Кепки, шапки, шоперы, значки, книги и детские игры в одной ветке.", "sumka-shopper", "catalog/aksessuary/"),
@@ -449,7 +459,7 @@ def store_collection_cards(depth: int = 1) -> str:
     ]
     return "".join(
         f"""<a class="store-promo-card" href="{root}{href}">
-          <img src="{product_by_slug(slug)['img']}" alt="">
+          <img src="{project_image_path(product_by_slug(slug)['img'], prototype_depth)}" alt="">
           <span>{title}</span>
           <p>{text}</p>
         </a>"""
@@ -478,7 +488,7 @@ def products_for_collection(slug: str) -> list:
 def product_body(p: dict) -> str:
     root = "../../"
     primary_image = model_card_image(p, 2)
-    gallery_images = [primary_image, p["img"], p["img"], p["img"]]
+    gallery_images = [primary_image] + [project_image_path(p["img"], 2) for _ in range(3)]
     thumbs = "".join(
         f'<button type="button" class="{"is-active" if i == 0 else ""}"><img src="{src}" alt=""></button>'
         for i, src in enumerate(gallery_images)
@@ -604,7 +614,7 @@ def main() -> None:
     cart_rows = "".join(
         f"""
         <li class="cart-item">
-          <img src="{p['img']}" alt="{p['title']} — {BRAND['name']}">
+          <img src="{project_image_path(p['img'], 1)}" alt="{p['title']} — {BRAND['name']}">
           <div><strong>{p['title']}</strong><span>{p['cat_label']} · размер M</span></div>
           <b>{fmt_price(p['price'])}</b>
         </li>"""
@@ -890,7 +900,7 @@ def main() -> None:
     banners = "".join(
         f"""
         <article class="collection-banner" style="margin-bottom:24px;">
-          <div class="visual" style="background-image:url('{c['img']}')"></div>
+          <div class="visual" style="background-image:url('{project_image_path(c['img'], 1)}')"></div>
           <div class="copy"><h3>{c['title']}</h3><p>{c['lead']}</p><a class="btn btn-primary" href="{c['slug']}/">Смотреть</a></div>
         </article>"""
         for c in COLLECTIONS
@@ -1055,7 +1065,7 @@ def main() -> None:
     )
 
     blog_cards = "".join(
-        f'<article class="blog-card"><a href="{post["slug"]}/"><div class="thumb" style="background-image:url(\'{post["img"]}\')"></div><div class="body"><h3>{post["title"]}</h3><p>{post["excerpt"]}</p></div></a></article>'
+        f'<article class="blog-card"><a href="{post["slug"]}/"><div class="thumb" style="background-image:url(\'{project_image_path(post["img"], 1)}\')"></div><div class="body"><h3>{post["title"]}</h3><p>{post["excerpt"]}</p></div></a></article>'
         for post in BLOG_POSTS
     )
     write("blog/index.html", shell(1, "Журнал", f'<div class="wrap section"><h1>Журнал</h1><p class="page-intro">Гиды и коллекции.</p><div class="blog-grid">{blog_cards}</div></div>'))

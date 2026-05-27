@@ -1,0 +1,75 @@
+# One pattern per line; matched case-insensitively against the full phrase.
+# Lines starting with # are comments.
+
+# Geo outside Russia delivery scope (meeting 2026-05)
+минск
+беларус
+казахстан
+украин
+
+# Auto / radiator badges (not FRC assortment)
+значок бмв
+значок фольксваген
+фольксваген купить
+решетк радиатор
+на решетку радиатора
+
+# Off-topic badge / pin noise
+значки купить сайт
+значок на машину
+номерной знак
+госномер
+автознак
+
+# Marketplaces and aggregators
+wildberries|вайлдберриз|валберис
+ozon|озон
+market\.yandex
+aliexpress
+lamoda
+сбермега
+avito|авито
+читай город|литрес|лабиринт
+
+# Jobs, patterns, DIY
+ваканс
+работа 
+зарплат
+выкройк
+своими руками
+бесплатно скачать
+pdf скачать
+электронн.*книг.*скачать
+
+# Media / games not in assortment
+дорам
+сериал
+песн.*скачать
+компьютерн.*игр
+онлайн.*игр
+steam
+
+# Books: fiction, school reports, red data book, alcohol gift sets
+гарри поттер|поттер
+водка
+лето в пионерском|галстуке
+читать бесплатно|читать онлайн|скачать книг
+красн.*книг.*росси
+попадан
+сообщение о|презентация|реферат|4 класс
+упаковать|завернуть|упаковк.*бумаг
+электронн.*книг
+авито|литрес|labirint|читай город
+
+# Games: DIY / informational
+своими руками
+распечатать
+правила игры
+
+# Medical / education certificates (not gift cards)
+медицинск.*сертификат
+обучен.*сертификат
+
+# Repair / services
+химчистк
+ремонт куртк

@@ -1,15 +1,16 @@
 (function () {
   const script = document.currentScript;
-  const depth = Number(script?.dataset.depth || 0);
-  const root = depth ? "../".repeat(depth) : "./";
+  const prototypeDepth = Number(script?.dataset.depth || 0);
+  const root = prototypeDepth ? "../".repeat(prototypeDepth) : "./";
+  const assetRoot = prototypeDepth ? "../".repeat(prototypeDepth + 1) : "../";
   const assetV = script?.src?.match(/[?&]v=([^&]+)/)?.[1] || "";
-  const markSrc = `${root}assets/u-mark-green.png${assetV ? `?v=${assetV}` : ""}`;
-  const markLightSrc = `${root}assets/u-mark-light.png${assetV ? `?v=${assetV}` : ""}`;
-  const ncLogoSrc = `${root}assets/nc-logo-white.png${assetV ? `?v=${assetV}` : ""}`;
+  const markSrc = `${assetRoot}assets/u-mark-green.png${assetV ? `?v=${assetV}` : ""}`;
+  const markLightSrc = `${assetRoot}assets/u-mark-light.png${assetV ? `?v=${assetV}` : ""}`;
+  const ncLogoSrc = `${assetRoot}assets/nc-logo-white.png${assetV ? `?v=${assetV}` : ""}`;
 
   const headerMount = document.querySelector("[data-site-header]");
   const footerMount = document.querySelector("[data-site-footer]");
-  const docsRoot = depth ? `${root}../` : "../";
+  const docsRoot = assetRoot;
 
   const nav = [
     { href: `${root}catalog/`, label: "Каталог" },
@@ -98,7 +99,7 @@
           <div class="footer-bottom">
             <span>© 2026 Универмаг «Россия»</span>
             <a class="made-by" href="https://serenity.agency/" target="_blank" rel="noreferrer">
-              <img src="${root}assets/serenity-logo.svg" alt="" width="18" height="18">
+              <img src="${assetRoot}assets/serenity-logo.svg" alt="" width="18" height="18">
               <span>Сделано в Serenity</span>
             </a>
           </div>
