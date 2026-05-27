@@ -170,33 +170,15 @@ async function formatFeedbackTab(sheets, spreadsheetId, tabTitle, values) {
     }
   }
 
+  // Сброс фильтра перед повторной установкой
+  requests.push({ clearBasicFilter: { sheetId } });
+
   requests.push({
     updateSheetProperties: {
       properties: { sheetId, gridProperties: { frozenRowCount: 1 } },
       fields: "gridProperties.frozenRowCount",
     },
   });
-
-  if (rowCount > 1) {
-    requests.push({
-      addBanding: {
-        bandedRange: {
-          range: {
-            sheetId,
-            startRowIndex: 0,
-            endRowIndex: rowCount,
-            startColumnIndex: 0,
-            endColumnIndex: colCount,
-          },
-          rowProperties: {
-            headerColor: HEADER_GREEN,
-            firstBandColor: BAND_WHITE,
-            secondBandColor: BAND_LIGHT,
-          },
-        },
-      },
-    });
-  }
 
   requests.push({
     repeatCell: {
@@ -334,6 +316,16 @@ async function main() {
   const { spreadsheetId, webViewLink } = await ensureSpreadsheet(drive, sheets);
   await writeTab(sheets, spreadsheetId, SHEET_TITLE, values);
   await formatFeedbackTab(sheets, spreadsheetId, SHEET_TITLE, values);
+
+  const files = await listFolder(drive);
+  const file = files.find((f) => f.id === spreadsheetId);
+  if (file && file.name !== REPORT_TITLE) {
+    await drive.files.update({
+      fileId: spreadsheetId,
+      requestBody: { name: REPORT_TITLE },
+      supportsAllDrives: true,
+    });
+  }
 
   const url =
     webViewLink ||

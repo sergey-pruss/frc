@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 /**
- * Watch for changes in source files and rebuild:
- *  - scripts/content.py or scripts/generate-prototype.py → regenerate site + PDF
- *  - export/seo-report-print.html → regenerate PDF only
- *  - assets/** → copy is instant (static), but re-run PDF in case images changed
+ * Watch for changes in report pages and rebuild PDFs.
  */
 import { watch } from "chokidar";
 import { execSync } from "node:child_process";
@@ -32,7 +29,10 @@ async function rebuild(trigger) {
   console.log(`\n═══ ${ts}  changed: ${trigger} ═══`);
 
   const siteSource = /scripts\/(content|generate-prototype)\.py/.test(trigger);
-  const reportSource = /export\/seo-report-print\.html/.test(trigger);
+  const reportSource =
+    /^(seo|analysis)\/index\.html$/.test(trigger) ||
+    /^assets\//.test(trigger) ||
+    /^data\/.*\.json$/.test(trigger);
 
   if (siteSource) {
     run("python3 scripts/generate-prototype.py", "generate site");
@@ -49,17 +49,21 @@ const watcher = watch(
   [
     "scripts/content.py",
     "scripts/generate-prototype.py",
-    "export/seo-report-print.html",
+    "seo/index.html",
+    "analysis/index.html",
+    "assets/**/*",
+    "data/catalog-wordstat-full.json",
+    "data/catalog-keywords-top10.json",
   ],
   {
     cwd: ROOT,
     ignoreInitial: true,
     awaitWriteFinish: { stabilityThreshold: 300, pollInterval: 100 },
-  }
+  },
 );
 
 watcher.on("change", (path) => rebuild(path));
 watcher.on("add", (path) => rebuild(path));
 
-console.log("[watch] Watching for changes in scripts/ and export/…");
+console.log("[watch] Watching seo/, analysis/, assets/, data/…");
 console.log("[watch] Press Ctrl+C to stop.\n");

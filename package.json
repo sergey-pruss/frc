@@ -10,6 +10,8 @@
     "sync:seo-drive": "node scripts/sync-seo-drive.mjs",
     "sync:manager-feedback-2": "node scripts/sync-manager-feedback-report.mjs",
     "build:pdf": "node scripts/generate-pdf.mjs",
+    "sync:seo-reports": "node scripts/sync-seo-reports-drive.mjs",
+    "build:reports": "npm run build:pdf && npm run sync:seo-reports",
     "build": "npm run build:content && npm run build:site && npm run build:pdf",
     "watch": "node scripts/watch.mjs",
     "test": "node tests/verify-html.mjs && node tests/verify-prototype.mjs"

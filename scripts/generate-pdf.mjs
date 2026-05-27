@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+/**
+ * Render SEO strategy and competitor analysis PDFs from the live HTML pages
+ * (seo/index.html, analysis/index.html), which include @media print styles.
+ * Competitor analysis PDF omits #screenshots (see analysis/index.html @media print).
+ */
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import puppeteer from "puppeteer";
@@ -6,21 +11,14 @@ import puppeteer from "puppeteer";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 
-const footerHtml = `
-<div style="width:100%; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; font-size: 8px; color: #999; display: flex; justify-content: space-between; padding: 0 6mm;">
-  <span></span>
-  <span>Serenity</span>
-  <span><span class="pageNumber"></span> / <span class="totalPages"></span></span>
-</div>`;
-
 const reports = [
   {
-    src: resolve(ROOT, "export/seo-report-print.html"),
+    src: resolve(ROOT, "seo/index.html"),
     dst: resolve(ROOT, "export/seo-strategy-report.pdf"),
     name: "SEO Strategy",
   },
   {
-    src: resolve(ROOT, "export/analysis-print.html"),
+    src: resolve(ROOT, "analysis/index.html"),
     dst: resolve(ROOT, "export/competitor-analysis-report.pdf"),
     name: "Competitor Analysis",
   },
@@ -30,16 +28,16 @@ const browser = await puppeteer.launch({ headless: true });
 
 for (const { src, dst, name } of reports) {
   const page = await browser.newPage();
-  await page.goto(`file://${src}`, { waitUntil: "networkidle0" });
+  await page.emulateMediaType("print");
+  await page.goto(`file://${src}`, { waitUntil: "networkidle0", timeout: 120_000 });
   await page.pdf({
     path: dst,
     format: "A4",
     landscape: true,
-    margin: { top: "10mm", bottom: "16mm", left: "10mm", right: "10mm" },
+    preferCSSPageSize: true,
+    margin: { top: "10mm", bottom: "14mm", left: "10mm", right: "10mm" },
     printBackground: true,
-    displayHeaderFooter: true,
-    headerTemplate: '<span></span>',
-    footerTemplate: footerHtml,
+    displayHeaderFooter: false,
   });
   await page.close();
   console.log(`pdf → ${dst} (${name})`);

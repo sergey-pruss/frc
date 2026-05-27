@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Отчёт по изменениям — 27.05.2026</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #1a1a1a; }
+    body { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+    h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+    .meta { color: #666; margin-bottom: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { border: 1px solid #ddd; padding: 0.5rem 0.65rem; text-align: left; vertical-align: top; }
+    th { background: #f4f4f4; }
+    tr:nth-child(even) td { background: #fafafa; }
+    .tag { display: inline-block; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+    .add { background: #e6f4ea; color: #137333; }
+    .chg { background: #fef7e0; color: #b06000; }
+    .del { background: #fce8e6; color: #c5221f; }
+    .mov { background: #e8f0fe; color: #1967d2; }
+    pre.slack { background: #f8f9fa; border: 1px solid #e0e0e0; padding: 1rem; white-space: pre-wrap; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <h1>Отчёт по изменениям в проекте FRC</h1>
+  <p class="meta">27 мая 2026 · ветка <code>main</code> · 4 коммита + локальные правки</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>Область</th>
+        <th>Что сделали</th>
+        <th>Где</th>
+        <th>Тип</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Анализ конкурентов</td>
+        <td>Исправлена разметка секций</td>
+        <td><code>analysis/index.html</code></td>
+        <td><span class="tag chg">изменено</span></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Дизайн-прототип</td>
+        <td>Прототип вынесен в <code>/design/</code>, скрыт от клиента</td>
+        <td><code>design/**</code>, <code>assets/site.js</code></td>
+        <td><span class="tag mov">перенос</span></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Прототип</td>
+        <td>Починены пути к assets</td>
+        <td><code>design/**/*.html</code>, <code>assets/site.js</code></td>
+        <td><span class="tag chg">изменено</span></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Wordstat</td>
+        <td>Обновлены выгрузки частот и фильтры семантики</td>
+        <td><code>data/catalog-wordstat-*</code>, <code>data/wordstat-*</code></td>
+        <td><span class="tag chg">изменено</span></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>SEO-стратегия</td>
+        <td>Доработка после встречи</td>
+        <td><code>seo/index.html</code></td>
+        <td><span class="tag chg">изменено</span></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Контент-стратегия</td>
+        <td>Новый раздел с материалами</td>
+        <td><code>content-strategy/</code>, <code>data/content-strategy-*</code></td>
+        <td><span class="tag add">добавлено</span></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Каталог (прототип)</td>
+        <td>Упрощение: осмысленные фильтры вместо «цвет×размер»</td>
+        <td><code>design/catalog/</code></td>
+        <td><span class="tag del">удалено</span> <span class="tag add">добавлено</span></td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>UI</td>
+        <td>Правки стилей витрины</td>
+        <td><code>assets/shop.css</code></td>
+        <td><span class="tag chg">изменено</span></td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Скрипты</td>
+        <td>Сборка прототипа, wordstat, CSV фильтров, синк контента</td>
+        <td><code>scripts/*.py</code>, <code>scripts/sync-*.mjs</code></td>
+        <td><span class="tag add">добавлено</span></td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>Google Drive</td>
+        <td>Синк SEO и отчёта ОС менеджеров (26–27.05)</td>
+        <td><code>scripts/sync-seo-drive.mjs</code>, <code>sync-manager-feedback-report.mjs</code></td>
+        <td><span class="tag add">добавлено</span></td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>Тесты</td>
+        <td>Проверки под новую структуру</td>
+        <td><code>tests/verify-*.mjs</code></td>
+        <td><span class="tag chg">изменено</span></td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>PDF + Drive</td>
+        <td>PDF из живых страниц, заливка в Drive (в работе, не в коммите)</td>
+        <td><code>scripts/generate-pdf.mjs</code>, <code>sync-seo-reports-drive.mjs</code></td>
+        <td><span class="tag chg">локально</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:2rem">Текст для Slack</h2>
+  <pre class="slack">📋 Отчёт по проекту FRC — 27.05.2026
+
+Привет, команда! Кратко, что сделали сегодня:
+
+Анализ и документация
+• Починили вёрстку на странице анализа конкурентов
+• Обновили SEO-стратегию после встречи
+
+Прототип магазина
+• Весь прототип в /design/ — клиенту не светится
+• Перестроили каталог: убрали «цвет+размер», сделали осмысленные фильтры
+• Худи: khudi → hudi в URL
+
+Семантика
+• Обновили Wordstat по каталогу
+• Добавили раздел контент-стратегии
+
+Автоматизация
+• Синк в Google Drive (SEO + ОС менеджеров 26–27.05)
+• В работе: PDF из seo/ и analysis/, заливка в Drive
+
+Итого: 4 коммита в main.</pre>
+</body>
+</html>
