@@ -16,7 +16,7 @@ GATE_AUTH_CORE = (
     'function ga(){try{if(localStorage.getItem(k)===h)return!0}catch(e){}'
     'var c=document.cookie.split(";");'
     'for(var i=0;i<c.length;i++){var p=c[i].trim().split("=");'
-    'if(p[0]===k)return decodeURIComponent(p.slice(1).join("="))===h}'
+    'if(p[0]===k&&decodeURIComponent(p.slice(1).join("="))===h){try{localStorage.setItem(k,h)}catch(e){}return!0}}'
     'return!1}'
     'function sn(n){'
     'if(!n||n==="/"||n==="/index.html"||!n.startsWith("/")||n.startsWith("//")||n.indexOf("/gate")===0)return d;'
