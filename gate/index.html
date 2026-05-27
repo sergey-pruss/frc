@@ -169,22 +169,36 @@
     <script>
       (function () {
         "use strict";
-        var STORAGE_KEY = "frc-gate-v1";
+        var COOKIE_KEY = "frc-gate-v1";
         var PASS_HASH = "c6c2307ac025abfed680cb646bc38ca3c3d6e02662a0f2faa143dcff22268a49";
         var DEFAULT_NEXT = "/seo/";
+        var COOKIE_MAX_AGE = 31536000;
+
+        function readCookie(name) {
+          var parts = document.cookie.split("; ");
+          for (var i = 0; i < parts.length; i++) {
+            var pair = parts[i].split("=");
+            if (pair[0] === name) {
+              return decodeURIComponent(pair.slice(1).join("="));
+            }
+          }
+          return "";
+        }
 
         function authed() {
-          try {
-            return sessionStorage.getItem(STORAGE_KEY) === PASS_HASH;
-          } catch (e) {
-            return false;
-          }
+          return readCookie(COOKIE_KEY) === PASS_HASH;
         }
 
         function grant() {
-          try {
-            sessionStorage.setItem(STORAGE_KEY, PASS_HASH);
-          } catch (e) {}
+          var secure = location.protocol === "https:" ? "; Secure" : "";
+          document.cookie =
+            COOKIE_KEY +
+            "=" +
+            PASS_HASH +
+            "; Path=/; Max-Age=" +
+            COOKIE_MAX_AGE +
+            "; SameSite=Lax" +
+            secure;
         }
 
         function safeNext(raw) {

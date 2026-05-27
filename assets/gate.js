@@ -1,28 +1,28 @@
 (function () {
   "use strict";
 
-  const STORAGE_KEY = "frc-gate-v1";
+  const COOKIE_KEY = "frc-gate-v1";
   const PASS_HASH = "c6c2307ac025abfed680cb646bc38ca3c3d6e02662a0f2faa143dcff22268a49";
   const GATE_URL = "/gate/";
   const DEFAULT_NEXT = "/seo/";
+  const COOKIE_MAX_AGE = 31536000;
 
   const script = document.currentScript;
   const isLoginPage = script?.hasAttribute("data-gate-login");
 
+  function readCookie(name) {
+    const match = document.cookie.split("; ").find((part) => part.startsWith(`${name}=`));
+    if (!match) return "";
+    return decodeURIComponent(match.slice(name.length + 1));
+  }
+
   function authed() {
-    try {
-      return sessionStorage.getItem(STORAGE_KEY) === PASS_HASH;
-    } catch {
-      return false;
-    }
+    return readCookie(COOKIE_KEY) === PASS_HASH;
   }
 
   function grant() {
-    try {
-      sessionStorage.setItem(STORAGE_KEY, PASS_HASH);
-    } catch {
-      /* private mode */
-    }
+    const secure = location.protocol === "https:" ? "; Secure" : "";
+    document.cookie = `${COOKIE_KEY}=${PASS_HASH}; Path=/; Max-Age=${COOKIE_MAX_AGE}; SameSite=Lax${secure}`;
   }
 
   async function hashPassword(value) {

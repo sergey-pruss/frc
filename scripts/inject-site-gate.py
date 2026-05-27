@@ -9,7 +9,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from gate_snippet import EXTERNAL_GATE_RE, GATE_GUARD_MARKER, GATE_GUARD_SCRIPT  # noqa: E402
+from gate_snippet import (  # noqa: E402
+    EXTERNAL_GATE_RE,
+    GATE_GUARD_MARKER,
+    GATE_GUARD_SCRIPT,
+    INLINE_GATE_RE,
+)
 SKIP_DIRS = {"gate", "data", "export", "node_modules", ".git"}
 SKIP_FILES = {ROOT / "gate" / "index.html"}
 
@@ -26,7 +31,13 @@ def inject(html: str) -> tuple[str, bool]:
     updated = EXTERNAL_GATE_RE.sub("\n", html)
     changed = updated != html
 
-    if GATE_GUARD_MARKER in updated and "location.replace(g+" in updated:
+    if INLINE_GATE_RE.search(updated):
+        new_html = INLINE_GATE_RE.sub("\n" + GATE_GUARD_SCRIPT, updated, count=1)
+        if new_html != updated:
+            return new_html, True
+        return updated, changed
+
+    if GATE_GUARD_MARKER in updated and "document.cookie.split" in updated:
         return updated, changed
 
     match = re.search(r'(<meta charset="utf-8">\n)', updated, re.IGNORECASE)
