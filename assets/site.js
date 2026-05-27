@@ -9,6 +9,7 @@
 
   const headerMount = document.querySelector("[data-site-header]");
   const footerMount = document.querySelector("[data-site-footer]");
+  const docsRoot = depth ? `${root}../` : "../";
 
   const nav = [
     { href: `${root}catalog/`, label: "Каталог" },
@@ -22,14 +23,14 @@
     headerMount.innerHTML = `
       <div class="site-topbar">
         <div class="site-topbar__tabs">
-          <a class="site-topbar__tab" href="${root}seo/">SEO-стратегия</a>
-          <a class="site-topbar__tab" href="${root}analysis/">Анализ конкурентов</a>
+          <a class="site-topbar__tab" href="${docsRoot}seo/">SEO-стратегия</a>
+          <a class="site-topbar__tab" href="${docsRoot}analysis/">Анализ конкурентов</a>
           <a class="site-topbar__tab is-active">Дизайн-прототип</a>
         </div>
       </div>
       <header class="site-header">
         <div class="wrap header-inner">
-          <a class="logo" href="${root}" aria-label="Универмаг «Россия»">
+          <a class="logo" href="${docsRoot}design/" aria-label="Универмаг «Россия»">
             <img class="logo-mark" src="${markSrc}" alt="" width="56" height="56">
             <span class="logo-wordmark">
               <span class="logo-wordmark__line">Универмаг</span>
@@ -54,7 +55,7 @@
         <div class="wrap site-footer__inner">
           <div class="footer-grid">
             <div class="footer-col footer-col--brand">
-              <a class="footer-brand" href="${root}">
+              <a class="footer-brand" href="${docsRoot}design/">
                 <img class="footer-mark" src="${markLightSrc}" alt="Универмаг «Россия»" width="56" height="56">
               </a>
               <p class="footer-tagline">Официальный интернет-магазин одежды, аксессуаров и подарков Национального центра «Россия».</p>

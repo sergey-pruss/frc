@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+PROTOTYPE_DIR = "design"
 sys.path.insert(0, str(ROOT / "scripts"))
 from content import (  # noqa: E402
     BLOG_POSTS,
@@ -45,8 +46,9 @@ def fmt_price(n: int) -> str:
 
 
 def shell(depth: int, title: str, body: str, desc: str | None = None, canonical_path: str = "") -> str:
+    depth += 1
     root = "../" * depth
-    canonical_url = f"{BASE_URL}/{canonical_path}"
+    canonical_url = f"{BASE_URL}/{PROTOTYPE_DIR}/{canonical_path}"
     return f"""<!doctype html>
 <html lang="ru">
   <head>
@@ -357,7 +359,7 @@ def subcategory_chips(active: str | None = None) -> str:
 
 
 def write(rel: str, content: str) -> None:
-    path = ROOT / rel
+    path = ROOT / PROTOTYPE_DIR / rel
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
     print("wrote", rel)

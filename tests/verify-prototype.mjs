@@ -4,12 +4,13 @@ import { join } from 'node:path';
 import vm from 'node:vm';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
-const home = readFileSync(join(root, 'index.html'), 'utf8');
+const shopRoot = join(root, 'design');
+const home = readFileSync(join(shopRoot, 'index.html'), 'utf8');
 const shopCss = readFileSync(join(root, 'assets/shop.css'), 'utf8');
 const siteJs = readFileSync(join(root, 'assets/site.js'), 'utf8');
 const contentPy = readFileSync(join(root, 'scripts/content.py'), 'utf8');
 const generatorPy = readFileSync(join(root, 'scripts/generate-prototype.py'), 'utf8');
-const productPage = readFileSync(join(root, 'product/kurtka-veter/index.html'), 'utf8');
+const productPage = readFileSync(join(shopRoot, 'product/kurtka-veter/index.html'), 'utf8');
 
 function sectionCardCount(title) {
   const match = home.match(new RegExp(`<section class="apple-shop-preview">[\\s\\S]*?<h2>${title}<\\/h2>[\\s\\S]*?<\\/section>`));
@@ -28,13 +29,13 @@ function sectionHtml(className) {
 
 const homeCategorySection = sectionHtml('apple-category-band');
 
-const productDirs = readdirSync(join(root, 'product')).filter((name) =>
-  existsSync(join(root, 'product', name, 'index.html')),
+const productDirs = readdirSync(join(shopRoot, 'product')).filter((name) =>
+  existsSync(join(shopRoot, 'product', name, 'index.html')),
 );
 const generatedProductImages = readdirSync(join(root, 'assets/generated/products')).filter((name) =>
   /\.jpe?g$/.test(name),
 );
-const catalogDirs = readdirSync(join(root, 'catalog'), { withFileTypes: true })
+const catalogDirs = readdirSync(join(shopRoot, 'catalog'), { withFileTypes: true })
   .filter((entry) => entry.isDirectory())
   .map((entry) => entry.name);
 
@@ -94,7 +95,7 @@ function runTopbarHarness(initialCookie = '') {
     },
   };
   const document = {
-    currentScript: { dataset: { depth: '0' }, src: 'https://frc.serenity-dev.ru/assets/site.js?v=test' },
+    currentScript: { dataset: { depth: '1' }, src: 'https://frc.serenity-dev.ru/design/assets/site.js?v=test' },
     body: {
       classList: {
         add: (...names) => names.forEach((name) => classNames.add(name)),
@@ -159,29 +160,41 @@ function topbarAlwaysVisibleWithoutDismiss() {
 }
 
 const requiredStructure = [
-  'catalog/index.html',
-  'product/futbolka-oranzhevaya/index.html',
-  'product/mystery-box/index.html',
-  'product/bomber-fluffy/index.html',
-  'about/index.html',
-  'delivery/index.html',
-  'blog/index.html',
-  'stores/index.html',
-  'cart/index.html',
-  'checkout/index.html',
-  'search/index.html',
+  'design/catalog/index.html',
+  'design/product/futbolka-oranzhevaya/index.html',
+  'design/product/mystery-box/index.html',
+  'design/product/bomber-fluffy/index.html',
+  'design/about/index.html',
+  'design/delivery/index.html',
+  'design/blog/index.html',
+  'design/stores/index.html',
+  'design/cart/index.html',
+  'design/checkout/index.html',
+  'design/search/index.html',
   '404.html',
-  'collections/index.html',
-  'gift-cards/index.html',
+  'design/collections/index.html',
+  'design/gift-cards/index.html',
 ];
 
 const checks = [
-  ['shop home exists', existsSync(join(root, 'index.html'))],
+  ['shop home exists under design', existsSync(join(shopRoot, 'index.html'))],
+  ['site root redirects clients to seo', /url=seo\//.test(readFileSync(join(root, 'index.html'), 'utf8'))],
   ['seo doc moved', existsSync(join(root, 'seo/index.html'))],
+  [
+    'client docs hide design prototype tab',
+    !/Дизайн-прототип/.test(readFileSync(join(root, 'seo/index.html'), 'utf8')) &&
+      !/Дизайн-прототип/.test(readFileSync(join(root, 'analysis/index.html'), 'utf8')),
+  ],
+  [
+    'internal design route exposes three project tabs',
+    /Дизайн-прототип/.test(siteJs) &&
+      /docsRoot/.test(siteJs) &&
+      /href="\$\{docsRoot\}seo\/"/.test(siteJs),
+  ],
   ['expanded catalog has at least 26 products', productDirs.length >= 26],
   ['all products have generated local images', generatedProductImages.length >= productDirs.length],
   ['generated product images are full 4:5 card crops', generatedImagesAreCoverCards],
-  ['catalog uses local generated product images', /\/assets\/generated\/products\//.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')) && !/images\.unsplash\.com/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8'))],
+  ['catalog uses local generated product images', /\/assets\/generated\/products\//.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) && !/images\.unsplash\.com/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8'))],
   ['all brief structure pages exist', requiredStructure.every((file) => existsSync(join(root, file)))],
   ['shop styles use brand green from guidebook', /--brand-green:\s*#3f5927/.test(shopCss)],
   ['shop uses Golos Text', /Golos Text/.test(shopCss)],
@@ -253,10 +266,10 @@ const checks = [
   ],
   [
     'catalog uses Apple Store structure',
-    /store-hero/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')) &&
-      /store-category-row/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')) &&
-      /apple-store-grid--catalog/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')) &&
-      /store-filter-panel/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')),
+    /store-hero/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) &&
+      /store-category-row/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) &&
+      /apple-store-grid--catalog/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) &&
+      /store-filter-panel/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')),
   ],
   [
     'catalog categories match client brief',
@@ -264,13 +277,13 @@ const checks = [
       catalogDirs.includes(slug),
     ) &&
       ['longslivy', 'svitshoty-flis', 'svitshoty-bez-flisa', 'kostyumy', 'kepki', 'sumki', 'podarki'].every((slug) => !catalogDirs.includes(slug)) &&
-      /Худи/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')) &&
-      /Свитшоты/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')) &&
-      /data-subcategory="С флисом"/.test(readFileSync(join(root, 'catalog/svitshoty/index.html'), 'utf8')) &&
-      /data-subcategory="Без флиса"/.test(readFileSync(join(root, 'catalog/svitshoty/index.html'), 'utf8')) &&
-      /data-filter-subcategory="С флисом"/.test(readFileSync(join(root, 'catalog/svitshoty/index.html'), 'utf8')) &&
-      /data-filter-subcategory="Без флиса"/.test(readFileSync(join(root, 'catalog/svitshoty/index.html'), 'utf8')) &&
-      /Аксессуары/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')),
+      /Худи/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) &&
+      /Свитшоты/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) &&
+      /data-subcategory="С флисом"/.test(readFileSync(join(shopRoot, 'catalog/svitshoty/index.html'), 'utf8')) &&
+      /data-subcategory="Без флиса"/.test(readFileSync(join(shopRoot, 'catalog/svitshoty/index.html'), 'utf8')) &&
+      /data-filter-subcategory="С флисом"/.test(readFileSync(join(shopRoot, 'catalog/svitshoty/index.html'), 'utf8')) &&
+      /data-filter-subcategory="Без флиса"/.test(readFileSync(join(shopRoot, 'catalog/svitshoty/index.html'), 'utf8')) &&
+      /Аксессуары/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')),
   ],
   [
     'catalog category row fits inside desktop wrap',
@@ -282,9 +295,9 @@ const checks = [
   ],
   [
     'catalog starts product section after category row',
-    !/store-promos/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')) &&
-      !/Купить проще/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')) &&
-      /store-category-row[\s\S]*store-products[\s\S]*Все товары/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')),
+    !/store-promos/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) &&
+      !/Купить проще/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) &&
+      /store-category-row[\s\S]*store-products[\s\S]*Все товары/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')),
   ],
   [
     'catalog filter panel sticks near viewport top',
@@ -306,28 +319,28 @@ const checks = [
   ],
   [
     'product detail page uses Apple-style model-led gallery',
-    /<div class="product-gallery">/.test(readFileSync(join(root, 'product/bomber-fluffy/index.html'), 'utf8')) &&
-      /gallery-main"><img src="\.\.\/\.\.\/assets\/generated\/fashion\/kurtki-models\.png" alt="Бомбер «Объём» на модели/.test(readFileSync(join(root, 'product/bomber-fluffy/index.html'), 'utf8')) &&
-      /gallery-thumbs"><button type="button" class="is-active"><img src="\.\.\/\.\.\/assets\/generated\/fashion\/kurtki-models\.png"/.test(readFileSync(join(root, 'product/bomber-fluffy/index.html'), 'utf8')) &&
+    /<div class="product-gallery">/.test(readFileSync(join(shopRoot, 'product/bomber-fluffy/index.html'), 'utf8')) &&
+      /gallery-main"><img src="\.\.\/\.\.\/assets\/generated\/fashion\/kurtki-models\.png" alt="Бомбер «Объём» на модели/.test(readFileSync(join(shopRoot, 'product/bomber-fluffy/index.html'), 'utf8')) &&
+      /gallery-thumbs"><button type="button" class="is-active"><img src="\.\.\/\.\.\/assets\/generated\/fashion\/kurtki-models\.png"/.test(readFileSync(join(shopRoot, 'product/bomber-fluffy/index.html'), 'utf8')) &&
       /\.product-page\s*\{[\s\S]*grid-template-columns:\s*minmax\(0,\s*1\.08fr\) minmax\(360px,\s*0\.92fr\);[\s\S]*gap:\s*clamp\(56px,\s*7vw,\s*96px\);/.test(shopCss) &&
       /\.product-page \.gallery-main\s*\{[\s\S]*border:\s*0;[\s\S]*border-radius:\s*0;[\s\S]*box-shadow:\s*none;/.test(shopCss) &&
       /\.product-info\s*\{[\s\S]*position:\s*sticky;[\s\S]*top:\s*112px;/.test(shopCss),
   ],
   [
     'front-end filters are functional',
-    /data-product-card/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')) &&
-      /data-filter-size/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')) &&
-      /data-filter-subcategory/.test(readFileSync(join(root, 'catalog/svitshoty/index.html'), 'utf8')) &&
+    /data-product-card/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) &&
+      /data-filter-size/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) &&
+      /data-filter-subcategory/.test(readFileSync(join(shopRoot, 'catalog/svitshoty/index.html'), 'utf8')) &&
       /applyFilters/.test(siteJs) &&
       /filterSubcategory/.test(siteJs) &&
       /card\.hidden = !shown/.test(siteJs),
   ],
   [
     'static SEO filter page has keyword metadata',
-    existsSync(join(root, 'catalog/futbolki/chernye-xs/index.html')) &&
-      /Футболки чёрные XS — купить с доставкой по России/.test(readFileSync(join(root, 'catalog/futbolki/chernye-xs/index.html'), 'utf8')) &&
-      /футболка чёрные XS/.test(readFileSync(join(root, 'catalog/futbolki/chernye-xs/index.html'), 'utf8')) &&
-      /alt="футболка чёрные XS/.test(readFileSync(join(root, 'catalog/futbolki/chernye-xs/index.html'), 'utf8')),
+    existsSync(join(shopRoot, 'catalog/futbolki/chernye-xs/index.html')) &&
+      /Футболки чёрные XS — купить с доставкой по России/.test(readFileSync(join(shopRoot, 'catalog/futbolki/chernye-xs/index.html'), 'utf8')) &&
+      /футболка чёрные XS/.test(readFileSync(join(shopRoot, 'catalog/futbolki/chernye-xs/index.html'), 'utf8')) &&
+      /alt="футболка чёрные XS/.test(readFileSync(join(shopRoot, 'catalog/futbolki/chernye-xs/index.html'), 'utf8')),
   ],
   [
     'home parallax uses text and image layers',
@@ -347,8 +360,8 @@ const checks = [
       /href: `\$\{root\}catalog\/aksessuary\/`, label: "Аксессуары"/.test(siteJs) &&
       /Подарочные карты/.test(siteJs) &&
       /Кабинет/.test(siteJs) &&
-      /<section class="store-products" id="odezhda">/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')) &&
-      existsSync(join(root, 'catalog', 'aksessuary', 'index.html')),
+      /<section class="store-products" id="odezhda">/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) &&
+      existsSync(join(shopRoot, 'catalog', 'aksessuary', 'index.html')),
   ],
   [
     'public chrome uses delivery topbar',
@@ -394,8 +407,8 @@ const checks = [
   [
     'requested footer and filter helper texts are removed',
     !/проект Национального центра «Россия»/.test(siteJs) &&
-      !/собраны в одном сценарии/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')) &&
-      !/без разделения на мужское и женское/.test(readFileSync(join(root, 'catalog/index.html'), 'utf8')),
+      !/собраны в одном сценарии/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')) &&
+      !/без разделения на мужское и женское/.test(readFileSync(join(shopRoot, 'catalog/index.html'), 'utf8')),
   ],
   [
     'header uses client mark',
@@ -403,17 +416,17 @@ const checks = [
   ],
   [
     'about includes brand quote',
-    /brand-quote/.test(readFileSync(join(root, 'about/index.html'), 'utf8')) &&
-      /<span class="brand-quote__accent">Россия<\/span>/.test(readFileSync(join(root, 'about/index.html'), 'utf8')) &&
-      /brand-quote__dash/.test(readFileSync(join(root, 'about/index.html'), 'utf8')),
+    /brand-quote/.test(readFileSync(join(shopRoot, 'about/index.html'), 'utf8')) &&
+      /<span class="brand-quote__accent">Россия<\/span>/.test(readFileSync(join(shopRoot, 'about/index.html'), 'utf8')) &&
+      /brand-quote__dash/.test(readFileSync(join(shopRoot, 'about/index.html'), 'utf8')),
   ],
   [
     'about mentions brand colors from guidebook',
-    /Pantone 4216/.test(readFileSync(join(root, 'about/index.html'), 'utf8')),
+    /Pantone 4216/.test(readFileSync(join(shopRoot, 'about/index.html'), 'utf8')),
   ],
   [
     'product pages include schema.org Product',
-    /"@type": "Product"/.test(readFileSync(join(root, 'product/futbolka-oranzhevaya/index.html'), 'utf8')),
+    /"@type": "Product"/.test(readFileSync(join(shopRoot, 'product/futbolka-oranzhevaya/index.html'), 'utf8')),
   ],
   [
     'product pages use three Apple-style recommendation rails',
@@ -429,7 +442,7 @@ const checks = [
   ['custom domain targets frc.serenity-dev.ru', readFileSync(join(root, 'CNAME'), 'utf8').trim() === 'frc.serenity-dev.ru'],
   [
     'home canonical and favicon',
-    /<link rel="canonical" href="https:\/\/frc\.serenity-dev\.ru\/">/.test(home) &&
+    /<link rel="canonical" href="https:\/\/frc\.serenity-dev\.ru\/design\/">/.test(home) &&
       existsSync(join(root, 'assets/favicon.png')),
   ],
 ];
