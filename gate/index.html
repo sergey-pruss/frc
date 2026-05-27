@@ -49,6 +49,8 @@
           radial-gradient(ellipse 70% 50% at 50% 42%, var(--gate-glow), transparent 70%),
           radial-gradient(ellipse 50% 40% at 55% 55%, var(--gate-glow-2), transparent 65%);
         pointer-events: none;
+        transform-origin: 50% 42%;
+        will-change: transform, opacity, filter;
       }
       .gate-panel {
         position: relative;
@@ -141,113 +143,81 @@
         letter-spacing: 0.02em;
       }
 
-      .gate-veil {
-        position: fixed;
-        inset: 0;
-        z-index: 20;
-        pointer-events: none;
-        opacity: 0;
-        background:
-          radial-gradient(circle at 50% 58%, rgba(120, 145, 255, 0.55), transparent 42%),
-          radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.98) 68%);
-        transform: scale(0.35);
-        transition: none;
+      html.is-exiting {
+        animation: gate-bg-green 1.5s ease forwards;
       }
 
-      body.is-exiting .gate-veil {
-        animation: gate-veil-reveal 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      body.is-exiting.gate-page {
+        animation: gate-bg-green 1.5s ease forwards;
       }
 
       body.is-exiting .gate-scene::before {
-        animation: gate-glow-burst 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        animation: gate-glow-expand 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       }
 
       body.is-exiting .gate-panel {
-        animation: gate-panel-exit 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        animation: gate-panel-fade 1.5s ease forwards;
       }
 
-      body.is-exiting .gate-input-wrap.is-success {
-        animation: gate-pill-success 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      @keyframes gate-bg-green {
+        from { background: #000; }
+        to { background: #071807; }
       }
 
-      @keyframes gate-veil-reveal {
+      @keyframes gate-glow-expand {
         0% {
-          opacity: 0;
-          transform: scale(0.35);
+          transform: scale(1);
+          opacity: 1;
+          background:
+            radial-gradient(ellipse 70% 50% at 50% 42%, rgba(66, 84, 255, 0.35), transparent 70%),
+            radial-gradient(ellipse 50% 40% at 55% 55%, rgba(138, 99, 255, 0.22), transparent 65%);
+        }
+        100% {
+          transform: scale(2.6);
+          opacity: 1;
+          background:
+            radial-gradient(ellipse 70% 50% at 50% 42%, rgba(47, 77, 43, 0.68), transparent 70%),
+            radial-gradient(ellipse 50% 40% at 55% 55%, rgba(88, 150, 78, 0.48), transparent 65%);
+        }
+      }
+
+      @keyframes gate-panel-fade {
+        0% {
+          opacity: 1;
+          transform: scale(1);
         }
         35% {
-          opacity: 0.85;
-        }
-        100% {
           opacity: 1;
-          transform: scale(1.35);
-        }
-      }
-
-      @keyframes gate-glow-burst {
-        0% {
-          opacity: 1;
-          transform: scale(1);
         }
         100% {
           opacity: 0;
-          transform: scale(1.8);
-          filter: blur(12px);
-        }
-      }
-
-      @keyframes gate-panel-exit {
-        0% {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-          filter: blur(0);
-        }
-        100% {
-          opacity: 0;
-          transform: translateY(-28px) scale(1.03);
-          filter: blur(10px);
-        }
-      }
-
-      @keyframes gate-pill-success {
-        0% {
-          transform: scale(1);
-          border-color: rgba(138, 180, 255, 0.35);
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
-        }
-        45% {
-          transform: scale(1.02);
-          border-color: rgba(170, 200, 255, 0.75);
-          box-shadow:
-            0 0 0 1px rgba(170, 200, 255, 0.35),
-            0 0 48px rgba(88, 118, 255, 0.45),
-            0 16px 40px rgba(0, 0, 0, 0.35);
-        }
-        100% {
-          transform: scale(1.06);
-          border-color: rgba(210, 225, 255, 0.9);
-          box-shadow:
-            0 0 0 999px rgba(120, 145, 255, 0.22),
-            0 0 80px rgba(120, 145, 255, 0.55);
+          transform: scale(0.985);
         }
       }
 
       @media (prefers-reduced-motion: reduce) {
-        body.is-exiting .gate-veil,
+        html.is-exiting,
+        body.is-exiting.gate-page {
+          animation: none;
+          background: #071807;
+        }
         body.is-exiting .gate-scene::before,
-        body.is-exiting .gate-panel,
-        body.is-exiting .gate-input-wrap.is-success {
+        body.is-exiting .gate-panel {
           animation: none;
         }
-        body.is-exiting .gate-veil {
-          opacity: 1;
-          transform: none;
+        body.is-exiting .gate-scene::before {
+          transform: scale(2.6);
+          background:
+            radial-gradient(ellipse 70% 50% at 50% 42%, rgba(47, 77, 43, 0.68), transparent 70%),
+            radial-gradient(ellipse 50% 40% at 55% 55%, rgba(88, 150, 78, 0.48), transparent 65%);
+        }
+        body.is-exiting .gate-panel {
+          opacity: 0;
         }
       }
     </style>
   </head>
   <body class="gate-page">
-    <div class="gate-veil" aria-hidden="true"></div>
     <div class="gate-scene">
       <div class="gate-panel">
         <img class="gate-logo" src="../assets/serenity-logo.svg" width="48" height="48" alt="Serenity">
@@ -346,13 +316,14 @@
 
         function playSuccessExit(callback) {
           if (prefersReducedMotion()) {
-            callback();
+            document.documentElement.classList.add("is-exiting");
+            document.body.classList.add("is-exiting");
+            window.setTimeout(callback, 150);
             return;
           }
+          document.documentElement.classList.add("is-exiting");
           document.body.classList.add("is-exiting");
-          var wrap = document.getElementById("gate-input-wrap");
-          if (wrap) wrap.classList.add("is-success");
-          window.setTimeout(callback, 920);
+          window.setTimeout(callback, 1500);
         }
 
         function syncAuthStores() {
@@ -409,7 +380,7 @@
           form.addEventListener("submit", async function (event) {
             event.preventDefault();
             hint.textContent = "";
-            wrap.classList.remove("is-error", "is-success");
+            wrap.classList.remove("is-error");
 
             var ok = await tryLogin(input.value);
             if (ok) {
