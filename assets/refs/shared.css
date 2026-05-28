@@ -60,9 +60,12 @@ body[class*="ref-"] .btn-secondary {
   object-fit: contain;
 }
 
-.ref-logo--on-dark .ref-logo__img,
-.ref-logo--on-dark .ref-logo__mark {
+.ref-logo--on-dark .ref-logo__img {
   filter: brightness(0) invert(1);
+}
+
+.ref-logo--on-dark.ref-logo--mark-only .ref-logo__mark {
+  filter: none;
 }
 
 .ref-logo--on-light .ref-logo__img,

@@ -119,8 +119,9 @@
     const stackClass = stack ? " ref-logo--stack" : "";
 
     if (layout === "mark") {
+      const markFile = tone === "dark" ? markLightSrc : markSrc;
       return `<a class="ref-logo ${toneClass} ref-logo--mark-only" href="${home}" aria-label="Универмаг «Россия»">
-        <img class="ref-logo__mark" src="${markSourceSrc}" alt="" width="56" height="56">
+        <img class="ref-logo__mark" src="${markFile}" alt="" width="56" height="56">
       </a>`;
     }
 
@@ -137,7 +138,7 @@
 
   const renderRefFooterBrand = ({ home, tone = "dark" }) => {
     const onDark = tone === "dark";
-    const markImg = onDark ? markLightSrc : markSourceSrc;
+    const markImg = onDark ? markLightSrc : markSrc;
     const markMonoClass = onDark ? "" : " ref-footer-brand__mark-img--mono";
     const ncImg = onDark ? ncLogoSrc : ncLogoBlackSrc;
     return `<div class="ref-footer-brand ref-footer-brand--${onDark ? "dark" : "light"}">
