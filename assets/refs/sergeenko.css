@@ -56,16 +56,21 @@ body.ref-sergeenko.is-design-variant-sergeenko .site-header {
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   padding: 10px min(10px, 1vw) 0;
+  height: clamp(480px, calc(100dvh - 140px), 820px);
+  max-height: 820px;
 }
 
 .ref-sergeenko .serg-screen__tile {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
   color: inherit;
   text-decoration: none;
 }
 
 .ref-sergeenko .serg-screen__img {
-  aspect-ratio: 3/4;
+  flex: 1;
+  min-height: 0;
   background: #ececec center/cover no-repeat;
 }
 
@@ -91,16 +96,17 @@ body.ref-sergeenko.is-design-variant-sergeenko .site-header {
 
 .ref-sergeenko .ref-mission {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-  gap: clamp(24px, 5vw, 72px);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(24px, 4vw, 56px);
   align-items: center;
-  padding: 72px min(40px, 4vw) 80px;
+  padding: 56px min(40px, 4vw) 64px;
   border-top: 1px solid #e8e8e8;
 }
 
 .ref-sergeenko .ref-mission__portrait {
-  aspect-ratio: 3/4;
-  max-height: 680px;
+  aspect-ratio: 4/5;
+  max-height: min(420px, 42vh);
+  width: 100%;
   background: #ececec center/cover no-repeat;
 }
 
@@ -152,6 +158,7 @@ body.ref-sergeenko.is-design-variant-sergeenko .site-header {
 
 .ref-sergeenko .ref-collection-card__img {
   aspect-ratio: 4/5;
+  max-height: min(380px, 38vh);
   background: #d8d8d8 center/cover no-repeat;
 }
 
@@ -190,43 +197,62 @@ body.ref-sergeenko.is-design-variant-sergeenko .site-header {
   letter-spacing: 0.04em;
 }
 
-.ref-sergeenko .ref-values {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  padding: 0 min(40px, 4vw) 80px;
+.ref-sergeenko .ref-cta-band {
+  margin: 0 min(40px, 4vw) 72px;
+  padding: 48px 32px;
+  text-align: center;
+  border: 1px solid #e8e8e8;
+  background: #fafafa;
 }
 
-.ref-sergeenko .ref-values__text {
-  padding: 48px 0;
-}
-
-.ref-sergeenko .ref-values__text h2 {
-  margin: 0 0 16px;
+.ref-sergeenko .ref-cta-band h2 {
+  margin: 0 0 12px;
   font-family: "Playfair Display", "PT Serif", serif;
-  font-size: clamp(24px, 3vw, 36px);
+  font-size: clamp(22px, 3vw, 32px);
   font-weight: 400;
-  line-height: 1.2;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
-.ref-sergeenko .ref-values__img {
-  aspect-ratio: 1;
-  background: #ececec center/cover no-repeat;
+.ref-sergeenko .ref-cta-band p {
+  margin: 0 auto 24px;
+  max-width: 42ch;
+  color: #555;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 @media (max-width: 900px) {
-  .ref-sergeenko .serg-screen__duo,
+  .ref-sergeenko .serg-screen__duo {
+    height: clamp(400px, calc(100dvh - 160px), 640px);
+  }
+
   .ref-sergeenko .ref-mission,
-  .ref-sergeenko .ref-collections__grid,
-  .ref-sergeenko .ref-values {
+  .ref-sergeenko .ref-collections__grid {
     grid-template-columns: 1fr;
+  }
+
+  .ref-sergeenko .ref-mission__portrait {
+    max-height: min(400px, 65vw);
   }
 
   .ref-sergeenko .serg-screen__utils {
     position: static;
     justify-content: center;
     margin-top: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .ref-sergeenko .serg-screen__duo {
+    grid-template-columns: 1fr;
+    height: auto;
+    max-height: none;
+  }
+
+  .ref-sergeenko .serg-screen__img {
+    aspect-ratio: 4/5;
+    max-height: min(70vw, 400px);
+    flex: none;
   }
 }
