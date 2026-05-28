@@ -121,6 +121,14 @@ async function ensureSheetTab(sheets, spreadsheetId, title) {
 const HEADER_GREEN = { red: 0.851, green: 0.918, blue: 0.827 };
 const BAND_LIGHT = { red: 0.949, green: 0.949, blue: 0.949 };
 const BAND_WHITE = { red: 1, green: 1, blue: 1 };
+const CONTROVERSIAL_HIGH = { red: 0.96, green: 0.8, blue: 0.8 };
+const CONTROVERSIAL_MED = { red: 1, green: 0.95, blue: 0.8 };
+
+const HIGH_CONTROVERSIAL_REASONS = /Видеоигры|Авто-бренды|Спортклубы/;
+
+function controversialBackground(reason) {
+  return HIGH_CONTROVERSIAL_REASONS.test(reason || "") ? CONTROVERSIAL_HIGH : CONTROVERSIAL_MED;
+}
 
 async function formatTabLikeReference(sheets, spreadsheetId, tabTitle, values) {
   const rowCount = values.length;
@@ -128,6 +136,8 @@ async function formatTabLikeReference(sheets, spreadsheetId, tabTitle, values) {
   const headers = values[0] || [];
   const queryCol = headers.indexOf("Запрос");
   const showsCol = headers.indexOf("Показы/мес");
+  const controversialCol = headers.indexOf("Спорный");
+  const reasonCol = headers.indexOf("Причина");
 
   const { sheetId, meta } = await getSheetId(sheets, spreadsheetId, tabTitle);
   const requests = [];
@@ -254,6 +264,32 @@ async function formatTabLikeReference(sheets, spreadsheetId, tabTitle, values) {
         fields: "userEnteredFormat.wrapStrategy",
       },
     });
+  }
+
+  // Спорные запросы — подсветка строк по колонкам «Спорный» / «Причина»
+  if (rowCount > 1 && controversialCol >= 0) {
+    for (let rowIndex = 1; rowIndex < rowCount; rowIndex++) {
+      const row = values[rowIndex] || [];
+      if (row[controversialCol] !== "Да") continue;
+      const reason = reasonCol >= 0 ? row[reasonCol] : "";
+      requests.push({
+        repeatCell: {
+          range: {
+            sheetId,
+            startRowIndex: rowIndex,
+            endRowIndex: rowIndex + 1,
+            startColumnIndex: 0,
+            endColumnIndex: colCount,
+          },
+          cell: {
+            userEnteredFormat: {
+              backgroundColor: controversialBackground(reason),
+            },
+          },
+          fields: "userEnteredFormat.backgroundColor",
+        },
+      });
+    }
   }
 
   await sheets.spreadsheets.batchUpdate({

@@ -13,9 +13,7 @@ body.is-design-variant-the-act .btn-primary,
 body.is-design-variant-sergeenko .btn-primary,
 body.is-design-variant-rains .btn-primary,
 body.is-design-variant-cromia .btn-primary,
-body.is-design-variant-soroboka .btn-primary,
-body.is-design-variant-zenit .btn-primary,
-body.is-design-variant-tretyakov .btn-primary {
+body.is-design-variant-soroboka .btn-primary {
   background: var(--ref-ink);
   border-color: var(--ref-ink);
   color: #fff;
