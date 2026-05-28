@@ -1,8 +1,8 @@
-/* Reference: RAINS — editorial grid, slash labels, cool minimal */
+/* Reference: RAINS — bold editorial first screen */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 body.ref-rains {
-  background: #f2f2f2;
+  background: #ececec;
   font-family: "Inter", "Golos Text", system-ui, sans-serif;
 }
 
@@ -10,11 +10,149 @@ body.ref-rains h1,
 body.ref-rains h2,
 body.ref-rains h3 {
   font-family: "Inter", system-ui, sans-serif;
-  letter-spacing: -0.03em;
+}
+
+body.ref-rains.is-design-variant-rains .site-header {
+  display: none;
+}
+
+.ref-rains .rains-screen {
+  position: relative;
+  min-height: max(92vh, 680px);
+  min-height: max(92dvh, 680px);
+  margin-bottom: 8px;
+  color: #fff;
+  overflow: hidden;
+}
+
+.ref-rains .rains-screen__media {
+  position: absolute;
+  inset: 0;
+  background: #1a1a1c center/cover no-repeat;
+}
+
+.ref-rains .rains-screen__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.55) 100%),
+    radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.08), transparent 40%);
+}
+
+.ref-rains .rains-screen__bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px min(32px, 4vw);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ref-rains .rains-screen__brand .ref-logo__mark {
+  height: 36px;
+}
+
+.ref-rains .rains-screen__brand .ref-logo__lockup {
+  height: 24px;
+}
+
+.ref-rains .rains-screen__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.ref-rains .rains-screen__nav a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+}
+
+.ref-rains .rains-screen__nav a::before {
+  content: "/ ";
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 500;
+}
+
+.ref-rains .rains-screen__cart {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 16px;
+  background: #fff;
+  color: #1a1a1c;
+}
+
+.ref-rains .rains-screen__body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: max(92vh, 680px);
+  min-height: max(92dvh, 680px);
+  padding: 0 min(32px, 4vw) clamp(48px, 7vh, 80px);
+}
+
+.ref-rains .rains-screen__meta {
+  margin: 0 0 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.ref-rains .rains-screen__title {
+  margin: 0;
+  font-size: clamp(64px, 14vw, 148px);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  max-width: 9ch;
+}
+
+.ref-rains .rains-screen__sub {
+  margin: 20px 0 0;
+  max-width: 36ch;
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+.ref-rains .rains-screen__cta-row {
+  margin-top: 32px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ref-rains .rains-screen__cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 22px;
+  background: #fff;
+  color: #1a1a1c;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.ref-rains .rains-screen__cta--ghost {
+  background: transparent;
+  color: #fff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
 }
 
 .ref-rains .ref-slash-head {
-  padding: 32px 0 20px;
+  padding: 32px min(32px, 4vw) 20px;
   font-size: clamp(36px, 5vw, 56px);
   font-weight: 700;
   line-height: 1;
@@ -25,38 +163,12 @@ body.ref-rains h3 {
   font-weight: 600;
 }
 
-.ref-rains .ref-hero-editorial {
-  position: relative;
-  min-height: min(70vh, 640px);
-  margin-bottom: 8px;
-  background: #1a1a1c center/cover no-repeat;
-  display: flex;
-  align-items: flex-end;
-  padding: 40px;
-  color: #fff;
-}
-
-.ref-rains .ref-hero-editorial h1 {
-  margin: 0;
-  font-size: clamp(48px, 8vw, 96px);
-  font-weight: 700;
-  line-height: 0.95;
-  max-width: 10ch;
-}
-
-.ref-rains .ref-hero-editorial p {
-  margin: 12px 0 0;
-  font-size: 14px;
-  opacity: 0.75;
-  max-width: 32ch;
-}
-
 .ref-rains .ref-mosaic {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-auto-rows: minmax(180px, auto);
   gap: 8px;
-  padding: 8px 0 48px;
+  padding: 0 min(8px, 1vw) 48px;
 }
 
 .ref-rains .ref-mosaic .ref-product {
@@ -72,24 +184,6 @@ body.ref-rains h3 {
   grid-column: span 6;
 }
 
-.ref-rains .ref-mosaic .ref-product--hero-tile {
-  grid-column: span 6;
-  grid-row: span 2;
-  position: relative;
-  min-height: 380px;
-  background: #ddd center/cover no-repeat;
-  display: flex;
-  align-items: flex-end;
-  padding: 24px;
-  color: #fff;
-}
-
-.ref-rains .ref-mosaic .ref-product--hero-tile h2 {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 700;
-}
-
 .ref-rains .ref-product__img {
   border-radius: 0;
   background: #e0e0e0;
@@ -100,19 +194,14 @@ body.ref-rains h3 {
 }
 
 .ref-rains .ref-product__meta h3 {
-  font-size: 12px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.ref-rains .ref-product__meta .price {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .ref-rains .ref-about-band {
-  margin: 24px 0 48px;
+  margin: 8px min(8px, 1vw) 48px;
   padding: 56px 40px;
   background: #fff;
   display: grid;
@@ -125,47 +214,35 @@ body.ref-rains h3 {
   margin: 0;
   font-size: clamp(28px, 4vw, 44px);
   font-weight: 700;
-}
-
-.ref-rains .ref-about-band p {
-  margin: 0;
-  color: #666;
-  line-height: 1.6;
+  letter-spacing: -0.03em;
 }
 
 .ref-rains .ref-category-strip {
   display: flex;
   flex-wrap: wrap;
   gap: 24px 40px;
-  padding: 40px 0 64px;
-  border-top: 1px solid #ccc;
+  padding: 40px min(32px, 4vw) 64px;
+  border-top: 1px solid #bbb;
   font-size: clamp(18px, 2.5vw, 28px);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.ref-rains .ref-category-strip a {
-  color: inherit;
-  opacity: 0.85;
-}
-
-.ref-rains .ref-category-strip a:hover {
-  opacity: 1;
+  letter-spacing: 0.02em;
 }
 
 @media (max-width: 900px) {
+  .ref-rains .rains-screen__nav {
+    display: none;
+  }
+
   .ref-rains .ref-mosaic {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .ref-rains .ref-mosaic .ref-product,
   .ref-rains .ref-mosaic .ref-product--tall,
-  .ref-rains .ref-mosaic .ref-product--wide,
-  .ref-rains .ref-mosaic .ref-product--hero-tile {
+  .ref-rains .ref-mosaic .ref-product--wide {
     grid-column: span 1;
     grid-row: span 1;
-    min-height: 240px;
   }
 
   .ref-rains .ref-about-band {

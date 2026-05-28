@@ -1,21 +1,88 @@
 /* Shared ref-variant utilities (loads after shop.css) */
-.ref-banner {
-  background: #1d1d1f;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 13px;
-  padding: 10px 16px;
-  text-align: center;
+:root {
+  --ref-ink: #171719;
+  --ref-muted: #6f6a61;
+  --ref-line: #e5e5e5;
+  --ref-paper: #fff;
+  --ref-soft: #f5f5f3;
+  --ref-dark: #171719;
 }
 
-.ref-banner a {
+body[class*="ref-"] .btn-primary,
+body.is-design-variant-the-act .btn-primary,
+body.is-design-variant-sergeenko .btn-primary,
+body.is-design-variant-rains .btn-primary,
+body.is-design-variant-cromia .btn-primary,
+body.is-design-variant-soroboka .btn-primary {
+  background: var(--ref-ink);
+  border-color: var(--ref-ink);
   color: #fff;
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
-.ref-banner strong {
-  color: #fff;
-  font-weight: 600;
+body[class*="ref-"] .btn-secondary {
+  border-color: var(--ref-ink);
+  color: var(--ref-ink);
+}
+
+/* Логотип Универмага «Россия» — mark + lockup, без фирменного зелёного */
+.ref-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ref-logo--stack {
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ref-logo__mark {
+  display: block;
+  width: auto;
+  height: 44px;
+  object-fit: contain;
+}
+
+.ref-logo__lockup {
+  display: block;
+  width: auto;
+  height: 26px;
+  object-fit: contain;
+}
+
+.ref-logo__lockup--lg {
+  height: 32px;
+}
+
+.ref-logo--on-dark .ref-logo__mark {
+  filter: brightness(0) invert(1);
+}
+
+.ref-logo--on-light .ref-logo__mark {
+  filter: brightness(0);
+}
+
+.ref-logo--mark-only .ref-logo__lockup {
+  display: none;
+}
+
+.ref-logo--lockup-only .ref-logo__mark {
+  display: none;
+}
+
+.ref-footer__logo {
+  margin: 0 0 16px;
+}
+
+.ref-footer__logo .ref-logo__mark {
+  height: 40px;
+}
+
+.ref-footer--the-act .ref-footer__logo .ref-logo__lockup,
+.ref-footer--rains .ref-footer__logo .ref-logo__lockup {
+  height: 30px;
 }
 
 .ref-label {
@@ -25,7 +92,7 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted, #6f6a61);
+  color: var(--ref-muted);
 }
 
 .ref-products {
@@ -34,7 +101,7 @@
 }
 
 .ref-products--4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, fr));
 }
 
 .ref-products--scroll {

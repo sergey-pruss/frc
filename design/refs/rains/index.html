@@ -13,67 +13,79 @@ location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n)
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Референс: RAINS — Универмаг «Россия»</title>
     <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png?v=20260528refs">
-    <link rel="stylesheet" href="../../../assets/shop.css?v=20260528refs">
-    <link rel="stylesheet" href="../../../assets/refs/shared.css?v=20260528refs">
-    <link rel="stylesheet" href="../../../assets/refs/rains.css?v=20260528refs">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png?v=20260528d">
+    <link rel="stylesheet" href="../../../assets/shop.css?v=20260528d">
+    <link rel="stylesheet" href="../../../assets/refs/shared.css?v=20260528d">
+    <link rel="stylesheet" href="../../../assets/refs/rains.css?v=20260528d">
   </head>
   <body class="ref-rains">
-    <p class="ref-banner"><strong>Референс: RAINS</strong> · <a href="../">все варианты</a> · <a href="../../">базовый прототип</a></p>
     <div data-site-header></div>
     <main>
-      <section class="ref-hero-editorial" style="background-image:url('../../../assets/generated/editorial/home-hero-apple-wall.png')">
-        <div>
-          <h1>Универмаг «Россия»</h1>
-          <p>Официальный мерч Национального центра — весна 2025</p>
+      <section class="rains-screen" aria-label="Главный экран">
+        <div class="rains-screen__media" style="background-image:url('../../../assets/generated/editorial/home-hero-apple-wall.png')"></div>
+        <div class="rains-screen__bar">
+          <a class="rains-screen__brand" href="./" data-ref-logo data-ref-logo-tone="dark" data-ref-logo-layout="full"></a>
+          <nav class="rains-screen__nav" aria-label="Меню">
+            <a href="../../catalog/">Каталог</a>
+            <a href="../../catalog/new/">Новинки</a>
+            <a href="../../catalog/kurtki/">Куртки</a>
+          </nav>
+          <a class="rains-screen__cart" href="../../cart/">Корзина</a>
+        </div>
+        <div class="rains-screen__body">
+          <p class="rains-screen__meta">Официальный мерч · весна 2025</p>
+          <h1 class="rains-screen__title">Центр°25</h1>
+          <p class="rains-screen__sub">Сдержанная графика, технические ткани и городской силуэт — мерч Национального центра «Россия».</p>
+          <div class="rains-screen__cta-row">
+            <a class="rains-screen__cta" href="../../catalog/">В коллекцию</a>
+            <a class="rains-screen__cta rains-screen__cta--ghost" href="../../catalog/new/">/ Новинки</a>
+          </div>
         </div>
       </section>
 
-      <div class="wrap">
-        <p class="ref-slash-head"><span>/ </span>Новинки</p>
-        <div class="ref-mosaic">
-          <div class="ref-product ref-product--hero-tile" style="background-image:url('../../../assets/generated/editorial/home-feature-style.png')">
-            <h2>Lifestyle</h2>
-          </div>
-          <a class="ref-product ref-product--tall" href="../../product/futbolka-oranzhevaya/">
-            <div class="ref-product__img"><img src="../../../assets/generated/fashion/futbolki-models.png" alt="" loading="lazy"></div>
-            <div class="ref-product__meta"><h3>Футболка «Оранжевая линия»</h3><span class="price">3 990 ₽</span></div>
-          </a>
-          <a class="ref-product" href="../../product/longsliv-grafika/">
-            <div class="ref-product__img"><img src="../../../assets/generated/fashion/svitshoty-bez-flisa-models.png" alt="" loading="lazy"></div>
-            <div class="ref-product__meta"><h3>Лонгслив «Графика»</h3><span class="price">4 490 ₽</span></div>
-          </a>
-          <a class="ref-product ref-product--wide" href="../../product/svitshot-premium/">
-            <div class="ref-product__img"><img src="../../../assets/generated/fashion/khudi-models.png" alt="" loading="lazy"></div>
-            <div class="ref-product__meta"><h3>Худи «Премиум капсула»</h3><span class="price">7 490 ₽</span></div>
-          </a>
-          <a class="ref-product" href="../../product/kurtka-veter/">
-            <div class="ref-product__img"><img src="../../../assets/generated/fashion/vetrovki-models.png" alt="" loading="lazy"></div>
-            <div class="ref-product__meta"><h3>Куртка «Ветер с севера»</h3><span class="price">12 990 ₽</span></div>
-          </a>
-          <a class="ref-product" href="../../product/sumka-shopper/">
-            <div class="ref-product__img"><img src="../../../assets/generated/fashion/aksessuary-models.png" alt="" loading="lazy"></div>
-            <div class="ref-product__meta"><h3>Шоппер</h3><span class="price">1 990 ₽</span></div>
-          </a>
-        </div>
-
-        <section class="ref-about-band">
-          <h2>О мерче центра</h2>
-          <p>Сдержанная графика, нейтральная палитра и акцент на посадке. Каталог с фильтрами по категории, размеру и цвету — от футболок до верхней одежды и подарочных наборов.</p>
-        </section>
-
-        <p class="ref-slash-head"><span>/ </span>Категории</p>
-        <nav class="ref-category-strip" aria-label="Категории">
-          <a href="../../catalog/hudi/">Худи</a>
-          <a href="../../catalog/futbolki/">Футболки</a>
-          <a href="../../catalog/kurtki/">Куртки</a>
-          <a href="../../catalog/aksessuary/">Аксессуары</a>
-          <a href="../../catalog/new/">Новинки</a>
-          <a href="../../gift-cards/">Сертификаты</a>
-        </nav>
+      <p class="ref-slash-head"><span>/ </span>Новинки</p>
+      <div class="ref-mosaic">
+        <a class="ref-product ref-product--tall" href="../../product/futbolka-oranzhevaya/">
+          <div class="ref-product__img"><img src="../../../assets/generated/fashion/futbolki-models.png" alt="" loading="lazy"></div>
+          <div class="ref-product__meta"><h3>Футболка «Оранжевая линия»</h3><span class="price">3 990 ₽</span></div>
+        </a>
+        <a class="ref-product" href="../../product/longsliv-grafika/">
+          <div class="ref-product__img"><img src="../../../assets/generated/fashion/svitshoty-bez-flisa-models.png" alt="" loading="lazy"></div>
+          <div class="ref-product__meta"><h3>Лонгслив «Графика»</h3><span class="price">4 490 ₽</span></div>
+        </a>
+        <a class="ref-product ref-product--wide" href="../../product/svitshot-premium/">
+          <div class="ref-product__img"><img src="../../../assets/generated/fashion/khudi-models.png" alt="" loading="lazy"></div>
+          <div class="ref-product__meta"><h3>Худи «Премиум капсула»</h3><span class="price">7 490 ₽</span></div>
+        </a>
+        <a class="ref-product" href="../../product/kurtka-veter/">
+          <div class="ref-product__img"><img src="../../../assets/generated/fashion/vetrovki-models.png" alt="" loading="lazy"></div>
+          <div class="ref-product__meta"><h3>Куртка «Ветер с севера»</h3><span class="price">12 990 ₽</span></div>
+        </a>
+        <a class="ref-product" href="../../product/sumka-shopper/">
+          <div class="ref-product__img"><img src="../../../assets/generated/fashion/aksessuary-models.png" alt="" loading="lazy"></div>
+          <div class="ref-product__meta"><h3>Шоппер</h3><span class="price">1 990 ₽</span></div>
+        </a>
+        <a class="ref-product" href="../../product/futbolka-belaya/">
+          <div class="ref-product__img"><img src="../../../assets/generated/editorial/home-feature-style.png" alt="" loading="lazy"></div>
+          <div class="ref-product__meta"><h3>Футболка «Белый фасад»</h3><span class="price">3 490 ₽</span></div>
+        </a>
       </div>
+
+      <section class="ref-about-band">
+        <h2>О мерче центра</h2>
+        <p>Каталог с фильтрами по категории, размеру и цвету. От футболок до верхней одежды и подарочных наборов.</p>
+      </section>
+
+      <p class="ref-slash-head"><span>/ </span>Категории</p>
+      <nav class="ref-category-strip" aria-label="Категории">
+        <a href="../../catalog/hudi/">Худи</a>
+        <a href="../../catalog/futbolki/">Футболки</a>
+        <a href="../../catalog/kurtki/">Куртки</a>
+        <a href="../../catalog/aksessuary/">Аксессуары</a>
+        <a href="../../catalog/new/">Новинки</a>
+      </nav>
     </main>
     <div data-site-footer></div>
-    <script src="../../../assets/site.js?v=20260528refs" data-depth="2"></script>
+    <script src="../../../assets/site.js?v=20260528d" data-depth="2"></script>
   </body>
 </html>

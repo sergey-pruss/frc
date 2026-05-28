@@ -1,0 +1,254 @@
+/* Reference: SOROBOKA — editorial hero, нейтральная палитра */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=PT+Serif:wght@400;700&display=swap");
+
+body.ref-soroboka {
+  background: #f5f3f0;
+}
+
+body.ref-soroboka.is-design-variant-soroboka .site-header {
+  display: none;
+}
+
+.ref-soroboka {
+  --soro-ink: var(--ref-ink, #171719);
+  --soro-dark: var(--ref-dark, #171719);
+}
+
+.ref-soroboka .soro-screen {
+  position: relative;
+  min-height: max(100vh, 760px);
+  min-height: max(100dvh, 760px);
+  color: #fff;
+  overflow: hidden;
+}
+
+.ref-soroboka .soro-screen__media {
+  position: absolute;
+  inset: 0;
+  background: #8a6a62 center/cover no-repeat;
+}
+
+.ref-soroboka .soro-screen__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(23, 23, 25, 0.72) 0%, rgba(23, 23, 25, 0.2) 55%, transparent 100%),
+    linear-gradient(180deg, transparent 50%, rgba(23, 23, 25, 0.5) 100%);
+}
+
+.ref-soroboka .soro-screen__header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px min(32px, 4vw);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ref-soroboka .soro-screen__logo .ref-logo__mark {
+  height: 40px;
+}
+
+.ref-soroboka .soro-screen__logo .ref-logo__lockup {
+  height: 24px;
+}
+
+.ref-soroboka .soro-screen__utils a {
+  margin-left: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+}
+
+.ref-soroboka .soro-screen__body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  min-height: max(100vh, 760px);
+  min-height: max(100dvh, 760px);
+  padding: 0 min(32px, 4vw) clamp(48px, 8vh, 88px);
+}
+
+.ref-soroboka .soro-screen__copy {
+  max-width: min(520px, 90vw);
+}
+
+.ref-soroboka .soro-screen__title {
+  margin: 0 0 20px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(22px, 3.8vw, 38px);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.ref-soroboka .soro-screen__lead {
+  margin: 0 0 28px;
+  max-width: 36ch;
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.92;
+}
+
+.ref-soroboka .soro-screen__cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 24px;
+  background: #fff;
+  color: var(--soro-ink);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.ref-soroboka .soro-screen__inset {
+  position: absolute;
+  right: min(8vw, 80px);
+  bottom: 18%;
+  z-index: 2;
+  width: min(200px, 28vw);
+  aspect-ratio: 1;
+  border: 6px solid #fff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  background: #ddd center/cover no-repeat;
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .ref-soroboka .soro-screen__inset {
+    display: block;
+  }
+}
+
+.ref-soroboka .soro-catalog {
+  padding: 56px min(24px, 4vw) 72px;
+  background: #fff;
+}
+
+.ref-soroboka .soro-catalog__head {
+  margin: 0 0 28px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--soro-ink);
+}
+
+.ref-soroboka .soro-catalog__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px 16px;
+}
+
+.ref-soroboka .soro-catalog-card {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ref-soroboka .soro-catalog-card__img {
+  aspect-ratio: 4/5;
+  background: #e0ddd8 center/cover no-repeat;
+  margin-bottom: 12px;
+}
+
+.ref-soroboka .soro-catalog-card h3 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.ref-soroboka .soro-catalog-card span {
+  font-size: 13px;
+  color: #666;
+}
+
+.ref-soroboka .soro-about {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 12px;
+  padding: 0 min(12px, 2vw) 64px;
+  align-items: stretch;
+}
+
+.ref-soroboka .soro-about__panel {
+  padding: 32px 24px;
+  background: var(--soro-dark);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.ref-soroboka .soro-about__panel h2 {
+  margin: 0 0 16px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ref-soroboka .soro-about__hero {
+  min-height: 420px;
+  background: #ccc center/cover no-repeat;
+}
+
+.ref-soroboka .soro-drop {
+  padding: 64px min(24px, 4vw);
+  background: #f5f3f0;
+}
+
+.ref-soroboka .soro-drop__label {
+  margin: 0 0 20px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--soro-ink);
+}
+
+.ref-soroboka .soro-drop__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.ref-soroboka .soro-drop__img {
+  min-height: 360px;
+  background: #ddd center/cover no-repeat;
+}
+
+.ref-soroboka .soro-drop__copy h2 {
+  margin: 0 0 16px;
+  font-family: "PT Serif", Georgia, serif;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.ref-soroboka .soro-drop__copy p {
+  margin: 0;
+  color: #555;
+  line-height: 1.65;
+  max-width: 42ch;
+}
+
+@media (max-width: 900px) {
+  .ref-soroboka .soro-catalog__grid,
+  .ref-soroboka .soro-about,
+  .ref-soroboka .soro-drop__grid {
+    grid-template-columns: 1fr;
+  }
+}

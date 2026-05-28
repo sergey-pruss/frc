@@ -1,92 +1,147 @@
-/* Reference: Uliana Sergeenko — serif luxury, mission block, collection duo */
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap");
+/* Reference: Uliana Sergeenko — luxury first screen */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600&display=swap");
 
 body.ref-sergeenko {
   background: #fff;
 }
 
-.ref-sergeenko .ref-duo-hero {
+body.ref-sergeenko.is-design-variant-sergeenko .site-header {
+  display: none;
+}
+
+.ref-sergeenko .serg-screen__header {
+  padding: 20px min(40px, 4vw) 12px;
+  text-align: center;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.ref-sergeenko .serg-screen__logo {
+  display: inline-flex;
+  margin-bottom: 16px;
+}
+
+.ref-sergeenko .serg-screen__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 28px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ref-sergeenko .serg-screen__nav a {
+  color: #1a1a1c;
+  text-decoration: none;
+}
+
+.ref-sergeenko .serg-screen__utils {
+  position: absolute;
+  top: 24px;
+  right: min(40px, 4vw);
+  display: flex;
+  gap: 20px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ref-sergeenko .serg-screen__header {
+  position: relative;
+}
+
+.ref-sergeenko .serg-screen__duo {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  padding: 24px 0 48px;
+  gap: 10px;
+  padding: 10px min(10px, 1vw) 0;
 }
 
-.ref-sergeenko .ref-duo-hero a {
-  position: relative;
+.ref-sergeenko .serg-screen__tile {
   display: block;
   color: inherit;
+  text-decoration: none;
 }
 
-.ref-sergeenko .ref-duo-hero__img {
+.ref-sergeenko .serg-screen__img {
   aspect-ratio: 3/4;
-  background: #efefef center/cover no-repeat;
+  background: #ececec center/cover no-repeat;
 }
 
-.ref-sergeenko .ref-duo-hero__cap {
-  padding: 14px 4px 0;
+.ref-sergeenko .serg-screen__cap {
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
+  gap: 12px;
+  padding: 14px 6px 0;
+  font-size: 12px;
+  line-height: 1.4;
 }
 
-.ref-sergeenko .ref-duo-hero__cap strong {
-  font-weight: 500;
+.ref-sergeenko .serg-screen__cap strong {
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ref-sergeenko .serg-screen__cap span {
+  white-space: nowrap;
+  color: #666;
 }
 
 .ref-sergeenko .ref-mission {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-  gap: clamp(24px, 5vw, 64px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(24px, 5vw, 72px);
   align-items: center;
-  padding: 56px 0 72px;
+  padding: 72px min(40px, 4vw) 80px;
   border-top: 1px solid #e8e8e8;
 }
 
 .ref-sergeenko .ref-mission__portrait {
   aspect-ratio: 3/4;
-  max-height: 640px;
+  max-height: 680px;
   background: #ececec center/cover no-repeat;
 }
 
 .ref-sergeenko .ref-mission h2 {
-  margin: 0 0 24px;
+  margin: 0 0 28px;
   font-family: "Playfair Display", "PT Serif", Georgia, serif;
-  font-size: clamp(32px, 4.5vw, 52px);
+  font-size: clamp(30px, 4.2vw, 48px);
   font-weight: 400;
-  line-height: 1.12;
+  line-height: 1.15;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
 
 .ref-sergeenko .ref-mission p {
-  margin: 0 0 20px;
-  color: #5a5a5a;
+  margin: 0 0 24px;
+  color: #555;
   max-width: 48ch;
   font-size: 15px;
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 .ref-sergeenko .ref-collections {
-  padding: 0 0 64px;
+  padding: 0 min(40px, 4vw) 64px;
 }
 
 .ref-sergeenko .ref-collections__title {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   font-family: "Playfair Display", "PT Serif", serif;
-  font-size: clamp(28px, 4vw, 42px);
+  font-size: clamp(26px, 3.5vw, 38px);
   font-weight: 400;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .ref-sergeenko .ref-collections__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
 .ref-sergeenko .ref-collection-card {
@@ -102,14 +157,15 @@ body.ref-sergeenko {
 
 .ref-sergeenko .ref-collection-card__label {
   position: absolute;
-  left: 20px;
-  bottom: 20px;
+  left: 18px;
+  bottom: 18px;
   font-family: "Playfair Display", serif;
-  font-size: 22px;
+  font-size: 20px;
+  letter-spacing: 0.04em;
 }
 
 .ref-sergeenko .ref-pick {
-  padding: 48px 0 72px;
+  padding: 56px min(40px, 4vw) 72px;
   border-top: 1px solid #e8e8e8;
 }
 
@@ -117,41 +173,42 @@ body.ref-sergeenko {
   margin: 0 0 28px;
   text-align: center;
   font-family: "Playfair Display", "PT Serif", serif;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
 }
 
 .ref-sergeenko .ref-product__img {
-  background: #f0f0f0;
+  background: #f2f2f2;
   border-radius: 0;
 }
 
 .ref-sergeenko .ref-product__meta h3 {
-  font-family: "Golos Text", sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
+  letter-spacing: 0.04em;
 }
 
 .ref-sergeenko .ref-values {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  padding: 0 0 80px;
+  gap: 10px;
+  padding: 0 min(40px, 4vw) 80px;
 }
 
 .ref-sergeenko .ref-values__text {
-  padding: 40px 0;
+  padding: 48px 0;
 }
 
 .ref-sergeenko .ref-values__text h2 {
   margin: 0 0 16px;
   font-family: "Playfair Display", "PT Serif", serif;
-  font-size: clamp(26px, 3.5vw, 38px);
+  font-size: clamp(24px, 3vw, 36px);
   font-weight: 400;
-  line-height: 1.15;
+  line-height: 1.2;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .ref-sergeenko .ref-values__img {
@@ -160,10 +217,16 @@ body.ref-sergeenko {
 }
 
 @media (max-width: 900px) {
-  .ref-sergeenko .ref-duo-hero,
+  .ref-sergeenko .serg-screen__duo,
   .ref-sergeenko .ref-mission,
   .ref-sergeenko .ref-collections__grid,
   .ref-sergeenko .ref-values {
     grid-template-columns: 1fr;
+  }
+
+  .ref-sergeenko .serg-screen__utils {
+    position: static;
+    justify-content: center;
+    margin-top: 12px;
   }
 }

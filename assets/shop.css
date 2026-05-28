@@ -71,10 +71,21 @@ a {
   margin: 0 auto;
 }
 
-.site-topbar {
+.site-topbar-stack {
   position: sticky;
   top: 0;
   z-index: 40;
+}
+
+/* Второй ряд — переключение референсов: всегда виден при скролле */
+body.has-design-variant-tabs .site-topbar--sub {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.site-topbar {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,6 +96,28 @@ a {
   font-weight: 500;
   color: rgba(255, 255, 255, 0.72);
   background: #1d1d1f;
+}
+
+.site-topbar--sub {
+  padding: 6px 16px 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #252527;
+}
+
+.site-topbar__tabs--design {
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 4px;
+  max-width: min(960px, 100%);
+}
+
+.site-topbar__tabs--design .site-topbar__tab {
+  padding: 5px 10px;
+  font-size: 11px;
+}
+
+.site-topbar__tabs--design {
+  max-width: min(1100px, 100%);
 }
 
 .site-topbar__tabs {
@@ -130,6 +163,10 @@ a {
   text-underline-offset: 3px;
 }
 
+.site-topbar-stack:has(.site-topbar--sub) + .site-header {
+  top: 72px;
+}
+
 .site-header {
   position: sticky;
   top: 33px;
@@ -156,11 +193,40 @@ body.smart-header-active.smart-header-visible .site-header {
   transform: translateY(0);
 }
 
-body.smart-header-active .site-topbar {
+body.smart-header-active .site-topbar-stack > .site-topbar:not(.site-topbar--sub) {
+  display: none;
+}
+
+body.smart-header-active.has-design-variant-tabs .site-topbar--sub {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body.smart-header-active:not(.has-design-variant-tabs) .site-topbar {
   transform: translateY(-100%);
   opacity: 0;
   pointer-events: none;
   transition: transform 320ms ease, opacity 240ms ease;
+}
+
+body.smart-header-active.has-design-variant-tabs .site-topbar-stack {
+  position: relative;
+  z-index: 50;
+}
+
+body.smart-header-active.has-design-variant-tabs .site-topbar-stack::after {
+  content: "";
+  display: block;
+  height: var(--design-tabs-height, 44px);
+}
+
+body.smart-header-active.smart-header-visible.has-design-variant-tabs .site-header {
+  top: var(--design-tabs-height, 44px);
 }
 
 .header-inner {

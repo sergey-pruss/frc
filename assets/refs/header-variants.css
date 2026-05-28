@@ -1,0 +1,243 @@
+/* Store header skins per design reference variant (body.is-design-variant-*) */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Playfair+Display:wght@400;500&family=Inter:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+body.ref-the-act.is-design-variant-the-act .site-header,
+body.ref-sergeenko.is-design-variant-sergeenko .site-header,
+body.ref-rains.is-design-variant-rains .site-header,
+body.ref-cromia.is-design-variant-cromia .site-header,
+body.ref-soroboka.is-design-variant-soroboka .site-header {
+  display: none;
+}
+
+body.is-design-variant-the-act .site-header {
+  background: rgba(250, 249, 246, 0.92);
+  border-bottom-color: rgba(23, 23, 25, 0.08);
+}
+
+body.is-design-variant-the-act .header-inner--the-act {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 68px;
+}
+
+body.is-design-variant-the-act .site-nav--the-act-left {
+  justify-self: start;
+  font-size: 13px;
+  font-weight: 500;
+  gap: 20px;
+}
+
+body.is-design-variant-the-act .header-inner--the-act > .ref-logo {
+  justify-self: center;
+}
+
+body.is-design-variant-the-act .header-actions--the-act {
+  justify-self: end;
+  gap: 16px;
+}
+
+body.is-design-variant-the-act .header-actions--the-act .btn {
+  min-height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #2a2a2c;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: none;
+}
+
+body.is-design-variant-the-act .header-actions--the-act .btn-primary {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+body.is-design-variant-the-act .header-actions--the-act .btn:hover {
+  transform: none;
+  opacity: 0.7;
+}
+
+body.is-design-variant-sergeenko .site-header {
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+body.is-design-variant-sergeenko .header-inner--sergeenko {
+  flex-direction: column;
+  gap: 18px;
+  padding: 18px 0 14px;
+  min-height: auto;
+}
+
+body.is-design-variant-sergeenko .header-inner--sergeenko > .ref-logo {
+  align-self: center;
+}
+
+body.is-design-variant-sergeenko .site-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 16px;
+}
+
+body.is-design-variant-sergeenko .site-nav--sergeenko {
+  justify-content: center;
+  flex: 1;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  gap: 24px;
+}
+
+body.is-design-variant-sergeenko .header-actions--sergeenko .btn {
+  min-height: 36px;
+  padding: 0 14px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 0;
+}
+
+body.is-design-variant-sergeenko .header-actions--sergeenko .btn-primary {
+  background: #1a1a1c;
+  border-color: #1a1a1c;
+}
+
+body.is-design-variant-rains .site-header {
+  background: #f2f2f2;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+body.is-design-variant-rains .header-inner--rains {
+  min-height: 56px;
+  font-family: "Inter", "Golos Text", system-ui, sans-serif;
+}
+
+body.is-design-variant-rains .header-inner--rains .ref-logo__mark {
+  height: 32px;
+}
+
+body.is-design-variant-rains .site-nav--rains {
+  gap: 28px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body.is-design-variant-rains .site-nav--rains a::before {
+  content: "/ ";
+  color: #9a9a9a;
+  font-weight: 500;
+}
+
+body.is-design-variant-rains .header-actions--rains .btn-ghost {
+  display: none;
+}
+
+body.is-design-variant-rains .header-actions--rains .btn-primary {
+  min-height: 36px;
+  padding: 0 16px;
+  border-radius: 0;
+  background: #1a1a1c;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+body.is-design-variant-cromia .site-header {
+  background: #faf8f4;
+  border-bottom-color: #e8e0d4;
+}
+
+body.is-design-variant-cromia .header-inner--cromia {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 72px;
+}
+
+body.is-design-variant-cromia .site-nav--cromia-left {
+  justify-self: start;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  gap: 20px;
+}
+
+body.is-design-variant-cromia .header-inner--cromia .ref-logo__lockup {
+  height: 28px;
+}
+
+body.is-design-variant-cromia .header-actions--cromia {
+  justify-self: end;
+}
+
+body.is-design-variant-cromia .header-actions--cromia .btn {
+  min-height: 40px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 0;
+}
+
+body.is-design-variant-soroboka .site-header {
+  background: #fff;
+  border-bottom: 1px solid var(--ref-line, #e5e5e5);
+}
+
+body.is-design-variant-soroboka .header-inner--soroboka {
+  min-height: 64px;
+  font-family: "IBM Plex Mono", "Golos Text", monospace;
+}
+
+body.is-design-variant-soroboka .site-nav--soroboka {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  gap: 22px;
+}
+
+body.is-design-variant-soroboka .header-actions--soroboka .btn-primary {
+  border-radius: 0;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  body.is-design-variant-cromia .header-inner--cromia {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  body.is-design-variant-cromia .site-nav--cromia-left,
+  body.is-design-variant-cromia .header-actions--cromia {
+    justify-self: center;
+  }
+
+  body.is-design-variant-the-act .header-inner--the-act {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    text-align: center;
+  }
+
+  body.is-design-variant-the-act .site-nav--the-act-left,
+  body.is-design-variant-the-act .header-actions--the-act {
+    justify-self: center;
+  }
+
+  body.is-design-variant-sergeenko .site-nav-row {
+    flex-direction: column;
+  }
+
+  body.is-design-variant-rains .site-nav {
+    display: none;
+  }
+}

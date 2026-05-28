@@ -6,6 +6,9 @@
   const assetV = script?.src?.match(/[?&]v=([^&]+)/)?.[1] || "";
   const markSrc = `${assetRoot}assets/u-mark-green.png${assetV ? `?v=${assetV}` : ""}`;
   const markLightSrc = `${assetRoot}assets/u-mark-light.png${assetV ? `?v=${assetV}` : ""}`;
+  const markSourceSrc = `${assetRoot}assets/u-mark-source.png${assetV ? `?v=${assetV}` : ""}`;
+  const lockupSrc = `${assetRoot}assets/univermag-lockup.png${assetV ? `?v=${assetV}` : ""}`;
+  const lockupLightSrc = `${assetRoot}assets/univermag-lockup-light.png${assetV ? `?v=${assetV}` : ""}`;
   const ncLogoSrc = `${assetRoot}assets/nc-logo-white.png${assetV ? `?v=${assetV}` : ""}`;
 
   const headerMount = document.querySelector("[data-site-header]");
@@ -20,27 +23,187 @@
     { href: `${root}gift-cards/`, label: "Подарочные карты" },
   ];
 
-  if (headerMount) {
-    headerMount.innerHTML = `
-      <div class="site-topbar">
-        <div class="site-topbar__tabs">
-          <a class="site-topbar__tab" href="${docsRoot}seo/">SEO-стратегия</a>
-          <a class="site-topbar__tab" href="${docsRoot}analysis/">Анализ конкурентов</a>
-          <a class="site-topbar__tab" href="${docsRoot}content-strategy/">Контент-стратегия</a>
-          <a class="site-topbar__tab is-active">Дизайн-прототип</a>
+  const DESIGN_VARIANT_KEY = "frc-design-variant";
+  const DESIGN_VARIANTS = ["default", "the-act", "sergeenko", "rains", "cromia", "soroboka"];
+  const path = location.pathname.replace(/\/index\.html$/, "/");
+
+  const designVariantFromPath = () => {
+    if (/\/design\/refs\/the-act\//.test(path)) return "the-act";
+    if (/\/design\/refs\/sergeenko\//.test(path)) return "sergeenko";
+    if (/\/design\/refs\/rains\//.test(path)) return "rains";
+    if (/\/design\/refs\/cromia\//.test(path)) return "cromia";
+    if (/\/design\/refs\/soroboka\//.test(path)) return "soroboka";
+    if (/\/design\/?$/.test(path)) return "default";
+    return null;
+  };
+
+  const inDesignPrototype = /\/design\//.test(path);
+  const pathVariant = designVariantFromPath();
+  let designVariant = pathVariant;
+
+  if (inDesignPrototype) {
+    if (pathVariant) {
+      try {
+        sessionStorage.setItem(DESIGN_VARIANT_KEY, pathVariant);
+      } catch (e) {
+        /* ignore */
+      }
+    } else {
+      try {
+        const stored = sessionStorage.getItem(DESIGN_VARIANT_KEY);
+        designVariant = DESIGN_VARIANTS.includes(stored) ? stored : "default";
+      } catch (e) {
+        designVariant = "default";
+      }
+    }
+  } else {
+    designVariant = null;
+  }
+
+  const isRefLanding = /\/design\/refs\/(the-act|sergeenko|rains|cromia|soroboka)\/?$/.test(path);
+
+  if (inDesignPrototype && designVariant) {
+    document.body.classList.add(`is-design-variant-${designVariant}`);
+    if (designVariant !== "default") {
+      const sharedCss = document.createElement("link");
+      sharedCss.rel = "stylesheet";
+      sharedCss.href = `${assetRoot}assets/refs/shared.css${assetV ? `?v=${assetV}` : ""}`;
+      document.head.appendChild(sharedCss);
+      const footerCss = document.createElement("link");
+      footerCss.rel = "stylesheet";
+      footerCss.href = `${assetRoot}assets/refs/footers.css${assetV ? `?v=${assetV}` : ""}`;
+      document.head.appendChild(footerCss);
+    }
+    if (!isRefLanding && designVariant !== "default") {
+      const headerCss = document.createElement("link");
+      headerCss.rel = "stylesheet";
+      headerCss.href = `${assetRoot}assets/refs/header-variants.css${assetV ? `?v=${assetV}` : ""}`;
+      document.head.appendChild(headerCss);
+    }
+  }
+
+  const designHomeHref = (variant) => {
+    const homes = {
+      default: `${docsRoot}design/`,
+      "the-act": `${docsRoot}design/refs/the-act/`,
+      sergeenko: `${docsRoot}design/refs/sergeenko/`,
+      rains: `${docsRoot}design/refs/rains/`,
+      cromia: `${docsRoot}design/refs/cromia/`,
+      soroboka: `${docsRoot}design/refs/soroboka/`,
+    };
+    return homes[variant] || homes.default;
+  };
+
+  const navLinks = (items) => items.map((item) => `<a href="${item.href}">${item.label}</a>`).join("");
+
+  const renderRefLogo = ({ home, tone = "light", layout = "full", stack = false, lockupSize = "" }) => {
+    const toneClass = tone === "dark" ? "ref-logo--on-dark" : "ref-logo--on-light";
+    const layoutClass =
+      layout === "mark" ? " ref-logo--mark-only" : layout === "lockup" ? " ref-logo--lockup-only" : "";
+    const stackClass = stack ? " ref-logo--stack" : "";
+    const lockupClass = lockupSize ? ` ref-logo__lockup--${lockupSize}` : "";
+    const lockupFile = tone === "dark" ? lockupLightSrc : lockupSrc;
+    return `<a class="ref-logo ${toneClass}${layoutClass}${stackClass}" href="${home}" aria-label="Универмаг «Россия»">
+      <img class="ref-logo__mark" src="${markSourceSrc}" alt="" width="56" height="56">
+      <img class="ref-logo__lockup${lockupClass}" src="${lockupFile}" alt="Универмаг «Россия»" width="180" height="44">
+    </a>`;
+  };
+
+  const renderStoreHeader = (variant) => {
+    const home = designHomeHref(variant);
+    const logo = `
+      <img class="logo-mark" src="${markSrc}" alt="" width="56" height="56">
+      <span class="logo-wordmark">
+        <span class="logo-wordmark__line">Универмаг</span>
+        <span class="logo-wordmark__line logo-wordmark__line--brand">«Россия»</span>
+      </span>`;
+    if (variant === "the-act") {
+      return `
+      <header class="site-header site-header--the-act">
+        <div class="wrap header-inner header-inner--the-act">
+          <nav class="site-nav site-nav--the-act-left" aria-label="Основное меню">
+            ${navLinks(nav.slice(0, 3))}
+          </nav>
+          ${renderRefLogo({ home, tone: "light", layout: "full" })}
+          <div class="header-actions header-actions--the-act">
+            <a class="btn btn-ghost" href="${root}search/">Поиск</a>
+            <a class="btn btn-primary" href="${root}cart/">Корзина</a>
+          </div>
         </div>
-      </div>
+      </header>`;
+    }
+
+    if (variant === "sergeenko") {
+      return `
+      <header class="site-header site-header--sergeenko">
+        <div class="wrap header-inner header-inner--sergeenko">
+          ${renderRefLogo({ home, tone: "light", layout: "lockup", stack: true, lockupSize: "lg" })}
+          <div class="site-nav-row">
+            <nav class="site-nav site-nav--sergeenko" aria-label="Основное меню">
+              ${navLinks(nav)}
+            </nav>
+            <div class="header-actions header-actions--sergeenko">
+              <a class="btn btn-ghost" href="${root}search/">Поиск</a>
+              <a class="btn btn-primary" href="${root}cart/">Корзина</a>
+            </div>
+          </div>
+        </div>
+      </header>`;
+    }
+
+    if (variant === "rains") {
+      return `
+      <header class="site-header site-header--rains">
+        <div class="wrap header-inner header-inner--rains">
+          ${renderRefLogo({ home, tone: "light", layout: "mark" })}
+          <nav class="site-nav site-nav--rains" aria-label="Основное меню">
+            ${navLinks(nav)}
+          </nav>
+          <div class="header-actions header-actions--rains">
+            <a class="btn btn-ghost" href="${root}search/">Поиск</a>
+            <a class="btn btn-primary" href="${root}cart/">Корзина</a>
+          </div>
+        </div>
+      </header>`;
+    }
+
+    if (variant === "cromia") {
+      return `
+      <header class="site-header site-header--cromia">
+        <div class="wrap header-inner header-inner--cromia">
+          <nav class="site-nav site-nav--cromia-left" aria-label="Основное меню">
+            ${navLinks(nav.slice(0, 3))}
+          </nav>
+          ${renderRefLogo({ home, tone: "light", layout: "lockup", lockupSize: "lg" })}
+          <div class="header-actions header-actions--cromia">
+            <a class="btn btn-ghost" href="${root}search/">Поиск</a>
+            <a class="btn btn-primary" href="${root}cart/">Корзина</a>
+          </div>
+        </div>
+      </header>`;
+    }
+
+    if (variant === "soroboka") {
+      return `
+      <header class="site-header site-header--soroboka">
+        <div class="wrap header-inner header-inner--soroboka">
+          ${renderRefLogo({ home, tone: "light", layout: "full" })}
+          <nav class="site-nav site-nav--soroboka" aria-label="Основное меню">
+            ${navLinks(nav)}
+          </nav>
+          <div class="header-actions header-actions--soroboka">
+            <a class="btn btn-primary" href="${root}cart/">Корзина</a>
+          </div>
+        </div>
+      </header>`;
+    }
+
+    return `
       <header class="site-header">
         <div class="wrap header-inner">
-          <a class="logo" href="${docsRoot}design/" aria-label="Универмаг «Россия»">
-            <img class="logo-mark" src="${markSrc}" alt="" width="56" height="56">
-            <span class="logo-wordmark">
-              <span class="logo-wordmark__line">Универмаг</span>
-              <span class="logo-wordmark__line logo-wordmark__line--brand">«Россия»</span>
-            </span>
-          </a>
+          <a class="logo" href="${home}" aria-label="Универмаг «Россия»">${logo}</a>
           <nav class="site-nav" aria-label="Основное меню">
-            ${nav.map((item) => `<a href="${item.href}">${item.label}</a>`).join("")}
+            ${navLinks(nav)}
           </nav>
           <div class="header-actions">
             <a class="btn btn-ghost" href="${root}login/" title="Личный кабинет">Кабинет</a>
@@ -49,15 +212,260 @@
           </div>
         </div>
       </header>`;
+  };
+
+  const designVariantTabs =
+    designVariant === null
+      ? ""
+      : [
+          { id: "default", label: "Дизайн по умолчанию", href: `${docsRoot}design/` },
+          { id: "the-act", label: "the act", href: `${docsRoot}design/refs/the-act/` },
+          { id: "sergeenko", label: "Uliana Sergeenko", href: `${docsRoot}design/refs/sergeenko/` },
+          { id: "rains", label: "RAINS", href: `${docsRoot}design/refs/rains/` },
+          { id: "cromia", label: "Cromia", href: `${docsRoot}design/refs/cromia/` },
+          { id: "soroboka", label: "SOROBOKA", href: `${docsRoot}design/refs/soroboka/` },
+        ]
+          .map(
+            (item) =>
+              `<a class="site-topbar__tab${item.id === designVariant ? " is-active" : ""}" href="${item.href}" data-design-variant-tab="${item.id}">${item.label}</a>`
+          )
+          .join("");
+
+  if (headerMount) {
+    headerMount.innerHTML = `
+      <div class="site-topbar-stack">
+        <div class="site-topbar">
+          <div class="site-topbar__tabs">
+            <a class="site-topbar__tab" href="${docsRoot}seo/">SEO-стратегия</a>
+            <a class="site-topbar__tab" href="${docsRoot}analysis/">Анализ конкурентов</a>
+            <a class="site-topbar__tab" href="${docsRoot}content-strategy/">Контент-стратегия</a>
+            <a class="site-topbar__tab is-active">Дизайн-прототип</a>
+          </div>
+        </div>
+        ${
+          designVariantTabs
+            ? `<div class="site-topbar site-topbar--sub" aria-label="Вариант главной">
+          <div class="site-topbar__tabs site-topbar__tabs--design">${designVariantTabs}</div>
+        </div>`
+            : ""
+        }
+      </div>
+      ${isRefLanding ? "" : renderStoreHeader(designVariant || "default")}`;
+
+    headerMount.querySelectorAll("[data-design-variant-tab]").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        try {
+          sessionStorage.setItem(DESIGN_VARIANT_KEY, tab.dataset.designVariantTab || "default");
+        } catch (e) {
+          /* ignore */
+        }
+      });
+    });
+
+    if (designVariantTabs) {
+      document.body.classList.add("has-design-variant-tabs");
+      const syncDesignTabsHeight = () => {
+        const sub = headerMount.querySelector(".site-topbar--sub");
+        if (!sub) return;
+        document.documentElement.style.setProperty("--design-tabs-height", `${sub.offsetHeight}px`);
+      };
+      syncDesignTabsHeight();
+      window.addEventListener("resize", syncDesignTabsHeight);
+    }
   }
 
-  if (footerMount) {
-    footerMount.innerHTML = `
+  const footerBottom = `
+    <div class="ref-footer__bottom">
+      <span>© 2026 Универмаг «Россия»</span>
+      <a class="made-by" href="https://serenity.agency/" target="_blank" rel="noreferrer">
+        <img src="${assetRoot}assets/serenity-logo.svg" alt="" width="18" height="18">
+        <span>Сделано в Serenity</span>
+      </a>
+    </div>`;
+
+  const renderStoreFooter = (variant) => {
+    const home = designHomeHref(variant);
+    const buyersLinks = `
+      <li><a href="${root}catalog/">Каталог</a></li>
+      <li><a href="${root}delivery/">Доставка и оплата</a></li>
+      <li><a href="${root}sizes/">Размеры</a></li>
+      <li><a href="${root}stores/">Магазины</a></li>
+      <li><a href="${root}gift-cards/">Подарочные карты</a></li>`;
+    const catalogLinks = `
+      <li><a href="${root}catalog/hudi/">Худи</a></li>
+      <li><a href="${root}catalog/svitshoty/">Свитшоты</a></li>
+      <li><a href="${root}catalog/futbolki/">Футболки</a></li>
+      <li><a href="${root}catalog/kurtki/">Куртки</a></li>
+      <li><a href="${root}catalog/aksessuary/">Аксессуары</a></li>`;
+    const contactLinks = `
+      <li><a href="${root}contacts/">Связаться с нами</a></li>
+      <li><a href="${root}about/">О бренде</a></li>
+      <li><a href="${root}corporate/">Корпоративным</a></li>
+      <li><a href="${root}login/">Личный кабинет</a></li>`;
+
+    if (variant === "the-act") {
+      return `
+      <footer class="ref-footer ref-footer--the-act">
+        <div class="wrap ref-footer__inner">
+          <div class="ref-footer__grid">
+            <div>
+              <div class="ref-footer__logo">${renderRefLogo({ home, tone: "dark", layout: "lockup", lockupSize: "lg" })}</div>
+              <ul class="ref-footer__links">${catalogLinks}</ul>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Покупателям</p>
+              <ul class="ref-footer__links">${buyersLinks}</ul>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Центр</p>
+              <ul class="ref-footer__links">${contactLinks}</ul>
+              <p style="margin-top:20px"><a href="https://russia.ru/" target="_blank" rel="noopener noreferrer">Национальный центр «Россия»</a></p>
+            </div>
+            <div class="ref-footer__newsletter">
+              <p class="ref-footer__heading">Рассылка</p>
+              <p>Новинки мерча и события центра — раз в месяц, без спама.</p>
+              <form class="ref-footer__field" action="#" onsubmit="return false">
+                <input type="email" placeholder="E-mail" aria-label="E-mail">
+                <button type="submit">→</button>
+              </form>
+            </div>
+          </div>
+          ${footerBottom}
+        </div>
+      </footer>`;
+    }
+
+    if (variant === "sergeenko") {
+      return `
+      <footer class="ref-footer ref-footer--sergeenko">
+        <div class="wrap ref-footer__inner">
+          <div class="ref-footer__grid">
+            <div>
+              <div class="ref-footer__logo">${renderRefLogo({ home, tone: "light", layout: "full" })}</div>
+              <p class="ref-footer__tagline">Официальный интернет-магазин одежды и аксессуаров Национального центра «Россия».</p>
+              <a href="https://russia.ru/" target="_blank" rel="noopener noreferrer">russia.ru</a>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Покупателям</p>
+              <ul class="ref-footer__links">${buyersLinks}</ul>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Каталог</p>
+              <ul class="ref-footer__links">${catalogLinks}</ul>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Контакты</p>
+              <ul class="ref-footer__links">${contactLinks}</ul>
+            </div>
+          </div>
+          ${footerBottom}
+        </div>
+      </footer>`;
+    }
+
+    if (variant === "rains") {
+      return `
+      <footer class="ref-footer ref-footer--rains">
+        <div class="wrap ref-footer__inner">
+          <div class="ref-footer__grid">
+            <div>
+              <div class="ref-footer__logo">${renderRefLogo({ home, tone: "dark", layout: "full" })}</div>
+              <p style="margin:0;font-size:12px;opacity:.65">Официальный мерч · Москва</p>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Company</p>
+              <ul class="ref-footer__links">${contactLinks}</ul>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Service</p>
+              <ul class="ref-footer__links">${buyersLinks}</ul>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Follow</p>
+              <ul class="ref-footer__links ref-footer__archive">
+                <li><a href="${root}catalog/new/">Коллекция 2025</a></li>
+                <li><a href="${root}catalog/hudi/">Худи</a></li>
+                <li><a href="${root}catalog/aksessuary/">Аксессуары</a></li>
+              </ul>
+            </div>
+          </div>
+          ${footerBottom}
+        </div>
+      </footer>`;
+    }
+
+    if (variant === "cromia") {
+      const ticker =
+        "Мерч с характером · Универмаг «Россия» · Качество и спокойный стиль · ";
+      return `
+      <footer class="ref-footer ref-footer--cromia">
+        <div class="ref-footer__ticker" aria-hidden="true"><span>${ticker.repeat(4)}</span></div>
+        <div class="wrap ref-footer__inner">
+          <div class="ref-footer__grid">
+            <div>
+              <div class="ref-footer__logo">${renderRefLogo({ home, tone: "light", layout: "lockup", lockupSize: "lg" })}</div>
+              <div class="ref-footer__pay"><span>Visa</span><span>Mastercard</span><span>Мир</span></div>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Shop</p>
+              <ul class="ref-footer__links">${catalogLinks}</ul>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Help</p>
+              <ul class="ref-footer__links">${buyersLinks}</ul>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Legal</p>
+              <ul class="ref-footer__links">
+                <li><a href="${root}about/">О бренде</a></li>
+                <li><a href="${root}contacts/">Контакты</a></li>
+                <li><a href="${root}corporate/">Корпоративным</a></li>
+              </ul>
+            </div>
+          </div>
+          ${footerBottom}
+        </div>
+      </footer>`;
+    }
+
+    if (variant === "soroboka") {
+      return `
+      <footer class="ref-footer ref-footer--soroboka">
+        <div class="wrap ref-footer__inner">
+          <div class="ref-footer__grid">
+            <div>
+              <div class="ref-footer__logo">${renderRefLogo({ home, tone: "light", layout: "full" })}</div>
+              <p class="ref-footer__tagline">Официальный мерч Национального центра «Россия» — с характером места и уважением к деталям.</p>
+              <div class="ref-footer__social">
+                <a href="${root}catalog/" title="Каталог">VK</a>
+                <a href="${root}stores/" title="Магазины">TG</a>
+              </div>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Каталог</p>
+              <ul class="ref-footer__links">${catalogLinks}</ul>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Покупателям</p>
+              <ul class="ref-footer__links">${buyersLinks}</ul>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Связь с нами</p>
+              <ul class="ref-footer__links">${contactLinks}</ul>
+              <p style="margin-top:16px"><a href="${root}cart/">Корзина</a></p>
+            </div>
+          </div>
+          ${footerBottom}
+        </div>
+      </footer>`;
+    }
+
+    return `
       <footer class="site-footer">
         <div class="wrap site-footer__inner">
           <div class="footer-grid">
             <div class="footer-col footer-col--brand">
-              <a class="footer-brand" href="${docsRoot}design/">
+              <a class="footer-brand" href="${home}">
                 <img class="footer-mark" src="${markLightSrc}" alt="Универмаг «Россия»" width="56" height="56">
               </a>
               <p class="footer-tagline">Официальный интернет-магазин одежды, аксессуаров и подарков Национального центра «Россия».</p>
@@ -67,34 +475,15 @@
             </div>
             <div class="footer-col">
               <h4>Покупателям</h4>
-              <ul>
-                <li><a href="${root}catalog/">Каталог</a></li>
-                <li><a href="${root}login/">Личный кабинет</a></li>
-                <li><a href="${root}cart/">Корзина</a></li>
-                <li><a href="${root}sizes/">Размеры</a></li>
-                <li><a href="${root}delivery/">Доставка и оплата</a></li>
-                <li><a href="${root}stores/">Магазины</a></li>
-              </ul>
+              <ul>${buyersLinks}</ul>
             </div>
-          <div class="footer-col">
-            <h4>Каталог</h4>
-            <ul>
-                <li><a href="${root}catalog/khudi/">Худи</a></li>
-                <li><a href="${root}catalog/svitshoty/">Свитшоты</a></li>
-                <li><a href="${root}catalog/futbolki/">Футболки</a></li>
-                <li><a href="${root}catalog/vetrovki/">Ветровки</a></li>
-                <li><a href="${root}catalog/kurtki/">Куртки</a></li>
-                <li><a href="${root}catalog/aksessuary/">Аксессуары</a></li>
-                <li><a href="${root}gift-cards/">Подарочные карты</a></li>
-              </ul>
+            <div class="footer-col">
+              <h4>Каталог</h4>
+              <ul>${catalogLinks}</ul>
             </div>
             <div class="footer-col">
               <h4>Контакты</h4>
-              <ul>
-                <li><a href="${root}contacts/">Связаться с нами</a></li>
-                <li><a href="${root}corporate/">Корпоративным</a></li>
-                <li><a href="${root}about/">О бренде</a></li>
-              </ul>
+              <ul>${contactLinks}</ul>
             </div>
           </div>
           <div class="footer-bottom">
@@ -106,7 +495,27 @@
           </div>
         </div>
       </footer>`;
+  };
+
+  if (footerMount) {
+    const activeFooterVariant = inDesignPrototype && designVariant ? designVariant : "default";
+    footerMount.innerHTML = renderStoreFooter(activeFooterVariant);
   }
+
+  document.querySelectorAll("[data-ref-logo]").forEach((el) => {
+    const tone = el.dataset.refLogoTone === "dark" ? "dark" : "light";
+    const layout = el.dataset.refLogoLayout || "full";
+    const stack = el.hasAttribute("data-ref-logo-stack");
+    const lockupSize = el.dataset.refLogoLockupSize || "";
+    const home = el.getAttribute("href") || "./";
+    const wrap = document.createElement("div");
+    wrap.innerHTML = renderRefLogo({ home, tone, layout, stack, lockupSize }).trim();
+    const link = wrap.firstElementChild;
+    el.classList.forEach((cls) => {
+      if (!cls.startsWith("ref-logo")) link.classList.add(cls);
+    });
+    el.replaceWith(link);
+  });
 
   document.querySelectorAll("[data-demo-cart]").forEach((btn) => {
     btn.addEventListener("click", () => {
