@@ -274,12 +274,54 @@
   font-weight: 600;
 }
 
+.ref-footer--zenit {
+  background: #0e0e10;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.ref-footer--zenit .ref-footer__grid {
+  grid-template-columns: 1.3fr 1fr 1fr 1fr;
+}
+
+.ref-footer--zenit .ref-footer__heading {
+  font-family: "Inter", system-ui, sans-serif;
+  letter-spacing: 0.12em;
+}
+
+.ref-footer--zenit .ref-footer__bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.ref-footer--tretyakov {
+  background: #fff;
+  color: var(--ref-ink, #171719);
+  border-top: 2px solid var(--ref-ink, #171719);
+}
+
+.ref-footer--tretyakov .ref-footer__grid {
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+}
+
+.ref-footer--tretyakov .ref-footer__heading {
+  font-family: "PT Serif", Georgia, serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+.ref-footer--tretyakov .ref-footer__links li + li {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
 @media (max-width: 900px) {
   .ref-footer--the-act .ref-footer__grid,
   .ref-footer--sergeenko .ref-footer__grid,
   .ref-footer--rains .ref-footer__grid,
   .ref-footer--cromia .ref-footer__grid,
-  .ref-footer--soroboka .ref-footer__grid {
+  .ref-footer--soroboka .ref-footer__grid,
+  .ref-footer--zenit .ref-footer__grid,
+  .ref-footer--tretyakov .ref-footer__grid {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -289,7 +331,9 @@
   .ref-footer--sergeenko .ref-footer__grid,
   .ref-footer--rains .ref-footer__grid,
   .ref-footer--cromia .ref-footer__grid,
-  .ref-footer--soroboka .ref-footer__grid {
+  .ref-footer--soroboka .ref-footer__grid,
+  .ref-footer--zenit .ref-footer__grid,
+  .ref-footer--tretyakov .ref-footer__grid {
     grid-template-columns: 1fr;
   }
 }

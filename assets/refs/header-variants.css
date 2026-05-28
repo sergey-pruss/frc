@@ -5,7 +5,9 @@ body.ref-the-act.is-design-variant-the-act .site-header,
 body.ref-sergeenko.is-design-variant-sergeenko .site-header,
 body.ref-rains.is-design-variant-rains .site-header,
 body.ref-cromia.is-design-variant-cromia .site-header,
-body.ref-soroboka.is-design-variant-soroboka .site-header {
+body.ref-soroboka.is-design-variant-soroboka .site-header,
+body.ref-zenit.is-design-variant-zenit .site-header,
+body.ref-tretyakov.is-design-variant-tretyakov .site-header {
   display: none;
 }
 
@@ -209,6 +211,72 @@ body.is-design-variant-soroboka .header-actions--soroboka .btn-primary {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+body.is-design-variant-zenit .site-header {
+  background: #0e0e10;
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+body.is-design-variant-zenit .header-inner--zenit {
+  min-height: 60px;
+  font-family: "Inter", "Golos Text", system-ui, sans-serif;
+}
+
+body.is-design-variant-zenit .site-nav--zenit {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  gap: 24px;
+}
+
+body.is-design-variant-zenit .site-nav--zenit a {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+body.is-design-variant-zenit .header-actions--zenit .btn-ghost {
+  color: rgba(255, 255, 255, 0.82);
+  border-color: transparent;
+}
+
+body.is-design-variant-zenit .header-actions--zenit .btn-primary {
+  background: #fff;
+  border-color: #fff;
+  color: #0e0e10;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+body.is-design-variant-tretyakov .site-header {
+  background: #fff;
+  border-bottom: 2px solid var(--ref-ink, #171719);
+}
+
+body.is-design-variant-tretyakov .header-inner--tretyakov {
+  min-height: 64px;
+}
+
+body.is-design-variant-tretyakov .site-nav--tretyakov {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  gap: 22px;
+}
+
+body.is-design-variant-tretyakov .header-actions--tretyakov .btn {
+  border-radius: 0;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ref-zenit .zen-screen__brand .ref-logo__img {
+  height: 36px;
 }
 
 @media (max-width: 900px) {

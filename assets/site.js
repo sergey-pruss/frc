@@ -27,7 +27,16 @@
   ];
 
   const DESIGN_VARIANT_KEY = "frc-design-variant";
-  const DESIGN_VARIANTS = ["default", "the-act", "sergeenko", "rains", "cromia", "soroboka"];
+  const DESIGN_VARIANTS = [
+    "default",
+    "the-act",
+    "sergeenko",
+    "rains",
+    "cromia",
+    "soroboka",
+    "zenit",
+    "tretyakov",
+  ];
   const path = location.pathname.replace(/\/index\.html$/, "/");
 
   const designVariantFromPath = () => {
@@ -36,6 +45,8 @@
     if (/\/design\/refs\/rains\//.test(path)) return "rains";
     if (/\/design\/refs\/cromia\//.test(path)) return "cromia";
     if (/\/design\/refs\/soroboka\//.test(path)) return "soroboka";
+    if (/\/design\/refs\/zenit\//.test(path)) return "zenit";
+    if (/\/design\/refs\/tretyakov\//.test(path)) return "tretyakov";
     if (/\/design\/?$/.test(path)) return "default";
     return null;
   };
@@ -63,7 +74,8 @@
     designVariant = null;
   }
 
-  const isRefLanding = /\/design\/refs\/(the-act|sergeenko|rains|cromia|soroboka)\/?$/.test(path);
+  const isRefLanding =
+    /\/design\/refs\/(the-act|sergeenko|rains|cromia|soroboka|zenit|tretyakov)\/?$/.test(path);
 
   if (inDesignPrototype && designVariant) {
     document.body.classList.add(`is-design-variant-${designVariant}`);
@@ -93,6 +105,8 @@
       rains: `${docsRoot}design/refs/rains/`,
       cromia: `${docsRoot}design/refs/cromia/`,
       soroboka: `${docsRoot}design/refs/soroboka/`,
+      zenit: `${docsRoot}design/refs/zenit/`,
+      tretyakov: `${docsRoot}design/refs/tretyakov/`,
     };
     return homes[variant] || homes.default;
   };
@@ -226,6 +240,38 @@
       </header>`;
     }
 
+    if (variant === "zenit") {
+      return `
+      <header class="site-header site-header--zenit">
+        <div class="wrap header-inner header-inner--zenit">
+          ${renderRefLogo({ home, tone: "dark", layout: "full" })}
+          <nav class="site-nav site-nav--zenit" aria-label="Основное меню">
+            ${navLinks(nav)}
+          </nav>
+          <div class="header-actions header-actions--zenit">
+            <a class="btn btn-ghost" href="${root}search/">Поиск</a>
+            <a class="btn btn-primary" href="${root}cart/">Корзина</a>
+          </div>
+        </div>
+      </header>`;
+    }
+
+    if (variant === "tretyakov") {
+      return `
+      <header class="site-header site-header--tretyakov">
+        <div class="wrap header-inner header-inner--tretyakov">
+          ${renderRefLogo({ home, tone: "light", layout: "full" })}
+          <nav class="site-nav site-nav--tretyakov" aria-label="Основное меню">
+            ${navLinks(nav)}
+          </nav>
+          <div class="header-actions header-actions--tretyakov">
+            <a class="btn btn-ghost" href="${root}search/">Поиск</a>
+            <a class="btn btn-primary" href="${root}cart/">Корзина</a>
+          </div>
+        </div>
+      </header>`;
+    }
+
     return `
       <header class="site-header">
         <div class="wrap header-inner">
@@ -252,6 +298,8 @@
           { id: "rains", label: "RAINS", href: `${docsRoot}design/refs/rains/` },
           { id: "cromia", label: "Cromia", href: `${docsRoot}design/refs/cromia/` },
           { id: "soroboka", label: "SOROBOKA", href: `${docsRoot}design/refs/soroboka/` },
+          { id: "zenit", label: "Zenit", href: `${docsRoot}design/refs/zenit/` },
+          { id: "tretyakov", label: "Третьяковка", href: `${docsRoot}design/refs/tretyakov/` },
         ]
           .map(
             (item) =>
@@ -445,6 +493,62 @@
                 <li><a href="${root}contacts/">Контакты</a></li>
                 <li><a href="${root}corporate/">Корпоративным</a></li>
               </ul>
+            </div>
+          </div>
+          ${footerBottom}
+        </div>
+      </footer>`;
+    }
+
+    if (variant === "zenit") {
+      return `
+      <footer class="ref-footer ref-footer--zenit">
+        <div class="wrap ref-footer__inner">
+          <div class="ref-footer__grid">
+            <div>
+              ${renderRefFooterBrand({ home, tone: "dark" })}
+            </div>
+            <div>
+              <p class="ref-footer__heading">Коллекции</p>
+              <ul class="ref-footer__links">
+                <li><a href="${root}collections/russia-capsule/">Russia Capsule</a></li>
+                <li><a href="${root}catalog/new/">Новинки</a></li>
+                <li><a href="${root}catalog/hudi/">Худи</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Покупателям</p>
+              <ul class="ref-footer__links">${buyersLinks}</ul>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Сервис</p>
+              <ul class="ref-footer__links">${contactLinks}</ul>
+            </div>
+          </div>
+          ${footerBottom}
+        </div>
+      </footer>`;
+    }
+
+    if (variant === "tretyakov") {
+      return `
+      <footer class="ref-footer ref-footer--tretyakov">
+        <div class="wrap ref-footer__inner">
+          <div class="ref-footer__grid">
+            <div>
+              ${renderRefFooterBrand({ home, tone: "light" })}
+            </div>
+            <div>
+              <p class="ref-footer__heading">Каталог</p>
+              <ul class="ref-footer__links">${catalogLinks}</ul>
+            </div>
+            <div>
+              <p class="ref-footer__heading">Покупателям</p>
+              <ul class="ref-footer__links">${buyersLinks}</ul>
+            </div>
+            <div>
+              <p class="ref-footer__heading">О центре</p>
+              <ul class="ref-footer__links">${contactLinks}</ul>
             </div>
           </div>
           ${footerBottom}

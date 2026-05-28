@@ -108,16 +108,12 @@ body.has-design-variant-tabs .site-topbar--sub {
   flex-wrap: wrap;
   justify-content: center;
   row-gap: 4px;
-  max-width: min(960px, 100%);
+  max-width: min(1200px, 100%);
 }
 
 .site-topbar__tabs--design .site-topbar__tab {
-  padding: 5px 10px;
-  font-size: 11px;
-}
-
-.site-topbar__tabs--design {
-  max-width: min(1100px, 100%);
+  padding: 4px 8px;
+  font-size: 10px;
 }
 
 .site-topbar__tabs {
