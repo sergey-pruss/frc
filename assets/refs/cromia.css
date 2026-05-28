@@ -11,8 +11,9 @@ body.ref-cromia.is-design-variant-cromia .site-header {
 
 .ref-cromia .crom-screen {
   position: relative;
-  min-height: max(92vh, 700px);
-  min-height: max(92dvh, 700px);
+  min-height: max(88vh, 680px);
+  min-height: max(88dvh, 680px);
+  max-height: 920px;
   color: #fff;
   overflow: hidden;
 }
@@ -79,8 +80,9 @@ body.ref-cromia.is-design-variant-cromia .site-header {
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: max(92vh, 700px);
-  min-height: max(92dvh, 700px);
+  min-height: max(88vh, 680px);
+  min-height: max(88dvh, 680px);
+  max-height: 920px;
   padding: 0 24px 80px;
 }
 
@@ -139,13 +141,16 @@ body.ref-cromia.is-design-variant-cromia .site-header {
 }
 
 .ref-cromia .crom-statement p {
-  margin: 0 auto 24px;
-  max-width: 52ch;
-  font-size: 13px;
-  line-height: 1.75;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #4a443c;
+  margin: 0 auto 28px;
+  max-width: 28ch;
+  font-family: "Cormorant Garamond", "PT Serif", serif;
+  font-size: clamp(26px, 3.2vw, 40px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #2a2620;
 }
 
 .ref-cromia .crom-statement a {
@@ -186,6 +191,7 @@ body.ref-cromia.is-design-variant-cromia .site-header {
 
 .ref-cromia .crom-must-card__img {
   aspect-ratio: 4/5;
+  max-height: 360px;
   background: #ddd center/cover no-repeat;
 }
 

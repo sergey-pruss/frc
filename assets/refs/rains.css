@@ -16,6 +16,69 @@ body.ref-rains.is-design-variant-rains .site-header {
   display: none;
 }
 
+.ref-rains .rains-topbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+  padding: 14px min(32px, 4vw);
+  background: linear-gradient(90deg, #c5c9b8 0%, #c5c9b8 58%, #1e2a3a 58%, #1e2a3a 100%);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ref-rains .rains-topbar__logo {
+  display: inline-flex;
+  padding: 8px 18px;
+  background: #e8e8e8;
+  border-radius: 999px;
+}
+
+.ref-rains .rains-topbar__mark {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #1a1a1c;
+}
+
+.ref-rains .rains-topbar__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+
+.ref-rains .rains-topbar__nav a {
+  color: #1a1a1c;
+  text-decoration: none;
+}
+
+.ref-rains .rains-topbar__nav a:hover {
+  opacity: 0.6;
+}
+
+.ref-rains .rains-topbar__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ref-rains .rains-topbar__pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #1a1a1c;
+  text-decoration: none;
+}
+
+.ref-rains .rains-topbar__pill--dark {
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+}
+
 .ref-rains .rains-screen {
   position: relative;
   min-height: max(92vh, 680px);
@@ -38,6 +101,10 @@ body.ref-rains.is-design-variant-rains .site-header {
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.55) 100%),
     radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.08), transparent 40%);
+}
+
+.ref-rains .rains-topbar + .rains-screen .rains-screen__bar {
+  display: none;
 }
 
 .ref-rains .rains-screen__bar {
@@ -176,6 +243,13 @@ body.ref-rains.is-design-variant-rains .site-header {
   grid-row: span 2;
 }
 
+.ref-rains .ref-mosaic .ref-product--tall .ref-product__img {
+  max-height: none;
+  min-height: 100%;
+  height: auto;
+  aspect-ratio: auto;
+}
+
 .ref-rains .ref-mosaic .ref-product--wide {
   grid-column: span 6;
 }
@@ -206,6 +280,75 @@ body.ref-rains.is-design-variant-rains .site-header {
   align-items: center;
 }
 
+.ref-rains .rains-screen__title-dot {
+  font-weight: 400;
+}
+
+.ref-rains .rains-campaigns {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ref-rains .rains-campaign {
+  position: relative;
+  display: block;
+  min-height: min(72vh, 820px);
+  color: #fff;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.ref-rains .rains-campaign__media {
+  position: absolute;
+  inset: 0;
+  background: #9a9a9a center/cover no-repeat;
+}
+
+.ref-rains .rains-campaign__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.45) 0%, transparent 55%);
+}
+
+.ref-rains .rains-campaign--invert .rains-campaign__media::after {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, transparent 45%);
+}
+
+.ref-rains .rains-campaign__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: inherit;
+  padding: clamp(32px, 5vw, 64px);
+}
+
+.ref-rains .rains-campaign__body h2 {
+  margin: 0;
+  font-size: clamp(48px, 8vw, 120px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: lowercase;
+}
+
+.ref-rains .rains-campaign__link {
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.ref-rains .rains-campaign--invert .rains-campaign__body {
+  justify-content: flex-start;
+}
+
 .ref-rains .ref-about-band h2 {
   margin: 0;
   font-size: clamp(28px, 4vw, 44px);
@@ -226,6 +369,15 @@ body.ref-rains.is-design-variant-rains .site-header {
 }
 
 @media (max-width: 900px) {
+  .ref-rains .rains-topbar {
+    grid-template-columns: 1fr;
+    background: #c5c9b8;
+  }
+
+  .ref-rains .rains-topbar__nav {
+    display: none;
+  }
+
   .ref-rains .rains-screen__nav {
     display: none;
   }
@@ -243,5 +395,13 @@ body.ref-rains.is-design-variant-rains .site-header {
 
   .ref-rains .ref-about-band {
     grid-template-columns: 1fr;
+  }
+
+  .ref-rains .rains-campaign {
+    min-height: 52vh;
+  }
+
+  .ref-rains .rains-campaign__body h2 {
+    font-size: clamp(36px, 10vw, 64px);
   }
 }

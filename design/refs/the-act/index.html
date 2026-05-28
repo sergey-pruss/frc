@@ -15,26 +15,34 @@ location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n)
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png?v=20260528d">
     <link rel="stylesheet" href="../../../assets/shop.css?v=20260528d">
-    <link rel="stylesheet" href="../../../assets/refs/shared.css?v=20260528f">
-    <link rel="stylesheet" href="../../../assets/refs/the-act.css?v=20260528d">
+    <link rel="stylesheet" href="../../../assets/refs/shared.css?v=20260531a">
+    <link rel="stylesheet" href="../../../assets/refs/the-act.css?v=20260531a">
   </head>
   <body class="ref-the-act">
     <div data-site-header></div>
     <main>
+      <p class="act-promo">Бесплатная доставка по России при заказе от 3&nbsp;000&nbsp;₽</p>
       <section class="act-screen" aria-label="Главный экран">
         <div class="act-screen__media" style="background-image:url('../../../assets/generated/editorial/home-hero-apple-wall.png')"></div>
         <header class="act-screen__header">
-          <a class="act-screen__brand" href="./" data-ref-logo data-ref-logo-tone="dark" data-ref-logo-layout="full" data-ref-logo-lockup-size="lg"></a>
-          <nav class="act-screen__nav" aria-label="Меню">
-            <a href="../../catalog/">Каталог</a>
-            <a href="../../catalog/#odezhda">Одежда</a>
-            <a href="../../catalog/aksessuary/">Аксессуары</a>
-          </nav>
-          <div class="act-screen__utils">
-            <a href="../../search/">Поиск</a>
-            <a href="../../cart/">Корзина</a>
+          <a class="act-screen__wordmark" href="./">Универмаг<span class="act-screen__wordmark-mark" aria-hidden="true">®</span></a>
+          <a class="act-screen__brand act-screen__brand--sr" href="./" data-ref-logo data-ref-logo-tone="dark" data-ref-logo-layout="full" aria-label="Универмаг «Россия»"></a>
+          <div class="act-screen__header-end">
+            <nav class="act-screen__nav" aria-label="Меню">
+              <a href="../../catalog/">Каталог +</a>
+              <a href="../../delivery/">Покупателям +</a>
+              <a href="../../corporate/">Партнёрам</a>
+            </nav>
+            <div class="act-screen__utils">
+              <a href="../../search/">Поиск</a>
+              <a href="../../cart/">Корзина</a>
+            </div>
           </div>
         </header>
+        <div class="act-screen__arrows" aria-hidden="true">
+          <span></span><span></span>
+        </div>
+        <div class="act-screen__dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
         <div class="act-screen__body">
           <div class="act-screen__copy">
             <p class="act-screen__eyebrow">Официальный мерч центра</p>
@@ -45,7 +53,16 @@ location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n)
         </div>
       </section>
 
-      <section class="ref-cats">
+      <nav class="act-pills" aria-label="Разделы каталога">
+        <a href="../../catalog/new/">Новинки <span>24</span></a>
+        <a href="../../catalog/hudi/">Одежда <span>48</span></a>
+        <a href="../../catalog/aksessuary/">Аксессуары <span>16</span></a>
+        <a href="../../catalog/kurtki/">Верхняя одежда <span>12</span></a>
+        <a href="../../gift-cards/">Подарки <span>8</span></a>
+        <a href="../../collections/russia-capsule/">Капсула <span>14</span></a>
+      </nav>
+
+      <section class="ref-cats ref-cats--secondary">
         <div class="wrap">
           <div class="ref-cats__grid">
             <a class="ref-cat" href="../../catalog/hudi/" style="background-image:url('../../../assets/generated/fashion/khudi-models.png')"><span>Лицо каталога<span class="ref-cat__arrow">→</span></span></a>
@@ -67,19 +84,19 @@ location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n)
           </div>
           <div class="ref-products ref-products--scroll">
             <a class="ref-product" href="../../product/futbolka-oranzhevaya/">
-              <div class="ref-product__img"><img src="../../../assets/generated/fashion/futbolki-models.png" alt="" loading="lazy"></div>
+              <div class="ref-product__img" style="background-image:url('../../../assets/generated/fashion/futbolki-models.png')"></div>
               <div class="ref-product__meta"><h3>Футболка «Оранжевая линия»</h3><span class="price">3 990 ₽</span></div>
             </a>
             <a class="ref-product" href="../../product/svitshot-premium/">
-              <div class="ref-product__img"><img src="../../../assets/generated/fashion/khudi-models.png" alt="" loading="lazy"></div>
+              <div class="ref-product__img" style="background-image:url('../../../assets/generated/fashion/khudi-models.png')"></div>
               <div class="ref-product__meta"><h3>Худи «Премиум капсула»</h3><span class="price">7 490 ₽</span></div>
             </a>
             <a class="ref-product" href="../../product/longsliv-grafika/">
-              <div class="ref-product__img"><img src="../../../assets/generated/fashion/svitshoty-bez-flisa-models.png" alt="" loading="lazy"></div>
+              <div class="ref-product__img" style="background-image:url('../../../assets/generated/fashion/svitshoty-bez-flisa-models.png')"></div>
               <div class="ref-product__meta"><h3>Лонгслив «Графика центра»</h3><span class="price">4 490 ₽</span></div>
             </a>
             <a class="ref-product" href="../../product/sumka-shopper/">
-              <div class="ref-product__img"><img src="../../../assets/generated/fashion/aksessuary-models.png" alt="" loading="lazy"></div>
+              <div class="ref-product__img" style="background-image:url('../../../assets/generated/fashion/aksessuary-models.png')"></div>
               <div class="ref-product__meta"><h3>Шоппер «Национальный центр»</h3><span class="price">1 990 ₽</span></div>
             </a>
           </div>
@@ -132,6 +149,6 @@ location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n)
       </section>
     </main>
     <div data-site-footer></div>
-    <script src="../../../assets/site.js?v=20260529b" data-depth="2"></script>
+    <script src="../../../assets/site.js?v=20260531b" data-depth="2"></script>
   </body>
 </html>

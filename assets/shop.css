@@ -77,12 +77,20 @@ a {
   z-index: 40;
 }
 
-/* Второй ряд — переключение референсов: всегда виден при скролле */
-body.has-design-variant-tabs .site-topbar--sub {
+/* Второй ряд — референсы: только в начале страницы, уезжает при скролле */
+body.has-design-variant-tabs .site-topbar-stack {
+  position: static;
+}
+
+body.has-design-variant-tabs .site-topbar-stack > .site-topbar:not(.site-topbar--sub) {
   position: sticky;
   top: 0;
-  z-index: 50;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 40;
+}
+
+body.has-design-variant-tabs .site-topbar--sub {
+  position: static;
+  z-index: auto;
 }
 
 .site-topbar {
@@ -194,10 +202,7 @@ body.smart-header-active .site-topbar-stack > .site-topbar:not(.site-topbar--sub
 }
 
 body.smart-header-active.has-design-variant-tabs .site-topbar--sub {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: static;
   transform: none;
   opacity: 1;
   pointer-events: auto;
@@ -215,14 +220,8 @@ body.smart-header-active.has-design-variant-tabs .site-topbar-stack {
   z-index: 50;
 }
 
-body.smart-header-active.has-design-variant-tabs .site-topbar-stack::after {
-  content: "";
-  display: block;
-  height: var(--design-tabs-height, 44px);
-}
-
 body.smart-header-active.smart-header-visible.has-design-variant-tabs .site-header {
-  top: var(--design-tabs-height, 44px);
+  top: 0;
 }
 
 .header-inner {

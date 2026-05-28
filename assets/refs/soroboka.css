@@ -16,8 +16,9 @@ body.ref-soroboka.is-design-variant-soroboka .site-header {
 
 .ref-soroboka .soro-screen {
   position: relative;
-  min-height: max(100vh, 760px);
-  min-height: max(100dvh, 760px);
+  min-height: max(88vh, 680px);
+  min-height: max(88dvh, 680px);
+  max-height: 900px;
   color: #fff;
   overflow: hidden;
 }
@@ -65,8 +66,9 @@ body.ref-soroboka.is-design-variant-soroboka .site-header {
   z-index: 2;
   display: flex;
   align-items: flex-end;
-  min-height: max(100vh, 760px);
-  min-height: max(100dvh, 760px);
+  min-height: max(88vh, 680px);
+  min-height: max(88dvh, 680px);
+  max-height: 900px;
   padding: 0 min(32px, 4vw) clamp(48px, 8vh, 88px);
 }
 

@@ -10,10 +10,11 @@
 
 body[class*="ref-"] .btn-primary,
 body.is-design-variant-the-act .btn-primary,
-body.is-design-variant-sergeenko .btn-primary,
+body.is-design-variant-etudes .btn-primary,
 body.is-design-variant-rains .btn-primary,
 body.is-design-variant-cromia .btn-primary,
-body.is-design-variant-soroboka .btn-primary {
+body.is-design-variant-soroboka .btn-primary,
+body.is-design-variant-shu .btn-primary {
   background: var(--ref-ink);
   border-color: var(--ref-ink);
   color: #fff;
@@ -171,16 +172,25 @@ body[class*="ref-"] .btn-secondary {
 }
 
 .ref-product__img {
+  position: relative;
   aspect-ratio: 4/5;
+  max-height: 320px;
   background: #ece8df center/cover no-repeat;
   border-radius: 4px;
   overflow: hidden;
 }
 
 .ref-product__img img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.ref-products--scroll .ref-product__img {
+  max-height: none;
+  height: 100%;
 }
 
 .ref-product__meta {

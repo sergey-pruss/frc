@@ -27,15 +27,16 @@
   ];
 
   const DESIGN_VARIANT_KEY = "frc-design-variant";
-  const DESIGN_VARIANTS = ["default", "the-act", "sergeenko", "rains", "cromia", "soroboka"];
+  const DESIGN_VARIANTS = ["default", "the-act", "etudes", "rains", "cromia", "soroboka", "shu"];
   const path = location.pathname.replace(/\/index\.html$/, "/");
 
   const designVariantFromPath = () => {
     if (/\/design\/refs\/the-act\//.test(path)) return "the-act";
-    if (/\/design\/refs\/sergeenko\//.test(path)) return "sergeenko";
+    if (/\/design\/refs\/(etudes|sergeenko)\//.test(path)) return "etudes";
     if (/\/design\/refs\/rains\//.test(path)) return "rains";
     if (/\/design\/refs\/cromia\//.test(path)) return "cromia";
     if (/\/design\/refs\/soroboka\//.test(path)) return "soroboka";
+    if (/\/design\/refs\/shu\//.test(path)) return "shu";
     if (/\/design\/?$/.test(path)) return "default";
     return null;
   };
@@ -53,7 +54,8 @@
       }
     } else {
       try {
-        const stored = sessionStorage.getItem(DESIGN_VARIANT_KEY);
+        let stored = sessionStorage.getItem(DESIGN_VARIANT_KEY);
+        if (stored === "sergeenko") stored = "etudes";
         designVariant = DESIGN_VARIANTS.includes(stored) ? stored : "default";
       } catch (e) {
         designVariant = "default";
@@ -63,7 +65,7 @@
     designVariant = null;
   }
 
-  const isRefLanding = /\/design\/refs\/(the-act|sergeenko|rains|cromia|soroboka)\/?$/.test(path);
+  const isRefLanding = /\/design\/refs\/(the-act|etudes|sergeenko|rains|cromia|soroboka|shu)\/?$/.test(path);
 
   if (inDesignPrototype && designVariant) {
     document.body.classList.add(`is-design-variant-${designVariant}`);
@@ -83,16 +85,23 @@
       headerCss.href = `${assetRoot}assets/refs/header-variants.css${assetV ? `?v=${assetV}` : ""}`;
       document.head.appendChild(headerCss);
     }
+    if (designVariant === "shu") {
+      const shuCss = document.createElement("link");
+      shuCss.rel = "stylesheet";
+      shuCss.href = `${assetRoot}assets/refs/shu.css${assetV ? `?v=${assetV}` : ""}`;
+      document.head.appendChild(shuCss);
+    }
   }
 
   const designHomeHref = (variant) => {
     const homes = {
       default: `${docsRoot}design/`,
       "the-act": `${docsRoot}design/refs/the-act/`,
-      sergeenko: `${docsRoot}design/refs/sergeenko/`,
+      etudes: `${docsRoot}design/refs/etudes/`,
       rains: `${docsRoot}design/refs/rains/`,
       cromia: `${docsRoot}design/refs/cromia/`,
       soroboka: `${docsRoot}design/refs/soroboka/`,
+      shu: `${docsRoot}design/refs/shu/`,
     };
     return homes[variant] || homes.default;
   };
@@ -162,19 +171,18 @@
       </header>`;
     }
 
-    if (variant === "sergeenko") {
+    if (variant === "etudes") {
       return `
-      <header class="site-header site-header--sergeenko">
-        <div class="wrap header-inner header-inner--sergeenko">
-          ${renderRefLogo({ home, tone: "light", layout: "vertical", stack: true, lockupSize: "lg" })}
-          <div class="site-nav-row">
-            <nav class="site-nav site-nav--sergeenko" aria-label="Основное меню">
-              ${navLinks(nav)}
-            </nav>
-            <div class="header-actions header-actions--sergeenko">
-              <a class="btn btn-ghost" href="${root}search/">Поиск</a>
-              <a class="btn btn-primary" href="${root}cart/">Корзина</a>
-            </div>
+      <header class="site-header site-header--etudes">
+        <div class="wrap header-inner header-inner--etudes">
+          <nav class="site-nav site-nav--etudes-left" aria-label="Каталог">
+            ${navLinks(nav.slice(0, 3))}
+          </nav>
+          ${renderRefLogo({ home, tone: "light", layout: "full" })}
+          <div class="header-actions header-actions--etudes">
+            <a class="btn btn-ghost" href="${root}search/">Поиск</a>
+            <a class="btn btn-ghost" href="${root}login/">Аккаунт</a>
+            <a class="btn btn-primary" href="${root}cart/">Корзина</a>
           </div>
         </div>
       </header>`;
@@ -227,6 +235,41 @@
       </header>`;
     }
 
+    if (variant === "shu") {
+      const announce =
+        "Скидка 10% на первый заказ при подписке на рассылку Универмага «Россия» · ";
+      return `
+      <div class="shu-store-chrome">
+        <div class="shu-announce" aria-hidden="true">
+          <div class="shu-announce__track">
+            <span>${announce}</span><span>${announce}</span><span>${announce}</span><span>${announce}</span>
+          </div>
+        </div>
+        <header class="site-header site-header--shu shu-header">
+          <div class="shu-header__inner">
+            <nav class="shu-header__left" aria-label="Каталог">
+              <a class="shu-header__search" href="${root}search/" title="Поиск" aria-label="Поиск">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/></svg>
+              </a>
+              <a href="${root}catalog/#odezhda">Одежда</a>
+              <a href="${root}catalog/aksessuary/">Аксессуары</a>
+              <a href="${root}catalog/new/">Новинки</a>
+              <a href="${root}collections/russia-capsule/">Капсула</a>
+              <a href="${root}gift-cards/">Подарки</a>
+            </nav>
+            ${renderRefLogo({ home, tone: "light", layout: "full" }).replace('class="ref-logo', 'class="shu-header__logo ref-logo')}
+            <nav class="shu-header__right" aria-label="Сервис">
+              <a href="${root}about/">О бренде</a>
+              <a href="${root}stores/">Магазины</a>
+              <a href="${root}delivery/">Помощь</a>
+              <a href="${root}login/">Аккаунт</a>
+              <a class="shu-header__cart" href="${root}cart/">Корзина <span class="shu-header__cart-count" aria-hidden="true">0</span></a>
+            </nav>
+          </div>
+        </header>
+      </div>`;
+    }
+
     return `
       <header class="site-header">
         <div class="wrap header-inner">
@@ -249,10 +292,11 @@
       : [
           { id: "default", label: "Дизайн по умолчанию", href: `${docsRoot}design/` },
           { id: "the-act", label: "the act", href: `${docsRoot}design/refs/the-act/` },
-          { id: "sergeenko", label: "Uliana Sergeenko", href: `${docsRoot}design/refs/sergeenko/` },
+          { id: "etudes", label: "Études Studio", href: `${docsRoot}design/refs/etudes/` },
           { id: "rains", label: "RAINS", href: `${docsRoot}design/refs/rains/` },
           { id: "cromia", label: "Cromia", href: `${docsRoot}design/refs/cromia/` },
           { id: "soroboka", label: "SOROBOKA", href: `${docsRoot}design/refs/soroboka/` },
+          { id: "shu", label: "SHU", href: `${docsRoot}design/refs/shu/` },
         ]
           .map(
             (item) =>
@@ -363,12 +407,12 @@
       </footer>`;
     }
 
-    if (variant === "sergeenko") {
+    if (variant === "etudes") {
       return `
-      <footer class="ref-footer ref-footer--sergeenko">
+      <footer class="ref-footer ref-footer--etudes">
         <div class="wrap ref-footer__inner">
-          <div class="ref-footer__grid">
-            <div>
+          <div class="ref-footer__grid ref-footer__grid--etudes">
+            <div class="ref-footer__etudes-mark">
               ${renderRefFooterBrand({ home, tone: "light" })}
             </div>
             <div>
@@ -481,6 +525,43 @@
           </div>
           ${footerBottom}
         </div>
+      </footer>`;
+    }
+
+    if (variant === "shu") {
+      return `
+      <footer class="ref-footer ref-footer--shu shu-footer">
+        <div class="shu-footer__grid wrap">
+          <div>
+            <div class="shu-footer__contact">
+              <a href="tel:+78000000000">8 800 000-00-00</a>
+              <a href="mailto:shop@russia.ru">shop@russia.ru</a>
+            </div>
+            <div class="shu-footer__social">
+              <a href="${root}catalog/">Вконтакте</a>
+              <a href="${root}catalog/">Telegram</a>
+            </div>
+          </div>
+          <div>
+            <p class="shu-footer__heading">О бренде</p>
+            <ul class="shu-footer__links">
+              <li><a href="${root}about/">История</a></li>
+              <li><a href="${root}about/">Дизайн</a></li>
+              <li><a href="${root}catalog/new/">Коллекции</a></li>
+              <li><a href="${root}stores/">Магазины</a></li>
+              <li><a href="${root}contacts/">Контакты</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="shu-footer__heading">Помощь</p>
+            <ul class="shu-footer__links">${buyersLinks}</ul>
+          </div>
+          <div>
+            <p class="shu-footer__heading">Подписка</p>
+            <p class="shu-footer__sub-note"><a href="${root}catalog/">Скидка 10% за подписку на e-mail рассылку</a></p>
+          </div>
+        </div>
+        <p class="shu-footer__copy wrap">© 2025 Универмаг «Россия»</p>
       </footer>`;
     }
 

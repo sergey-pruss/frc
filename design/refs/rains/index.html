@@ -15,12 +15,26 @@ location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n)
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/favicon-32.png?v=20260528d">
     <link rel="stylesheet" href="../../../assets/shop.css?v=20260528d">
-    <link rel="stylesheet" href="../../../assets/refs/shared.css?v=20260528f">
-    <link rel="stylesheet" href="../../../assets/refs/rains.css?v=20260528d">
+    <link rel="stylesheet" href="../../../assets/refs/shared.css?v=20260531a">
+    <link rel="stylesheet" href="../../../assets/refs/rains.css?v=20260531a">
   </head>
   <body class="ref-rains">
     <div data-site-header></div>
     <main>
+      <header class="rains-topbar">
+        <a class="rains-topbar__logo" href="./"><span class="rains-topbar__mark">УНИВЕРМАГ</span></a>
+        <nav class="rains-topbar__nav" aria-label="Каталог">
+          <a href="../../catalog/new/">Новинки</a>
+          <a href="../../catalog/#odezhda">Одежда</a>
+          <a href="../../catalog/aksessuary/">Аксессуары</a>
+          <a href="../../catalog/kurtki/">Куртки</a>
+          <a href="../../gift-cards/">Подарки</a>
+        </nav>
+        <div class="rains-topbar__actions">
+          <a class="rains-topbar__pill" href="../../search/">Поиск</a>
+          <a class="rains-topbar__pill rains-topbar__pill--dark" href="../../cart/">Корзина (0)</a>
+        </div>
+      </header>
       <section class="rains-screen" aria-label="Главный экран">
         <div class="rains-screen__media" style="background-image:url('../../../assets/generated/editorial/home-hero-apple-wall.png')"></div>
         <div class="rains-screen__bar">
@@ -34,7 +48,7 @@ location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n)
         </div>
         <div class="rains-screen__body">
           <p class="rains-screen__meta">Официальный мерч · весна 2025</p>
-          <h1 class="rains-screen__title">Центр°25</h1>
+          <h1 class="rains-screen__title">Центр<span aria-hidden="true">°</span>25<span class="rains-screen__title-dot">.</span></h1>
           <p class="rains-screen__sub">Сдержанная графика, технические ткани и городской силуэт — мерч Национального центра «Россия».</p>
           <div class="rains-screen__cta-row">
             <a class="rains-screen__cta" href="../../catalog/">В коллекцию</a>
@@ -43,30 +57,54 @@ location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n)
         </div>
       </section>
 
+      <section class="rains-campaigns" aria-label="Кампании">
+        <a class="rains-campaign" href="../../catalog/kurtki/">
+          <div class="rains-campaign__media" style="background-image:url('../../../assets/generated/fashion/kurtki-models.png')"></div>
+          <div class="rains-campaign__body">
+            <h2>Верхняя одежда</h2>
+            <span class="rains-campaign__link">Смотреть коллекцию</span>
+          </div>
+        </a>
+        <a class="rains-campaign rains-campaign--invert" href="../../catalog/aksessuary/">
+          <div class="rains-campaign__media" style="background-image:url('../../../assets/generated/fashion/aksessuary-models.png')"></div>
+          <div class="rains-campaign__body">
+            <h2>Аксессуары</h2>
+            <span class="rains-campaign__link">В каталог</span>
+          </div>
+        </a>
+        <a class="rains-campaign" href="../../catalog/new/">
+          <div class="rains-campaign__media" style="background-image:url('../../../assets/generated/editorial/home-feature-style.png')"></div>
+          <div class="rains-campaign__body">
+            <h2>Новинки сезона</h2>
+            <span class="rains-campaign__link">Открыть</span>
+          </div>
+        </a>
+      </section>
+
       <p class="ref-slash-head"><span>/ </span>Новинки</p>
       <div class="ref-mosaic">
         <a class="ref-product ref-product--tall" href="../../product/futbolka-oranzhevaya/">
-          <div class="ref-product__img"><img src="../../../assets/generated/fashion/futbolki-models.png" alt="" loading="lazy"></div>
+          <div class="ref-product__img" style="background-image:url('../../../assets/generated/fashion/futbolki-models.png')"></div>
           <div class="ref-product__meta"><h3>Футболка «Оранжевая линия»</h3><span class="price">3 990 ₽</span></div>
         </a>
         <a class="ref-product" href="../../product/longsliv-grafika/">
-          <div class="ref-product__img"><img src="../../../assets/generated/fashion/svitshoty-bez-flisa-models.png" alt="" loading="lazy"></div>
+          <div class="ref-product__img" style="background-image:url('../../../assets/generated/fashion/svitshoty-bez-flisa-models.png')"></div>
           <div class="ref-product__meta"><h3>Лонгслив «Графика»</h3><span class="price">4 490 ₽</span></div>
         </a>
         <a class="ref-product ref-product--wide" href="../../product/svitshot-premium/">
-          <div class="ref-product__img"><img src="../../../assets/generated/fashion/khudi-models.png" alt="" loading="lazy"></div>
+          <div class="ref-product__img" style="background-image:url('../../../assets/generated/fashion/khudi-models.png')"></div>
           <div class="ref-product__meta"><h3>Худи «Премиум капсула»</h3><span class="price">7 490 ₽</span></div>
         </a>
         <a class="ref-product" href="../../product/kurtka-veter/">
-          <div class="ref-product__img"><img src="../../../assets/generated/fashion/vetrovki-models.png" alt="" loading="lazy"></div>
+          <div class="ref-product__img" style="background-image:url('../../../assets/generated/fashion/kurtki-models.png')"></div>
           <div class="ref-product__meta"><h3>Куртка «Ветер с севера»</h3><span class="price">12 990 ₽</span></div>
         </a>
         <a class="ref-product" href="../../product/sumka-shopper/">
-          <div class="ref-product__img"><img src="../../../assets/generated/fashion/aksessuary-models.png" alt="" loading="lazy"></div>
+          <div class="ref-product__img" style="background-image:url('../../../assets/generated/fashion/aksessuary-models.png')"></div>
           <div class="ref-product__meta"><h3>Шоппер</h3><span class="price">1 990 ₽</span></div>
         </a>
         <a class="ref-product" href="../../product/futbolka-belaya/">
-          <div class="ref-product__img"><img src="../../../assets/generated/editorial/home-feature-style.png" alt="" loading="lazy"></div>
+          <div class="ref-product__img" style="background-image:url('../../../assets/generated/editorial/home-feature-style.png')"></div>
           <div class="ref-product__meta"><h3>Футболка «Белый фасад»</h3><span class="price">3 490 ₽</span></div>
         </a>
       </div>
@@ -86,6 +124,6 @@ location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n)
       </nav>
     </main>
     <div data-site-footer></div>
-    <script src="../../../assets/site.js?v=20260529b" data-depth="2"></script>
+    <script src="../../../assets/site.js?v=20260531b" data-depth="2"></script>
   </body>
 </html>
