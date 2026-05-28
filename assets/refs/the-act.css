@@ -1,0 +1,201 @@
+/* Reference: the act — calm wellness-premium, category tiles, manifesto, carousel */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap");
+
+body.ref-the-act {
+  background: #faf9f6;
+}
+
+.ref-the-act .ref-hero {
+  position: relative;
+  min-height: min(88vh, 820px);
+  display: grid;
+  align-items: end;
+  color: #fff;
+}
+
+.ref-the-act .ref-hero__bg {
+  position: absolute;
+  inset: 0;
+  background: #c4bdb0 center/cover no-repeat;
+}
+
+.ref-the-act .ref-hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 20, 22, 0.15) 0%, rgba(20, 20, 22, 0.55) 100%);
+}
+
+.ref-the-act .ref-hero__inner {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 48px 0 64px;
+}
+
+.ref-the-act .ref-hero h1 {
+  max-width: 12ch;
+  margin: 0 0 16px;
+  font-family: "Cormorant Garamond", "PT Serif", Georgia, serif;
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.ref-the-act .ref-hero p {
+  max-width: 36ch;
+  margin: 0 0 24px;
+  font-size: 17px;
+  opacity: 0.92;
+}
+
+.ref-the-act .ref-cats {
+  padding: 56px 0;
+}
+
+.ref-the-act .ref-cats__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.ref-the-act .ref-cat {
+  position: relative;
+  min-height: 320px;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+  color: #fff;
+  background: #ddd center/cover no-repeat;
+}
+
+.ref-the-act .ref-cat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.5));
+}
+
+.ref-the-act .ref-cat span {
+  position: relative;
+  z-index: 1;
+  font-size: 22px;
+  font-family: "Cormorant Garamond", "PT Serif", serif;
+}
+
+.ref-the-act .ref-manifesto {
+  padding: 72px 0;
+  text-align: center;
+}
+
+.ref-the-act .ref-manifesto p {
+  margin: 0 auto;
+  max-width: 22ch;
+  font-family: "Golos Text", sans-serif;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.ref-the-act .ref-section {
+  padding: 48px 0 64px;
+}
+
+.ref-the-act .ref-section__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.ref-the-act .ref-section__head h2 {
+  margin: 0;
+  font-family: "Cormorant Garamond", "PT Serif", serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 400;
+}
+
+.ref-the-act .ref-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: 480px;
+}
+
+.ref-the-act .ref-split__media {
+  background: #e8e4dc center/cover no-repeat;
+  min-height: 360px;
+}
+
+.ref-the-act .ref-split__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(32px, 6vw, 72px);
+  background: #f3f1eb;
+}
+
+.ref-the-act .ref-split__copy h2 {
+  margin: 0 0 16px;
+  font-family: "Cormorant Garamond", "PT Serif", serif;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.ref-the-act .ref-split__copy p {
+  margin: 0 0 20px;
+  color: #5c574f;
+  max-width: 42ch;
+}
+
+.ref-the-act .ref-journal {
+  padding: 64px 0 80px;
+  background: #fff;
+}
+
+.ref-the-act .ref-journal__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.ref-the-act .ref-journal-card {
+  color: inherit;
+}
+
+.ref-the-act .ref-journal-card__img {
+  aspect-ratio: 4/3;
+  border-radius: 6px;
+  background: #e5e0d6 center/cover no-repeat;
+  margin-bottom: 14px;
+}
+
+.ref-the-act .ref-journal-card h3 {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.ref-the-act .ref-journal-card span {
+  font-size: 13px;
+  color: #6f6a61;
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .ref-the-act .ref-cats__grid,
+  .ref-the-act .ref-journal__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ref-the-act .ref-split {
+    grid-template-columns: 1fr;
+  }
+}

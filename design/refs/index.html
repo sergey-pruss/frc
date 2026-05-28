@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <script>
+(function(){var k="frc-gate-v1",h="c6c2307ac025abfed680cb646bc38ca3c3d6e02662a0f2faa143dcff22268a49",g="/gate/",d="/seo/";function ga(){try{if(localStorage.getItem(k)===h)return!0}catch(e){}var c=document.cookie.split(";");for(var i=0;i<c.length;i++){var p=c[i].trim().split("=");if(p[0]===k&&decodeURIComponent(p.slice(1).join("="))===h){try{localStorage.setItem(k,h)}catch(e){}return!0}}return!1}function sn(n){if(!n||n==="/"||n==="/index.html"||!n.startsWith("/")||n.startsWith("//")||n.indexOf("/gate")===0)return d;return n}
+if(location.pathname.indexOf("/gate")===0)return;
+if(ga()){if(location.pathname==="/"||location.pathname==="/index.html")location.replace(d);return}
+var n=location.pathname+location.search+location.hash;
+location.replace(g+(n&&n!=="/"&&n!=="/index.html"?"?next="+encodeURIComponent(n):""));
+})();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Варианты по референсам — Универмаг «Россия»</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png?v=20260528refs">
+    <link rel="stylesheet" href="../../assets/shop.css?v=20260528refs">
+    <style>
+      .refs-hub { padding: 48px 0 80px; }
+      .refs-hub h1 { margin: 0 0 12px; font-family: "PT Serif", Georgia, serif; font-size: clamp(32px, 4vw, 48px); }
+      .refs-hub > p { margin: 0 0 40px; color: var(--muted); max-width: 60ch; }
+      .refs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+      .refs-card {
+        display: block;
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--paper);
+        color: inherit;
+        box-shadow: var(--shadow);
+      }
+      .refs-card:hover { border-color: var(--brand-green); }
+      .refs-card h2 { margin: 0 0 8px; font-size: 20px; font-family: "PT Serif", serif; }
+      .refs-card p { margin: 0 0 12px; font-size: 14px; color: var(--muted); line-height: 1.5; }
+      .refs-card span { font-size: 13px; font-weight: 600; color: var(--brand-green); }
+      .refs-back { display: inline-block; margin-bottom: 24px; font-size: 14px; text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <div data-site-header></div>
+    <main class="refs-hub">
+      <div class="wrap">
+        <a class="refs-back" href="../">← Базовый прототип (Apple)</a>
+        <h1>Варианты главной по референсам</h1>
+        <p>Отдельные макеты главной страницы в стиле референсов с Figma. Контент и товары те же; меняются структура блоков и визуальный язык. Для сравнения есть отдельные git-ветки, где эта версия подставлена в <code>design/index.html</code>.</p>
+        <div class="refs-grid">
+          <a class="refs-card" href="the-act/">
+            <h2>the act</h2>
+            <p>Спокойный wellness-премиум: hero с оверлеем, плитки категорий, манифест, карусель новинок, split-блоки, журнал.</p>
+            <span>Открыть вариант →</span>
+          </a>
+          <a class="refs-card" href="sergeenko/">
+            <h2>Uliana Sergeenko</h2>
+            <p>Сдержанная luxury-сетка: дуэт в hero, блок миссии с serif-заголовком, коллекции, «выбор», ценности.</p>
+            <span>Открыть вариант →</span>
+          </a>
+          <a class="refs-card" href="rains/">
+            <h2>RAINS</h2>
+            <p>Editorial-сетка каталога: крупная типографика, слэш-лейблы, неровная мозаика товаров, холодный минимализм.</p>
+            <span>Открыть вариант →</span>
+          </a>
+        </div>
+      </div>
+    </main>
+    <div data-site-footer></div>
+    <script src="../../assets/site.js?v=20260528refs" data-depth="1"></script>
+  </body>
+</html>

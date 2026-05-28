@@ -1,0 +1,169 @@
+/* Reference: Uliana Sergeenko — serif luxury, mission block, collection duo */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap");
+
+body.ref-sergeenko {
+  background: #fff;
+}
+
+.ref-sergeenko .ref-duo-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 24px 0 48px;
+}
+
+.ref-sergeenko .ref-duo-hero a {
+  position: relative;
+  display: block;
+  color: inherit;
+}
+
+.ref-sergeenko .ref-duo-hero__img {
+  aspect-ratio: 3/4;
+  background: #efefef center/cover no-repeat;
+}
+
+.ref-sergeenko .ref-duo-hero__cap {
+  padding: 14px 4px 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.ref-sergeenko .ref-duo-hero__cap strong {
+  font-weight: 500;
+}
+
+.ref-sergeenko .ref-mission {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: center;
+  padding: 56px 0 72px;
+  border-top: 1px solid #e8e8e8;
+}
+
+.ref-sergeenko .ref-mission__portrait {
+  aspect-ratio: 3/4;
+  max-height: 640px;
+  background: #ececec center/cover no-repeat;
+}
+
+.ref-sergeenko .ref-mission h2 {
+  margin: 0 0 24px;
+  font-family: "Playfair Display", "PT Serif", Georgia, serif;
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 400;
+  line-height: 1.12;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.ref-sergeenko .ref-mission p {
+  margin: 0 0 20px;
+  color: #5a5a5a;
+  max-width: 48ch;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.ref-sergeenko .ref-collections {
+  padding: 0 0 64px;
+}
+
+.ref-sergeenko .ref-collections__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20px;
+  font-family: "Playfair Display", "PT Serif", serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ref-sergeenko .ref-collections__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ref-sergeenko .ref-collection-card {
+  position: relative;
+  display: block;
+  color: #fff;
+}
+
+.ref-sergeenko .ref-collection-card__img {
+  aspect-ratio: 4/5;
+  background: #d8d8d8 center/cover no-repeat;
+}
+
+.ref-sergeenko .ref-collection-card__label {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+}
+
+.ref-sergeenko .ref-pick {
+  padding: 48px 0 72px;
+  border-top: 1px solid #e8e8e8;
+}
+
+.ref-sergeenko .ref-pick h2 {
+  margin: 0 0 28px;
+  text-align: center;
+  font-family: "Playfair Display", "PT Serif", serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.ref-sergeenko .ref-product__img {
+  background: #f0f0f0;
+  border-radius: 0;
+}
+
+.ref-sergeenko .ref-product__meta h3 {
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.ref-sergeenko .ref-values {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0 0 80px;
+}
+
+.ref-sergeenko .ref-values__text {
+  padding: 40px 0;
+}
+
+.ref-sergeenko .ref-values__text h2 {
+  margin: 0 0 16px;
+  font-family: "Playfair Display", "PT Serif", serif;
+  font-size: clamp(26px, 3.5vw, 38px);
+  font-weight: 400;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.ref-sergeenko .ref-values__img {
+  aspect-ratio: 1;
+  background: #ececec center/cover no-repeat;
+}
+
+@media (max-width: 900px) {
+  .ref-sergeenko .ref-duo-hero,
+  .ref-sergeenko .ref-mission,
+  .ref-sergeenko .ref-collections__grid,
+  .ref-sergeenko .ref-values {
+    grid-template-columns: 1fr;
+  }
+}
