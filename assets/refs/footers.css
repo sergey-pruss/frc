@@ -70,13 +70,8 @@
   grid-template-columns: 1.2fr 1fr 1fr 1.1fr;
 }
 
-.ref-footer--the-act .ref-footer__brand {
-  margin: 0 0 20px;
-  font-family: "Cormorant Garamond", "PT Serif", Georgia, serif;
-  font-size: 28px;
-  font-weight: 400;
-  color: #fff;
-  text-transform: lowercase;
+.ref-footer--the-act .ref-footer-brand__tagline {
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .ref-footer--the-act .ref-footer__links li + li {
@@ -130,21 +125,6 @@
   grid-template-columns: 1.4fr repeat(3, 1fr);
 }
 
-.ref-footer--sergeenko .ref-footer__brand {
-  margin: 0 0 16px;
-  font-family: "Playfair Display", "PT Serif", Georgia, serif;
-  font-size: 13px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-}
-
-.ref-footer--sergeenko .ref-footer__tagline {
-  margin: 0;
-  max-width: 32ch;
-  font-size: 13px;
-  line-height: 1.6;
-  color: #666;
-}
 
 .ref-footer--sergeenko .ref-footer__links li + li {
   margin-top: 10px;
@@ -167,13 +147,8 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.ref-footer--rains .ref-footer__brand {
-  margin: 0 0 8px;
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: #fff;
-  text-transform: uppercase;
+.ref-footer--rains .ref-footer-brand__tagline {
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .ref-footer--rains .ref-footer__links li + li {
@@ -236,8 +211,8 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
-.ref-footer--cromia .ref-footer__logo {
-  margin-bottom: 12px;
+.ref-footer--cromia .ref-footer__pay {
+  margin-top: 20px;
 }
 
 .ref-footer--cromia .ref-footer__links li + li {
@@ -269,15 +244,8 @@
   grid-template-columns: 1.3fr 1fr 1fr 1fr;
 }
 
-.ref-footer--soroboka .ref-footer__logo {
-  margin-bottom: 16px;
-}
-
-.ref-footer--soroboka .ref-footer__tagline {
-  margin: 0 0 20px;
-  font-size: 13px;
-  line-height: 1.6;
-  color: #555;
+.ref-footer--soroboka .ref-footer__social {
+  margin-top: 4px;
 }
 
 .ref-footer--soroboka .ref-footer__heading {

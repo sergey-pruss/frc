@@ -50,12 +50,8 @@ body.ref-soroboka.is-design-variant-soroboka .site-header {
   text-transform: uppercase;
 }
 
-.ref-soroboka .soro-screen__logo .ref-logo__mark {
-  height: 40px;
-}
-
-.ref-soroboka .soro-screen__logo .ref-logo__lockup {
-  height: 24px;
+.ref-soroboka .soro-screen__logo .ref-logo__img {
+  height: 36px;
 }
 
 .ref-soroboka .soro-screen__utils a {

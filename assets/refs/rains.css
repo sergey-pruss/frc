@@ -54,12 +54,8 @@ body.ref-rains.is-design-variant-rains .site-header {
   text-transform: uppercase;
 }
 
-.ref-rains .rains-screen__brand .ref-logo__mark {
+.ref-rains .rains-screen__brand .ref-logo__img {
   height: 36px;
-}
-
-.ref-rains .rains-screen__brand .ref-logo__lockup {
-  height: 24px;
 }
 
 .ref-rains .rains-screen__nav {

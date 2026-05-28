@@ -7,9 +7,12 @@
   const markSrc = `${assetRoot}assets/u-mark-green.png${assetV ? `?v=${assetV}` : ""}`;
   const markLightSrc = `${assetRoot}assets/u-mark-light.png${assetV ? `?v=${assetV}` : ""}`;
   const markSourceSrc = `${assetRoot}assets/u-mark-source.png${assetV ? `?v=${assetV}` : ""}`;
-  const lockupSrc = `${assetRoot}assets/univermag-lockup.png${assetV ? `?v=${assetV}` : ""}`;
-  const lockupLightSrc = `${assetRoot}assets/univermag-lockup-light.png${assetV ? `?v=${assetV}` : ""}`;
+  const univermagLogoSrc = `${assetRoot}assets/univermag-logo.png${assetV ? `?v=${assetV}` : ""}`;
+  const univermagLogoVerticalSrc = `${assetRoot}assets/univermag-logo-vertical.png${assetV ? `?v=${assetV}` : ""}`;
   const ncLogoSrc = `${assetRoot}assets/nc-logo-white.png${assetV ? `?v=${assetV}` : ""}`;
+  const ncLogoBlackSrc = `${assetRoot}assets/nc-logo-black.png${assetV ? `?v=${assetV}` : ""}`;
+  const FOOTER_TAGLINE =
+    "Официальный интернет-магазин одежды, аксессуаров и подарков Национального центра «Россия».";
 
   const headerMount = document.querySelector("[data-site-header]");
   const footerMount = document.querySelector("[data-site-footer]");
@@ -98,15 +101,40 @@
 
   const renderRefLogo = ({ home, tone = "light", layout = "full", stack = false, lockupSize = "" }) => {
     const toneClass = tone === "dark" ? "ref-logo--on-dark" : "ref-logo--on-light";
-    const layoutClass =
-      layout === "mark" ? " ref-logo--mark-only" : layout === "lockup" ? " ref-logo--lockup-only" : "";
+    const sizeClass = lockupSize ? ` ref-logo--${lockupSize}` : "";
     const stackClass = stack ? " ref-logo--stack" : "";
-    const lockupClass = lockupSize ? ` ref-logo__lockup--${lockupSize}` : "";
-    const lockupFile = tone === "dark" ? lockupLightSrc : lockupSrc;
-    return `<a class="ref-logo ${toneClass}${layoutClass}${stackClass}" href="${home}" aria-label="Универмаг «Россия»">
-      <img class="ref-logo__mark" src="${markSourceSrc}" alt="" width="56" height="56">
-      <img class="ref-logo__lockup${lockupClass}" src="${lockupFile}" alt="Универмаг «Россия»" width="180" height="44">
+
+    if (layout === "mark") {
+      return `<a class="ref-logo ${toneClass} ref-logo--mark-only" href="${home}" aria-label="Универмаг «Россия»">
+        <img class="ref-logo__mark" src="${markSourceSrc}" alt="" width="56" height="56">
+      </a>`;
+    }
+
+    if (layout === "vertical" || stack) {
+      return `<a class="ref-logo ${toneClass} ref-logo--vertical${stackClass}${sizeClass}" href="${home}" aria-label="Универмаг «Россия»">
+        <img class="ref-logo__img" src="${univermagLogoVerticalSrc}" alt="Универмаг «Россия»" width="120" height="140">
+      </a>`;
+    }
+
+    return `<a class="ref-logo ${toneClass}${sizeClass}" href="${home}" aria-label="Универмаг «Россия»">
+      <img class="ref-logo__img" src="${univermagLogoSrc}" alt="Универмаг «Россия»" width="240" height="56">
     </a>`;
+  };
+
+  const renderRefFooterBrand = ({ home, tone = "dark" }) => {
+    const onDark = tone === "dark";
+    const markImg = onDark ? markLightSrc : markSourceSrc;
+    const markMonoClass = onDark ? "" : " ref-footer-brand__mark-img--mono";
+    const ncImg = onDark ? ncLogoSrc : ncLogoBlackSrc;
+    return `<div class="ref-footer-brand ref-footer-brand--${onDark ? "dark" : "light"}">
+      <a class="ref-footer-brand__mark" href="${home}">
+        <img class="ref-footer-brand__mark-img${markMonoClass}" src="${markImg}" alt="" width="56" height="56">
+      </a>
+      <p class="ref-footer-brand__tagline">${FOOTER_TAGLINE}</p>
+      <a class="ref-footer-brand__nc" href="https://russia.ru/" target="_blank" rel="noopener noreferrer">
+        <img src="${ncImg}" alt="Национальный центр «Россия»" width="200" height="40">
+      </a>
+    </div>`;
   };
 
   const renderStoreHeader = (variant) => {
@@ -137,7 +165,7 @@
       return `
       <header class="site-header site-header--sergeenko">
         <div class="wrap header-inner header-inner--sergeenko">
-          ${renderRefLogo({ home, tone: "light", layout: "lockup", stack: true, lockupSize: "lg" })}
+          ${renderRefLogo({ home, tone: "light", layout: "vertical", stack: true, lockupSize: "lg" })}
           <div class="site-nav-row">
             <nav class="site-nav site-nav--sergeenko" aria-label="Основное меню">
               ${navLinks(nav)}
@@ -174,7 +202,7 @@
           <nav class="site-nav site-nav--cromia-left" aria-label="Основное меню">
             ${navLinks(nav.slice(0, 3))}
           </nav>
-          ${renderRefLogo({ home, tone: "light", layout: "lockup", lockupSize: "lg" })}
+          ${renderRefLogo({ home, tone: "light", layout: "full", lockupSize: "lg" })}
           <div class="header-actions header-actions--cromia">
             <a class="btn btn-ghost" href="${root}search/">Поиск</a>
             <a class="btn btn-primary" href="${root}cart/">Корзина</a>
@@ -309,8 +337,8 @@
         <div class="wrap ref-footer__inner">
           <div class="ref-footer__grid">
             <div>
-              <div class="ref-footer__logo">${renderRefLogo({ home, tone: "dark", layout: "lockup", lockupSize: "lg" })}</div>
-              <ul class="ref-footer__links">${catalogLinks}</ul>
+              ${renderRefFooterBrand({ home, tone: "dark" })}
+              <ul class="ref-footer__links ref-footer__links--after-brand">${catalogLinks}</ul>
             </div>
             <div>
               <p class="ref-footer__heading">Покупателям</p>
@@ -319,7 +347,6 @@
             <div>
               <p class="ref-footer__heading">Центр</p>
               <ul class="ref-footer__links">${contactLinks}</ul>
-              <p style="margin-top:20px"><a href="https://russia.ru/" target="_blank" rel="noopener noreferrer">Национальный центр «Россия»</a></p>
             </div>
             <div class="ref-footer__newsletter">
               <p class="ref-footer__heading">Рассылка</p>
@@ -341,9 +368,7 @@
         <div class="wrap ref-footer__inner">
           <div class="ref-footer__grid">
             <div>
-              <div class="ref-footer__logo">${renderRefLogo({ home, tone: "light", layout: "full" })}</div>
-              <p class="ref-footer__tagline">Официальный интернет-магазин одежды и аксессуаров Национального центра «Россия».</p>
-              <a href="https://russia.ru/" target="_blank" rel="noopener noreferrer">russia.ru</a>
+              ${renderRefFooterBrand({ home, tone: "light" })}
             </div>
             <div>
               <p class="ref-footer__heading">Покупателям</p>
@@ -369,8 +394,7 @@
         <div class="wrap ref-footer__inner">
           <div class="ref-footer__grid">
             <div>
-              <div class="ref-footer__logo">${renderRefLogo({ home, tone: "dark", layout: "full" })}</div>
-              <p style="margin:0;font-size:12px;opacity:.65">Официальный мерч · Москва</p>
+              ${renderRefFooterBrand({ home, tone: "dark" })}
             </div>
             <div>
               <p class="ref-footer__heading">Company</p>
@@ -403,7 +427,7 @@
         <div class="wrap ref-footer__inner">
           <div class="ref-footer__grid">
             <div>
-              <div class="ref-footer__logo">${renderRefLogo({ home, tone: "light", layout: "lockup", lockupSize: "lg" })}</div>
+              ${renderRefFooterBrand({ home, tone: "light" })}
               <div class="ref-footer__pay"><span>Visa</span><span>Mastercard</span><span>Мир</span></div>
             </div>
             <div>
@@ -434,8 +458,7 @@
         <div class="wrap ref-footer__inner">
           <div class="ref-footer__grid">
             <div>
-              <div class="ref-footer__logo">${renderRefLogo({ home, tone: "light", layout: "full" })}</div>
-              <p class="ref-footer__tagline">Официальный мерч Национального центра «Россия» — с характером места и уважением к деталям.</p>
+              ${renderRefFooterBrand({ home, tone: "light" })}
               <div class="ref-footer__social">
                 <a href="${root}catalog/" title="Каталог">VK</a>
                 <a href="${root}stores/" title="Магазины">TG</a>
@@ -504,7 +527,8 @@
 
   document.querySelectorAll("[data-ref-logo]").forEach((el) => {
     const tone = el.dataset.refLogoTone === "dark" ? "dark" : "light";
-    const layout = el.dataset.refLogoLayout || "full";
+    let layout = el.dataset.refLogoLayout || "full";
+    if (layout === "lockup" || layout === "lockup-only") layout = "full";
     const stack = el.hasAttribute("data-ref-logo-stack");
     const lockupSize = el.dataset.refLogoLockupSize || "";
     const home = el.getAttribute("href") || "./";

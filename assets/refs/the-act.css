@@ -46,12 +46,8 @@ body.ref-the-act.is-design-variant-the-act .site-header {
   justify-self: start;
 }
 
-.ref-the-act .act-screen__brand .ref-logo__mark {
-  height: 48px;
-}
-
-.ref-the-act .act-screen__brand .ref-logo__lockup {
-  height: 30px;
+.ref-the-act .act-screen__brand .ref-logo__img {
+  height: 44px;
 }
 
 .ref-the-act .act-screen__nav {

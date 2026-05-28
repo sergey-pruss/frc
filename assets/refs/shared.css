@@ -24,18 +24,31 @@ body[class*="ref-"] .btn-secondary {
   color: var(--ref-ink);
 }
 
-/* Логотип Универмага «Россия» — mark + lockup, без фирменного зелёного */
+/* Логотип Универмага «Россия» — univermag-logo.png, монохром под референс */
 .ref-logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   text-decoration: none;
   color: inherit;
 }
 
-.ref-logo--stack {
-  flex-direction: column;
-  gap: 6px;
+.ref-logo__img {
+  display: block;
+  width: auto;
+  height: 40px;
+  object-fit: contain;
+}
+
+.ref-logo--lg .ref-logo__img {
+  height: 48px;
+}
+
+.ref-logo--vertical .ref-logo__img {
+  height: 72px;
+}
+
+.ref-logo--vertical.ref-logo--lg .ref-logo__img {
+  height: 88px;
 }
 
 .ref-logo__mark {
@@ -45,44 +58,76 @@ body[class*="ref-"] .btn-secondary {
   object-fit: contain;
 }
 
-.ref-logo__lockup {
-  display: block;
-  width: auto;
-  height: 26px;
-  object-fit: contain;
-}
-
-.ref-logo__lockup--lg {
-  height: 32px;
-}
-
+.ref-logo--on-dark .ref-logo__img,
 .ref-logo--on-dark .ref-logo__mark {
   filter: brightness(0) invert(1);
 }
 
+.ref-logo--on-light .ref-logo__img,
 .ref-logo--on-light .ref-logo__mark {
   filter: brightness(0);
 }
 
-.ref-logo--mark-only .ref-logo__lockup {
+.ref-logo--mark-only .ref-logo__img {
   display: none;
 }
 
-.ref-logo--lockup-only .ref-logo__mark {
-  display: none;
+/* Футер — как site-footer: марка, текст, wordmark НЦ */
+.ref-footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: 8px;
 }
 
-.ref-footer__logo {
-  margin: 0 0 16px;
+.ref-footer-brand__mark {
+  display: inline-block;
+  margin-bottom: 4px;
 }
 
-.ref-footer__logo .ref-logo__mark {
+.ref-footer-brand__mark-img {
+  display: block;
+  width: auto;
+  height: 56px;
+  object-fit: contain;
+}
+
+.ref-footer-brand__mark-img--mono {
+  filter: brightness(0);
+}
+
+.ref-footer-brand__tagline {
+  margin: 12px 0 0;
+  max-width: 34ch;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.ref-footer-brand__nc {
+  display: inline-block;
+  margin-top: 18px;
+}
+
+.ref-footer-brand__nc img {
+  display: block;
+  width: auto;
   height: 40px;
+  max-width: min(220px, 90vw);
+  object-fit: contain;
+  object-position: left center;
 }
 
-.ref-footer--the-act .ref-footer__logo .ref-logo__lockup,
-.ref-footer--rains .ref-footer__logo .ref-logo__lockup {
-  height: 30px;
+.ref-footer-brand--dark .ref-footer-brand__tagline {
+  opacity: 0.86;
+}
+
+.ref-footer-brand--light .ref-footer-brand__tagline {
+  color: var(--ref-muted, #6f6a61);
+}
+
+.ref-footer__links--after-brand {
+  margin-top: 24px;
 }
 
 .ref-label {
