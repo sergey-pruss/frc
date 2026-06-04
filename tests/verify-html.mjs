@@ -79,10 +79,10 @@ const checks = [
       /id="matrix-putin-team"/.test(contentStrategy) &&
       /id="tone-of-voice"/.test(contentStrategy) &&
       /class="checklist"/.test(contentStrategy) &&
-      /cs-audience-cards/.test(contentStrategy) &&
+      /cs-audience-portraits/.test(contentStrategy) &&
       /Putin Team/.test(contentStrategy) &&
       /GLORY SEASON/.test(contentStrategy) &&
-      /современный российский lifestyle-бренд/.test(contentStrategy) &&
+      /современный российский бренд с качественной визуальной подачей/.test(contentStrategy) &&
       !/class="cs-block card"/.test(contentStrategy),
   ],
   [
